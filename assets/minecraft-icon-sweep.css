@@ -1,0 +1,123 @@
+/* DLavie Craft — second-pass icon sweep for remaining generic outline icons */
+.dl-mc-sweep-icon{
+  width:19px;
+  height:19px;
+  flex:0 0 19px;
+  display:inline-grid;
+  place-items:center;
+  color:var(--accent,#159965);
+  vertical-align:middle;
+  image-rendering:pixelated;
+  filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink,#18201b) 12%,transparent));
+  transform:translateZ(0);
+}
+.dl-mc-sweep-icon svg{width:100%;height:100%;display:block;shape-rendering:crispEdges;overflow:visible}
+.dl-mc-sweep-icon .p-main{fill:currentColor}.dl-mc-sweep-icon .p-mid{fill:color-mix(in srgb,currentColor 72%,#fff 28%)}.dl-mc-sweep-icon .p-dark{fill:color-mix(in srgb,currentColor 68%,#000 32%)}.dl-mc-sweep-icon .p-shadow{fill:color-mix(in srgb,currentColor 48%,#000 52%)}.dl-mc-sweep-icon .p-hi{fill:color-mix(in srgb,currentColor 38%,#fff 62%)}.dl-mc-sweep-icon .p-top{fill:color-mix(in srgb,currentColor 60%,#fff 40%)}.dl-mc-sweep-icon .p-left{fill:color-mix(in srgb,currentColor 76%,#000 24%)}
+.dl-mc-sweep-icon .green{fill:#29b56f}.dl-mc-sweep-icon .dirt{fill:#85613c}.dl-mc-sweep-icon .dirt2{fill:#6f4b31}.dl-mc-sweep-icon .gold{fill:#c89243}.dl-mc-sweep-icon .gold2{fill:#a96d2f}.dl-mc-sweep-icon .wood{fill:#9b6a3a}.dl-mc-sweep-icon .wood2{fill:#714928}.dl-mc-sweep-icon .iron{fill:#aeb8b1}.dl-mc-sweep-icon .cyan{fill:#51cdda}.dl-mc-sweep-icon .red{fill:#cc4c49}.dl-mc-sweep-icon .flame{fill:#e98339}
+
+/* Only hide the old direct-child outline SVG once a pixel replacement exists. */
+.dl-mc-v2-iconized > svg:not(.dl-mc-pixel-svg){display:none!important}
+
+button.dl-mc-v2-iconized,
+a.dl-mc-v2-iconized,
+[role="button"].dl-mc-v2-iconized{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+
+.icon-button.dl-mc-v2-iconized,
+.mobile-menu-button.dl-mc-v2-iconized,
+.modal-close.dl-mc-v2-iconized,
+.console-nav-close.dl-mc-v2-iconized,
+.console-nav-trigger.dl-mc-v2-iconized,
+.emoji-close.dl-mc-v2-iconized{
+  justify-content:center;
+  padding:0;
+}
+.icon-button .dl-mc-sweep-icon,
+.mobile-menu-button .dl-mc-sweep-icon,
+.modal-close .dl-mc-sweep-icon,
+.console-nav-close .dl-mc-sweep-icon,
+.console-nav-trigger .dl-mc-sweep-icon,
+.emoji-close .dl-mc-sweep-icon{
+  width:20px;height:20px;flex-basis:20px;
+}
+
+.dl-mc-v2-iconized:hover > .dl-mc-sweep-icon{
+  animation:dl-mc-sweep-hop .32s cubic-bezier(.2,.85,.25,1) both;
+  filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 13%,transparent)) drop-shadow(0 0 7px color-mix(in srgb,var(--accent) 30%,transparent));
+}
+.dl-mc-v2-iconized:active > .dl-mc-sweep-icon{transform:translateY(1px) scale(.96)}
+
+.project-glyph.dl-mc-v2-iconized,
+.discussion-icon.dl-mc-v2-iconized,
+.news-icon.dl-mc-v2-iconized,
+.active-forum-icon.dl-mc-v2-iconized,
+.forum-nav-icon.dl-mc-v2-iconized,
+.forum-symbol.dl-mc-v2-iconized,
+.ticket-marker.dl-mc-v2-iconized,
+.announcement-icon.dl-mc-v2-iconized{
+  display:grid!important;
+  place-items:center!important;
+}
+.project-glyph.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.discussion-icon.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.news-icon.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.active-forum-icon.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.forum-nav-icon.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.forum-symbol.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.ticket-marker.dl-mc-v2-iconized .dl-mc-sweep-icon,
+.announcement-icon.dl-mc-v2-iconized .dl-mc-sweep-icon{
+  width:55%;height:55%;flex-basis:auto;filter:none;
+}
+
+.metric-card.dl-mc-v2-iconized,
+.community-values.dl-mc-v2-iconized,
+.xp-guide.dl-mc-v2-iconized,
+.rail-heading.dl-mc-v2-iconized,
+.section-mini-head.dl-mc-v2-iconized,
+.community-side-title.dl-mc-v2-iconized{
+  position:relative;
+}
+.metric-card.dl-mc-v2-iconized > .dl-mc-sweep-icon,
+.community-values.dl-mc-v2-iconized > .dl-mc-sweep-icon,
+.xp-guide.dl-mc-v2-iconized > .dl-mc-sweep-icon,
+.rail-heading.dl-mc-v2-iconized > .dl-mc-sweep-icon,
+.section-mini-head.dl-mc-v2-iconized > .dl-mc-sweep-icon,
+.community-side-title.dl-mc-v2-iconized > .dl-mc-sweep-icon{
+  width:22px;height:22px;flex-basis:22px;
+}
+
+/* Minecraft semantics get their own slight material tint. */
+.dl-mc-sweep--barrier{color:#c84b4b}
+.dl-mc-sweep--lava{color:#d86d32}
+.dl-mc-sweep--tnt{color:#c84b4b}
+.dl-mc-sweep--torch{color:#d59b37}
+.dl-mc-sweep--bell{color:#d39b42}
+.dl-mc-sweep--diamond{color:#48bfc8}
+.dl-mc-sweep--xp,.dl-mc-sweep--emerald{color:#27a968}
+.dl-mc-sweep--anvil,.dl-mc-sweep--hopper{color:#7d8882}
+.dl-mc-sweep--heart{color:#cc4c57}
+
+/* Preserve white icon language on solid primary actions. */
+.button-primary.dl-mc-v2-iconized > .dl-mc-sweep-icon,
+.dl-account-btn.primary.dl-mc-v2-iconized > .dl-mc-sweep-icon{
+  color:#fff;
+  filter:drop-shadow(2px 2px 0 rgba(0,0,0,.17));
+}
+
+@keyframes dl-mc-sweep-hop{
+  0%{transform:translateY(0) scale(1)}
+  58%{transform:translateY(-2px) scale(1.07)}
+  100%{transform:translateY(0) scale(1)}
+}
+
+@media(max-width:720px){
+  .dl-mc-sweep-icon{width:20px;height:20px;flex-basis:20px}
+  .mobile-menu-button .dl-mc-sweep-icon{width:22px;height:22px;flex-basis:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-mc-sweep-icon{animation:none!important;transition:none!important}
+}
