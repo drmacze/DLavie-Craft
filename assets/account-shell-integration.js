@@ -57,6 +57,11 @@
     return button;
   }
 
+  function setLabel(button, label) {
+    const node = button?.querySelector('[data-dl-shell-label]');
+    if (node && node.textContent !== label) node.textContent = label;
+  }
+
   function syncAccountEntries() {
     const label = accountLabel();
     const actions = document.querySelector('.site-header .header-actions');
@@ -68,7 +73,7 @@
         button = makeAccountButton('dl-shell-account-entry', false);
         actions.appendChild(button);
       }
-      button.querySelector('[data-dl-shell-label]').textContent = label;
+      setLabel(button, label);
     }
 
     if (nav) {
@@ -77,7 +82,7 @@
         button = makeAccountButton('dl-shell-account-entry-mobile', true);
         nav.appendChild(button);
       }
-      button.querySelector('[data-dl-shell-label]').textContent = label;
+      setLabel(button, label);
     }
   }
 
@@ -107,8 +112,10 @@
     // The original account/legal system still owns state and click handlers.
     // We keep its helper nodes in the DOM, but CSS hides them so they no longer
     // create a second footer or a floating account pill on public pages.
-    helperAccountButton()?.setAttribute('aria-hidden', 'true');
-    helperLegalFooter()?.setAttribute('aria-hidden', 'true');
+    const account = helperAccountButton();
+    const legal = helperLegalFooter();
+    if (account?.getAttribute('aria-hidden') !== 'true') account?.setAttribute('aria-hidden', 'true');
+    if (legal?.getAttribute('aria-hidden') !== 'true') legal?.setAttribute('aria-hidden', 'true');
   }
 
   function sync() {
