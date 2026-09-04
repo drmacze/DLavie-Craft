@@ -1,0 +1,182 @@
+/* DLavie Craft — Icon Forge v3. Stronger, readable Minecraft/voxel motion. */
+.dl-mc-forge-icon{
+  --forge-color:var(--accent,#159965);
+  position:relative;
+  width:20px;height:20px;flex:0 0 20px;
+  display:inline-grid;place-items:center;
+  color:var(--forge-color);
+  overflow:visible;
+  isolation:isolate;
+  image-rendering:pixelated;
+  filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink,#18201b) 14%,transparent));
+  animation-delay:var(--forge-delay,0ms)!important;
+}
+.dl-mc-forge-icon svg{width:100%;height:100%;display:block;overflow:visible;shape-rendering:crispEdges;transform-box:view-box;transform-origin:center}
+.dl-mc-forge-icon path{transform-box:fill-box;transform-origin:center}
+.dl-mc-generic-replaced{display:none!important}
+
+/* voxel material palette */
+.dl-mc-forge-icon .f-main{fill:currentColor}.dl-mc-forge-icon .f-top{fill:color-mix(in srgb,currentColor 56%,#fff 44%)}.dl-mc-forge-icon .f-left{fill:color-mix(in srgb,currentColor 74%,#000 26%)}.dl-mc-forge-icon .f-dark{fill:#4e5753}.dl-mc-forge-icon .f-iron{fill:#aeb8b2}.dl-mc-forge-icon .stone{fill:#7e8a84}.dl-mc-forge-icon .stone-mid{fill:#68736e}.dl-mc-forge-icon .stone-hi{fill:#a4aea9}.dl-mc-forge-icon .wood{fill:#8b5b34}.dl-mc-forge-icon .wood-hi{fill:#bd8550}.dl-mc-forge-icon .f-chip{fill:#56615c}.dl-mc-forge-icon .f-core{fill:#fff0a0}.dl-mc-forge-icon .f-flame,.dl-mc-forge-icon .f-fire{fill:#ff8a32}.dl-mc-forge-icon .f-glass{fill:#ffd56a}.dl-mc-forge-icon .f-lamp{fill:#773a2a}.dl-mc-forge-icon .f-red{fill:#c94b47}.dl-mc-forge-icon .f-potion{fill:#9b62d5}.dl-mc-forge-icon .f-pearl{fill:#2eb7a2}.dl-mc-forge-icon .f-water{fill:#4aa4d7}.dl-mc-forge-icon .f-shulker{fill:#8b62b3}.dl-mc-forge-icon .cake{fill:#c58b56}.dl-mc-forge-icon .frosting{fill:#f1ece4}.dl-mc-forge-icon .candle{fill:#d94848}
+
+/* semi-Minecraft block bevel on icon hosts */
+.icon-button.dl-mc-forged-host,
+.mobile-menu-button.dl-mc-forged-host,
+.modal-close.dl-mc-forged-host,
+.console-nav-trigger.dl-mc-forged-host,
+.console-nav-close.dl-mc-forged-host,
+.emoji-close.dl-mc-forged-host{
+  position:relative;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 38%,transparent),inset 0 -2px 0 color-mix(in srgb,var(--ink) 11%,transparent),3px 3px 0 color-mix(in srgb,var(--ink) 9%,transparent)!important;
+}
+.dl-mc-forged-host:active{transform:translateY(2px)}
+
+/* Existing icon systems get a little more voxel depth. */
+.dl-mc-sweep-icon,.dl-mc-icon{transform-origin:center;animation-delay:var(--forge-delay,0ms)!important}
+.dl-mc-sweep-icon:after,.dl-mc-icon:after,.dl-mc-forge-icon:after{
+  content:"";position:absolute;z-index:-1;left:2px;right:2px;bottom:-3px;height:3px;
+  background:color-mix(in srgb,currentColor 24%,transparent);opacity:.18;transform:skewX(-30deg);pointer-events:none
+}
+
+/* ===== LANTERN ===== */
+.dl-mc-forge--lantern,.dl-mc-sweep--lantern{animation:forge-lantern-halo 3.2s steps(4,end) infinite}
+.dl-mc-forge--lantern .f-glass,.dl-mc-sweep--lantern .lantern-glass{animation:forge-lantern-glass 3.2s steps(4,end) infinite}
+.dl-mc-forge--lantern .f-flame,.dl-mc-sweep--lantern .lantern-core{animation:forge-lantern-core .8s steps(3,end) infinite}
+.dl-mc-forge--lantern:before,.dl-mc-sweep--lantern:before{
+  content:"";position:absolute;z-index:-2;width:30px;height:30px;left:50%;top:50%;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle,rgba(255,190,74,.44),rgba(255,150,35,.14) 42%,transparent 72%);
+  animation:forge-lantern-aura 3.2s ease-in-out infinite;pointer-events:none
+}
+
+/* ===== TORCH ===== */
+.dl-mc-sweep--torch{animation:forge-torch-body 1.35s steps(4,end) infinite!important}
+.dl-mc-sweep--torch .flame{animation:forge-torch-flame .42s steps(3,end) infinite!important;filter:drop-shadow(0 0 5px rgba(255,139,37,.88))!important}
+.dl-mc-sweep--torch .p-hi{animation:forge-torch-core .34s steps(2,end) infinite!important;fill:#fff08a!important}
+.dl-mc-sweep--torch:before,.dl-mc-sweep--torch:after{width:3px!important;height:3px!important;box-shadow:0 0 7px #ff8d26!important}
+
+/* ===== CHEST: obvious open-close ===== */
+.dl-mc-sweep--chest svg,.dl-mc-icon--chest svg,.dl-mc-icon--download svg{animation:forge-chest-body 4.1s ease-in-out infinite}
+.dl-mc-sweep--chest .gold:first-of-type,.dl-mc-icon--chest .dl-mci-main:first-of-type,.dl-mc-icon--download .dl-mci-main:first-of-type{
+  transform-origin:50% 100%;animation:forge-chest-lid 4.1s cubic-bezier(.2,.8,.2,1) infinite
+}
+.dl-mc-sweep--chest:before,.dl-mc-icon--chest:before,.dl-mc-icon--download:before{
+  content:"";position:absolute;z-index:-1;left:4px;right:4px;top:7px;height:8px;background:linear-gradient(#ffe77b,transparent);
+  opacity:0;filter:blur(2px);animation:forge-chest-loot 4.1s ease-in-out infinite;pointer-events:none
+}
+
+/* ===== FURNACE ===== */
+.dl-mc-forge--furnace .f-fire{animation:forge-fire .55s steps(3,end) infinite;filter:drop-shadow(0 0 4px #ff7d24)}
+.dl-mc-forge--furnace .f-core{animation:forge-core .42s steps(2,end) infinite}
+.dl-mc-forge--furnace:before,.dl-mc-forge--furnace:after{content:"";position:absolute;width:3px;height:3px;background:#8f9a95;opacity:0;top:-2px;animation:forge-smoke 2.4s steps(5,end) infinite}
+.dl-mc-forge--furnace:before{left:7px}.dl-mc-forge--furnace:after{left:13px;animation-delay:-1.1s}
+
+/* ===== REDSTONE LAMP / REPEATER ===== */
+.dl-mc-forge--redlamp .f-lamp{animation:forge-lamp-power 2.4s steps(2,end) infinite}
+.dl-mc-forge--redlamp .f-core{animation:forge-lamp-core 2.4s steps(2,end) infinite}
+.dl-mc-forge--redlamp{animation:forge-lamp-glow 2.4s steps(2,end) infinite}
+.dl-mc-forge--repeater .f-red,.dl-mc-forge--repeater .f-core{animation:forge-redstone-run 1.25s steps(4,end) infinite}
+
+/* ===== PISTON / LEVER ===== */
+.dl-mc-forge--piston .f-top{animation:forge-piston-head 2.8s steps(4,end) infinite}
+.dl-mc-forge--piston .f-iron{animation:forge-piston-rod 2.8s steps(4,end) infinite}
+.dl-mc-forge--lever .lever-stick,.dl-mc-forge--lever .lever-knob{transform-origin:50% 100%;animation:forge-lever 3.6s steps(2,end) infinite}
+
+/* ===== POTION / ENDER PEARL ===== */
+.dl-mc-forge--potion svg{animation:forge-potion-slosh 3.1s ease-in-out infinite}
+.dl-mc-forge--potion .bubble-a{animation:forge-bubble-a 1.5s steps(4,end) infinite}.dl-mc-forge--potion .bubble-b{animation:forge-bubble-b 1.85s steps(5,end) infinite}
+.dl-mc-forge--pearl{animation:forge-pearl-float 2.4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(48,210,183,.34))}
+.dl-mc-forge--pearl:before,.dl-mc-forge--pearl:after{content:"";position:absolute;width:3px;height:3px;background:#80ffe4;opacity:.7;animation:forge-pearl-orbit 2.1s linear infinite}
+.dl-mc-forge--pearl:after{animation-delay:-1.05s}
+
+/* ===== BUCKET / MINECART / RAIL ===== */
+.dl-mc-forge--bucket .f-water{transform-origin:50% 50%;animation:forge-bucket-slosh 2.6s ease-in-out infinite}
+.dl-mc-forge--minecart svg{animation:forge-cart-roll 2.7s cubic-bezier(.45,.05,.55,.95) infinite}.dl-mc-forge--minecart .wheel{animation:forge-wheel .9s steps(4,end) infinite}
+.dl-mc-forge--rail .rail-spark{animation:forge-rail-signal 1.1s steps(5,end) infinite;filter:drop-shadow(0 0 4px #ff4848)}
+
+/* ===== SHULKER ===== */
+.dl-mc-forge--shulker .shulker-lid{transform-origin:50% 100%;animation:forge-shulker-open 4.8s ease-in-out infinite}
+.dl-mc-forge--shulker .f-core{animation:forge-shulker-eye 4.8s steps(2,end) infinite}
+
+/* ===== BED / CAKE ===== */
+.dl-mc-forge--bed svg{animation:forge-bed-idle 4s ease-in-out infinite}
+.dl-mc-forge--cake .cake-flame{animation:forge-cake-flame .55s steps(3,end) infinite;filter:drop-shadow(0 0 4px #ff8c2d)}
+.dl-mc-forge--cake .candle{animation:forge-candle-breathe 1.8s ease-in-out infinite}
+
+/* ===== EYE / GEAR / ARROW / CLOSE ===== */
+.dl-mc-forge--eye .eye-pupil{animation:forge-eye-look 3.8s steps(5,end) infinite}
+.dl-mc-forge--gear svg{animation:forge-gear-turn 8s steps(16,end) infinite}
+.dl-mc-forge--arrow svg{animation:forge-arrow-nudge 1.8s ease-in-out infinite}
+.dl-mc-forge--close{animation:forge-close-pulse 3.8s steps(2,end) infinite}
+
+/* Existing icons: stronger unique idle animations */
+.dl-mc-sweep--diamond,.dl-mc-sweep--emerald,.dl-mc-sweep--xp,.dl-mc-icon--emerald{animation:forge-gem-float 2.1s ease-in-out infinite!important}
+.dl-mc-sweep--bell svg{animation:forge-bell-big 4.4s ease-in-out infinite!important}
+.dl-mc-sweep--heart svg{animation:forge-heart-big 2.7s ease-in-out infinite!important}
+.dl-mc-sweep--compass .p-main.red{animation:forge-compass-hunt 3.4s steps(8,end) infinite!important}
+.dl-mc-sweep--map svg{animation:forge-map-unfold 4.6s ease-in-out infinite!important}
+.dl-mc-sweep--hopper svg{animation:forge-hopper-vacuum 2.2s steps(4,end) infinite!important}
+.dl-mc-sweep--inventory svg{animation:forge-inventory-scan 4.8s steps(6,end) infinite!important}
+.dl-mc-sweep--barrier{animation:forge-barrier-alert 2.5s steps(2,end) infinite!important}
+
+/* tap burst is visible on touch */
+.dl-mc-forge-burst{animation:forge-tap-burst .72s cubic-bezier(.16,.85,.25,1) both!important}
+.dl-mc-forge-burst:before{content:"";position:absolute;inset:-7px;border:2px solid color-mix(in srgb,currentColor 54%,transparent);opacity:0;animation:forge-ring .65s steps(5,end) both;pointer-events:none}
+
+@keyframes forge-lantern-halo{0%,18%,100%{filter:drop-shadow(2px 2px 0 rgba(0,0,0,.12)) drop-shadow(0 0 2px rgba(255,171,55,.18))}35%,70%{filter:drop-shadow(2px 2px 0 rgba(0,0,0,.12)) drop-shadow(0 0 10px rgba(255,171,55,.72))}}
+@keyframes forge-lantern-glass{0%,18%,100%{fill:#7e7056;opacity:.62}35%,70%{fill:#ffc95e;opacity:1}}
+@keyframes forge-lantern-core{0%,100%{fill:#9d5c24;transform:scale(.75)}50%{fill:#fff09a;transform:scale(1.18)}}
+@keyframes forge-lantern-aura{0%,18%,100%{opacity:.08;transform:translate(-50%,-50%) scale(.72)}40%,68%{opacity:.8;transform:translate(-50%,-50%) scale(1.2)}}
+@keyframes forge-torch-body{0%,100%{filter:drop-shadow(0 0 3px #ff8b2c55)}50%{filter:drop-shadow(0 0 11px #ff8b2caa)}}
+@keyframes forge-torch-flame{0%{transform:translate(-2px,-2px) scale(1.22,.82);fill:#ff9b2f}33%{transform:translate(2px,-4px) scale(.84,1.32);fill:#ff6f25}66%{transform:translate(-1px,-1px) scale(1.35,.9);fill:#ffbd40}100%{transform:translate(1px,-3px) scale(.95,1.22);fill:#ff8228}}
+@keyframes forge-torch-core{0%,100%{transform:scale(.75,1.15)}50%{transform:translateY(-2px) scale(1.3,.75)}}
+@keyframes forge-chest-body{0%,15%,100%{transform:translateY(0)}31%{transform:translateY(1px)}35%{transform:translateY(-1px)}42%,60%{transform:translateY(0)}}
+@keyframes forge-chest-lid{0%,18%,75%,100%{transform:translateY(0) scaleY(1)}31%,58%{transform:translateY(-4px) scaleY(.55)}}
+@keyframes forge-chest-loot{0%,20%,72%,100%{opacity:0;transform:translateY(2px) scale(.7)}35%,58%{opacity:.75;transform:translateY(-3px) scale(1.25)}}
+@keyframes forge-fire{0%,100%{transform:translateX(-1px) scaleY(.85);fill:#ff7c25}50%{transform:translate(1px,-1px) scaleY(1.25);fill:#ffc240}}
+@keyframes forge-core{0%,100%{opacity:.55}50%{opacity:1;transform:scale(1.25)}}
+@keyframes forge-smoke{0%{opacity:0;transform:translate(0,3px)}20%{opacity:.5}100%{opacity:0;transform:translate(4px,-11px) scale(1.7)}}
+@keyframes forge-lamp-power{0%,35%,100%{fill:#68392b}45%,72%{fill:#ff8c3b}}
+@keyframes forge-lamp-core{0%,35%,100%{fill:#7c4631;opacity:.45}45%,72%{fill:#ffe374;opacity:1;filter:drop-shadow(0 0 5px #ffb43b)}}
+@keyframes forge-lamp-glow{0%,35%,100%{filter:drop-shadow(2px 2px 0 rgba(0,0,0,.12))}45%,72%{filter:drop-shadow(2px 2px 0 rgba(0,0,0,.12)) drop-shadow(0 0 9px #ff9a3d88)}}
+@keyframes forge-redstone-run{0%,100%{opacity:.4;filter:none}50%{opacity:1;filter:drop-shadow(0 0 5px #ff4040)}}
+@keyframes forge-piston-head{0%,28%,72%,100%{transform:translateY(0)}40%,60%{transform:translateY(-5px)}}
+@keyframes forge-piston-rod{0%,28%,72%,100%{transform:scaleY(1)}40%,60%{transform:translateY(-2px) scaleY(1.5)}}
+@keyframes forge-lever{0%,35%,75%,100%{transform:rotate(-22deg)}45%,65%{transform:rotate(22deg)}}
+@keyframes forge-potion-slosh{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg) translateY(-1px)}75%{transform:rotate(4deg) translateY(-1px)}}
+@keyframes forge-bubble-a{0%{transform:translateY(4px);opacity:0}25%{opacity:1}100%{transform:translateY(-6px);opacity:0}}
+@keyframes forge-bubble-b{0%{transform:translateY(3px);opacity:0}30%{opacity:1}100%{transform:translate(-2px,-7px);opacity:0}}
+@keyframes forge-pearl-float{0%,100%{transform:translateY(1px) rotate(-2deg)}50%{transform:translateY(-3px) rotate(3deg)}}
+@keyframes forge-pearl-orbit{0%{transform:translate(2px,9px);opacity:.1}25%{transform:translate(17px,3px);opacity:1}50%{transform:translate(19px,15px);opacity:.5}75%{transform:translate(3px,18px);opacity:1}100%{transform:translate(2px,9px);opacity:.1}}
+@keyframes forge-bucket-slosh{0%,100%{transform:skewY(0) translateY(0)}35%{transform:skewY(-8deg) translateY(1px)}70%{transform:skewY(8deg) translateY(-1px)}}
+@keyframes forge-cart-roll{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+@keyframes forge-wheel{to{transform:rotate(360deg)}}
+@keyframes forge-rail-signal{0%{transform:translateY(-12px);opacity:0}25%{opacity:1}100%{transform:translateY(2px);opacity:0}}
+@keyframes forge-shulker-open{0%,22%,76%,100%{transform:translateY(0)}38%,60%{transform:translateY(-5px)}}
+@keyframes forge-shulker-eye{0%,26%,72%,100%{opacity:0}40%,60%{opacity:1;filter:drop-shadow(0 0 4px #f2d7ff)}}
+@keyframes forge-bed-idle{0%,80%,100%{transform:translateY(0)}87%{transform:translateY(-2px)}93%{transform:translateY(0)}}
+@keyframes forge-cake-flame{0%,100%{transform:translate(-1px,-1px) scale(.9,1.15)}50%{transform:translate(1px,-2px) scale(1.25,.8)}}
+@keyframes forge-candle-breathe{0%,100%{filter:none}50%{filter:drop-shadow(0 0 4px #ff9c3d)}}
+@keyframes forge-eye-look{0%,100%{transform:translateX(-2px)}25%{transform:translateX(2px)}50%{transform:translateY(-2px)}75%{transform:translateY(2px)}}
+@keyframes forge-gear-turn{to{transform:rotate(360deg)}}
+@keyframes forge-arrow-nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+@keyframes forge-close-pulse{0%,75%,100%{transform:scale(1)}82%{transform:scale(1.13)}90%{transform:scale(.96)}}
+@keyframes forge-gem-float{0%,100%{transform:translateY(1px) rotate(-2deg);filter:drop-shadow(0 0 3px currentColor)}50%{transform:translateY(-3px) rotate(3deg);filter:drop-shadow(0 0 8px currentColor)}}
+@keyframes forge-bell-big{0%,66%,100%{transform:rotate(0)}73%{transform:rotate(-16deg)}80%{transform:rotate(14deg)}87%{transform:rotate(-9deg)}94%{transform:rotate(5deg)}}
+@keyframes forge-heart-big{0%,65%,100%{transform:scale(1)}72%{transform:scale(1.2)}78%{transform:scale(.95)}84%{transform:scale(1.14)}90%{transform:scale(1)}}
+@keyframes forge-compass-hunt{0%{transform:rotate(0)}20%{transform:rotate(48deg)}40%{transform:rotate(-35deg)}60%{transform:rotate(21deg)}80%{transform:rotate(-12deg)}100%{transform:rotate(0)}}
+@keyframes forge-map-unfold{0%,72%,100%{transform:scaleX(1) rotate(0)}80%{transform:scaleX(1.13) rotate(-2deg)}90%{transform:scaleX(.96) rotate(2deg)}}
+@keyframes forge-hopper-vacuum{0%,100%{transform:translateY(0)}40%{transform:translateY(2px) scaleX(.92)}70%{transform:translateY(-1px) scaleX(1.06)}}
+@keyframes forge-inventory-scan{0%,100%{filter:none}35%{filter:brightness(1.25)}70%{filter:brightness(.9)}}
+@keyframes forge-barrier-alert{0%,75%,100%{filter:drop-shadow(0 0 2px #d44b4b55)}82%{filter:drop-shadow(0 0 9px #e34040bb);transform:scale(1.08)}}
+@keyframes forge-tap-burst{0%{transform:scale(.82)}55%{transform:scale(1.24) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes forge-ring{0%{opacity:.75;transform:scale(.45)}100%{opacity:0;transform:scale(1.35)}}
+
+@media(max-width:720px){
+  .dl-mc-sweep-icon,.dl-mc-icon,.dl-mc-forge-icon{min-width:20px;min-height:20px}
+  .dl-mc-sweep--torch,.dl-mc-sweep--lantern,.dl-mc-forge--lantern{transform:scale(1.08)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-mc-forge-icon,.dl-mc-forge-icon *,
+  .dl-mc-sweep-icon,.dl-mc-sweep-icon *,
+  .dl-mc-icon,.dl-mc-icon *{animation:none!important;transition:none!important}
+}
