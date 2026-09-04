@@ -1,0 +1,151 @@
+/* DLavie canonical Minecraft icons v8 */
+.dl-canon-control-v8{display:inline-flex!important;align-items:center!important;gap:8px!important}
+.dl-canon-label-v8{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.dl-canon-count-v8{margin-left:auto!important;min-width:20px!important;height:20px!important;display:grid!important;place-items:center!important;border-radius:6px!important;background:color-mix(in srgb,#7654d6 16%,#fff)!important;color:#5b3daf!important;font-size:9px!important;line-height:1!important}
+.dl-canon-icon-v8{
+  --a:#7654d6;--b:#4d329a;--c:#b9a7ee;--ink:#26312a;--gold:#e8b849;
+  position:relative!important;width:23px!important;height:23px!important;min-width:23px!important;flex:0 0 23px!important;
+  display:inline-block!important;margin:0!important;padding:0!important;vertical-align:middle!important;pointer-events:none!important;
+  filter:drop-shadow(0 2px 0 rgba(24,31,26,.12));image-rendering:pixelated!important;overflow:visible!important;
+}
+.dl-canon-icon-v8>*{position:absolute!important;display:block!important;box-sizing:border-box!important}
+
+/* chat */
+.dl-canon-icon-v8.type-chat i{left:2px;top:3px;width:18px;height:14px;background:#7d59d2;border:2px solid #4c358a;border-radius:3px;box-shadow:inset 0 -4px #6042ad}
+.dl-canon-icon-v8.type-chat b{left:5px;top:8px;width:3px;height:3px;background:#d9cdfa;box-shadow:5px 0 #d9cdfa,10px 0 #d9cdfa}
+.dl-canon-icon-v8.type-chat em{left:5px;top:15px;width:6px;height:5px;background:#6042ad;clip-path:polygon(0 0,100% 0,0 100%)}
+
+/* compass */
+.dl-canon-icon-v8.type-compass i{inset:2px;border:3px solid #394139;border-radius:50%;background:#d7ba80}
+.dl-canon-icon-v8.type-compass b{left:10px;top:5px;width:3px;height:13px;background:linear-gradient(#d9524c 0 50%,#f3ead1 50%);transform-origin:50% 50%;animation:dlCanonCompass 3.8s ease-in-out infinite}
+.dl-canon-icon-v8.type-compass em{left:9px;top:9px;width:5px;height:5px;border-radius:50%;background:#343a34}
+
+/* book */
+.dl-canon-icon-v8.type-book i,.dl-canon-icon-v8.type-book b{top:4px;width:10px;height:15px;background:#f1ead7;border:2px solid #4b356f}
+.dl-canon-icon-v8.type-book i{left:1px;transform:skewY(5deg)}.dl-canon-icon-v8.type-book b{right:1px;transform:skewY(-5deg)}
+.dl-canon-icon-v8.type-book em{left:10px;top:4px;width:3px;height:16px;background:#7654d6}
+.dl-canon-icon-v8.type-book u{left:5px;top:7px;width:3px;height:8px;background:#b99de8;animation:dlCanonPage 2.8s ease-in-out infinite}
+
+/* chest/profile + upload/download */
+.dl-canon-icon-v8.type-chest i,.dl-canon-icon-v8.type-chest-down i,.dl-canon-icon-v8.type-chest-up i{left:2px;top:8px;width:19px;height:13px;background:#a76d36;border:2px solid #56371f;box-shadow:inset 0 -4px #71431f}
+.dl-canon-icon-v8.type-chest b,.dl-canon-icon-v8.type-chest-down b,.dl-canon-icon-v8.type-chest-up b{left:2px;top:3px;width:19px;height:7px;background:#ca8842;border:2px solid #56371f;transform-origin:left bottom;animation:dlCanonChest 3.6s steps(3,end) infinite}
+.dl-canon-icon-v8.type-chest em,.dl-canon-icon-v8.type-chest-down em,.dl-canon-icon-v8.type-chest-up em{left:9px;top:9px;width:6px;height:6px;background:#e6c767;border:1px solid #6e5623;z-index:3}
+.dl-canon-icon-v8.type-chest-down u,.dl-canon-icon-v8.type-chest-up u{left:10px;top:0;width:4px;height:9px;background:#7d59d2;z-index:4}
+.dl-canon-icon-v8.type-chest-down s,.dl-canon-icon-v8.type-chest-up s{left:7px;width:10px;height:7px;background:#7d59d2;clip-path:polygon(50% 100%,0 30%,30% 30%,30% 0,70% 0,70% 30%,100% 30%);z-index:4}
+.dl-canon-icon-v8.type-chest-down s{top:6px}.dl-canon-icon-v8.type-chest-up s{top:-1px;transform:rotate(180deg)}
+
+/* lifebuoy */
+.dl-canon-icon-v8.type-lifebuoy i{inset:2px;border:4px solid #e4a535;border-radius:50%;background:#fff}
+.dl-canon-icon-v8.type-lifebuoy b{left:9px;top:1px;width:5px;height:21px;background:#fff;transform:rotate(45deg)}
+.dl-canon-icon-v8.type-lifebuoy em{left:9px;top:1px;width:5px;height:21px;background:#fff;transform:rotate(-45deg)}
+
+/* redstone */
+.dl-canon-icon-v8.type-redstone i{left:4px;top:3px;width:15px;height:15px;background:#c84947;clip-path:polygon(50% 0,72% 27%,100% 50%,72% 72%,50% 100%,27% 72%,0 50%,27% 27%);box-shadow:0 0 7px rgba(218,71,68,.32)}
+.dl-canon-icon-v8.type-redstone b{left:9px;top:8px;width:5px;height:5px;background:#ff8a74;animation:dlCanonPulse 1.8s steps(2,end) infinite}
+
+/* bell */
+.dl-canon-icon-v8.type-bell i{left:5px;top:4px;width:14px;height:13px;background:#e7b746;border:2px solid #865b1d;clip-path:polygon(25% 0,75% 0,100% 82%,0 82%);transform-origin:50% 0;animation:dlCanonBell 3.2s ease-in-out infinite}
+.dl-canon-icon-v8.type-bell b{left:10px;top:16px;width:5px;height:4px;background:#6d4b1c;border-radius:50%}
+
+/* painting */
+.dl-canon-icon-v8.type-painting i{left:2px;top:3px;width:19px;height:16px;background:#d6b77d;border:3px solid #5b432a}
+.dl-canon-icon-v8.type-painting b{left:6px;top:7px;width:5px;height:5px;background:#6aa260;box-shadow:6px 3px #7d59d2}
+.dl-canon-icon-v8.type-painting em{left:4px;top:14px;width:15px;height:3px;background:#5d8e58}
+
+/* emerald */
+.dl-canon-icon-v8.type-emerald i{left:4px;top:2px;width:15px;height:19px;background:linear-gradient(135deg,#a9ffd0,#35c777 45%,#14794b);clip-path:polygon(50% 0,95% 28%,78% 90%,22% 90%,5% 28%)}
+.dl-canon-icon-v8.type-emerald b{left:7px;top:4px;width:4px;height:12px;background:rgba(255,255,255,.65);transform:skewX(-18deg);animation:dlCanonGlint 2.9s ease-in-out infinite}
+
+/* beacon */
+.dl-canon-icon-v8.type-beacon i{left:4px;top:10px;width:15px;height:10px;background:#bededc;border:2px solid #4d6f6d}
+.dl-canon-icon-v8.type-beacon b{left:7px;top:6px;width:9px;height:7px;background:#7fe8d9;border:2px solid #397c74;box-shadow:0 0 9px rgba(92,226,208,.45)}
+.dl-canon-icon-v8.type-beacon em{left:10px;top:-1px;width:4px;height:8px;background:linear-gradient(rgba(127,232,217,.8),transparent);animation:dlCanonBeacon 2.2s ease-in-out infinite}
+
+/* map */
+.dl-canon-icon-v8.type-map i{left:2px;top:4px;width:19px;height:15px;background:linear-gradient(90deg,#e6d797 0 33%,#c6e0a2 33% 66%,#d9ca8b 66%);border:2px solid #655c40}
+.dl-canon-icon-v8.type-map b{left:7px;top:4px;width:2px;height:15px;background:#6e6344;box-shadow:7px 0 #6e6344}
+.dl-canon-icon-v8.type-map em{left:11px;top:8px;width:4px;height:4px;background:#c6504a}
+
+/* shield */
+.dl-canon-icon-v8.type-shield i{left:4px;top:2px;width:15px;height:19px;background:linear-gradient(135deg,#aa91ed,#7654d6 45%,#4d329a);clip-path:polygon(50% 0,100% 18%,90% 70%,50% 100%,10% 70%,0 18%);border:1px solid #3e2a7d}
+.dl-canon-icon-v8.type-shield b{left:10px;top:5px;width:3px;height:11px;background:rgba(255,255,255,.45)}
+
+/* sword */
+.dl-canon-icon-v8.type-sword i{left:10px;top:0;width:6px;height:16px;background:#89d8e2;border:2px solid #356c75;transform:rotate(43deg);transform-origin:center bottom}
+.dl-canon-icon-v8.type-sword b{left:6px;top:12px;width:13px;height:4px;background:#56402e;transform:rotate(43deg)}
+.dl-canon-icon-v8.type-sword em{left:3px;top:16px;width:6px;height:7px;background:#8b5c31;transform:rotate(43deg)}
+.dl-canon-icon-v8.type-sword u{left:0;top:2px;width:24px;height:2px;background:#d8fbff;opacity:0;transform:rotate(-35deg);animation:dlCanonSlash 3s ease-out infinite}
+
+/* door */
+.dl-canon-icon-v8.type-door i{left:4px;top:1px;width:16px;height:21px;background:#553823}
+.dl-canon-icon-v8.type-door b{left:6px;top:3px;width:12px;height:17px;background:#9a6135;box-shadow:inset 3px 0 #c4894f;transform-origin:left center;animation:dlCanonDoor 3.8s steps(4,end) infinite}
+.dl-canon-icon-v8.type-door em{right:6px;top:11px;width:3px;height:3px;background:#e5c05f}
+
+/* paper */
+.dl-canon-icon-v8.type-paper i{left:4px;top:2px;width:15px;height:19px;background:#f1ead8;border:2px solid #6d6250}
+.dl-canon-icon-v8.type-paper b{right:4px;top:2px;width:6px;height:6px;background:#cfc1a5;clip-path:polygon(0 0,100% 100%,0 100%)}
+.dl-canon-icon-v8.type-paper em{left:7px;top:8px;width:8px;height:2px;background:#8f7c61;box-shadow:0 4px #8f7c61}
+
+/* anvil */
+.dl-canon-icon-v8.type-anvil i{left:4px;top:8px;width:15px;height:9px;background:#626a64;border:2px solid #343a35}
+.dl-canon-icon-v8.type-anvil b{left:1px;top:5px;width:21px;height:6px;background:#777f79;border:2px solid #343a35}
+.dl-canon-icon-v8.type-anvil em{left:8px;top:16px;width:8px;height:6px;background:#4f5751}
+
+/* lava */
+.dl-canon-icon-v8.type-lava i{left:5px;top:2px;width:13px;height:19px;background:linear-gradient(#ffca3d,#f36b2f 55%,#b73326);clip-path:polygon(50% 0,72% 27%,90% 50%,76% 100%,20% 92%,6% 50%,30% 25%);animation:dlCanonPulse 1.4s ease-in-out infinite}
+
+/* tnt */
+.dl-canon-icon-v8.type-tnt i{left:3px;top:6px;width:18px;height:14px;background:#d64a45;border:2px solid #7b2927;box-shadow:inset 0 -4px #a83330}
+.dl-canon-icon-v8.type-tnt b{left:6px;top:10px;width:12px;height:4px;background:#f2e9d7}
+.dl-canon-icon-v8.type-tnt em{left:11px;top:1px;width:2px;height:7px;background:#5a4630;transform:rotate(20deg)}
+.dl-canon-icon-v8.type-tnt u{left:13px;top:0;width:4px;height:4px;background:#ffdb54;animation:dlCanonPulse .9s steps(2,end) infinite}
+
+/* spyglass */
+.dl-canon-icon-v8.type-spyglass i{left:3px;top:5px;width:15px;height:8px;background:#a5753e;border:2px solid #574229;transform:rotate(-35deg)}
+.dl-canon-icon-v8.type-spyglass b{left:13px;top:1px;width:8px;height:10px;background:#d6b85f;border:2px solid #705c2f;transform:rotate(-35deg)}
+.dl-canon-icon-v8.type-spyglass em{left:0;top:10px;width:7px;height:7px;background:#5d4930;border-radius:50%}
+
+/* gear */
+.dl-canon-icon-v8.type-gear i{inset:3px;border:5px dotted #6f7871;border-radius:50%;animation:dlCanonSpin 6s linear infinite}
+.dl-canon-icon-v8.type-gear b{left:8px;top:8px;width:7px;height:7px;border-radius:50%;background:#414943}
+
+/* mail / lock / craft / pickaxe / grass / slime */
+.dl-canon-icon-v8.type-mail i{left:2px;top:5px;width:19px;height:14px;background:#7654d6;border:2px solid #4a347f}.dl-canon-icon-v8.type-mail b{left:4px;top:6px;width:15px;height:10px;background:linear-gradient(35deg,transparent 48%,#e7ddff 49% 54%,transparent 55%),linear-gradient(-35deg,transparent 48%,#e7ddff 49% 54%,transparent 55%)}
+.dl-canon-icon-v8.type-lock i{left:5px;top:9px;width:14px;height:12px;background:#7654d6;border:2px solid #49317e}.dl-canon-icon-v8.type-lock b{left:7px;top:2px;width:10px;height:10px;border:3px solid #7e7590;border-bottom:0;border-radius:6px 6px 0 0}
+.dl-canon-icon-v8.type-craft i{inset:2px;background:#9e6937;border:2px solid #4f3421;box-shadow:inset 0 -5px #6f4628}.dl-canon-icon-v8.type-craft b{left:7px;top:3px;width:2px;height:17px;background:#452e22;box-shadow:6px 0 #452e22}.dl-canon-icon-v8.type-craft em{left:3px;top:8px;width:17px;height:2px;background:#452e22;box-shadow:0 6px #452e22}
+.dl-canon-icon-v8.type-pickaxe i{left:10px;top:7px;width:5px;height:15px;background:#86522c;border:1px solid #4d321d;transform:rotate(-28deg)}.dl-canon-icon-v8.type-pickaxe b{left:2px;top:3px;width:18px;height:5px;background:#78ced9;border:2px solid #315f68;transform:rotate(-16deg);animation:dlCanonPick 2.8s ease-in-out infinite}
+.dl-canon-icon-v8.type-grass i{left:3px;top:6px;width:17px;height:15px;background:#744b2d;border:2px solid #3d3326;box-shadow:inset 0 5px #67ad4d}.dl-canon-icon-v8.type-grass b{left:8px;top:1px;width:7px;height:8px;background:#6fbd54}
+.dl-canon-icon-v8.type-slime i{left:3px;top:3px;width:18px;height:18px;background:#69be69;border:2px solid #397c45;box-shadow:inset -4px -4px rgba(0,0,0,.12)}.dl-canon-icon-v8.type-slime b{left:7px;top:8px;width:3px;height:3px;background:#173c25;box-shadow:7px 0 #173c25}.dl-canon-icon-v8.type-slime em{left:9px;top:14px;width:6px;height:2px;background:#173c25}
+
+/* active forum head */
+.active-forum-head>.forum-head-icon-v8{margin-right:10px!important}
+
+/* reaction icon */
+.dl-v10-add{width:40px!important;min-width:40px!important;height:40px!important;padding:0!important;display:grid!important;place-items:center!important}
+.dl-reaction-crystal-v8{position:relative!important;width:25px!important;height:25px!important;display:block!important;pointer-events:none!important;filter:drop-shadow(0 2px 0 rgba(55,38,100,.18))}
+.dl-reaction-crystal-v8>*{position:absolute!important;display:block!important;box-sizing:border-box!important}
+.dl-reaction-crystal-v8 i{left:4px;top:3px;width:16px;height:18px;background:linear-gradient(145deg,#c6b5ff,#7d59d2 50%,#4c3295);clip-path:polygon(50% 0,95% 28%,80% 90%,20% 90%,5% 28%)}
+.dl-reaction-crystal-v8 b{left:8px;top:6px;width:4px;height:10px;background:rgba(255,255,255,.45);transform:skewX(-18deg)}
+.dl-reaction-crystal-v8 em{right:0;bottom:2px;width:9px;height:3px;background:#fff;box-shadow:0 0 0 1px rgba(76,47,151,.4)}
+.dl-reaction-crystal-v8 u{right:3px;bottom:-1px;width:3px;height:9px;background:#fff;box-shadow:0 0 0 1px rgba(76,47,151,.4)}
+.dl-v10-add:active .dl-reaction-crystal-v8{transform:scale(.9)}
+
+@keyframes dlCanonCompass{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(22deg)}}
+@keyframes dlCanonPage{0%,70%,100%{transform:scaleX(1)}78%{transform:scaleX(.25)}}
+@keyframes dlCanonChest{0%,74%,100%{transform:rotateX(0)}80%,91%{transform:rotateX(-55deg)}}
+@keyframes dlCanonPulse{50%{filter:brightness(1.22);transform:scale(1.05)}}
+@keyframes dlCanonBell{0%,74%,100%{transform:rotate(0)}80%{transform:rotate(-12deg)}86%{transform:rotate(12deg)}}
+@keyframes dlCanonGlint{0%,65%{opacity:0;transform:translateX(-5px) skewX(-18deg)}76%{opacity:1}100%{opacity:0;transform:translateX(8px) skewX(-18deg)}}
+@keyframes dlCanonBeacon{50%{opacity:.35;transform:scaleY(1.2)}}
+@keyframes dlCanonSlash{0%,68%{opacity:0;transform:translate(-5px,6px) rotate(-35deg)}76%{opacity:1}90%,100%{opacity:0;transform:translate(6px,-4px) rotate(-35deg)}}
+@keyframes dlCanonDoor{0%,72%,100%{transform:perspective(30px) rotateY(0)}78%,91%{transform:perspective(30px) rotateY(-42deg)}}
+@keyframes dlCanonSpin{to{transform:rotate(360deg)}}
+@keyframes dlCanonPick{0%,74%,100%{transform:rotate(-16deg)}82%{transform:rotate(-34deg)}}
+
+@media(max-width:560px){
+  .dl-canon-icon-v8{width:21px!important;height:21px!important;min-width:21px!important;flex-basis:21px!important}
+  .dl-canon-control-v8{gap:7px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .dl-canon-icon-v8 *,.dl-reaction-crystal-v8 *{animation:none!important}
+}
