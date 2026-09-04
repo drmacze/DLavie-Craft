@@ -1,0 +1,531 @@
+/* DLavie Community Chat v3
+   Clear message/thread hierarchy + compact Discord-like reactions/actions. */
+
+.community-page.community-v2{
+  --chat-indent:46px;
+}
+
+/* ---------- Simplify the page hierarchy ---------- */
+.community-page .community-hub-head{
+  padding:24px 26px!important;
+  border-radius:18px!important;
+}
+.community-page .community-hub-head h1{
+  max-width:17ch!important;
+  margin:.25rem 0 .4rem!important;
+}
+.community-page .active-forum-head{
+  min-height:84px!important;
+  padding:15px 17px!important;
+}
+.community-page #dl-community-toolbar{
+  margin-top:8px!important;
+}
+.community-page .typed-feed{
+  gap:10px!important;
+}
+
+/* ---------- Chat cards: each message is one clearly bounded object ---------- */
+.community-page .community-entry.entry-chat.dl-community-entry-v3{
+  position:relative;
+  margin:0!important;
+  padding:10px 10px 8px!important;
+  border:1px solid color-mix(in srgb,var(--line) 86%,transparent)!important;
+  border-radius:15px!important;
+  background:color-mix(in srgb,var(--surface-raised) 90%,transparent)!important;
+  box-shadow:0 2px 0 color-mix(in srgb,var(--ink) 5%,transparent)!important;
+  overflow:visible!important;
+}
+.community-page .entry-chat .chat-entry-main{
+  display:grid!important;
+  grid-template-columns:36px minmax(0,1fr)!important;
+  gap:9px!important;
+  align-items:start!important;
+}
+.community-page .entry-chat .community-avatar{
+  width:36px!important;
+  height:36px!important;
+  flex-basis:36px!important;
+}
+.community-page .entry-chat .chat-bubble{
+  position:relative!important;
+  min-width:0!important;
+  width:100%!important;
+  padding:9px 38px 9px 11px!important;
+  border:1px solid color-mix(in srgb,var(--line) 82%,transparent)!important;
+  border-radius:12px!important;
+  background:var(--surface-raised)!important;
+  box-shadow:none!important;
+}
+.community-page .entry-chat .chat-bubble .entry-author{
+  min-height:20px!important;
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  margin-bottom:3px!important;
+}
+.community-page .entry-chat .chat-bubble p{
+  margin:0!important;
+  color:var(--ink)!important;
+  font-size:13px!important;
+  line-height:1.46!important;
+  overflow-wrap:anywhere;
+}
+.community-page .dl-edited-mark{
+  color:var(--ink-soft)!important;
+  font-size:8px!important;
+  font-weight:700!important;
+  opacity:.72;
+}
+.community-page .dl-edited-mark::before{content:"· ";}
+
+/* ---------- Message actions ---------- */
+.community-page .dl-message-action-host{position:relative!important}
+.community-page .dl-message-more{
+  position:absolute!important;
+  top:5px!important;
+  right:5px!important;
+  z-index:7;
+  width:29px!important;
+  height:26px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0 0 5px!important;
+  border:1px solid transparent!important;
+  border-radius:8px!important;
+  background:transparent!important;
+  color:var(--ink-soft)!important;
+  font:900 14px/1 var(--font-body)!important;
+  letter-spacing:1px;
+  box-shadow:none!important;
+}
+.community-page .dl-message-more:hover,
+.community-page .dl-message-more:focus-visible,
+.community-page .dl-message-more[aria-expanded="true"]{
+  border-color:var(--line)!important;
+  background:var(--surface)!important;
+  color:var(--ink)!important;
+}
+.community-page .dl-message-menu{
+  position:absolute;
+  top:34px;
+  right:5px;
+  z-index:45;
+  min-width:132px;
+  display:none;
+  padding:5px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--surface-raised);
+  box-shadow:0 15px 40px rgba(13,18,15,.17);
+}
+.community-page .dl-message-menu.open{display:grid;gap:2px}
+.community-page .dl-message-menu button{
+  width:100%!important;
+  min-height:34px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  padding:0 10px!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  color:var(--ink)!important;
+  font-size:10px!important;
+  font-weight:780!important;
+  box-shadow:none!important;
+}
+.community-page .dl-message-menu button:hover{background:var(--surface)!important}
+.community-page .dl-message-menu button[data-action="delete"],
+.community-page .dl-message-menu button[data-action="report"]{color:#b84b48!important}
+
+/* ---------- Reactions: compact and visibly separate from replies ---------- */
+.community-page .entry-chat > .entry-actions{
+  width:auto!important;
+  min-height:34px!important;
+  margin:5px 0 0 var(--chat-indent)!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:6px!important;
+  border:0!important;
+  background:transparent!important;
+}
+.community-page .reaction-area{min-width:0!important}
+.community-page .reaction-bar{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:4px!important;
+}
+.community-page .reaction-button.dl-reaction-chip,
+.community-page .reaction-add.dl-reaction-trigger{
+  min-height:28px!important;
+  height:28px!important;
+  border-radius:8px!important;
+}
+.community-page .reaction-button.dl-reaction-chip.active{
+  border-color:color-mix(in srgb,var(--accent) 55%,var(--line))!important;
+  background:color-mix(in srgb,var(--accent-soft) 86%,var(--surface-raised))!important;
+}
+.community-page .reaction-add > .dl-mc-sweep-icon,
+.community-page .reaction-add > .dl-mc-forge-icon,
+.community-page .reaction-add > .dl-mc-icon,
+.community-page .reaction-add > svg{display:none!important}
+.community-page .dl-reaction-trigger-emoji{display:inline-grid!important}
+.community-page .reply-toggle{
+  min-height:28px!important;
+  height:28px!important;
+  padding:0 7px!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:transparent!important;
+  color:var(--ink-soft)!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+.community-page .reply-toggle:hover{background:var(--surface)!important;color:var(--ink)!important}
+
+/* ---------- Thread: visually belongs to a message, but is clearly a child ---------- */
+.community-page .entry-chat .post-thread{
+  position:relative!important;
+  margin:7px 0 1px var(--chat-indent)!important;
+  padding:8px 8px 8px 14px!important;
+  border:0!important;
+  border-left:2px solid color-mix(in srgb,var(--accent) 52%,var(--line))!important;
+  border-radius:0 12px 12px 0!important;
+  background:color-mix(in srgb,var(--surface) 64%,transparent)!important;
+  overflow:visible!important;
+}
+.community-page .dl-thread-head{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:32px;
+  margin:0 0 7px;
+  padding:0 2px 6px;
+  border-bottom:1px solid color-mix(in srgb,var(--line) 72%,transparent);
+}
+.community-page .dl-thread-rail-dot{
+  width:8px;height:8px;flex:0 0 8px;
+  border-radius:2px;
+  background:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft);
+}
+.community-page .dl-thread-head>div{min-width:0;display:grid;gap:1px;flex:1}
+.community-page .dl-thread-head strong{font-size:10px!important;font-weight:850!important}
+.community-page .dl-thread-head small{font-size:8px!important;color:var(--ink-soft)!important}
+.community-page .dl-thread-head b{
+  flex:0 0 auto;
+  padding:3px 6px;
+  border-radius:7px;
+  background:var(--surface-raised);
+  color:var(--ink-soft);
+  font-size:8px;
+}
+
+/* Every reply is its own mini-card. */
+.community-page .post-thread .community-comment.dl-comment-v3{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:28px minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:7px!important;
+  margin:0 0 6px!important;
+  padding:7px!important;
+  border:1px solid color-mix(in srgb,var(--line) 76%,transparent)!important;
+  border-radius:10px!important;
+  background:var(--surface-raised)!important;
+  box-shadow:none!important;
+}
+.community-page .post-thread .community-comment.dl-comment-v3>.community-avatar{
+  width:28px!important;height:28px!important;flex-basis:28px!important;
+}
+.community-page .post-thread .community-comment.dl-comment-v3>div:last-child{
+  position:relative!important;
+  min-width:0!important;
+  padding-right:30px!important;
+}
+.community-page .post-thread .community-comment.dl-comment-v3>div:last-child>div:first-child{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:5px!important;
+  min-height:18px!important;
+}
+.community-page .post-thread .community-comment.dl-comment-v3 p{
+  margin:3px 0!important;
+  font-size:11px!important;
+  line-height:1.44!important;
+  overflow-wrap:anywhere;
+}
+.community-page .post-thread .community-comment.dl-comment-reply{
+  width:calc(100% - 22px)!important;
+  margin-left:22px!important;
+  border-left:2px solid color-mix(in srgb,var(--accent) 38%,var(--line))!important;
+  background:color-mix(in srgb,var(--accent-soft) 28%,var(--surface-raised))!important;
+}
+.community-page .post-thread .community-comment.dl-comment-highlight{
+  outline:2px solid color-mix(in srgb,var(--accent) 42%,transparent)!important;
+  outline-offset:2px;
+}
+
+/* Explicit parent reference: no guessing who the reply was for. */
+.community-page .dl-reply-context{
+  width:100%!important;
+  min-height:32px!important;
+  display:grid!important;
+  grid-template-columns:14px minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:4px!important;
+  margin:3px 0 5px!important;
+  padding:5px 7px!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:color-mix(in srgb,var(--accent-soft) 55%,var(--surface))!important;
+  color:var(--ink-soft)!important;
+  text-align:left!important;
+  box-shadow:none!important;
+}
+.community-page .dl-reply-context>span:first-child{color:var(--accent);font-size:12px;font-weight:900}
+.community-page .dl-reply-context>span:last-child{min-width:0;display:grid;gap:1px}
+.community-page .dl-reply-context strong{
+  color:var(--accent-dark)!important;
+  font-size:8px!important;
+  font-weight:850!important;
+}
+.community-page .dl-reply-context small{
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:var(--ink-soft)!important;
+  font-size:8px!important;
+}
+
+/* Thread composer is clearly the final item of the thread. */
+.community-page .entry-chat .reply-composer{
+  display:grid!important;
+  grid-template-columns:28px minmax(0,1fr) auto!important;
+  align-items:end!important;
+  gap:7px!important;
+  margin:8px 0 0!important;
+  padding:8px 0 0!important;
+  border-top:1px dashed color-mix(in srgb,var(--line) 80%,transparent)!important;
+  background:transparent!important;
+}
+.community-page .entry-chat .reply-composer textarea{
+  min-height:58px!important;
+  padding:9px 10px!important;
+  border-radius:9px!important;
+}
+.community-page .entry-chat .reply-composer .button{
+  min-height:38px!important;
+  padding:0 12px!important;
+}
+.community-page .reply-target{
+  min-height:26px!important;
+  padding:4px 6px!important;
+  border-radius:7px!important;
+  background:var(--accent-soft)!important;
+  color:var(--accent-dark)!important;
+  font-size:8px!important;
+}
+
+/* ---------- Edit / delete / report sheets ---------- */
+.dl-community-v3-sheet{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(8,12,10,.42);
+}
+.dl-community-v3-sheet>section{
+  width:min(460px,100%);
+  max-height:min(720px,88dvh);
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface-raised);
+  box-shadow:0 28px 90px rgba(5,8,6,.28);
+}
+.dl-v3-sheet-head{
+  min-height:62px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+}
+.dl-v3-sheet-head>div{min-width:0;display:grid;gap:2px}
+.dl-v3-sheet-head strong{font-family:var(--font-block);font-size:20px}
+.dl-v3-sheet-head small{color:var(--ink-soft);font-size:9px}
+.dl-v3-sheet-head>button{
+  width:32px;height:32px;display:grid;place-items:center;
+  padding:0;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface);color:var(--ink);font-size:20px;
+}
+.dl-v3-sheet-body{padding:13px 14px 15px}
+.dl-v3-sheet-body form{display:grid;gap:9px}
+.dl-v3-sheet-body textarea,
+.dl-v3-sheet-body select{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--ink);
+  font:inherit;
+}
+.dl-v3-sheet-body textarea{min-height:104px;padding:10px 11px;resize:vertical}
+.dl-v3-sheet-body select{height:42px;padding:0 10px}
+.dl-v3-sheet-body label{display:grid;gap:5px;font-size:9px;font-weight:820}
+.dl-v3-edit-form>small{justify-self:end;color:var(--ink-soft);font-size:8px}
+.dl-v3-sheet-body blockquote{
+  margin:0 0 12px;
+  padding:9px 10px;
+  border-left:3px solid var(--line);
+  background:var(--surface);
+  color:var(--ink-soft);
+  font-size:10px;
+  line-height:1.45;
+}
+.dl-v3-sheet-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:3px}
+.dl-v3-action{
+  min-height:38px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:var(--surface);
+  color:var(--ink);
+  font-size:10px;
+  font-weight:820;
+}
+.dl-v3-action.primary{border-color:var(--accent);background:var(--accent);color:#fff}
+.dl-v3-action.danger{border-color:#bf5a56;background:#bf5a56;color:#fff}
+.dl-v3-inline-error{
+  padding:8px 9px;
+  border:1px solid rgba(190,76,70,.25);
+  border-radius:8px;
+  background:rgba(190,76,70,.08);
+  color:#a7423f;
+  font-size:9px;
+}
+.dl-community-v3-toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(18px + env(safe-area-inset-bottom));
+  z-index:10020;
+  max-width:calc(100vw - 28px);
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--ink);
+  color:var(--surface-raised);
+  font-size:10px;
+  font-weight:780;
+  opacity:0;
+  transform:translate(-50%,8px);
+  transition:.18s ease;
+}
+.dl-community-v3-toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- Mobile ---------- */
+@media(max-width:620px){
+  .community-page.community-v2{--chat-indent:39px}
+  .community-page .community-hub-head{
+    padding:17px 16px!important;
+    border-radius:14px!important;
+  }
+  .community-page .community-hub-head h1{
+    font-size:clamp(27px,8.5vw,35px)!important;
+    line-height:1!important;
+  }
+  .community-page .community-hub-head p{
+    max-width:42ch!important;
+    font-size:10px!important;
+    line-height:1.45!important;
+  }
+  .community-page .active-forum-head{
+    min-height:70px!important;
+    padding:11px 12px!important;
+  }
+  .community-page .community-entry.entry-chat.dl-community-entry-v3{
+    padding:8px 7px 7px!important;
+    border-radius:12px!important;
+  }
+  .community-page .entry-chat .chat-entry-main{
+    grid-template-columns:31px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  .community-page .entry-chat .community-avatar{
+    width:31px!important;height:31px!important;flex-basis:31px!important;
+  }
+  .community-page .entry-chat .chat-bubble{
+    padding:8px 34px 8px 9px!important;
+  }
+  .community-page .entry-chat .chat-bubble p{font-size:12px!important}
+  .community-page .entry-chat > .entry-actions{
+    margin-left:var(--chat-indent)!important;
+    overflow:visible!important;
+  }
+  .community-page .entry-chat .post-thread{
+    margin-left:var(--chat-indent)!important;
+    padding:7px 5px 7px 10px!important;
+  }
+  .community-page .post-thread .community-comment.dl-comment-v3{
+    grid-template-columns:25px minmax(0,1fr)!important;
+    gap:6px!important;
+    padding:6px!important;
+  }
+  .community-page .post-thread .community-comment.dl-comment-v3>.community-avatar{
+    width:25px!important;height:25px!important;flex-basis:25px!important;
+  }
+  .community-page .post-thread .community-comment.dl-comment-reply{
+    width:calc(100% - 13px)!important;
+    margin-left:13px!important;
+  }
+  .community-page .entry-chat .reply-composer{
+    grid-template-columns:minmax(0,1fr)!important;
+    padding-left:0!important;
+  }
+  .community-page .entry-chat .reply-composer>.community-avatar{display:none!important}
+  .community-page .entry-chat .reply-composer>div{grid-column:1!important}
+  .community-page .entry-chat .reply-composer>.button{
+    width:auto!important;
+    min-width:98px!important;
+    justify-self:end!important;
+  }
+  .community-page .dl-message-menu{
+    right:2px;
+    min-width:126px;
+  }
+  .dl-community-v3-sheet{
+    align-items:end;
+    padding:8px 8px max(8px,env(safe-area-inset-bottom));
+  }
+  .dl-community-v3-sheet>section{
+    width:100%;
+    max-height:78dvh;
+    border-radius:18px;
+  }
+  .dl-v3-sheet-actions .dl-v3-action{flex:1}
+}
+
+@media(max-width:390px){
+  .community-page.community-v2{--chat-indent:36px}
+  .community-page .reaction-add.dl-reaction-trigger .dl-reaction-add-label{display:none!important}
+  .community-page .reaction-add.dl-reaction-trigger{min-width:30px!important;padding:0 6px!important}
+  .community-page .dl-thread-head small{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .community-page .dl-comment-highlight,
+  .dl-community-v3-toast{transition:none!important}
+}
