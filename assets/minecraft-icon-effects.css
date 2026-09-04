@@ -1,0 +1,232 @@
+/* DLavie Craft — animated Minecraft item/block icon effects.
+   Keep animations transform/opacity-first so they stay light on iPhone/Safari. */
+
+.dl-mc-sweep-icon,
+.dl-mc-icon{
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+}
+
+.dl-mc-sweep-icon svg,
+.dl-mc-icon svg{
+  transform-box:view-box;
+  transform-origin:center;
+}
+
+.dl-mc-sweep-icon svg path,
+.dl-mc-icon svg path{
+  transform-box:fill-box;
+  transform-origin:center;
+}
+
+/* ---------- TORCH: real flame flicker + pixel embers ---------- */
+.dl-mc-sweep--torch{
+  filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent))
+         drop-shadow(0 0 5px rgba(255,153,55,.24));
+  animation:dl-mc-torch-aura 2.2s ease-in-out infinite;
+}
+.dl-mc-sweep--torch .flame{
+  transform-origin:50% 100%;
+  animation:dl-mc-flame-flicker .76s steps(2,end) infinite;
+  filter:drop-shadow(0 0 1px #ffd56a) drop-shadow(0 0 4px rgba(255,126,34,.72));
+}
+.dl-mc-sweep--torch .p-hi{
+  transform-origin:50% 100%;
+  fill:#ffd86b!important;
+  animation:dl-mc-flame-core .54s steps(2,end) infinite reverse;
+  filter:drop-shadow(0 0 3px rgba(255,222,105,.82));
+}
+.dl-mc-sweep--torch:before,
+.dl-mc-sweep--torch:after{
+  content:"";
+  position:absolute;
+  z-index:2;
+  width:2px;
+  height:2px;
+  border-radius:0;
+  pointer-events:none;
+  background:#ffd45d;
+  box-shadow:0 0 4px rgba(255,142,35,.74);
+  opacity:0;
+}
+.dl-mc-sweep--torch:before{left:8px;top:4px;animation:dl-mc-ember-rise 1.55s steps(4,end) infinite .12s}
+.dl-mc-sweep--torch:after{left:13px;top:6px;animation:dl-mc-ember-rise-b 1.9s steps(5,end) infinite .72s}
+
+/* ---------- LAVA: animated hot core ---------- */
+.dl-mc-sweep--lava .flame{
+  animation:dl-mc-lava-core 1.25s steps(3,end) infinite;
+  filter:drop-shadow(0 0 4px rgba(255,102,24,.62));
+}
+.dl-mc-sweep--lava .p-hi{
+  fill:#ffd45a!important;
+  animation:dl-mc-lava-flow 1.15s steps(3,end) infinite;
+}
+.dl-mc-sweep--lava{animation:dl-mc-lava-aura 2.6s ease-in-out infinite}
+
+/* ---------- REDSTONE: powered pulse ---------- */
+.dl-mc-sweep--redstone{
+  animation:dl-mc-redstone-pulse 1.55s steps(2,end) infinite;
+}
+.dl-mc-sweep--redstone .red{
+  filter:drop-shadow(0 0 3px rgba(255,54,54,.55));
+}
+.dl-mc-sweep--redstone .p-hi{animation:dl-mc-redstone-hot .78s steps(2,end) infinite}
+
+/* ---------- EMERALD / DIAMOND / XP: enchanted shimmer ---------- */
+.dl-mc-sweep--emerald,
+.dl-mc-sweep--diamond,
+.dl-mc-sweep--xp,
+.dl-mc-icon--emerald{
+  animation:dl-mc-gem-breathe 2.9s ease-in-out infinite;
+}
+.dl-mc-sweep--emerald .p-hi,
+.dl-mc-sweep--diamond .p-hi,
+.dl-mc-sweep--xp .p-hi,
+.dl-mc-icon--emerald .dl-mci-hi{
+  animation:dl-mc-gem-glint 2.35s steps(4,end) infinite;
+}
+.dl-mc-sweep--diamond{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 5px rgba(81,205,218,.24))}
+.dl-mc-sweep--emerald,.dl-mc-sweep--xp{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 5px rgba(41,181,111,.22))}
+
+/* XP has a slightly floatier collectible feel. */
+.dl-mc-sweep--xp svg{animation:dl-mc-xp-float 2.1s ease-in-out infinite}
+
+/* ---------- BELL: occasional idle ring ---------- */
+.dl-mc-sweep--bell svg{
+  transform-origin:50% 10%;
+  animation:dl-mc-bell-idle 5.2s ease-in-out infinite;
+}
+.dl-mc-sweep--bell .gold{filter:drop-shadow(0 0 3px rgba(226,174,68,.32))}
+
+/* ---------- HEART: Minecraft health beat ---------- */
+.dl-mc-sweep--heart svg{animation:dl-mc-heartbeat 3.1s cubic-bezier(.2,.8,.2,1) infinite}
+.dl-mc-sweep--heart .red{filter:drop-shadow(0 0 3px rgba(214,69,78,.28))}
+
+/* ---------- COMPASS / CLOCK ---------- */
+.dl-mc-sweep--compass .p-main.red{
+  transform-origin:50% 50%;
+  animation:dl-mc-compass-needle 4.6s cubic-bezier(.45,.05,.55,.95) infinite;
+}
+.dl-mc-sweep--clock .p-dark{
+  transform-origin:50% 50%;
+  animation:dl-mc-clock-tick 9s steps(12,end) infinite;
+}
+
+/* ---------- TNT: fuse-like spark and warning pulse ---------- */
+.dl-mc-sweep--tnt{animation:dl-mc-tnt-idle 2.4s steps(2,end) infinite}
+.dl-mc-sweep--tnt:before{
+  content:"";
+  position:absolute;
+  left:11px;
+  top:-2px;
+  width:3px;
+  height:3px;
+  background:#ffd45b;
+  box-shadow:0 0 5px #ff7a29;
+  opacity:.25;
+  animation:dl-mc-tnt-spark .72s steps(2,end) infinite;
+}
+
+/* ---------- CHEST / DOWNLOAD / UPLOAD ---------- */
+.dl-mc-sweep--chest .p-hi,
+.dl-mc-icon--chest .dl-mci-hi,
+.dl-mc-icon--download .dl-mci-hi{
+  animation:dl-mc-chest-latch 3.4s steps(2,end) infinite;
+}
+.dl-mc-icon--download .dl-mci-accent{
+  animation:dl-mc-download-arrow 1.65s ease-in-out infinite;
+}
+.dl-mc-sweep--upload .green,
+.dl-mc-sweep--upload .p-main.green{
+  animation:dl-mc-upload-arrow 1.65s ease-in-out infinite;
+}
+
+/* ---------- MAP / PAPER: tiny idle page movement ---------- */
+.dl-mc-sweep--map svg{animation:dl-mc-map-float 4s ease-in-out infinite}
+.dl-mc-sweep--paper svg{transform-origin:50% 90%;animation:dl-mc-paper-idle 4.6s ease-in-out infinite}
+
+/* ---------- HOVER ACTIONS: tools feel like tools ---------- */
+@media(hover:hover){
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--sword svg,
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--pickaxe svg{
+    animation:dl-mc-tool-swing .42s cubic-bezier(.2,.8,.25,1) both;
+    transform-origin:35% 75%;
+  }
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--shield svg{animation:dl-mc-shield-brace .34s ease both}
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--chest svg,
+  .dl-mc-iconized:hover > .dl-mc-icon--chest svg{animation:dl-mc-chest-pop .38s cubic-bezier(.2,.85,.25,1) both}
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--search svg{animation:dl-mc-search-look .46s ease both}
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--door svg{animation:dl-mc-door-nudge .34s ease both}
+  .dl-mc-v2-iconized:hover > .dl-mc-sweep--anvil svg{animation:dl-mc-anvil-hit .38s steps(3,end) both}
+}
+
+/* Universal highlight: a single pixel flash rather than generic smooth SVG hover. */
+.dl-mc-v2-iconized:hover > .dl-mc-sweep-icon .p-hi,
+.dl-mc-iconized:hover > .dl-mc-icon .dl-mci-hi{
+  filter:brightness(1.28) drop-shadow(0 0 2px color-mix(in srgb,currentColor 35%,transparent));
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes dl-mc-flame-flicker{
+  0%{transform:translateY(0) scale(.95,1);fill:#e98339}
+  25%{transform:translate(-1px,-1px) scale(1.08,.9);fill:#ff9d37}
+  50%{transform:translate(1px,0) scale(.9,1.08);fill:#f1762f}
+  75%{transform:translate(0,-1px) scale(1.04,.96);fill:#ffad42}
+  100%{transform:translateY(0) scale(.95,1);fill:#e98339}
+}
+@keyframes dl-mc-flame-core{0%,100%{transform:scale(.86,1);opacity:.76}50%{transform:translateY(-1px) scale(1.1,.88);opacity:1}}
+@keyframes dl-mc-torch-aura{0%,100%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 4px rgba(255,153,55,.20))}50%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 8px rgba(255,153,55,.42))}}
+@keyframes dl-mc-ember-rise{0%{transform:translate(0,1px);opacity:0}18%{opacity:.95}55%{transform:translate(2px,-5px);opacity:.65}100%{transform:translate(-1px,-10px);opacity:0}}
+@keyframes dl-mc-ember-rise-b{0%{transform:translate(0,1px);opacity:0}20%{opacity:.8}60%{transform:translate(-2px,-6px);opacity:.5}100%{transform:translate(1px,-11px);opacity:0}}
+
+@keyframes dl-mc-lava-core{0%,100%{fill:#e98339;transform:translateY(0) scaleY(1)}33%{fill:#ffb03d;transform:translateY(-1px) scaleY(.96)}66%{fill:#ef6f2d;transform:translateY(1px) scaleY(1.05)}}
+@keyframes dl-mc-lava-flow{0%,100%{transform:translateY(0);opacity:.75}50%{transform:translateY(2px);opacity:1}}
+@keyframes dl-mc-lava-aura{0%,100%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 3px rgba(255,91,28,.20))}50%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 7px rgba(255,91,28,.38))}}
+
+@keyframes dl-mc-redstone-pulse{0%,100%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 2px rgba(255,55,55,.18))}50%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 7px rgba(255,55,55,.55))}}
+@keyframes dl-mc-redstone-hot{0%,100%{opacity:.55}50%{opacity:1;filter:brightness(1.45)}}
+
+@keyframes dl-mc-gem-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.035)}}
+@keyframes dl-mc-gem-glint{0%,68%,100%{opacity:.65;transform:translate(0,0) scale(1)}76%{opacity:1;transform:translate(-1px,-1px) scale(1.15)}84%{opacity:.72;transform:translate(1px,0) scale(.95)}}
+@keyframes dl-mc-xp-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(2deg)}}
+
+@keyframes dl-mc-bell-idle{0%,72%,100%{transform:rotate(0)}77%{transform:rotate(-9deg)}82%{transform:rotate(8deg)}87%{transform:rotate(-5deg)}92%{transform:rotate(3deg)}}
+@keyframes dl-mc-heartbeat{0%,72%,100%{transform:scale(1)}78%{transform:scale(1.12)}82%{transform:scale(.98)}87%{transform:scale(1.08)}92%{transform:scale(1)}}
+@keyframes dl-mc-compass-needle{0%,100%{transform:rotate(0)}20%{transform:rotate(34deg)}45%{transform:rotate(-26deg)}67%{transform:rotate(18deg)}84%{transform:rotate(-7deg)}}
+@keyframes dl-mc-clock-tick{to{transform:rotate(360deg)}}
+
+@keyframes dl-mc-tnt-idle{0%,100%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent))}50%{filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 4px rgba(220,68,60,.28))}}
+@keyframes dl-mc-tnt-spark{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:translateY(-1px) scale(1.25)}}
+
+@keyframes dl-mc-chest-latch{0%,82%,100%{filter:none;transform:scale(1)}88%{filter:brightness(1.45);transform:scale(1.12)}94%{filter:none;transform:scale(1)}}
+@keyframes dl-mc-download-arrow{0%,100%{transform:translateY(-1px)}50%{transform:translateY(2px)}}
+@keyframes dl-mc-upload-arrow{0%,100%{transform:translateY(1px)}50%{transform:translateY(-2px)}}
+@keyframes dl-mc-map-float{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(1.5deg) translateY(-1px)}}
+@keyframes dl-mc-paper-idle{0%,80%,100%{transform:rotate(0)}88%{transform:rotate(2deg)}94%{transform:rotate(-1deg)}}
+
+@keyframes dl-mc-tool-swing{0%{transform:rotate(0)}55%{transform:rotate(-18deg) translateY(-1px)}100%{transform:rotate(0)}}
+@keyframes dl-mc-shield-brace{0%{transform:scale(1)}55%{transform:scale(1.1) translateX(-1px)}100%{transform:scale(1)}}
+@keyframes dl-mc-chest-pop{0%{transform:translateY(0)}52%{transform:translateY(-2px) scale(1.05)}100%{transform:translateY(0)}}
+@keyframes dl-mc-search-look{0%{transform:translate(0,0)}50%{transform:translate(1px,-1px) rotate(-4deg)}100%{transform:translate(0,0)}}
+@keyframes dl-mc-door-nudge{0%{transform:perspective(60px) rotateY(0)}55%{transform:perspective(60px) rotateY(-14deg)}100%{transform:perspective(60px) rotateY(0)}}
+@keyframes dl-mc-anvil-hit{0%{transform:translateY(0)}35%{transform:translateY(-2px)}58%{transform:translateY(1px)}100%{transform:translateY(0)}}
+
+/* Mobile keeps the same personality but trims glow cost. */
+@media(max-width:720px){
+  .dl-mc-sweep--torch{filter:drop-shadow(0 0 4px rgba(255,153,55,.22))}
+  .dl-mc-sweep--torch .flame{filter:drop-shadow(0 0 3px rgba(255,126,34,.62))}
+  .dl-mc-sweep--diamond,.dl-mc-sweep--emerald,.dl-mc-sweep--xp{filter:none}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-mc-sweep-icon,
+  .dl-mc-sweep-icon *,
+  .dl-mc-icon,
+  .dl-mc-icon *,
+  .dl-mc-sweep-icon:before,
+  .dl-mc-sweep-icon:after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
