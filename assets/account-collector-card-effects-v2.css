@@ -1,0 +1,54 @@
+/* Collector rarity effects — layered after the base collector profile styles. */
+.dl-collector-card.tier-enchanted .dl-card-art:after{
+  content:"";
+  position:absolute;
+  left:7%;bottom:7%;z-index:4;
+  width:48px;height:34px;
+  border:3px solid #241b2d;
+  border-radius:4px 4px 7px 7px;
+  background:linear-gradient(90deg,#6f3da0 0 46%,#be77dd 46% 52%,#5a2e88 52% 100%);
+  clip-path:polygon(0 13%,43% 0,50% 13%,57% 0,100% 13%,100% 100%,57% 86%,50% 100%,43% 86%,0 100%);
+  box-shadow:0 0 9px #b457e8,0 0 22px rgba(153,62,211,.55),inset 0 -7px 0 rgba(29,14,46,.26);
+  transform:rotate(-8deg);
+  animation:dl-enchanted-book-float 2.7s ease-in-out infinite;
+}
+.dl-collector-card.tier-enchanted .dl-card-art:before{
+  content:"✦ ᚱ ᛫ ᚨ ✧";
+  position:absolute;left:8%;bottom:20%;z-index:5;
+  width:90px;height:55px;
+  color:#f0b6ff;font-size:8px;font-weight:900;letter-spacing:4px;line-height:1.8;
+  text-shadow:0 0 7px #b657e8;
+  transform:rotate(-12deg);
+  opacity:.82;
+  animation:dl-enchant-runes 3.2s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes dl-enchanted-book-float{50%{transform:translateY(-5px) rotate(-5deg);filter:brightness(1.18)}}
+@keyframes dl-enchant-runes{0%,100%{transform:translateY(5px) rotate(-12deg);opacity:.35}50%{transform:translateY(-9px) rotate(-8deg);opacity:1}}
+
+.dl-collector-card.tier-holo .dl-collector-card-inner:after,
+.dl-collector-card.tier-mythic .dl-collector-card-inner:after,
+.dl-collector-card.tier-legendary .dl-collector-card-inner:after{
+  content:"";position:absolute;inset:-35%;z-index:6;pointer-events:none;
+  background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,.56) 47%,rgba(255,255,255,.08) 53%,transparent 66%);
+  transform:translateX(-55%) rotate(10deg);
+  animation:dl-premium-card-sweep 4.1s ease-in-out infinite;
+  mix-blend-mode:screen;
+}
+.dl-collector-card.tier-mythic .dl-collector-card-inner:after{animation-duration:3.2s;background:linear-gradient(105deg,transparent 27%,rgba(93,231,255,.2) 37%,rgba(255,112,220,.6) 48%,rgba(255,231,92,.38) 56%,transparent 70%)}
+.dl-collector-card.tier-legendary .dl-collector-card-inner:after{animation-duration:2.55s;background:linear-gradient(105deg,transparent 22%,rgba(71,239,255,.3) 34%,rgba(255,98,215,.7) 45%,rgba(255,236,90,.58) 54%,rgba(102,255,166,.3) 64%,transparent 76%)}
+@keyframes dl-premium-card-sweep{0%,42%{transform:translateX(-62%) rotate(10deg)}76%,100%{transform:translateX(62%) rotate(10deg)}}
+
+.dl-collector-card.tier-mythic .dl-card-level-heart,
+.dl-collector-card.tier-legendary .dl-card-level-heart{animation:dl-level-heart-glow 2.1s ease-in-out infinite}
+@keyframes dl-level-heart-glow{50%{filter:drop-shadow(0 0 7px #ff6769) drop-shadow(3px 4px 0 rgba(70,20,20,.24));transform:scale(1.06)}}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-collector-card.tier-enchanted .dl-card-art:after,
+  .dl-collector-card.tier-enchanted .dl-card-art:before,
+  .dl-collector-card.tier-holo .dl-collector-card-inner:after,
+  .dl-collector-card.tier-mythic .dl-collector-card-inner:after,
+  .dl-collector-card.tier-legendary .dl-collector-card-inner:after,
+  .dl-collector-card.tier-mythic .dl-card-level-heart,
+  .dl-collector-card.tier-legendary .dl-card-level-heart{animation:none!important}
+}
