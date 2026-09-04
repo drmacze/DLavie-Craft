@@ -1,0 +1,34 @@
+/* DLavie Craft — icon dedupe v4 */
+.dl-native-icon-hidden{display:none!important}
+.dl-icon-deduped-v4{min-width:0}
+.dl-icon-deduped-v4>.dl-mc-sweep-icon,
+.dl-icon-deduped-v4>.dl-mc-forge-icon,
+.dl-icon-deduped-v4>.dl-mc-icon{
+  flex:0 0 auto!important;
+}
+
+/* Navigation should read as one symbol + one label, never two icon languages. */
+.site-header .main-nav a.dl-icon-deduped-v4,
+.site-header .main-nav button.dl-icon-deduped-v4{
+  column-gap:10px!important;
+}
+.site-header .main-nav .dl-mc-sweep-icon,
+.site-header .main-nav .dl-mc-forge-icon,
+.site-header .main-nav .dl-mc-icon{
+  margin:0!important;
+}
+
+/* Action buttons in Community are particularly sensitive to duplicate sweep icons. */
+.community-page .entry-actions .dl-icon-deduped-v4,
+.community-page .quick-chat-composer .dl-icon-deduped-v4,
+.community-page .reply-composer .dl-icon-deduped-v4{
+  gap:6px!important;
+}
+
+@media(max-width:720px){
+  .site-header .main-nav a.dl-icon-deduped-v4,
+  .site-header .main-nav button.dl-icon-deduped-v4{
+    display:flex!important;
+    align-items:center!important;
+  }
+}
