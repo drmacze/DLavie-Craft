@@ -1,0 +1,132 @@
+/* DLavie Minecraft Icon Cleanup v6 */
+
+/* A control with a canonical icon must never show nested legacy icon wrappers. */
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .forum-nav-icon,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .active-forum-icon,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .forum-symbol,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .discussion-icon,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .news-icon,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .announcement-icon,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .project-glyph,
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .ticket-marker{
+  display:none!important;
+}
+
+.dl-icon-cleanup-v6 .dl-icon-clean-v6{
+  gap:8px!important;
+}
+.dl-icon-cleanup-v6 .dl-icon-clean-v6 > .dl-master-icon{
+  margin-right:0!important;
+}
+
+/* Keep master icons visually consistent in compact mobile controls. */
+@media(max-width:719px){
+  .dl-icon-cleanup-v6 .main-nav a > .dl-master-icon,
+  .dl-icon-cleanup-v6 .forum-sidebar nav button > .dl-master-icon,
+  .dl-icon-cleanup-v6 .forum-tabs button > .dl-master-icon,
+  .dl-icon-cleanup-v6 .community-toolbar button > .dl-master-icon,
+  .dl-icon-cleanup-v6 .dl-shell-account > .dl-master-icon{
+    width:20px!important;
+    height:20px!important;
+    min-width:20px!important;
+    flex-basis:20px!important;
+  }
+}
+
+/* ---------- Reaction crystal ---------- */
+.dl-icon-cleanup-v6 .dl-v10-add{
+  width:38px!important;
+  min-width:38px!important;
+  max-width:38px!important;
+  height:32px!important;
+  min-height:32px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+.dl-react-crystal-v6{
+  position:relative;
+  width:24px;
+  height:22px;
+  display:block;
+  pointer-events:none;
+  filter:drop-shadow(0 2px 0 rgba(40,30,70,.14));
+}
+.dl-react-crystal-v6 i{position:absolute;display:block;box-sizing:border-box}
+.dl-react-crystal-v6 .core{
+  left:4px;top:3px;width:14px;height:14px;
+  background:linear-gradient(135deg,#a98cf1 0 28%,#7b59d3 28% 66%,#51369a 66%);
+  clip-path:polygon(50% 0,100% 28%,86% 84%,50% 100%,14% 84%,0 28%);
+  border-radius:2px;
+  animation:dlReactCrystalFloat 2.8s ease-in-out infinite;
+}
+.dl-react-crystal-v6 .facet.f1{
+  left:7px;top:5px;width:4px;height:8px;background:rgba(255,255,255,.68);
+  transform:skewX(-16deg);opacity:.78;
+  animation:dlReactCrystalGlint 2.6s ease-in-out infinite;
+}
+.dl-react-crystal-v6 .facet.f2{
+  left:12px;top:8px;width:3px;height:5px;background:#c6b8ff;opacity:.55;
+}
+.dl-react-crystal-v6 .spark{
+  width:3px;height:3px;background:#d8cdfd;opacity:0;
+}
+.dl-react-crystal-v6 .spark.s1{left:1px;top:2px;animation:dlReactSpark 2.2s steps(4,end) infinite}
+.dl-react-crystal-v6 .spark.s2{right:1px;bottom:2px;animation:dlReactSpark 2.8s steps(4,end) .7s infinite}
+.dl-react-crystal-v6 .plus.p1,
+.dl-react-crystal-v6 .plus.p2{
+  right:0;bottom:0;background:#fff;border-radius:1px;z-index:4;
+  box-shadow:0 0 0 2px #7654d6;
+}
+.dl-react-crystal-v6 .plus.p1{width:8px;height:3px;right:-1px;bottom:2px}
+.dl-react-crystal-v6 .plus.p2{width:3px;height:8px;right:2px;bottom:-1px}
+
+.dl-v10-add:active .dl-react-crystal-v6 .core,
+.dl-v10-add:focus-visible .dl-react-crystal-v6 .core{
+  animation:dlReactCrystalPop .28s steps(3,end) both;
+}
+
+@keyframes dlReactCrystalFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-2px) rotate(4deg)}
+}
+@keyframes dlReactCrystalGlint{
+  0%,62%,100%{opacity:.18;transform:translateX(-2px) skewX(-16deg)}
+  72%{opacity:.9;transform:translateX(3px) skewX(-16deg)}
+}
+@keyframes dlReactSpark{
+  0%,72%,100%{opacity:0;transform:translate(0,0) scale(.7)}
+  80%{opacity:1;transform:translate(1px,-2px) scale(1)}
+  90%{opacity:.5;transform:translate(2px,-4px) scale(.8)}
+}
+@keyframes dlReactCrystalPop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.18) rotate(-5deg)}
+  100%{transform:scale(1)}
+}
+
+/* Prevent older icon systems from decorating the v10 reaction controls. */
+.dl-icon-cleanup-v6 .dl-v10-add > .dl-mc-icon,
+.dl-icon-cleanup-v6 .dl-v10-add > .dl-mc-sweep-icon,
+.dl-icon-cleanup-v6 .dl-v10-add > .dl-mc-forge-icon,
+.dl-icon-cleanup-v6 .dl-v10-add > .dl-master-icon{
+  display:none!important;
+}
+
+@media(max-width:719px){
+  .dl-icon-cleanup-v6 .dl-v10-add{
+    width:36px!important;
+    min-width:36px!important;
+    max-width:36px!important;
+    height:31px!important;
+    min-height:31px!important;
+  }
+  .dl-react-crystal-v6{transform:scale(.92)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-react-crystal-v6 .core,
+  .dl-react-crystal-v6 .facet,
+  .dl-react-crystal-v6 .spark{animation:none!important}
+}
