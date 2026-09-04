@@ -1,0 +1,158 @@
+/* DLavie Minecraft Icon Master v5 — one canonical semi-block icon language. */
+.dl-icon-master-v5 .dl-master-icon{
+  --c1:#7654d6;--c2:#5536ad;--c3:#a98ef0;--hi:#fff;--dark:#26302a;
+  position:relative!important;
+  width:22px!important;height:22px!important;min-width:22px!important;flex:0 0 22px!important;
+  display:inline-grid!important;place-items:center!important;
+  margin:0 8px 0 0!important;padding:0!important;
+  overflow:visible!important;vertical-align:middle!important;
+  pointer-events:none!important;isolation:isolate!important;
+  filter:drop-shadow(0 2px 0 rgba(25,31,27,.14));
+  transform:translateZ(0);
+}
+.dl-icon-master-v5 .dl-master-icon svg{display:block!important;width:22px!important;height:22px!important;overflow:visible!important}
+.dl-icon-master-v5 .dl-master-icon svg .main{fill:var(--c1)}
+.dl-icon-master-v5 .dl-master-icon svg .mid{fill:var(--c2)}
+.dl-icon-master-v5 .dl-master-icon svg .dark{fill:var(--dark)}
+.dl-icon-master-v5 .dl-master-icon svg .top{fill:#64bd62}.dl-icon-master-v5 .dl-master-icon svg .left{fill:#6b5237}.dl-icon-master-v5 .dl-master-icon svg .right{fill:#513a2c}.dl-icon-master-v5 .dl-master-icon svg .shine{fill:#9ae67c}
+.dl-icon-master-v5 .dl-master-icon .piece,.dl-icon-master-v5 .dl-master-icon .spark,.dl-icon-master-v5 .dl-master-icon .pixel,.dl-icon-master-v5 .dl-master-icon .flame,.dl-icon-master-v5 .dl-master-icon .ember,.dl-icon-master-v5 .dl-master-icon .wave,.dl-icon-master-v5 .dl-master-icon .halo,.dl-icon-master-v5 .dl-master-icon .glint,.dl-icon-master-v5 .dl-master-icon .slash,.dl-icon-master-v5 .dl-master-icon .scan,.dl-icon-master-v5 .dl-master-icon .gem{position:absolute;display:block;box-sizing:border-box}
+.dl-icon-master-v5 .dl-master-iconized{display:inline-flex!important;align-items:center!important}
+.dl-icon-master-v5 .dl-master-native-hidden{display:none!important}
+.dl-icon-master-v5 .dl-master-iconized > .dl-mc-icon,.dl-icon-master-v5 .dl-master-iconized > .dl-mc-sweep-icon,.dl-icon-master-v5 .dl-master-iconized > .dl-mc-forge-icon{display:none!important}
+
+/* Palette by item. */
+.dl-master-icon--grass{--c1:#58aa55}.dl-master-icon--chest{--c1:#b87835;--c2:#74441f;--c3:#e4b255}.dl-master-icon--lantern,.dl-master-icon--torch{--c1:#ffad35;--c2:#cf6d22;--c3:#ffe36d}.dl-master-icon--compass{--c1:#d4b276;--c2:#6e5940;--c3:#d34f48}.dl-master-icon--book{--c1:#7c54c9;--c2:#4e337e;--c3:#f4ead3}.dl-master-icon--chat{--c1:#7d59d2}.dl-master-icon--player{--c1:#73b8cf;--c2:#416b8f}.dl-master-icon--mail{--c1:#7958d0;--c2:#4d3496;--c3:#ddd4ff}.dl-master-icon--lock{--c1:#8b68d6;--c2:#5e43a8;--c3:#c9b8f1}.dl-master-icon--door{--c1:#9c6637;--c2:#633d23;--c3:#e7b56a}.dl-master-icon--craft{--c1:#9f6a39;--c2:#5a3825;--c3:#d5a35b}.dl-master-icon--pickaxe{--c1:#78d4df;--c2:#3f8795;--c3:#88552c}.dl-master-icon--sword{--c1:#86d7e1;--c2:#4d8e9c;--c3:#6a4d31}.dl-master-icon--shield{--c1:#7c60c9}.dl-master-icon--emerald{--c1:#37c978;--c2:#188f51;--c3:#a5ffc8}.dl-master-icon--diamond{--c1:#47d4dd;--c2:#2095a0;--c3:#b7fbff}.dl-master-icon--bell{--c1:#e9b640;--c2:#9b6a20;--c3:#ffe49a}.dl-master-icon--search{--c1:#7a59ca}.dl-master-icon--gear{--c1:#758078;--c2:#424c45}.dl-master-icon--download,.dl-master-icon--upload{--c1:#8f6338;--c2:#5d3b21;--c3:#6fcf78}.dl-master-icon--edit{--c1:#77817b;--c2:#454e48;--c3:#9b6332}.dl-master-icon--trash{--c1:#d74843;--c2:#8a2926;--c3:#ffca45}.dl-master-icon--report{--c1:#d24d49;--c2:#802c2a}.dl-master-icon--map{--c1:#d3b477;--c2:#897245;--c3:#65b873}.dl-master-icon--plus{--c1:#6fbf69;--c2:#3f8042}.dl-master-icon--heart{--c1:#e04d50;--c2:#a42f33}
+
+/* Chest */
+.dl-master-icon--chest .box{left:3px;bottom:2px;width:16px;height:11px;background:var(--c1);border:2px solid var(--dark);box-shadow:inset 0 -3px var(--c2)}
+.dl-master-icon--chest .lid{left:3px;top:3px;width:16px;height:7px;background:#cf8f43;border:2px solid var(--dark);transform-origin:3px 7px;transition:transform .28s steps(3,end)}
+.dl-master-icon--chest .band{left:3px;top:10px;width:16px;height:3px;background:var(--dark)}
+.dl-master-icon--chest .latch{left:9px;top:9px;width:5px;height:6px;background:#e4c86a;border:1px solid #6b5522;z-index:3}
+.dl-master-icon--chest .spark{width:3px;height:3px;background:#ffe788;opacity:0}.dl-master-icon--chest .s1{left:5px;top:2px}.dl-master-icon--chest .s2{right:3px;top:0}
+
+/* Lantern */
+.dl-master-icon--lantern .hook{left:8px;top:1px;width:7px;height:5px;border:2px solid #4c514d;border-bottom:0}
+.dl-master-icon--lantern .cap{left:5px;top:5px;width:13px;height:4px;background:#565d57;border:1px solid #2f3530}
+.dl-master-icon--lantern .lamp{left:6px;top:8px;width:11px;height:10px;background:#db762a;border:2px solid #444a45;box-shadow:inset 0 0 0 2px #ffbe45}
+.dl-master-icon--lantern .core{left:9px;top:10px;width:5px;height:6px;background:#ffe469;z-index:2}
+.dl-master-icon--lantern .halo,.dl-master-icon--torch .halo{inset:2px;border-radius:50%;background:radial-gradient(circle,rgba(255,192,72,.42),rgba(255,192,72,0) 72%);z-index:-1;animation:dlMasterGlow 2.8s ease-in-out infinite}
+
+/* Torch */
+.dl-master-icon--torch .stick{left:9px;top:9px;width:6px;height:12px;background:#8c562b;border:2px solid #4d321f;transform:rotate(-8deg)}
+.dl-master-icon--torch .flame{transform:rotate(45deg);image-rendering:pixelated}.dl-master-icon--torch .f1{left:7px;top:2px;width:10px;height:10px;background:#ff8b27;border:2px solid #8f3d19}.dl-master-icon--torch .f2{left:9px;top:4px;width:6px;height:6px;background:#ffe46a}
+.dl-master-icon--torch .ember{width:3px;height:3px;background:#ffc34a;opacity:0}.dl-master-icon--torch .e1{left:4px;top:6px;animation:dlMasterEmber 2.7s steps(4,end) infinite}.dl-master-icon--torch .e2{right:3px;top:8px;animation:dlMasterEmber 3.4s steps(4,end) .8s infinite}
+
+/* Compass */
+.dl-master-icon--compass .rim{inset:2px;border:3px solid #443e31;border-radius:50%;background:#d6bc82}.dl-master-icon--compass .face{inset:6px;border-radius:50%;background:#f2dfad}.dl-master-icon--compass .needle{left:10px;top:5px;width:3px;height:13px;background:linear-gradient(#d64742 0 50%,#eee4c9 50%);transform-origin:50% 50%}.dl-master-icon--compass .pin{left:9px;top:10px;width:5px;height:5px;background:#403b31;border-radius:50%}
+
+/* Book */
+.dl-master-icon--book .cover{top:4px;width:10px;height:15px;background:var(--c1);border:2px solid var(--dark)}.dl-master-icon--book .cover.l{left:2px;transform:skewY(5deg)}.dl-master-icon--book .cover.r{right:2px;transform:skewY(-5deg)}
+.dl-master-icon--book .page{top:6px;width:8px;height:11px;background:#f3e9d1}.dl-master-icon--book .page.l{left:4px;transform-origin:right center}.dl-master-icon--book .page.r{right:4px;transform-origin:left center}.dl-master-icon--book .spine{left:10px;top:5px;width:3px;height:14px;background:var(--c2)}
+
+/* Mail */
+.dl-master-icon--mail .envelope{left:2px;top:5px;width:19px;height:14px;background:var(--c1);border:2px solid #4b347e}.dl-master-icon--mail .flap{top:6px;width:13px;height:3px;background:var(--c3)}.dl-master-icon--mail .flap.a{left:3px;transform:rotate(31deg);transform-origin:left}.dl-master-icon--mail .flap.b{right:3px;transform:rotate(-31deg);transform-origin:right}.dl-master-icon--mail .pixel{width:3px;height:3px;background:#cdbfff;opacity:.7}.dl-master-icon--mail .p1{left:0;top:3px}.dl-master-icon--mail .p2{right:0;bottom:1px}
+
+/* Lock */
+.dl-master-icon--lock .body{left:4px;top:9px;width:15px;height:12px;background:var(--c1);border:2px solid #473278;box-shadow:inset 0 -3px var(--c2)}.dl-master-icon--lock .shackle{left:7px;top:2px;width:9px;height:11px;border:3px solid #7e7590;border-bottom:0;border-radius:6px 6px 0 0;transform-origin:left bottom}.dl-master-icon--lock .keyhole{left:10px;top:13px;width:4px;height:6px;background:#3d2d61}
+
+/* Door */
+.dl-master-icon--door .frame{left:3px;top:1px;width:17px;height:21px;background:#4d3322}.dl-master-icon--door .slab{left:5px;top:3px;width:13px;height:17px;background:#9c6335;box-shadow:inset 3px 0 #c18a50;transform-origin:left center;transition:transform .3s steps(4,end)}.dl-master-icon--door .window{left:8px;top:6px;width:7px;height:5px;background:#60401f}.dl-master-icon--door .knob{right:5px;top:12px;width:3px;height:3px;background:#e5c05f}.dl-master-icon--door .glow{left:5px;top:3px;width:4px;height:17px;background:#ffdc72;opacity:0}
+
+/* Craft table */
+.dl-master-icon--craft .table{inset:2px;background:#9e6937;border:2px solid #4f3421;box-shadow:inset 0 -5px #6f4628}.dl-master-icon--craft .grid{background:#452e22;z-index:2}.dl-master-icon--craft .g1{left:7px;top:3px;width:2px;height:17px;box-shadow:6px 0 #452e22}.dl-master-icon--craft .g2{left:3px;top:8px;width:17px;height:2px;box-shadow:0 6px #452e22}.dl-master-icon--craft .pixel{right:0;top:0;width:4px;height:4px;background:#f1bd68;opacity:0}
+
+/* Pickaxe / Sword */
+.dl-master-icon--pickaxe .handle{left:10px;top:7px;width:5px;height:15px;background:#86522c;border:1px solid #4d321d;transform:rotate(-28deg);transform-origin:center 75%}.dl-master-icon--pickaxe .head{left:2px;top:3px;width:18px;height:5px;background:#78ced9;border:2px solid #315f68;transform:rotate(-16deg);transform-origin:center}.dl-master-icon--pickaxe .spark,.dl-master-icon--edit .spark,.dl-master-icon--trash .spark{width:3px;height:3px;background:#fff0a6;opacity:0}.dl-master-icon--pickaxe .s1{right:1px;top:2px}.dl-master-icon--pickaxe .s2{right:4px;top:7px}
+.dl-master-icon--sword .blade{left:10px;top:0;width:6px;height:16px;background:#8bdbe5;border:2px solid #356b75;transform:rotate(43deg);transform-origin:center bottom}.dl-master-icon--sword .guard{left:6px;top:12px;width:13px;height:4px;background:#4d3a2d;transform:rotate(43deg)}.dl-master-icon--sword .grip{left:4px;top:15px;width:5px;height:8px;background:#79522e;transform:rotate(43deg)}.dl-master-icon--sword .slash{left:-1px;top:2px;width:24px;height:2px;background:#d4fbff;opacity:0;transform:rotate(-35deg)}
+
+/* Gems */
+.dl-master-icon .gem{left:4px;top:2px;width:15px;height:19px;clip-path:polygon(50% 0,95% 28%,78% 90%,22% 90%,5% 28%);background:linear-gradient(135deg,var(--c3),var(--c1) 42%,var(--c2));border:0;box-shadow:inset 0 -4px rgba(0,0,0,.12)}
+.dl-master-icon .glint{left:3px;top:3px;width:5px;height:15px;background:rgba(255,255,255,.72);transform:skewX(-25deg);opacity:0}.dl-master-icon .spark{width:3px;height:3px;background:var(--c3);opacity:0}.dl-master-icon--emerald .s1,.dl-master-icon--diamond .s1{right:0;top:2px}.dl-master-icon--emerald .s2,.dl-master-icon--diamond .s2{left:1px;bottom:2px}
+
+/* Bell */
+.dl-master-icon--bell .bell{left:5px;top:4px;width:14px;height:13px;background:#e9b640;border:2px solid #81591d;clip-path:polygon(25% 0,75% 0,100% 85%,0 85%);transform-origin:50% 0}.dl-master-icon--bell .clapper{left:10px;top:15px;width:5px;height:5px;background:#8d641e}.dl-master-icon--bell .wave{top:5px;width:3px;height:10px;border:2px solid #d8a832;opacity:0}.dl-master-icon--bell .w1{left:0;border-right:0}.dl-master-icon--bell .w2{right:0;border-left:0}
+
+/* Search */
+.dl-master-icon--search .glass{left:2px;top:1px;width:14px;height:14px;border:3px solid #6c53b5;border-radius:50%;background:#eee9ff}.dl-master-icon--search .handle{left:14px;top:14px;width:9px;height:4px;background:#4d397d;transform:rotate(45deg);transform-origin:left center}.dl-master-icon--search .scan{left:5px;top:6px;width:8px;height:2px;background:#a78ce9;opacity:.6}
+
+/* Gear */
+.dl-master-icon--gear .gear-core{position:absolute;inset:6px;border:4px solid #6c7670;border-radius:50%}.dl-master-icon--gear .gear-teeth{position:absolute;inset:1px;background:conic-gradient(from 0deg,#6c7670 0 10%,transparent 10% 15%,#6c7670 15% 25%,transparent 25% 30%,#6c7670 30% 40%,transparent 40% 45%,#6c7670 45% 55%,transparent 55% 60%,#6c7670 60% 70%,transparent 70% 75%,#6c7670 75% 85%,transparent 85% 90%,#6c7670 90% 100%);clip-path:polygon(42% 0,58% 0,62% 13%,75% 18%,88% 12%,100% 26%,91% 38%,100% 51%,88% 64%,91% 77%,75% 88%,62% 83%,58% 100%,42% 100%,38% 84%,24% 88%,11% 77%,15% 64%,3% 51%,12% 38%,3% 26%,15% 12%,28% 18%,38% 13%)}
+
+/* Upload / Download */
+.dl-master-icon--download .chestbase,.dl-master-icon--upload .chestbase{left:2px;bottom:2px;width:19px;height:10px;background:#93623a;border:2px solid #4d3424;box-shadow:inset 0 -3px #663f27}.dl-master-icon--download .slot,.dl-master-icon--upload .slot{left:7px;bottom:8px;width:9px;height:3px;background:#e1b55d}.dl-master-icon--download .arrow,.dl-master-icon--upload .arrow{left:9px;width:6px;height:10px;background:#63c97b;clip-path:polygon(30% 0,70% 0,70% 55%,100% 55%,50% 100%,0 55%,30% 55%)}.dl-master-icon--download .down{top:1px}.dl-master-icon--upload .up{top:1px;transform:rotate(180deg)}
+
+/* Edit / TNT / Barrier */
+.dl-master-icon--edit .anvil{left:2px;top:9px;width:19px;height:10px;background:#757e78;clip-path:polygon(0 0,100% 0,78% 35%,67% 35%,67% 75%,84% 75%,84% 100%,16% 100%,16% 75%,34% 75%,34% 35%,22% 35%)}.dl-master-icon--edit .hammer{left:7px;top:1px;width:13px;height:5px;background:#86603a;border:1px solid #4c3624;transform:rotate(-24deg);transform-origin:left bottom}
+.dl-master-icon--trash .tnt{left:3px;top:6px;width:17px;height:14px;background:#d74843;border:2px solid #762624;box-shadow:inset 0 -4px #a6322f}.dl-master-icon--trash .tnt:after{content:"T";position:absolute;inset:2px;display:grid;place-items:center;background:#f4e6d0;color:#5c2927;font:900 8px/1 monospace}.dl-master-icon--trash .fuse{left:12px;top:1px;width:7px;height:7px;border-top:2px solid #4b4536;border-right:2px solid #4b4536;transform:rotate(-10deg)}.dl-master-icon--trash .s1{right:0;top:0;background:#ffcf48}
+.dl-master-icon--report .barrier{inset:2px;border:4px solid #d24d49;border-radius:50%;background:#f3e6df}.dl-master-icon--report .slashbar{left:9px;top:2px;width:5px;height:19px;background:#d24d49;transform:rotate(45deg)}
+
+/* Map / Plus */
+.dl-master-icon--map .map{top:3px;width:8px;height:17px;border:1px solid #6d5937;background:#d8bd7d}.dl-master-icon--map .map.l{left:1px;transform:skewY(-8deg)}.dl-master-icon--map .map.m{left:8px;background:#c6a665}.dl-master-icon--map .map.r{right:1px;transform:skewY(8deg)}.dl-master-icon--map .marker{left:11px;top:9px;width:5px;height:5px;background:#d44b47;transform:rotate(45deg)}
+.dl-master-icon--plus .block{width:7px;height:7px;background:#65b761;border:1px solid #376d3a}.dl-master-icon--plus .b1{left:8px;top:1px}.dl-master-icon--plus .b2{left:1px;top:8px}.dl-master-icon--plus .b3{right:1px;top:8px}
+
+/* Field icons stay inside inputs and never become a second column. */
+.dl-icon-master-v5 .dl-master-field{position:relative!important}
+.dl-icon-master-v5 .dl-master-field > .dl-master-field-icon{position:absolute!important;left:14px!important;top:50%!important;z-index:4!important;margin:0!important;transform:translateY(2px)!important;width:20px!important;height:20px!important;min-width:20px!important}
+.dl-icon-master-v5 .dl-master-field > input{padding-left:46px!important}
+.dl-icon-master-v5 .dl-master-section-icon > .dl-master-icon{margin:0!important}
+
+/* Interaction language: each item behaves like the Minecraft object it represents. */
+@media(hover:hover){
+  .dl-master-iconized:hover .dl-master-icon--chest .lid,.dl-master-iconized:focus-visible .dl-master-icon--chest .lid{transform:translateY(-2px) rotate(-24deg)}
+  .dl-master-iconized:hover .dl-master-icon--chest .spark,.dl-master-iconized:focus-visible .dl-master-icon--chest .spark{animation:dlMasterSpark .8s steps(4,end) both}
+  .dl-master-iconized:hover .dl-master-icon--door .slab{transform:perspective(30px) rotateY(-32deg)}.dl-master-iconized:hover .dl-master-icon--door .glow{opacity:.65}
+  .dl-master-iconized:hover .dl-master-icon--compass .needle{animation:dlMasterCompass .85s cubic-bezier(.2,.8,.2,1)}
+  .dl-master-iconized:hover .dl-master-icon--book .page.l{animation:dlMasterPage .7s ease-in-out}.dl-master-iconized:hover .dl-master-icon--pickaxe{animation:dlMasterSwing .55s steps(4,end)}
+  .dl-master-iconized:hover .dl-master-icon--sword{animation:dlMasterSword .48s steps(3,end)}.dl-master-iconized:hover .dl-master-icon--sword .slash{animation:dlMasterSlash .48s ease-out}
+  .dl-master-iconized:hover .dl-master-icon--bell .bell{animation:dlMasterBell .55s steps(5,end)}.dl-master-iconized:hover .dl-master-icon--bell .wave{animation:dlMasterWave .6s ease-out}
+  .dl-master-iconized:hover .dl-master-icon--search .scan{animation:dlMasterScan .65s ease-in-out}.dl-master-iconized:hover .dl-master-icon--gear .gear-teeth{animation:dlMasterGear .8s steps(8,end)}
+  .dl-master-iconized:hover .dl-master-icon--download .arrow{animation:dlMasterDown .62s ease-in-out}.dl-master-iconized:hover .dl-master-icon--upload .arrow{animation:dlMasterUp .62s ease-in-out}
+  .dl-master-iconized:hover .dl-master-icon--edit .hammer{animation:dlMasterHammer .55s steps(4,end)}.dl-master-iconized:hover .dl-master-icon--trash .s1{animation:dlMasterFuse .55s steps(3,end)}
+  .dl-master-iconized:hover .dl-master-icon--map .map.l{transform:translateX(-2px) skewY(-8deg)}.dl-master-iconized:hover .dl-master-icon--map .map.r{transform:translateX(2px) skewY(8deg)}
+}
+.dl-master-iconized:active .dl-master-icon{transform:translateY(1px) scale(.94)}
+.dl-master-iconized:active .dl-master-icon--pickaxe{transform:rotate(-18deg) scale(.94)}
+.dl-master-iconized:active .dl-master-icon--sword{transform:rotate(13deg) scale(.94)}
+.dl-master-iconized:active .dl-master-icon--chest .lid{transform:translateY(-2px) rotate(-24deg)}
+.dl-master-iconized:active .dl-master-icon--door .slab{transform:perspective(30px) rotateY(-32deg)}
+
+/* A few important objects remain alive while idle; only transform/opacity are animated. */
+.dl-master-icon--lantern .core{animation:dlMasterLamp 2.6s steps(4,end) infinite}
+.dl-master-icon--torch .f1{animation:dlMasterFlame 1.45s steps(4,end) infinite}.dl-master-icon--torch .f2{animation:dlMasterFlame2 1.12s steps(3,end) infinite}
+.dl-master-icon--emerald,.dl-master-icon--diamond{animation:dlMasterGemFloat 4.6s ease-in-out infinite}.dl-master-icon--emerald .glint,.dl-master-icon--diamond .glint{animation:dlMasterGlint 4.2s ease-in-out infinite}
+.dl-master-icon--bell{animation:dlMasterBellIdle 7s steps(6,end) infinite}.dl-master-icon--gear .gear-teeth{animation:dlMasterGear 9s steps(16,end) infinite}
+
+@keyframes dlMasterGlow{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:.9;transform:scale(1.16)}}
+@keyframes dlMasterLamp{0%,100%{opacity:.78}45%{opacity:1;filter:brightness(1.35)}50%{opacity:.72}55%{opacity:1}}
+@keyframes dlMasterFlame{0%,100%{transform:rotate(45deg) translate(0,0) scale(1)}25%{transform:rotate(45deg) translate(-1px,-1px) scale(.9,1.12)}55%{transform:rotate(45deg) translate(1px,0) scale(1.08,.9)}80%{transform:rotate(45deg) translate(0,-1px) scale(.96,1.08)}}
+@keyframes dlMasterFlame2{0%,100%{transform:rotate(45deg) scale(.9)}50%{transform:rotate(45deg) translateY(-1px) scale(1.08)}}
+@keyframes dlMasterEmber{0%{opacity:0;transform:none}20%{opacity:1}100%{opacity:0;transform:translateY(-9px) translateX(3px)}}
+@keyframes dlMasterSpark{0%{opacity:0;transform:none}30%{opacity:1;transform:translateY(-2px)}100%{opacity:0;transform:translateY(-7px) scale(.5)}}
+@keyframes dlMasterCompass{0%{transform:rotate(0)}35%{transform:rotate(150deg)}65%{transform:rotate(-35deg)}100%{transform:rotate(12deg)}}
+@keyframes dlMasterPage{0%,100%{transform:rotateY(0)}50%{transform:perspective(18px) rotateY(95deg)}}
+@keyframes dlMasterSwing{0%{transform:rotate(0)}45%{transform:rotate(-24deg)}75%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+@keyframes dlMasterSword{0%{transform:rotate(0)}50%{transform:rotate(18deg) translate(1px,-1px)}100%{transform:rotate(0)}}
+@keyframes dlMasterSlash{0%{opacity:0;transform:translate(-5px,5px) rotate(-35deg) scaleX(.3)}45%{opacity:.9}100%{opacity:0;transform:translate(5px,-5px) rotate(-35deg) scaleX(1)}}
+@keyframes dlMasterBell{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}50%{transform:rotate(10deg)}75%{transform:rotate(-6deg)}}
+@keyframes dlMasterBellIdle{0%,92%,100%{transform:rotate(0)}94%{transform:rotate(-6deg)}96%{transform:rotate(6deg)}98%{transform:rotate(-3deg)}}
+@keyframes dlMasterWave{0%{opacity:.8;transform:scale(.7)}100%{opacity:0;transform:scale(1.4)}}
+@keyframes dlMasterScan{0%,100%{transform:translateY(-2px);opacity:.2}50%{transform:translateY(6px);opacity:1}}
+@keyframes dlMasterGear{to{transform:rotate(360deg)}}
+@keyframes dlMasterDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+@keyframes dlMasterUp{0%,100%{transform:rotate(180deg) translateY(0)}50%{transform:rotate(180deg) translateY(4px)}}
+@keyframes dlMasterHammer{0%,100%{transform:rotate(-24deg)}45%{transform:rotate(26deg) translateY(3px)}60%{transform:rotate(18deg)}}
+@keyframes dlMasterFuse{0%{opacity:0;transform:scale(.5)}35%{opacity:1;transform:scale(1.4)}100%{opacity:0;transform:translate(2px,-4px) scale(.7)}}
+@keyframes dlMasterGemFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes dlMasterGlint{0%,72%,100%{opacity:0;transform:translateX(-4px) skewX(-25deg)}80%{opacity:.85}90%{opacity:0;transform:translateX(14px) skewX(-25deg)}}
+
+/* Keep mobile performance predictable. */
+@media(max-width:719px){
+  .dl-icon-master-v5 .dl-master-icon{width:21px!important;height:21px!important;min-width:21px!important;flex-basis:21px!important;margin-right:7px!important;filter:drop-shadow(0 1px 0 rgba(25,31,27,.12))}
+  .dl-icon-master-v5 .dl-master-icon svg{width:21px!important;height:21px!important}
+  .dl-master-icon--gear .gear-teeth{animation-duration:13s}
+  .dl-master-icon--emerald,.dl-master-icon--diamond{animation-duration:6s}
+  .dl-master-icon--bell{animation-duration:9s}
+}
+@media(prefers-reduced-motion:reduce){
+  .dl-icon-master-v5 .dl-master-icon,.dl-icon-master-v5 .dl-master-icon *{animation:none!important;transition:none!important}
+}
