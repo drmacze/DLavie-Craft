@@ -109,9 +109,6 @@
   }
 
   function cleanDetachedUi() {
-    // The original account/legal system still owns state and click handlers.
-    // We keep its helper nodes in the DOM, but CSS hides them so they no longer
-    // create a second footer or a floating account pill on public pages.
     const account = helperAccountButton();
     const legal = helperLegalFooter();
     if (account?.getAttribute('aria-hidden') !== 'true') account?.setAttribute('aria-hidden', 'true');
@@ -128,6 +125,11 @@
         document.querySelector('.dl-shell-legal-links')?.remove();
         return;
       }
+
+      // The portal is a full-screen surface. Avoid repeatedly scanning the hidden
+      // React shell while account effects/icons are mounting inside the portal.
+      if (document.getElementById('dl-account-portal')) return;
+
       cleanDetachedUi();
       syncAccountEntries();
       syncLegalLinks();
