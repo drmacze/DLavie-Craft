@@ -1,0 +1,91 @@
+/* DLavie onboarding visual v2 */
+
+/* Gender character stage */
+.dl-onboarding-visual-v2 .dl-gender-grid{gap:14px}
+.dl-onboarding-visual-v2 .dl-gender-grid button{position:relative;min-height:300px;overflow:hidden;padding:18px 16px 16px;background:linear-gradient(180deg,#f9fbf6 0 62%,#e9efe5 62%);isolation:isolate}
+.dl-onboarding-visual-v2 .dl-gender-grid button:before{content:"";position:absolute;inset:0;z-index:-3;background-image:linear-gradient(rgba(75,93,79,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(75,93,79,.055) 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(to bottom,black,transparent 76%)}
+.dl-onboarding-visual-v2 .dl-gender-grid button:after{content:"";position:absolute;left:0;right:0;bottom:0;height:78px;z-index:-2;background:linear-gradient(#76b65a 0 14%,#745137 14% 48%,#5b412f 48%);clip-path:polygon(0 36%,15% 36%,15% 18%,30% 18%,30% 31%,46% 31%,46% 12%,64% 12%,64% 27%,82% 27%,82% 8%,100% 8%,100% 100%,0 100%);opacity:.75}
+.dl-onboarding-visual-v2 .dl-gender-grid button.selected{border-color:#4c9b68;background:linear-gradient(180deg,#f5fff7 0 62%,#e5f3e5 62%);box-shadow:0 18px 42px rgba(40,88,55,.15),inset 0 0 0 2px rgba(73,157,102,.12)}
+.dl-onboarding-visual-v2 .dl-gender-grid button.selected:before{background-image:linear-gradient(rgba(67,145,95,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(67,145,95,.08) 1px,transparent 1px);animation:dl-gender-grid-slide 8s linear infinite}
+@keyframes dl-gender-grid-slide{to{background-position:24px 24px}}
+
+.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2{width:126px;height:166px;margin-top:4px;filter:drop-shadow(0 18px 10px rgba(18,28,21,.18));transform-origin:50% 100%;animation:dl-character-idle 2.8s ease-in-out infinite}
+@keyframes dl-character-idle{0%,100%{transform:translateY(0) rotate(-1deg)}45%{transform:translateY(-7px) rotate(1deg)}55%{transform:translateY(-7px) rotate(1deg)}}
+.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2:before{left:37px;top:0;width:52px;height:52px;border:4px solid #202720;border-radius:0;background:
+ linear-gradient(#37271f 0 15px,transparent 15px),
+ linear-gradient(90deg,transparent 0 8px,#f2f4ef 8px 16px,#4b76b7 16px 21px,transparent 21px 31px,#f2f4ef 31px 39px,#4b76b7 39px 44px,transparent 44px),
+ linear-gradient(#c58c68,#bb7d5d);box-shadow:inset -7px -7px 0 rgba(0,0,0,.1),7px 0 0 rgba(0,0,0,.04)}
+.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2:after{left:33px;top:56px;width:60px;height:67px;border:4px solid #202720;border-radius:0;background:#2d9da0;box-shadow:inset -8px -8px 0 rgba(0,0,0,.11),inset 8px 0 rgba(255,255,255,.06)}
+.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2 i{position:absolute;left:40px;top:122px;width:20px;height:44px;border:4px solid #202720;border-top:0;background:#4453a5;box-shadow:26px 0 0 -4px #4453a5,26px 0 0 0 #202720;z-index:1}
+.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2 i:before,.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2 i:after{top:-59px;width:18px;height:58px;border:4px solid #202720;border-radius:0;background:linear-gradient(#2d9da0 0 27px,#c58c68 27px);transform-origin:50% 6px;animation:dl-arm-walk 1.7s ease-in-out infinite}
+.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2 i:before{left:-36px}.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2 i:after{right:-62px;animation-direction:reverse}
+@keyframes dl-arm-walk{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-15deg)}}
+
+/* Alex */
+.dl-onboarding-visual-v2 .dl-gender-figure.female.dl-character-v2:before{background:
+ linear-gradient(#d56b2d 0 18px,transparent 18px),
+ linear-gradient(90deg,#d56b2d 0 7px,transparent 7px 9px,#f4f6ef 9px 17px,#50a260 17px 22px,transparent 22px 30px,#f4f6ef 30px 38px,#50a260 38px 43px,transparent 43px 45px,#d56b2d 45px),
+ linear-gradient(#dca077,#cf8f68);box-shadow:inset -7px -7px 0 rgba(0,0,0,.08),-6px 16px 0 -1px #bd5727,6px 17px 0 -1px #d56b2d}
+.dl-onboarding-visual-v2 .dl-gender-figure.female.dl-character-v2:after{background:#70a847}
+.dl-onboarding-visual-v2 .dl-gender-figure.female.dl-character-v2 i{background:#6d523b;box-shadow:26px 0 0 -4px #6d523b,26px 0 0 0 #202720}
+.dl-onboarding-visual-v2 .dl-gender-figure.female.dl-character-v2 i:before,.dl-onboarding-visual-v2 .dl-gender-figure.female.dl-character-v2 i:after{background:linear-gradient(#70a847 0 27px,#dca077 27px)}
+.dl-onboarding-visual-v2 .dl-gender-card-female .dl-character-v2{animation-name:dl-character-alex}
+@keyframes dl-character-alex{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-8px) rotate(-1.5deg)}}
+
+.dl-character-caption{display:flex;align-items:center;gap:6px;margin-top:-4px;padding:4px 7px;border:1px solid #cad5ca;border-radius:7px;background:rgba(255,255,255,.8);box-shadow:0 4px 12px rgba(35,53,40,.06)}
+.dl-character-caption i{width:7px;height:7px;background:#49a36d;box-shadow:0 0 0 2px #dff0e4}.dl-character-caption b{font-size:8px;letter-spacing:.09em}.dl-character-caption em{font-size:7px;font-style:normal;color:#7c877e}
+
+/* Role cards */
+.dl-onboarding-visual-v2 .dl-role-pick-grid{gap:11px}
+.dl-onboarding-visual-v2 .dl-role-card-v2{position:relative!important;min-height:260px!important;padding:0 13px 14px!important;isolation:isolate;overflow:hidden!important;background:#f8faf5!important;transform-style:preserve-3d}
+.dl-onboarding-visual-v2 .dl-role-card-v2:before{content:"";position:absolute;inset:0;z-index:-4;background-image:linear-gradient(rgba(47,61,50,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(47,61,50,.045) 1px,transparent 1px);background-size:18px 18px}
+.dl-onboarding-visual-v2 .dl-role-card-v2:after{content:"";position:absolute;inset:0;z-index:-2;opacity:0;transition:.25s;background:radial-gradient(circle at 50% 35%,var(--role-glow,rgba(80,160,110,.22)),transparent 45%)}
+.dl-onboarding-visual-v2 .dl-role-card-v2:hover,.dl-onboarding-visual-v2 .dl-role-card-v2.selected{transform:translateY(-5px) rotateX(1deg);box-shadow:0 19px 38px rgba(25,39,29,.13)}
+.dl-onboarding-visual-v2 .dl-role-card-v2:hover:after,.dl-onboarding-visual-v2 .dl-role-card-v2.selected:after{opacity:1}
+.dl-role-card-v2.role-builder{--role-glow:rgba(221,164,61,.28)}.dl-role-card-v2.role-miner{--role-glow:rgba(83,199,228,.28)}.dl-role-card-v2.role-explorer{--role-glow:rgba(68,171,102,.25)}.dl-role-card-v2.role-newbie{--role-glow:rgba(149,205,78,.24)}.dl-role-card-v2.role-pvp{--role-glow:rgba(229,83,80,.28)}
+.dl-role-scene{position:relative;display:block;width:calc(100% + 26px);height:112px;margin:0 -13px 2px;border-bottom:1px solid rgba(50,65,53,.12);overflow:hidden;background:linear-gradient(180deg,#edf2e9 0 62%,#dfe7dc 62%)}
+.dl-role-scene:before{content:"";position:absolute;inset:0;opacity:.52;background-image:linear-gradient(rgba(255,255,255,.32) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.32) 1px,transparent 1px);background-size:17px 17px}
+.dl-role-scene-icon{position:absolute;left:50%;top:50%;width:48px;height:48px;transform:translate(-50%,-50%);z-index:3;filter:drop-shadow(0 10px 8px rgba(30,42,33,.16))}
+.dl-role-floor{position:absolute;left:0;right:0;bottom:0;height:28px;opacity:.82;background:#7f9b73;clip-path:polygon(0 40%,16% 40%,16% 13%,31% 13%,31% 35%,48% 35%,48% 8%,66% 8%,66% 27%,82% 27%,82% 18%,100% 18%,100% 100%,0 100%)}
+.dl-role-scene>i{position:absolute;z-index:2;display:block}
+
+/* Builder scene */
+.role-builder .dl-role-scene{background:linear-gradient(#f5e7c8 0 62%,#d8b473 62%)}.role-builder .dl-role-scene-icon{width:48px;height:40px;border:4px solid #2f2a20;background:#aa6d32;box-shadow:0 -14px 0 -4px #d69b4c,inset -8px -8px rgba(0,0,0,.11)}.role-builder .dl-role-scene-icon:before,.role-builder .dl-role-scene-icon:after{content:"";position:absolute;width:13px;height:13px;border:3px solid #2f2a20;background:#d8ad58;animation:dl-builder-block 2.4s steps(3,end) infinite}.role-builder .dl-role-scene-icon:before{left:-27px;top:17px}.role-builder .dl-role-scene-icon:after{right:-27px;top:2px;animation-delay:.55s}@keyframes dl-builder-block{0%,100%{transform:translateY(6px)}50%{transform:translateY(-10px)}}
+.role-builder .fx-block{width:16px;height:16px;border:2px solid #55432c;background:#c98c43;bottom:25px;left:20%;animation:dl-build-rise 3s steps(4,end) infinite}.role-builder .fx-block.f2{left:auto;right:18%;animation-delay:.9s}.role-builder .fx-spark{width:6px;height:6px;background:#ffe18a;right:30%;top:18px;box-shadow:0 0 9px #ffd56b;animation:dl-spark-pop 1.8s ease-out infinite}@keyframes dl-build-rise{50%{transform:translateY(-18px) rotate(90deg)}}
+
+/* Miner scene */
+.role-miner .dl-role-scene{background:linear-gradient(#dfeff1 0 53%,#75858a 53%)}.role-miner .dl-role-floor{background:#596a6d}.role-miner .dl-role-scene-icon{width:16px;height:48px;background:#6a4b32;border:3px solid #253135;transform:translate(-50%,-50%) rotate(-38deg);transform-origin:50% 70%;animation:dl-pick-swing 1.8s ease-in-out infinite}.role-miner .dl-role-scene-icon:before{content:"";position:absolute;left:-20px;top:-7px;width:49px;height:11px;border:3px solid #253135;background:#70d6e2}.role-miner .dl-role-scene-icon:after{content:"";position:absolute;right:-33px;bottom:-4px;width:24px;height:24px;background:#63dce6;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);box-shadow:0 0 16px rgba(79,221,236,.75)}@keyframes dl-pick-swing{0%,100%{transform:translate(-50%,-50%) rotate(-48deg)}50%{transform:translate(-50%,-50%) rotate(-12deg)}}
+.role-miner .fx-ore{left:18%;bottom:24px;width:18px;height:18px;background:#58d6df;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);box-shadow:0 0 15px #63e7ef;animation:dl-ore-pulse 1.7s ease-in-out infinite}.role-miner .fx-spark{width:6px;height:6px;background:#d6ffff;box-shadow:0 0 11px #8df5ff;animation:dl-spark-pop 1.6s ease-out infinite}.role-miner .f2{right:18%;top:20px}.role-miner .f3{left:27%;top:28px;animation-delay:.6s}@keyframes dl-ore-pulse{50%{transform:scale(1.25) rotate(90deg);filter:brightness(1.25)}}
+
+/* Explorer scene */
+.role-explorer .dl-role-scene{background:linear-gradient(#dcead9 0 56%,#94b784 56%)}.role-explorer .dl-role-scene-icon{width:49px;height:49px;border:4px solid #273327;border-radius:50%;background:#e8ddb2;box-shadow:inset 0 0 0 6px #a0733e}.role-explorer .dl-role-scene-icon:before{content:"";position:absolute;left:18px;top:5px;width:7px;height:35px;background:linear-gradient(#d54d45 0 50%,#ece9db 50%);clip-path:polygon(50% 0,100% 45%,66% 100%,34% 100%,0 45%);transform-origin:50% 50%;animation:dl-compass-spin 3.8s cubic-bezier(.4,0,.2,1) infinite}@keyframes dl-compass-spin{0%,15%{transform:rotate(0)}45%{transform:rotate(148deg)}70%{transform:rotate(278deg)}100%{transform:rotate(360deg)}}
+.role-explorer .fx-compass{left:14%;top:18px;width:15px;height:15px;border:3px solid #497450;border-radius:50%;animation:dl-compass-orbit 3s linear infinite}.role-explorer .fx-trail{width:7px;height:7px;background:#5cb86e;box-shadow:0 0 9px #7fe78f;animation:dl-trail 2.8s ease-in-out infinite}.role-explorer .f2{right:18%;top:28px}.role-explorer .f3{right:28%;bottom:28px;animation-delay:.8s}@keyframes dl-compass-orbit{to{transform:rotate(360deg) translateX(8px) rotate(-360deg)}}@keyframes dl-trail{50%{transform:translate(-10px,-12px);opacity:.35}}
+
+/* Newbie scene */
+.role-newbie .dl-role-scene{background:linear-gradient(#e7f2d6 0 60%,#82af5a 60%)}.role-newbie .dl-role-scene-icon{width:49px;height:49px;border:4px solid #2b3527;background:linear-gradient(#6fbb4c 0 34%,#7c5431 34%);box-shadow:inset -8px -8px rgba(0,0,0,.1)}.role-newbie .dl-role-scene-icon:before{content:"";position:absolute;left:18px;top:-22px;width:8px;height:25px;background:#4d9b42;box-shadow:-8px -4px #68b957,8px -9px #74c866;transform-origin:50% 100%;animation:dl-sprout-grow 2s ease-in-out infinite}@keyframes dl-sprout-grow{0%,100%{transform:scaleY(.72) rotate(-3deg)}50%{transform:scaleY(1.08) rotate(3deg)}}
+.role-newbie .fx-grass{left:18%;bottom:24px;width:14px;height:14px;background:#75b94c;border:2px solid #355936;animation:dl-bounce-grass 2.4s ease-in-out infinite}.role-newbie .fx-sprout{right:18%;bottom:23px;width:5px;height:18px;background:#4b9541;box-shadow:-6px -5px #65b457,6px -10px #79ca68;animation:dl-sprout-grow 2.1s ease-in-out infinite}.role-newbie .fx-spark{left:30%;top:20px;width:6px;height:6px;background:#d5ff9d;box-shadow:0 0 9px #aaf06f;animation:dl-spark-pop 2s ease-out infinite}@keyframes dl-bounce-grass{50%{transform:translateY(-9px) rotate(7deg)}}
+
+/* PvP scene */
+.role-pvp .dl-role-scene{background:linear-gradient(#f1d9d7 0 55%,#8b4e4b 55%)}.role-pvp .dl-role-floor{background:#6f3735}.role-pvp .dl-role-scene-icon{width:11px;height:54px;background:#d8d9d3;border:3px solid #2d2626;transform:translate(-50%,-50%) rotate(42deg);animation:dl-sword-duel 1.6s ease-in-out infinite}.role-pvp .dl-role-scene-icon:before{content:"";position:absolute;left:-12px;top:33px;width:30px;height:8px;background:#b78146;border:3px solid #2d2626}.role-pvp .dl-role-scene-icon:after{content:"";position:absolute;left:14px;top:4px;width:11px;height:52px;background:#b9bec0;border:3px solid #2d2626;transform:rotate(-82deg);transform-origin:50% 80%}@keyframes dl-sword-duel{0%,100%{transform:translate(-50%,-50%) rotate(35deg)}50%{transform:translate(-50%,-50%) rotate(49deg) scale(1.05)}}
+.role-pvp .fx-slash{width:60px;height:5px;background:linear-gradient(90deg,transparent,#ff726f,transparent);transform:rotate(-28deg);animation:dl-slash 1.7s ease-out infinite;opacity:0}.role-pvp .f1{left:7%;top:31px}.role-pvp .f2{right:4%;top:55px;animation-delay:.65s;transform:rotate(31deg)}.role-pvp .fx-spark{left:50%;top:18px;width:7px;height:7px;background:#ffcf6b;box-shadow:0 0 10px #ff856b;animation:dl-spark-pop 1.2s ease-out infinite}@keyframes dl-slash{0%,45%{opacity:0;transform:translateX(-12px) rotate(-28deg) scaleX(.4)}55%{opacity:1}75%,100%{opacity:0;transform:translateX(18px) rotate(-28deg) scaleX(1.1)}}
+@keyframes dl-spark-pop{0%,60%,100%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.25)}85%{opacity:.5;transform:translateY(-8px) scale(.7)}}
+
+/* Minecraft-style role icon override, used in onboarding + community username labels. */
+.dl-role-badge i{position:relative!important;font-size:0!important;border-radius:3px!important;overflow:visible!important;box-shadow:inset -3px -3px rgba(0,0,0,.12),inset 2px 2px rgba(255,255,255,.12)}
+.dl-role-badge i:before,.dl-role-badge i:after{content:"";position:absolute;display:block}
+.dl-role-badge.role-builder i:before{width:7px;height:7px;left:3px;bottom:3px;background:#f0c367;box-shadow:7px 0 #c9873f,0 -7px #d99b49,7px -7px #f1d078}.dl-role-badge.role-builder i:after{left:2px;right:2px;bottom:1px;height:2px;background:#6e4a2d}
+.dl-role-badge.role-miner i:before{left:8px;top:2px;width:3px;height:14px;background:#6f5037;transform:rotate(-38deg)}.dl-role-badge.role-miner i:after{left:3px;top:3px;width:12px;height:4px;background:#a6f1f3;border:1px solid #315d69;transform:rotate(-38deg)}
+.dl-role-badge.role-explorer i:before{left:4px;top:4px;width:10px;height:10px;border:2px solid #f5e6b5;border-radius:50%;box-shadow:inset 0 0 0 2px #6a4c2b}.dl-role-badge.role-explorer i:after{left:8px;top:5px;width:2px;height:9px;background:#ef6259;transform-origin:50% 70%;animation:dl-compass-spin 3.8s linear infinite}
+.dl-role-badge.role-newbie i:before{left:3px;top:6px;width:12px;height:9px;background:linear-gradient(#86d064 0 35%,#7b5937 35%);border:1px solid #3f5d35}.dl-role-badge.role-newbie i:after{left:8px;top:0;width:3px;height:8px;background:#5cb557;box-shadow:-4px 2px #7bd16c,4px -2px #80da70}
+.dl-role-badge.role-pvp i:before{left:8px;top:1px;width:3px;height:14px;background:#e0e2df;border:1px solid #6d6d6a;transform:rotate(42deg)}.dl-role-badge.role-pvp i:after{left:7px;top:1px;width:3px;height:14px;background:#c1c7c8;border:1px solid #676e70;transform:rotate(-42deg)}
+.dl-role-badge.role-builder i{animation:dl-role-build 1.8s steps(2,end) infinite}.dl-role-badge.role-miner i{animation:dl-role-crystal 2.1s ease-in-out infinite}.dl-role-badge.role-explorer i{animation:none}.dl-role-badge.role-newbie i{animation:dl-role-grow 2.4s ease-in-out infinite}.dl-role-badge.role-pvp i{animation:dl-role-pvp 1.35s ease-in-out infinite}
+
+@media(max-width:760px){
+  .dl-onboarding-visual-v2 .dl-gender-grid{grid-template-columns:1fr 1fr}.dl-onboarding-visual-v2 .dl-gender-grid button{min-height:265px;padding:13px 9px}.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2{transform:scale(.86);margin:-8px 0 -2px}.dl-onboarding-visual-v2 .dl-role-pick-grid{grid-template-columns:1fr 1fr}.dl-onboarding-visual-v2 .dl-role-card-v2{min-height:238px!important}.dl-role-scene{height:98px}
+}
+@media(max-width:480px){
+  .dl-onboarding-visual-v2 .dl-gender-grid{grid-template-columns:1fr;gap:10px}.dl-onboarding-visual-v2 .dl-gender-grid button{min-height:220px;grid-template-columns:120px 1fr;grid-template-rows:auto auto;align-items:center;text-align:left}.dl-onboarding-visual-v2 .dl-gender-figure.dl-character-v2{grid-row:1/3;width:108px;height:144px;transform:scale(.84);margin:-5px}.dl-character-caption{justify-self:start}.dl-onboarding-visual-v2 .dl-role-pick-grid{grid-template-columns:1fr}.dl-onboarding-visual-v2 .dl-role-card-v2{min-height:220px!important}.dl-role-scene{height:92px}
+}
+@media(prefers-reduced-motion:reduce){
+  .dl-onboarding-visual-v2 .dl-gender-grid button.selected:before,.dl-gender-figure.dl-character-v2,.dl-gender-figure.dl-character-v2 i:before,.dl-gender-figure.dl-character-v2 i:after,.dl-role-scene-icon,.dl-role-scene>i,.dl-role-badge i,.dl-role-badge i:after{animation:none!important}
+}
