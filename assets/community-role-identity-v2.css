@@ -1,0 +1,57 @@
+/* DLavie verified developer identity */
+.dl-community-verified{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  margin-left:6px!important;
+  vertical-align:middle!important;
+  white-space:nowrap!important;
+  color:#8a6200!important;
+  font-size:10px!important;
+  font-weight:850!important;
+  line-height:1!important;
+}
+.dl-community-verified[hidden]{display:none!important}
+.dl-community-verified > i{
+  position:relative!important;
+  width:16px!important;height:16px!important;
+  display:inline-grid!important;place-items:center!important;
+  border-radius:4px!important;
+  background:linear-gradient(145deg,#ffe46a,#efb82f)!important;
+  border:1px solid #9d7113!important;
+  box-shadow:0 2px 0 rgba(112,76,0,.18),inset 2px 2px 0 rgba(255,255,255,.35)!important;
+  transform:rotate(45deg)!important;
+  overflow:visible!important;
+}
+.dl-community-verified > i b{
+  transform:rotate(-45deg)!important;
+  color:#4f3900!important;
+  font-size:11px!important;
+  font-weight:1000!important;
+  line-height:1!important;
+}
+.dl-community-verified > i em{
+  position:absolute!important;
+  width:3px!important;height:3px!important;
+  right:-2px!important;top:-2px!important;
+  background:#fff3a2!important;
+  box-shadow:-9px 13px 0 #ffd84c!important;
+  opacity:.8!important;
+  animation:dlVerifiedSpark 2.8s steps(2,end) infinite!important;
+}
+.dl-community-verified > strong{
+  font:inherit!important;
+  color:inherit!important;
+  letter-spacing:.01em!important;
+}
+.dl-is-verified .entry-author strong,
+.dl-is-verified .comment-author strong{
+  text-shadow:0 0 12px rgba(255,204,60,.14)!important;
+}
+@keyframes dlVerifiedSpark{0%,68%,100%{opacity:.2;transform:scale(.7)}72%,82%{opacity:1;transform:scale(1.35)}}
+@media(max-width:560px){
+  .dl-community-verified{gap:3px!important;margin-left:4px!important;font-size:0!important}
+  .dl-community-verified > i{width:15px!important;height:15px!important}
+  .dl-community-verified > i b{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){.dl-community-verified > i em{animation:none!important}}
