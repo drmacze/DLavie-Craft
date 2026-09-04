@@ -1,0 +1,43 @@
+/* Final Community v4 refinements. */
+.community-page.dl-community-discord-v4 .community-entry.dl-v4-message:has(.dl-message-menu.open){
+  content-visibility:visible!important;
+  contain:layout style!important;
+  position:relative!important;
+  z-index:80!important;
+}
+
+/* Level & Peringkat: keep it game-like but calmer than the old card wall. */
+.community-page.dl-community-discord-v4 .levels-forum{
+  display:grid!important;
+  gap:10px!important;
+}
+.community-page.dl-community-discord-v4 .levels-forum > section,
+.community-page.dl-community-discord-v4 .levels-forum > article{
+  position:relative!important;
+  overflow:hidden!important;
+  border-radius:15px!important;
+  border:1px solid color-mix(in srgb,var(--line) 88%,transparent)!important;
+  box-shadow:0 2px 0 color-mix(in srgb,var(--ink) 5%,transparent)!important;
+}
+.community-page.dl-community-discord-v4 .levels-forum > section::before,
+.community-page.dl-community-discord-v4 .levels-forum > article::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;width:72px;height:3px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+  pointer-events:none;
+}
+.community-page.dl-community-discord-v4 .levels-forum h2,
+.community-page.dl-community-discord-v4 .levels-forum h3{
+  line-height:1.12!important;
+}
+.community-page.dl-community-discord-v4 .levels-forum button{
+  touch-action:manipulation;
+}
+
+@media(max-width:719px){
+  .community-page.dl-community-discord-v4 .levels-forum > section,
+  .community-page.dl-community-discord-v4 .levels-forum > article{
+    border-radius:13px!important;
+  }
+}
