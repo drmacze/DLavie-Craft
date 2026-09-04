@@ -1,0 +1,301 @@
+/* DLavie ID — signature Minecraft ambient + restrained typography shine.
+   Loaded after the base account theme so this layer stays purely visual. */
+
+/* ---------- Typography: soft enchanted/ore shine ---------- */
+.dl-account-brand h1,
+.dl-account-card h2,
+.dl-account-legal-page h2,
+.dl-legal-sheet-head h2{
+  position:relative;
+  background-size:260% 100%!important;
+  background-repeat:no-repeat!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent;
+  animation:dl-title-shine 7.2s cubic-bezier(.4,0,.2,1) infinite;
+  filter:drop-shadow(0 1px 0 color-mix(in srgb,var(--ink) 9%,transparent));
+}
+
+.dl-account-brand h1{
+  background-image:linear-gradient(
+    108deg,
+    #fff 0%,
+    #fff 37%,
+    #d9ffec 44%,
+    #ffffff 49%,
+    #baf1d3 54%,
+    #fff 61%,
+    #fff 100%
+  )!important;
+  filter:drop-shadow(0 3px 0 rgba(0,0,0,.16)) drop-shadow(0 0 16px rgba(148,255,199,.08));
+}
+
+.dl-account-card h2,
+.dl-account-legal-page h2,
+.dl-legal-sheet-head h2{
+  background-image:linear-gradient(
+    108deg,
+    var(--ink) 0%,
+    var(--ink) 39%,
+    color-mix(in srgb,var(--ink) 50%,#fff 50%) 45%,
+    color-mix(in srgb,var(--accent) 58%,#fff 42%) 49%,
+    color-mix(in srgb,var(--ink) 67%,#fff 33%) 54%,
+    var(--ink) 61%,
+    var(--ink) 100%
+  )!important;
+}
+
+.dl-account-eyebrow,
+.dl-account-brand-kicker,
+.dl-account-logo{
+  text-shadow:
+    0 1px 0 color-mix(in srgb,#fff 32%,transparent),
+    0 0 14px color-mix(in srgb,var(--accent) 14%,transparent);
+}
+
+/* a tiny glint on the logo mark; transform-only animation keeps Safari light */
+.dl-account-logo img{
+  animation:dl-logo-breathe 5.8s ease-in-out infinite;
+}
+
+/* ---------- Portal world: block/chunk grid + biome glow ---------- */
+.dl-account-portal{
+  background:
+    radial-gradient(circle at 16% 11%,color-mix(in srgb,var(--accent) 14%,transparent) 0 2px,transparent 3px),
+    radial-gradient(circle at 83% 21%,color-mix(in srgb,var(--accent) 10%,transparent) 0 1px,transparent 2px),
+    radial-gradient(circle at 68% 78%,color-mix(in srgb,var(--accent) 9%,transparent) 0 2px,transparent 3px),
+    linear-gradient(135deg,color-mix(in srgb,var(--accent) 5%,transparent),transparent 33%),
+    var(--bg)!important;
+}
+
+/* chunk grid — intentionally crisp instead of blur-heavy */
+.dl-account-shell:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.38;
+  background-image:
+    linear-gradient(to right,color-mix(in srgb,var(--line) 34%,transparent) 1px,transparent 1px),
+    linear-gradient(to bottom,color-mix(in srgb,var(--line) 34%,transparent) 1px,transparent 1px),
+    linear-gradient(to right,color-mix(in srgb,var(--accent) 10%,transparent) 1px,transparent 1px),
+    linear-gradient(to bottom,color-mix(in srgb,var(--accent) 10%,transparent) 1px,transparent 1px);
+  background-size:32px 32px,32px 32px,128px 128px,128px 128px;
+  mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.8) 42%,transparent 92%);
+}
+
+/* ---------- Brand biome panel ---------- */
+.dl-account-brand{
+  background:
+    radial-gradient(circle at 78% 18%,rgba(112,255,184,.18) 0 2px,transparent 3px),
+    radial-gradient(circle at 72% 23%,rgba(112,255,184,.12) 0 1px,transparent 2px),
+    radial-gradient(circle at 88% 38%,rgba(112,255,184,.11) 0 2px,transparent 3px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 34px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 34px),
+    linear-gradient(145deg,color-mix(in srgb,var(--accent-dark) 94%,#07120d) 0%,color-mix(in srgb,var(--accent) 76%,#113223) 58%,color-mix(in srgb,var(--accent-dark) 84%,#092116) 100%)!important;
+}
+
+/* voxel terrain silhouette behind the hero copy */
+.dl-account-brand-copy{
+  position:relative;
+  isolation:isolate;
+}
+.dl-account-brand-copy:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-18%;
+  right:-22%;
+  bottom:-42px;
+  height:124px;
+  opacity:.22;
+  background:
+    linear-gradient(90deg,
+      transparent 0 4%,rgba(5,27,18,.78) 4% 14%,
+      transparent 14% 17%,rgba(5,27,18,.78) 17% 31%,
+      transparent 31% 35%,rgba(5,27,18,.78) 35% 49%,
+      transparent 49% 55%,rgba(5,27,18,.78) 55% 70%,
+      transparent 70% 74%,rgba(5,27,18,.78) 74% 91%,transparent 91% 100%);
+  clip-path:polygon(0 75%,5% 75%,5% 56%,14% 56%,14% 66%,20% 66%,20% 38%,31% 38%,31% 57%,39% 57%,39% 26%,49% 26%,49% 48%,58% 48%,58% 17%,70% 17%,70% 45%,78% 45%,78% 31%,91% 31%,91% 62%,100% 62%,100% 100%,0 100%);
+  transform:translate3d(0,6px,0);
+  animation:dl-terrain-float 8.5s ease-in-out infinite alternate;
+}
+
+/* ore sparkle cluster */
+.dl-account-brand-copy:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:7px;
+  height:7px;
+  border-radius:1px;
+  right:5%;
+  top:-22px;
+  background:rgba(189,255,221,.82);
+  box-shadow:
+    18px 14px rgba(84,229,151,.72),
+    34px -7px rgba(198,255,226,.54),
+    56px 19px rgba(78,215,141,.62),
+    72px -14px rgba(208,255,232,.42),
+    88px 30px rgba(68,197,129,.5),
+    -18px 28px rgba(197,255,226,.38);
+  animation:dl-ore-twinkle 4.8s ease-in-out infinite;
+}
+
+/* ---------- Main/login area ambient voxel particles ---------- */
+.dl-account-main{
+  overflow:hidden;
+}
+.dl-account-main:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.54;
+  background:
+    radial-gradient(circle at 14% 21%,color-mix(in srgb,var(--accent) 16%,transparent) 0 2px,transparent 3px),
+    radial-gradient(circle at 87% 15%,color-mix(in srgb,var(--accent) 12%,transparent) 0 1px,transparent 2px),
+    radial-gradient(circle at 77% 72%,color-mix(in srgb,var(--accent) 10%,transparent) 0 2px,transparent 3px),
+    radial-gradient(circle at 24% 83%,color-mix(in srgb,var(--accent) 9%,transparent) 0 1px,transparent 2px);
+  animation:dl-ambient-pan 10s ease-in-out infinite alternate;
+}
+
+.dl-account-main:after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  width:9px;
+  height:9px;
+  left:8%;
+  top:14%;
+  border-radius:1px;
+  background:color-mix(in srgb,var(--accent) 38%,transparent);
+  box-shadow:
+    58px 42px color-mix(in srgb,var(--accent) 22%,transparent),
+    158px 18px color-mix(in srgb,var(--accent) 16%,transparent),
+    244px 88px color-mix(in srgb,var(--accent) 20%,transparent),
+    324px 34px color-mix(in srgb,var(--accent) 13%,transparent),
+    410px 126px color-mix(in srgb,var(--accent) 15%,transparent),
+    82px 250px color-mix(in srgb,var(--accent) 16%,transparent),
+    302px 286px color-mix(in srgb,var(--accent) 12%,transparent);
+  transform:rotate(12deg);
+  animation:dl-pixel-drift 9s ease-in-out infinite alternate;
+}
+
+/* card gets a very subtle crafting-table grid, preserving readability */
+.dl-account-card,
+.dl-account-legal-page{
+  background-image:
+    linear-gradient(to right,color-mix(in srgb,var(--line) 12%,transparent) 1px,transparent 1px),
+    linear-gradient(to bottom,color-mix(in srgb,var(--line) 12%,transparent) 1px,transparent 1px)!important;
+  background-size:28px 28px!important;
+  background-color:color-mix(in srgb,var(--surface-raised) 97%,transparent)!important;
+  backdrop-filter:blur(9px);
+}
+
+/* micro-interactions feel more game-like but remain polished */
+.dl-account-field input:focus{
+  animation:dl-focus-pulse .38s ease-out both;
+}
+.dl-account-tabs button.active:after{
+  content:"";
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:4px;
+  height:2px;
+  border-radius:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.7;
+}
+.dl-account-check input:checked{
+  animation:dl-check-pop .22s cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* ---------- Dark / amethyst / copper compatibility ---------- */
+:root[data-theme=dark] .dl-account-shell:after{opacity:.24}
+:root[data-theme=dark] .dl-account-card,
+:root[data-theme=dark] .dl-account-legal-page{
+  background-color:color-mix(in srgb,var(--surface-raised) 94%,transparent)!important;
+}
+:root[data-theme=dark] .dl-account-card h2,
+:root[data-theme=dark] .dl-account-legal-page h2,
+:root[data-theme=dark] .dl-legal-sheet-head h2{
+  background-image:linear-gradient(
+    108deg,
+    var(--ink) 0%,var(--ink) 39%,
+    color-mix(in srgb,var(--ink) 72%,#fff 28%) 45%,
+    color-mix(in srgb,var(--accent) 62%,#fff 38%) 49%,
+    color-mix(in srgb,var(--ink) 76%,#fff 24%) 55%,
+    var(--ink) 61%,var(--ink) 100%
+  )!important;
+}
+
+/* ---------- Motion ---------- */
+@keyframes dl-title-shine{
+  0%,18%{background-position:110% 0}
+  42%{background-position:-20% 0}
+  100%{background-position:-20% 0}
+}
+@keyframes dl-logo-breathe{
+  0%,100%{transform:translateY(0);filter:drop-shadow(5px 5px 0 rgba(0,0,0,.16))}
+  50%{transform:translateY(-2px);filter:drop-shadow(6px 7px 0 rgba(0,0,0,.16)) drop-shadow(0 0 10px rgba(124,255,185,.16))}
+}
+@keyframes dl-terrain-float{
+  from{transform:translate3d(-4px,8px,0)}
+  to{transform:translate3d(8px,1px,0)}
+}
+@keyframes dl-ore-twinkle{
+  0%,100%{opacity:.34;transform:scale(.94)}
+  45%{opacity:.92;transform:scale(1.08)}
+  70%{opacity:.48;transform:scale(1)}
+}
+@keyframes dl-ambient-pan{
+  from{transform:translate3d(-3px,-2px,0);opacity:.38}
+  to{transform:translate3d(5px,4px,0);opacity:.68}
+}
+@keyframes dl-pixel-drift{
+  from{transform:translate3d(0,0,0) rotate(12deg);opacity:.28}
+  to{transform:translate3d(12px,-10px,0) rotate(12deg);opacity:.62}
+}
+@keyframes dl-focus-pulse{
+  from{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 24%,transparent)}
+  to{box-shadow:0 0 0 3px var(--accent-soft),inset 0 -2px 0 color-mix(in srgb,var(--accent) 24%,transparent)}
+}
+@keyframes dl-check-pop{
+  0%{transform:scale(.76)}
+  70%{transform:scale(1.13)}
+  100%{transform:scale(1)}
+}
+
+/* Mobile: effects are calmer and stay behind the form. */
+@media(max-width:820px){
+  .dl-account-brand-copy:before{height:92px;bottom:-28px;opacity:.18}
+  .dl-account-brand-copy:after{right:4%;top:-10px;transform:scale(.82)}
+  .dl-account-main:after{opacity:.55;left:3%;top:8%}
+  .dl-account-card,
+  .dl-account-legal-page{backdrop-filter:none}
+  .dl-account-shell:after{background-size:28px 28px,28px 28px,112px 112px,112px 112px}
+}
+
+@media(max-width:430px){
+  .dl-account-brand-copy:after{opacity:.55}
+  .dl-account-main:after{opacity:.38}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-account-brand h1,
+  .dl-account-card h2,
+  .dl-account-legal-page h2,
+  .dl-legal-sheet-head h2,
+  .dl-account-logo img,
+  .dl-account-brand-copy:before,
+  .dl-account-brand-copy:after,
+  .dl-account-main:before,
+  .dl-account-main:after,
+  .dl-account-field input:focus,
+  .dl-account-check input:checked{
+    animation:none!important;
+  }
+}
