@@ -21,6 +21,10 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
   };
 
+  const setText = (element, value) => {
+    if (element && element.textContent !== value) element.textContent = value;
+  };
+
   const slugify = (value = '') => value
     .toLowerCase()
     .trim()
@@ -69,15 +73,19 @@
     try { localStorage.setItem(FOCUS_KEY, enabled ? '1' : '0'); } catch {}
     const button = page.querySelector('[data-dl-community-action="focus"]');
     if (button) {
-      button.setAttribute('aria-pressed', enabled ? 'true' : 'false');
-      button.textContent = enabled ? 'Ringkas aktif' : 'Ringkas';
+      const pressed = enabled ? 'true' : 'false';
+      if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
+      setText(button, enabled ? 'Ringkas aktif' : 'Ringkas');
     }
   }
 
   function setInfo(page, open) {
     page.classList.toggle('dl-community-info-open', open);
     const button = page.querySelector('[data-dl-community-action="info"]');
-    if (button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (button) {
+      const expanded = open ? 'true' : 'false';
+      if (button.getAttribute('aria-expanded') !== expanded) button.setAttribute('aria-expanded', expanded);
+    }
   }
 
   function ensureInfoShell(page) {
@@ -164,19 +172,20 @@
 
     entries.forEach((entry) => {
       const match = !needle || (entry.textContent || '').toLowerCase().includes(needle);
-      entry.hidden = !match;
+      if (entry.hidden === match) entry.hidden = !match;
       if (match) visible += 1;
     });
 
     const status = page.querySelector('[data-dl-community-status]');
-    if (status) status.textContent = needle ? `${visible} hasil dari ${entries.length} posting` : `${entries.length} posting di ruang ini`;
+    setText(status, needle ? `${visible} hasil dari ${entries.length} posting` : `${entries.length} posting di ruang ini`);
   }
 
   function updateNewBadge(page) {
     const badge = page.querySelector('.dl-community-new-badge');
     if (!badge) return;
-    badge.hidden = toolbarNewCount <= 0;
-    badge.textContent = String(Math.min(99, toolbarNewCount));
+    const hidden = toolbarNewCount <= 0;
+    if (badge.hidden !== hidden) badge.hidden = hidden;
+    setText(badge, String(Math.min(99, toolbarNewCount)));
   }
 
   function updateForumBadges(page) {
@@ -188,9 +197,10 @@
     const active = activeForumButton(page);
 
     buttons.forEach((button) => {
-      const key = slugify(button.querySelector('strong')?.textContent || 'room');
+      const label = button.querySelector('strong')?.textContent || 'Forum';
+      const key = slugify(label);
       const count = roomCount(button);
-      button.dataset.dlRoomKey = key;
+      if (button.dataset.dlRoomKey !== key) button.dataset.dlRoomKey = key;
 
       const previousRuntime = runtimeCounts.get(key);
       if (previousRuntime != null && count > previousRuntime && button === active) {
@@ -201,8 +211,12 @@
       if (firstRun) seen[key] = count;
       const hasNew = !firstRun && button !== active && count > Number(seen[key] || 0);
       button.classList.toggle('dl-room-has-new', hasNew);
-      if (hasNew) button.setAttribute('aria-label', `${button.querySelector('strong')?.textContent || 'Forum'} memiliki posting baru`);
-      else button.removeAttribute('aria-label');
+      if (hasNew) {
+        const aria = `${label} memiliki posting baru`;
+        if (button.getAttribute('aria-label') !== aria) button.setAttribute('aria-label', aria);
+      } else if (button.hasAttribute('aria-label')) {
+        button.removeAttribute('aria-label');
+      }
     });
 
     if (firstRun) writeJson(SEEN_KEY, seen);
@@ -270,13 +284,13 @@
       counter.className = 'dl-chat-counter';
       actionArea.insertBefore(counter, actionArea.lastElementChild || null);
     }
-    counter.textContent = `${textarea.value.length}/8000`;
+    setText(counter, `${textarea.value.length}/8000`);
     counter.classList.toggle('near-limit', textarea.value.length > 7200);
   }
 
   function updateRoomContext(page) {
     const type = getForumType(page);
-    page.dataset.dlCommunityForumType = type;
+    if (page.dataset.dlCommunityForumType !== type) page.dataset.dlCommunityForumType = type;
     const key = roomKey(page);
 
     if (lastActiveRoom && lastActiveRoom !== key) {
@@ -290,12 +304,15 @@
     lastActiveRoom = key;
 
     const shortcut = page.querySelector('.dl-community-shortcut');
-    if (shortcut) shortcut.hidden = type !== 'chat';
+    if (shortcut) {
+      const hidden = type !== 'chat';
+      if (shortcut.hidden !== hidden) shortcut.hidden = hidden;
+    }
 
     const status = page.querySelector('[data-dl-community-status]');
     if (status && !page.querySelector('.dl-community-room-search input')?.value) {
       const count = page.querySelectorAll('.typed-feed .community-entry').length;
-      status.textContent = type === 'levels' ? 'Peringkat dan progres komunitas' : `${count} posting di ruang ini`;
+      setText(status, type === 'levels' ? 'Peringkat dan progres komunitas' : `${count} posting di ruang ini`);
     }
   }
 
@@ -346,7 +363,14 @@
       }
     });
 
-    pageObserver = new MutationObserver(() => schedule(page));
+    pageObserver = new MutationObserver((records) => {
+      const meaningful = records.some((record) => {
+        const target = record.target?.nodeType === 1 ? record.target : record.target?.parentElement;
+        if (!target) return true;
+        return !target.closest?.('#dl-community-toolbar, .dl-community-info-head, #dl-community-info-scrim, .dl-chat-counter');
+      });
+      if (meaningful) schedule(page);
+    });
     pageObserver.observe(page, { childList: true, subtree: true });
   }
 
