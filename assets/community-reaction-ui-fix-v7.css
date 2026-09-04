@@ -1,0 +1,266 @@
+/* Community reaction stability v7 — final mobile/iOS overrides. */
+.community-page.dl-reaction-ui-v7 .reaction-area.dl-v7-legacy-reaction,
+.community-page.dl-reaction-ui-v7 .reaction-bar.dl-v7-legacy-reaction{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  overflow:hidden!important;
+}
+
+.community-page.dl-reaction-ui-v7 .entry-actions.dl-v7-actions-ready{
+  width:auto!important;
+  max-width:calc(100% - var(--dl-thread-indent,42px))!important;
+  min-height:32px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  margin-top:6px!important;
+  overflow:visible!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-reactions{
+  width:auto!important;
+  max-width:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex:0 1 auto!important;
+  flex-wrap:wrap!important;
+  gap:5px!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-chip{
+  width:auto!important;
+  min-width:42px!important;
+  max-width:none!important;
+  height:30px!important;
+  min-height:30px!important;
+  flex:0 0 auto!important;
+  padding:0 10px!important;
+  border-radius:9px!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-chip > span{
+  display:inline!important;
+  font-size:16px!important;
+  line-height:1!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-chip > b{
+  display:inline!important;
+  min-width:auto!important;
+  font-size:9px!important;
+  line-height:1!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add{
+  position:relative!important;
+  width:34px!important;
+  min-width:34px!important;
+  max-width:34px!important;
+  height:30px!important;
+  min-height:30px!important;
+  flex:0 0 34px!important;
+  padding:0!important;
+  display:inline-grid!important;
+  grid-template-columns:1fr!important;
+  place-items:center!important;
+  border-radius:9px!important;
+  color:var(--ink-soft)!important;
+  font-size:0!important;
+  line-height:1!important;
+  overflow:visible!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add > .dl-v7-react-face{
+  display:block!important;
+  position:relative!important;
+  z-index:1!important;
+  font:900 15px/1 var(--font-body)!important;
+  transform:translateY(-1px)!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add > .dl-v7-react-plus{
+  display:grid!important;
+  place-items:center!important;
+  position:absolute!important;
+  right:4px!important;
+  bottom:3px!important;
+  z-index:2!important;
+  width:10px!important;
+  height:10px!important;
+  border-radius:3px!important;
+  background:var(--accent)!important;
+  color:var(--accent-contrast,#fff)!important;
+  font:900 9px/1 var(--font-body)!important;
+  box-shadow:0 0 0 2px var(--surface-raised)!important;
+}
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add > .dl-mc-icon,
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add > .dl-mc-sweep-icon,
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add > .dl-mc-forge-icon,
+.community-page.dl-reaction-ui-v7 .dl-v4-react-add > svg,
+.community-page.dl-reaction-ui-v7 .dl-v4-react-chip > .dl-mc-icon,
+.community-page.dl-reaction-ui-v7 .dl-v4-react-chip > .dl-mc-sweep-icon,
+.community-page.dl-reaction-ui-v7 .dl-v4-react-chip > .dl-mc-forge-icon{
+  display:none!important;
+}
+.community-page.dl-reaction-ui-v7 .reply-toggle{
+  width:auto!important;
+  max-width:none!important;
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+}
+
+/* Prevent old global button rules from turning action controls into full-width bars. */
+.community-page.dl-reaction-ui-v7 .entry-actions button,
+.community-page.dl-reaction-ui-v7 .dl-v4-comment-actions button{
+  align-self:auto!important;
+}
+
+/* Emoji picker: always a real dialog with a visible header. */
+.dl-v4-picker[data-dl-v7="1"]{
+  display:grid!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+  overflow:hidden!important;
+  background:var(--surface-raised)!important;
+  border:1px solid color-mix(in srgb,var(--line) 92%,transparent)!important;
+  box-shadow:0 20px 58px rgba(10,15,12,.24)!important;
+}
+.dl-v4-picker[data-dl-v7="1"] > header{
+  position:relative!important;
+  top:auto!important;
+  z-index:4!important;
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr) 34px!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:56px!important;
+  padding:10px!important;
+  background:var(--surface-raised)!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.dl-v4-picker[data-dl-v7="1"] > header strong{
+  display:block!important;
+  color:var(--ink)!important;
+  font-size:10px!important;
+  white-space:nowrap!important;
+}
+.dl-v4-picker[data-dl-v7="1"] > header input{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji-list{
+  min-height:0!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+}
+.dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji-list section{
+  padding-bottom:3px!important;
+}
+.dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji-list section > div{
+  align-items:center!important;
+}
+.dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1!important;
+  display:grid!important;
+  place-items:center!important;
+}
+
+@media(max-width:719px){
+  .community-page.dl-reaction-ui-v7 .entry-actions.dl-v7-actions-ready{
+    max-width:calc(100% - 31px)!important;
+    margin-left:31px!important;
+    padding-right:2px!important;
+  }
+  .community-page.dl-reaction-ui-v7 .dl-v4-reactions{
+    flex-wrap:nowrap!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
+    padding:1px 1px 2px!important;
+  }
+  .community-page.dl-reaction-ui-v7 .dl-v4-reactions::-webkit-scrollbar{display:none!important}
+  .community-page.dl-reaction-ui-v7 .dl-v4-react-chip{
+    height:32px!important;
+    min-height:32px!important;
+    min-width:44px!important;
+    border-radius:10px!important;
+  }
+  .community-page.dl-reaction-ui-v7 .dl-v4-react-add{
+    width:36px!important;
+    min-width:36px!important;
+    max-width:36px!important;
+    height:32px!important;
+    min-height:32px!important;
+    flex-basis:36px!important;
+    border-radius:10px!important;
+  }
+
+  .dl-v4-picker[data-dl-v7="1"]{
+    left:10px!important;
+    right:10px!important;
+    bottom:calc(10px + env(safe-area-inset-bottom))!important;
+    top:auto!important;
+    width:auto!important;
+    max-width:none!important;
+    height:min(70dvh,610px)!important;
+    max-height:min(70dvh,610px)!important;
+    border-radius:20px!important;
+    box-shadow:0 0 0 100vmax rgba(7,11,9,.38),0 24px 70px rgba(7,11,9,.28)!important;
+    animation:dlV7PickerIn .22s cubic-bezier(.2,.8,.2,1) both!important;
+    contain:layout paint!important;
+  }
+  .dl-v4-picker[data-dl-v7="1"]::before{
+    content:"";
+    position:absolute;
+    top:5px;left:50%;z-index:6;
+    width:42px;height:4px;
+    border-radius:99px;
+    background:color-mix(in srgb,var(--ink-soft) 34%,transparent);
+    transform:translateX(-50%);
+    pointer-events:none;
+  }
+  .dl-v4-picker[data-dl-v7="1"] > header{
+    min-height:62px!important;
+    padding:13px 10px 9px!important;
+  }
+  .dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji-list{
+    padding:9px 10px calc(12px + env(safe-area-inset-bottom))!important;
+  }
+  .dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji-list section > div{
+    grid-template-columns:repeat(7,minmax(0,1fr))!important;
+    gap:4px!important;
+  }
+  .dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji{
+    min-height:42px!important;
+    font-size:23px!important;
+    border-radius:10px!important;
+  }
+  body.dl-v7-picker-open{
+    overscroll-behavior:none!important;
+  }
+}
+
+@media(max-width:390px){
+  .dl-v4-picker[data-dl-v7="1"] .dl-v4-emoji-list section > div{
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  }
+}
+
+@keyframes dlV7PickerIn{
+  from{opacity:0;transform:translateY(20px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-v4-picker[data-dl-v7="1"]{animation:none!important}
+}
