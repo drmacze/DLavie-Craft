@@ -14,8 +14,8 @@
 .dl-mc-icon svg{width:100%;height:100%;display:block;overflow:visible;shape-rendering:crispEdges}
 .dl-mci-main{fill:currentColor}.dl-mci-mid{fill:color-mix(in srgb,currentColor 72%,#fff 28%)}.dl-mci-dark{fill:color-mix(in srgb,currentColor 72%,#000 28%)}.dl-mci-shadow{fill:color-mix(in srgb,currentColor 54%,#000 46%)}.dl-mci-hi{fill:color-mix(in srgb,currentColor 40%,#fff 60%)}.dl-mci-accent{fill:color-mix(in srgb,var(--accent,#159965) 72%,#fff 28%)}.dl-mci-top{fill:color-mix(in srgb,currentColor 60%,#fff 40%)}.dl-mci-left{fill:color-mix(in srgb,currentColor 74%,#000 26%)}.dl-mci-right{fill:currentColor}
 
-/* Hide generic outline SVGs only on elements upgraded by this system. */
-.dl-mc-iconized > svg:not(.dl-mc-icon svg){display:none!important}
+/* Hide generic outline SVGs only when they are direct children of an upgraded control. */
+.dl-mc-iconized > svg{display:none!important}
 
 .dl-mc-icon-nav{width:19px;height:19px;flex-basis:19px}
 .main-nav a.dl-mc-iconized,
@@ -143,7 +143,6 @@ button.dl-mc-iconized{align-items:center}
 .dl-download-unlocked-toast.show .dl-mc-icon--emerald{animation:dl-mci-emerald-unlock .7s cubic-bezier(.15,.85,.25,1) both}
 
 /* Search and filters */
-.search-field.dl-mc-iconized > svg:not(.dl-mc-icon svg){display:none!important}
 .search-field .dl-mc-icon-utility{width:19px;height:19px;flex-basis:19px;filter:none;color:var(--ink-soft)}
 .search-field:focus-within .dl-mc-icon-utility{color:var(--accent);filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 28%,transparent))}
 .filter-pills{align-items:center}
