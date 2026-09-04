@@ -1,0 +1,192 @@
+/* DLavie Craft — Minecraft-style icon language */
+.dl-mc-icon{
+  --mci:var(--accent,#159965);
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+  display:inline-grid;
+  place-items:center;
+  color:var(--mci);
+  vertical-align:middle;
+  filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink,#18201b) 12%,transparent));
+  transform:translateZ(0);
+}
+.dl-mc-icon svg{width:100%;height:100%;display:block;overflow:visible;shape-rendering:crispEdges}
+.dl-mci-main{fill:currentColor}.dl-mci-mid{fill:color-mix(in srgb,currentColor 72%,#fff 28%)}.dl-mci-dark{fill:color-mix(in srgb,currentColor 72%,#000 28%)}.dl-mci-shadow{fill:color-mix(in srgb,currentColor 54%,#000 46%)}.dl-mci-hi{fill:color-mix(in srgb,currentColor 40%,#fff 60%)}.dl-mci-accent{fill:color-mix(in srgb,var(--accent,#159965) 72%,#fff 28%)}.dl-mci-top{fill:color-mix(in srgb,currentColor 60%,#fff 40%)}.dl-mci-left{fill:color-mix(in srgb,currentColor 74%,#000 26%)}.dl-mci-right{fill:currentColor}
+
+/* Hide generic outline SVGs only on elements upgraded by this system. */
+.dl-mc-iconized > svg:not(.dl-mc-icon svg){display:none!important}
+
+.dl-mc-icon-nav{width:19px;height:19px;flex-basis:19px}
+.main-nav a.dl-mc-iconized,
+.dl-shell-account.dl-mc-iconized{gap:8px!important}
+.main-nav a.dl-mc-iconized:hover .dl-mc-icon,
+.main-nav a.dl-mc-iconized.active .dl-mc-icon,
+.dl-shell-account.dl-mc-iconized:hover .dl-mc-icon{
+  animation:dl-mci-hop .34s cubic-bezier(.2,.85,.25,1) both;
+  filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 13%,transparent)) drop-shadow(0 0 7px color-mix(in srgb,var(--accent) 28%,transparent));
+}
+
+/* Account headings: voxel icon becomes part of the title rhythm. */
+.dl-account-card h2.dl-mc-iconized,
+.dl-account-legal-page h2.dl-mc-iconized,
+.dl-legal-sheet-head h2.dl-mc-iconized{
+  display:flex!important;
+  align-items:center;
+  gap:11px;
+}
+.dl-mc-icon-title{
+  width:29px;
+  height:29px;
+  flex-basis:29px;
+  padding:5px;
+  border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line));
+  border-radius:7px;
+  background:color-mix(in srgb,var(--accent-soft) 72%,var(--surface-raised));
+  box-shadow:4px 4px 0 color-mix(in srgb,var(--accent) 13%,transparent);
+  -webkit-text-fill-color:initial!important;
+  animation:dl-mci-title-breathe 4.6s ease-in-out infinite;
+}
+
+/* Login / Register tabs */
+.dl-account-tabs button.dl-mc-iconized{
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+.dl-mc-icon-tab{width:17px;height:17px;flex-basis:17px;filter:none}
+.dl-account-tabs button.active .dl-mc-icon-tab{
+  filter:drop-shadow(0 0 6px color-mix(in srgb,var(--accent) 30%,transparent));
+  animation:dl-mci-tab-pop .28s cubic-bezier(.2,.85,.2,1) both;
+}
+
+/* Field icons are embedded inside the input, Minecraft-inventory style. */
+.dl-account-field.dl-mc-field-iconized{position:relative}
+.dl-account-field.dl-mc-field-iconized input{padding-left:47px!important}
+.dl-mc-field-icon{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+  z-index:2;
+  width:22px;
+  height:22px;
+  flex-basis:22px;
+  padding:3px;
+  border-radius:4px;
+  background:color-mix(in srgb,var(--accent-soft) 65%,var(--surface-raised));
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 18%,var(--line));
+  pointer-events:none;
+  transition:transform .18s ease,filter .18s ease,background .18s ease;
+}
+.dl-account-field.dl-mc-field-iconized:focus-within .dl-mc-field-icon{
+  transform:translateY(-1px) scale(1.06);
+  background:color-mix(in srgb,var(--accent-soft) 84%,var(--surface-raised));
+  filter:drop-shadow(0 0 7px color-mix(in srgb,var(--accent) 34%,transparent));
+}
+
+/* Account actions */
+.dl-account-btn.dl-mc-iconized,
+.dl-account-link.dl-mc-iconized,
+.dl-shell-legal-links button.dl-mc-iconized{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+.dl-mc-icon-action{width:17px;height:17px;flex-basis:17px;filter:none}
+.dl-account-btn.primary .dl-mc-icon{color:#fff}
+.dl-account-btn:hover .dl-mc-icon-action{animation:dl-mci-action .3s ease both}
+.dl-account-link .dl-mc-icon-action{width:14px;height:14px;flex-basis:14px}
+.dl-shell-legal-links .dl-mc-icon-action{width:13px;height:13px;flex-basis:13px}
+
+/* Download buttons use a chest + arrow identity. */
+.dl-mc-icon-download{width:21px;height:21px;flex-basis:21px;position:relative}
+.button.dl-mc-iconized,
+a.dl-mc-iconized,
+button.dl-mc-iconized{align-items:center}
+[data-dl-download-locked="true"] .dl-mc-icon-download:after,
+.dl-mc-icon-download.is-locked:after{
+  content:"";
+  position:absolute;
+  right:-4px;
+  bottom:-3px;
+  width:8px;
+  height:7px;
+  border:2px solid currentColor;
+  border-radius:2px;
+  background:var(--surface-raised);
+  box-shadow:0 -4px 0 -2px var(--surface-raised),0 -5px 0 -1px currentColor;
+}
+[data-dl-download-locked="true"]:hover .dl-mc-icon-download{
+  animation:dl-mci-locked-rattle .38s steps(2,end) both;
+}
+
+/* Download gate notice / success toast */
+.dl-download-lock .dl-mc-icon,
+.dl-download-unlocked-toast>span:first-child .dl-mc-icon{
+  width:24px;height:24px;flex-basis:24px;filter:none
+}
+.dl-download-lock.is-locked{position:relative}
+.dl-download-lock.is-locked:after{
+  content:"";
+  position:absolute;
+  right:3px;
+  bottom:3px;
+  width:7px;
+  height:6px;
+  border:2px solid var(--accent-dark);
+  border-radius:2px;
+  background:var(--surface-raised);
+  box-shadow:0 -4px 0 -2px var(--surface-raised),0 -5px 0 -1px var(--accent-dark);
+}
+.dl-download-unlocked-toast.show .dl-mc-icon--emerald{animation:dl-mci-emerald-unlock .7s cubic-bezier(.15,.85,.25,1) both}
+
+/* Search and filters */
+.search-field.dl-mc-iconized > svg:not(.dl-mc-icon svg){display:none!important}
+.search-field .dl-mc-icon-utility{width:19px;height:19px;flex-basis:19px;filter:none;color:var(--ink-soft)}
+.search-field:focus-within .dl-mc-icon-utility{color:var(--accent);filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 28%,transparent))}
+.filter-pills{align-items:center}
+.dl-mc-filter-mark{
+  width:18px;height:18px;flex-basis:18px;
+  margin:0 3px 0 4px;
+  color:var(--ink-soft);
+  filter:none;
+}
+
+/* Make icon cards feel like tiny inventory slots without becoming childish. */
+.dl-account-profile-card .dl-mc-icon,
+.dl-download-login-notice .dl-mc-icon,
+.dl-mc-icon-title{
+  image-rendering:pixelated;
+}
+
+@keyframes dl-mci-hop{
+  0%{transform:translateY(0) scale(1)}
+  55%{transform:translateY(-3px) scale(1.08)}
+  100%{transform:translateY(0) scale(1)}
+}
+@keyframes dl-mci-title-breathe{
+  0%,100%{transform:translateY(0);filter:drop-shadow(2px 2px 0 color-mix(in srgb,var(--ink) 10%,transparent))}
+  50%{transform:translateY(-2px);filter:drop-shadow(3px 3px 0 color-mix(in srgb,var(--ink) 10%,transparent)) drop-shadow(0 0 7px color-mix(in srgb,var(--accent) 30%,transparent))}
+}
+@keyframes dl-mci-tab-pop{0%{transform:scale(.76)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes dl-mci-action{0%{transform:translateX(0)}55%{transform:translateX(2px)}100%{transform:translateX(0)}}
+@keyframes dl-mci-locked-rattle{0%,100%{transform:translateX(0)}25%{transform:translateX(-1px)}75%{transform:translateX(1px)}}
+@keyframes dl-mci-emerald-unlock{0%{transform:scale(.65) rotate(-12deg);opacity:.2}55%{transform:scale(1.18) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+
+@media(max-width:720px){
+  .main-nav a.dl-mc-iconized{gap:10px!important}
+  .main-nav .dl-mc-icon-nav{width:21px;height:21px;flex-basis:21px}
+  .dl-account-card h2 .dl-mc-icon-title{width:27px;height:27px;flex-basis:27px;padding:4px}
+  .dl-account-field.dl-mc-field-iconized input{padding-left:45px!important}
+  .dl-mc-field-icon{left:13px;bottom:14px;width:21px;height:21px;flex-basis:21px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-mc-icon,
+  .dl-mc-icon-title,
+  .dl-mc-icon-action,
+  .dl-mc-icon-tab,
+  .dl-mc-icon-download{animation:none!important;transition:none!important}
+}
