@@ -1,0 +1,210 @@
+/* DLavie Craft — expressive Minecraft icon motion layer v2 */
+
+[data-dl-icon-fx-v2="true"]{will-change:transform,filter}
+
+/* Larger visual motion on idle so icons never look static. */
+.dl-mc-sweep-icon[data-dl-icon-fx-v2="true"],
+.dl-mc-icon[data-dl-icon-fx-v2="true"]{
+  transform-origin:50% 55%;
+}
+
+/* CHEST / DOWNLOAD: lid visibly opens, item glow rises, then closes. */
+.dl-mc-sweep--chest .p-main.gold,
+.dl-mc-icon--chest .dl-mci-main,
+.dl-mc-icon--download .dl-mci-main{
+  transform-origin:50% 100%;
+  animation:dl-chest-lid 4.8s cubic-bezier(.2,.8,.2,1) infinite var(--dl-icon-phase,0ms);
+}
+.dl-mc-sweep--chest,
+.dl-mc-icon--chest,
+.dl-mc-icon--download{animation:dl-chest-body 4.8s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--chest:before,
+.dl-mc-icon--chest:before,
+.dl-mc-icon--download:before{
+  content:"";position:absolute;left:50%;top:0;width:4px;height:4px;z-index:4;opacity:0;
+  background:#68efad;box-shadow:-5px 4px #b9ffd9,5px 7px #45c987,0 0 8px rgba(74,231,153,.7);
+  animation:dl-chest-loot 4.8s steps(5,end) infinite var(--dl-icon-phase,0ms);
+}
+
+/* LANTERN: true on/off breathing light with halo and warm core. */
+.dl-mc-sweep--lantern{color:#8d9691;animation:dl-lantern-sway 3.8s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--lantern .lantern-glass{fill:#b36d2d;animation:dl-lantern-glass 3.2s steps(5,end) infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--lantern .lantern-core{fill:#ffd469;animation:dl-lantern-core 3.2s steps(5,end) infinite var(--dl-icon-phase,0ms);filter:drop-shadow(0 0 5px rgba(255,176,65,.8))}
+.dl-mc-sweep--lantern .lantern-hi{fill:#fff0a8;animation:dl-lantern-hi 3.2s steps(5,end) infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--lantern:after{
+  content:"";position:absolute;inset:3px;border-radius:50%;z-index:-1;opacity:.1;
+  background:radial-gradient(circle,rgba(255,190,82,.7),rgba(255,160,56,.18) 45%,transparent 72%);
+  transform:scale(.6);animation:dl-lantern-halo 3.2s ease-in-out infinite var(--dl-icon-phase,0ms)
+}
+:root[data-theme=dark] .dl-mc-sweep--lantern:after{opacity:.28}
+
+/* TORCH: much more obvious flame, body bounce and pixel sparks. */
+.dl-mc-sweep--torch{animation:dl-torch-big 1.55s ease-in-out infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--torch .flame{transform-origin:50% 100%;animation:dl-flame-big .48s steps(3,end) infinite!important;filter:drop-shadow(0 0 2px #ffd15d) drop-shadow(0 0 7px rgba(255,116,27,.85))!important}
+.dl-mc-sweep--torch .p-hi{animation:dl-flame-core-big .36s steps(2,end) infinite reverse!important}
+.dl-mc-sweep--torch:before{width:3px!important;height:3px!important;box-shadow:0 0 6px #ff8e29!important;animation:dl-ember-a 1.05s steps(5,end) infinite!important}
+.dl-mc-sweep--torch:after{width:2px!important;height:2px!important;box-shadow:0 0 5px #ffc65a!important;animation:dl-ember-b 1.25s steps(5,end) infinite .35s!important}
+
+/* BOOK: left/right pages visibly flip. */
+.dl-mc-sweep--book .p-left{transform-origin:100% 50%;animation:dl-page-left 5.4s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--book .p-main{transform-origin:0 50%;animation:dl-page-right 5.4s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--book{animation:dl-book-float 5.4s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* DOOR: panel opens and shuts with a light slit. */
+.dl-mc-sweep--door .p-main.wood{transform-origin:0 50%;animation:dl-door-open 4.2s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--door:after{content:"";position:absolute;left:8px;top:4px;width:2px;height:15px;background:#d9ffe9;opacity:0;box-shadow:0 0 6px rgba(128,255,185,.55);animation:dl-door-light 4.2s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* CRAFTING TABLE: crafting pulse + ingredient sparks. */
+.dl-mc-sweep--craft{animation:dl-craft-bob 3.6s steps(6,end) infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--craft .p-hi{animation:dl-craft-slot 1.15s steps(3,end) infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--craft:before,.dl-mc-sweep--craft:after{content:"";position:absolute;width:3px;height:3px;background:#65dca0;opacity:0}
+.dl-mc-sweep--craft:before{left:3px;top:3px;animation:dl-craft-particle 2.1s steps(4,end) infinite}
+.dl-mc-sweep--craft:after{right:2px;bottom:3px;background:#d2a25c;animation:dl-craft-particle-b 2.4s steps(4,end) infinite .5s}
+
+/* GEMS / XP: stronger orbiting sparkle and hover lift. */
+.dl-mc-sweep--emerald,.dl-mc-sweep--diamond,.dl-mc-sweep--xp,.dl-mc-icon--emerald{animation:dl-gem-orbit 2.7s ease-in-out infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--emerald:before,.dl-mc-sweep--diamond:before,.dl-mc-sweep--xp:before{content:"";position:absolute;left:1px;top:1px;width:3px;height:3px;background:currentColor;opacity:0;box-shadow:15px 10px currentColor;animation:dl-gem-spark 2.7s steps(5,end) infinite var(--dl-icon-phase,0ms)}
+
+/* REDSTONE: visible power cycle. */
+.dl-mc-sweep--redstone{animation:dl-redstone-strong 1.05s steps(2,end) infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--redstone:before{content:"";position:absolute;inset:1px;border:1px solid rgba(255,65,65,.5);opacity:0;animation:dl-redstone-ring 1.05s steps(3,end) infinite}
+
+/* TNT: fuse flashes, then quick prime shake, then rests. */
+.dl-mc-sweep--tnt{animation:dl-tnt-prime 4.8s steps(2,end) infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--tnt:before{width:4px!important;height:4px!important;left:10px!important;top:-3px!important;background:#fff27a!important;box-shadow:0 0 7px #ff7a29!important;animation:dl-tnt-fuse 1.1s steps(3,end) infinite!important}
+
+/* BELL: bigger ring with visible light flash. */
+.dl-mc-sweep--bell svg{animation:dl-bell-ring 4.6s cubic-bezier(.2,.8,.2,1) infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--bell:after{content:"";position:absolute;inset:-2px;border:1px solid rgba(222,175,69,.55);opacity:0;animation:dl-bell-wave 4.6s ease-out infinite var(--dl-icon-phase,0ms)}
+
+/* HEART: double Minecraft hit-point beat. */
+.dl-mc-sweep--heart svg{animation:dl-heart-double 2.35s cubic-bezier(.2,.85,.2,1) infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--heart:after{content:"";position:absolute;inset:2px;border:2px solid rgba(223,75,86,.32);opacity:0;animation:dl-heart-ring 2.35s ease-out infinite var(--dl-icon-phase,0ms)}
+
+/* COMPASS + CLOCK: obvious movement. */
+.dl-mc-sweep--compass .p-main.red{animation:dl-compass-live 3s cubic-bezier(.45,.05,.55,.95) infinite!important}
+.dl-mc-sweep--clock .p-dark{animation:dl-clock-live 6s steps(8,end) infinite!important}
+
+/* MAP: unfolds, marker pulses. */
+.dl-mc-sweep--map svg{transform-origin:center;animation:dl-map-unfold 5s ease-in-out infinite var(--dl-icon-phase,0ms)!important}
+.dl-mc-sweep--map .green{animation:dl-map-marker 1.3s steps(2,end) infinite}
+
+/* PAPER: page turn. */
+.dl-mc-sweep--paper{animation:dl-paper-float 3.9s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--paper .p-mid{transform-origin:0 0;animation:dl-paper-corner 3.9s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* SHIELD: blocking motion + glint. */
+.dl-mc-sweep--shield{animation:dl-shield-guard 4.1s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--shield .p-hi{animation:dl-shield-glint 2.2s steps(4,end) infinite var(--dl-icon-phase,0ms)}
+
+/* SWORD / PICKAXE: idle stance, tap performs real swing. */
+.dl-mc-sweep--sword,.dl-mc-sweep--pickaxe{animation:dl-tool-idle 3.2s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--sword.dl-mc-fx-burst svg,.dl-mc-sweep--pickaxe.dl-mc-fx-burst svg{animation:dl-tool-impact .62s cubic-bezier(.18,.9,.25,1) both!important;transform-origin:35% 80%}
+.dl-mc-sweep--sword.dl-mc-fx-burst:after,.dl-mc-sweep--pickaxe.dl-mc-fx-burst:after{content:"";position:absolute;right:-2px;top:0;width:4px;height:4px;background:#fff3a6;box-shadow:0 0 6px #ffe36a;animation:dl-impact-spark .62s steps(4,end) both}
+
+/* ANVIL: weight drop and impact dust. */
+.dl-mc-sweep--anvil{animation:dl-anvil-weight 4s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--anvil.dl-mc-fx-burst{animation:dl-anvil-slam .58s steps(4,end) both!important}
+.dl-mc-sweep--anvil.dl-mc-fx-burst:after{content:"";position:absolute;left:3px;bottom:-2px;width:3px;height:3px;background:#98a39d;box-shadow:7px -1px #c2cac6,13px 1px #7d8882;animation:dl-anvil-dust .58s steps(4,end) both}
+
+/* HOPPER: a pixel item is visibly sucked downward. */
+.dl-mc-sweep--hopper:before{content:"";position:absolute;left:9px;top:-5px;width:4px;height:4px;background:#6de0a5;box-shadow:1px 1px 0 rgba(0,0,0,.15);animation:dl-hopper-suck 2.2s steps(6,end) infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--hopper{animation:dl-hopper-breathe 2.2s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* LOCK + KEY: shackle bounce and key turn. */
+.dl-mc-sweep--lock .p-mid.iron{transform-origin:50% 100%;animation:dl-lock-shackle 4.5s ease-in-out infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--key{animation:dl-key-turn 4.5s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* CHAT: typing dots blink. */
+.dl-mc-sweep--chat .p-dark{animation:dl-chat-dots 1.45s steps(4,end) infinite var(--dl-icon-phase,0ms)}
+.dl-mc-sweep--chat{animation:dl-chat-float 3.2s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* SEARCH: scanning motion. */
+.dl-mc-sweep--search{animation:dl-search-scan 3.6s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* PLAYER: small alive idle. */
+.dl-mc-sweep--player{animation:dl-player-idle 3s steps(6,end) infinite var(--dl-icon-phase,0ms)}
+
+/* GRASS/CUBE: chunky voxel tilt. */
+.dl-mc-sweep--grass,.dl-mc-sweep--cube{animation:dl-block-tilt 4.3s ease-in-out infinite var(--dl-icon-phase,0ms)}
+
+/* UPLOAD / DOWNLOAD arrows are now unmistakable. */
+.dl-mc-icon--download .dl-mci-accent{animation:dl-download-big 1.05s cubic-bezier(.2,.85,.25,1) infinite!important}
+.dl-mc-sweep--upload .green{animation:dl-upload-big 1.05s cubic-bezier(.2,.85,.25,1) infinite!important}
+
+/* Tap feedback used across all icons. */
+.dl-mc-fx-burst:not(.dl-mc-sweep--sword):not(.dl-mc-sweep--pickaxe):not(.dl-mc-sweep--anvil){animation:dl-generic-burst .62s cubic-bezier(.15,.9,.25,1) both!important}
+
+/* --- keyframes --- */
+@keyframes dl-chest-lid{0%,58%,100%{transform:translateY(0) scaleY(1)}66%{transform:translateY(-4px) scaleY(.58)}75%{transform:translateY(-5px) scaleY(.42)}86%{transform:translateY(-1px) scaleY(.9)}}
+@keyframes dl-chest-body{0%,58%,100%{filter:drop-shadow(2px 2px 0 rgba(0,0,0,.12))}72%{transform:translateY(1px) scale(1.05);filter:drop-shadow(0 0 8px rgba(84,225,147,.38))}}
+@keyframes dl-chest-loot{0%,60%,100%{opacity:0;transform:translate(-50%,7px) scale(.5)}68%{opacity:1;transform:translate(-50%,0) scale(1)}78%{opacity:.85;transform:translate(-50%,-9px) scale(1.15)}88%{opacity:0;transform:translate(-50%,-14px) scale(.8)}}
+@keyframes dl-lantern-sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes dl-lantern-glass{0%,18%,100%{fill:#7b4e29;opacity:.55}28%,70%{fill:#d98a34;opacity:1}82%{fill:#8c572b;opacity:.68}}
+@keyframes dl-lantern-core{0%,18%,100%{opacity:.15;transform:scale(.8)}28%,70%{opacity:1;transform:scale(1.16)}82%{opacity:.35;transform:scale(.9)}}
+@keyframes dl-lantern-hi{0%,20%,100%{opacity:.1}35%,62%{opacity:1}78%{opacity:.25}}
+@keyframes dl-lantern-halo{0%,18%,100%{opacity:.04;transform:scale(.55)}30%,68%{opacity:.48;transform:scale(1.35)}82%{opacity:.12;transform:scale(.78)}}
+@keyframes dl-torch-big{0%,100%{transform:translateY(0) rotate(-1deg);filter:drop-shadow(0 0 4px rgba(255,130,35,.3))}50%{transform:translateY(-1px) rotate(1deg);filter:drop-shadow(0 0 10px rgba(255,130,35,.62))}}
+@keyframes dl-flame-big{0%{transform:translate(-1px,0) scale(.92,1.18);fill:#f0782f}33%{transform:translate(1px,-2px) scale(1.18,.9);fill:#ffad39}66%{transform:translate(0,-1px) scale(.98,1.28);fill:#ff8b30}100%{transform:translate(-1px,0) scale(.92,1.18);fill:#f0782f}}
+@keyframes dl-flame-core-big{0%,100%{transform:translateY(0) scale(.85,1.1);opacity:.78}50%{transform:translateY(-2px) scale(1.18,.82);opacity:1}}
+@keyframes dl-ember-a{0%{opacity:0;transform:translate(0,2px)}18%{opacity:1}60%{transform:translate(3px,-8px);opacity:.7}100%{transform:translate(-2px,-15px);opacity:0}}
+@keyframes dl-ember-b{0%{opacity:0;transform:translate(0,1px)}22%{opacity:.9}64%{transform:translate(-3px,-9px);opacity:.6}100%{transform:translate(2px,-16px);opacity:0}}
+@keyframes dl-page-left{0%,66%,100%{transform:scaleX(1)}74%{transform:scaleX(.32)}82%{transform:scaleX(.88)}}
+@keyframes dl-page-right{0%,66%,100%{transform:scaleX(1)}74%{transform:scaleX(.72)}82%{transform:scaleX(1.05)}}
+@keyframes dl-book-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+@keyframes dl-door-open{0%,58%,100%{transform:scaleX(1)}68%,78%{transform:translateX(-2px) scaleX(.42)}88%{transform:scaleX(.88)}}
+@keyframes dl-door-light{0%,58%,100%{opacity:0}68%,78%{opacity:1}88%{opacity:.15}}
+@keyframes dl-craft-bob{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-1px) rotate(-1deg)}70%{transform:translateY(1px) rotate(1deg)}}
+@keyframes dl-craft-slot{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.18)}}
+@keyframes dl-craft-particle{0%{opacity:0;transform:translate(0,4px)}25%{opacity:1}100%{opacity:0;transform:translate(8px,-8px)}}
+@keyframes dl-craft-particle-b{0%{opacity:0;transform:translate(0,0)}25%{opacity:.9}100%{opacity:0;transform:translate(-8px,-10px)}}
+@keyframes dl-gem-orbit{0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-3px) rotate(2deg) scale(1.09)}}
+@keyframes dl-gem-spark{0%,58%,100%{opacity:0;transform:translate(0,0)}66%{opacity:1;transform:translate(2px,-2px)}78%{opacity:.7;transform:translate(-1px,2px)}88%{opacity:0;transform:translate(3px,-4px)}}
+@keyframes dl-redstone-strong{0%,100%{filter:drop-shadow(0 0 2px rgba(255,40,40,.2));transform:scale(.96)}50%{filter:drop-shadow(0 0 9px rgba(255,45,45,.75));transform:scale(1.08)}}
+@keyframes dl-redstone-ring{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.8;transform:scale(1.2)}}
+@keyframes dl-tnt-prime{0%,65%,100%{transform:translateX(0) scale(1)}72%{transform:translateX(-1px) scale(1.05)}76%{transform:translateX(1px) scale(1.08)}80%{transform:translateX(-1px) scale(1.05)}84%{transform:translateX(1px) scale(1.02)}}
+@keyframes dl-tnt-fuse{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:translateY(-2px) scale(1.45)}}
+@keyframes dl-bell-ring{0%,65%,100%{transform:rotate(0)}70%{transform:rotate(-17deg)}75%{transform:rotate(15deg)}80%{transform:rotate(-10deg)}85%{transform:rotate(7deg)}90%{transform:rotate(-3deg)}}
+@keyframes dl-bell-wave{0%,67%,100%{opacity:0;transform:scale(.65)}74%{opacity:.65;transform:scale(1.2)}84%{opacity:0;transform:scale(1.5)}}
+@keyframes dl-heart-double{0%,62%,100%{transform:scale(1)}69%{transform:scale(1.22)}74%{transform:scale(.95)}79%{transform:scale(1.16)}85%{transform:scale(1)}}
+@keyframes dl-heart-ring{0%,65%,100%{opacity:0;transform:scale(.65)}72%{opacity:.55;transform:scale(1.18)}84%{opacity:0;transform:scale(1.45)}}
+@keyframes dl-compass-live{0%{transform:rotate(-38deg)}20%{transform:rotate(42deg)}40%{transform:rotate(-22deg)}62%{transform:rotate(18deg)}82%{transform:rotate(-8deg)}100%{transform:rotate(-38deg)}}
+@keyframes dl-clock-live{to{transform:rotate(360deg)}}
+@keyframes dl-map-unfold{0%,65%,100%{transform:scaleX(1) rotate(0)}72%{transform:scaleX(.78) rotate(-2deg)}80%{transform:scaleX(1.08) rotate(1deg)}88%{transform:scaleX(1)}}
+@keyframes dl-map-marker{0%,100%{opacity:.45}50%{opacity:1;filter:brightness(1.45)}}
+@keyframes dl-paper-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-2px) rotate(1deg)}}
+@keyframes dl-paper-corner{0%,70%,100%{transform:scale(1)}80%{transform:scale(.7) rotate(-8deg)}90%{transform:scale(1.06)}}
+@keyframes dl-shield-guard{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-1px) rotate(1deg)}}
+@keyframes dl-shield-glint{0%,62%,100%{opacity:.45;transform:translateX(0)}70%{opacity:1;transform:translateX(3px)}80%{opacity:.6;transform:translateX(-1px)}}
+@keyframes dl-tool-idle{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-1px)}}
+@keyframes dl-tool-impact{0%{transform:rotate(0)}45%{transform:rotate(-28deg) translateY(-2px)}65%{transform:rotate(16deg)}100%{transform:rotate(0)}}
+@keyframes dl-impact-spark{0%{opacity:0;transform:scale(.4)}48%{opacity:1;transform:scale(1.35)}100%{opacity:0;transform:translate(5px,-5px) scale(.6)}}
+@keyframes dl-anvil-weight{0%,100%{transform:translateY(0)}50%{transform:translateY(1px)}}
+@keyframes dl-anvil-slam{0%{transform:translateY(-3px)}55%{transform:translateY(2px) scaleY(.96)}75%{transform:translateY(-1px)}100%{transform:translateY(0)}}
+@keyframes dl-anvil-dust{0%{opacity:0;transform:scale(.4)}55%{opacity:1;transform:scale(1)}100%{opacity:0;transform:translateY(-3px) scale(1.4)}}
+@keyframes dl-hopper-suck{0%{opacity:0;transform:translateY(-2px) scale(1)}18%{opacity:1}72%{opacity:1;transform:translateY(11px) scale(.8)}100%{opacity:0;transform:translateY(15px) scale(.45)}}
+@keyframes dl-hopper-breathe{0%,100%{transform:scale(1)}55%{transform:scale(1.05)}}
+@keyframes dl-lock-shackle{0%,64%,100%{transform:translateY(0)}72%{transform:translateY(-3px)}80%{transform:translateY(-3px) translateX(2px)}88%{transform:translateY(0)}}
+@keyframes dl-key-turn{0%,65%,100%{transform:rotate(0)}75%{transform:rotate(18deg)}85%{transform:rotate(-8deg)}}
+@keyframes dl-chat-dots{0%,100%{opacity:.28}35%{opacity:1}65%{opacity:.5}}
+@keyframes dl-chat-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes dl-search-scan{0%,100%{transform:translate(0,0) rotate(0)}35%{transform:translate(2px,-1px) rotate(4deg)}70%{transform:translate(-1px,1px) rotate(-3deg)}}
+@keyframes dl-player-idle{0%,100%{transform:translateY(0)}40%{transform:translateY(-1px)}70%{transform:translateY(1px)}}
+@keyframes dl-block-tilt{0%,100%{transform:rotate(-1.5deg) translateY(0)}50%{transform:rotate(1.5deg) translateY(-2px)}}
+@keyframes dl-download-big{0%,100%{transform:translateY(-2px) scale(1)}50%{transform:translateY(3px) scale(1.15)}}
+@keyframes dl-upload-big{0%,100%{transform:translateY(2px) scale(1)}50%{transform:translateY(-3px) scale(1.15)}}
+@keyframes dl-generic-burst{0%{transform:scale(1)}40%{transform:scale(1.24) rotate(-5deg)}70%{transform:scale(.94) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+
+@media(max-width:720px){
+  /* Keep motion visible on touch devices, but lower expensive glow radius. */
+  .dl-mc-sweep--torch{filter:drop-shadow(0 0 6px rgba(255,130,35,.45))!important}
+  .dl-mc-sweep--lantern:after{transform:scale(1.05)}
+  .dl-mc-sweep--diamond,.dl-mc-sweep--emerald,.dl-mc-sweep--xp{filter:none!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  [data-dl-icon-fx-v2="true"],
+  [data-dl-icon-fx-v2="true"] *,
+  [data-dl-icon-fx-v2="true"]:before,
+  [data-dl-icon-fx-v2="true"]:after{animation:none!important;transition:none!important}
+}
