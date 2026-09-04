@@ -1,0 +1,300 @@
+/* DLavie ID — Minecraft-flavoured visual layer that reuses the main site's design tokens. */
+.dl-account-portal{
+  --dl-account-green:var(--accent,#159965);
+  --dl-account-green-dark:var(--accent-dark,#0d7650);
+  --dl-account-ink:var(--ink,#18201b);
+  --dl-account-muted:var(--ink-soft,#5f6b63);
+  --dl-account-line:var(--line,#d5dbd2);
+  --dl-account-bg:var(--bg,#f1f3ed);
+  --dl-account-card:var(--surface-raised,#fff);
+  --dl-account-soft:var(--accent-soft,#dff4e8);
+  font-family:var(--font-body,"Manrope Variable",system-ui,sans-serif)!important;
+  background:
+    radial-gradient(circle at 12% 12%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 30%),
+    radial-gradient(circle at 88% 82%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 26%),
+    var(--bg)!important;
+}
+
+.dl-account-shell{position:relative;isolation:isolate}
+.dl-account-shell:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.23;
+  background-image:
+    linear-gradient(45deg,color-mix(in srgb,var(--line) 34%,transparent) 25%,transparent 25%,transparent 75%,color-mix(in srgb,var(--line) 34%,transparent) 75%),
+    linear-gradient(45deg,color-mix(in srgb,var(--line) 34%,transparent) 25%,transparent 25%,transparent 75%,color-mix(in srgb,var(--line) 34%,transparent) 75%);
+  background-size:42px 42px;
+  background-position:0 0,21px 21px;
+  mask-image:linear-gradient(to bottom,#000 0%,transparent 72%);
+}
+
+.dl-account-brand{
+  background:
+    linear-gradient(145deg,color-mix(in srgb,var(--accent-dark) 92%,#08140f) 0%,color-mix(in srgb,var(--accent) 78%,#113424) 58%,color-mix(in srgb,var(--accent-dark) 82%,#0b281a) 100%)!important;
+  border-right:1px solid color-mix(in srgb,var(--accent) 34%,var(--line));
+}
+.dl-account-brand:before,
+.dl-account-brand:after{
+  border:0!important;
+  border-radius:4px!important;
+  transform:rotate(0)!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.13) 0 49%,rgba(0,0,0,.12) 50% 100%);
+  box-shadow:
+    44px 0 rgba(255,255,255,.035),
+    0 44px rgba(0,0,0,.08),
+    44px 44px rgba(255,255,255,.025);
+  animation:dl-cube-drift 8s ease-in-out infinite alternate;
+}
+.dl-account-brand:before{width:76px!important;height:76px!important;right:12%!important;top:13%!important}
+.dl-account-brand:after{width:112px!important;height:112px!important;left:8%!important;bottom:11%!important;animation-delay:-3s}
+
+.dl-account-logo{
+  font-family:var(--font-block,"Pixelify Sans",sans-serif)!important;
+  font-size:22px;
+  font-weight:600!important;
+  letter-spacing:0!important;
+  text-shadow:0 2px 0 rgba(0,0,0,.2);
+}
+.dl-account-logo img{
+  filter:drop-shadow(5px 5px 0 rgba(0,0,0,.16));
+  transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .22s ease;
+}
+.dl-account-logo:hover img{transform:translateY(-2px) rotate(-2deg);filter:drop-shadow(7px 7px 0 rgba(0,0,0,.18))}
+
+.dl-account-brand-kicker,
+.dl-account-eyebrow{
+  font-family:var(--font-body,"Manrope Variable",system-ui,sans-serif)!important;
+  font-weight:820!important;
+  letter-spacing:.13em!important;
+}
+.dl-account-brand h1,
+.dl-account-card h2,
+.dl-account-legal-page h2,
+.dl-legal-sheet-head h2{
+  font-family:var(--font-block,"Pixelify Sans",sans-serif)!important;
+  font-weight:600!important;
+  letter-spacing:-.02em!important;
+  text-wrap:balance;
+}
+.dl-account-brand h1{line-height:.96!important;text-shadow:0 4px 0 rgba(0,0,0,.16)}
+
+.dl-account-main{
+  background:
+    radial-gradient(circle at 100% 0%,color-mix(in srgb,var(--accent) 11%,transparent),transparent 35%),
+    transparent!important;
+}
+
+.dl-account-card,
+.dl-account-legal-page{
+  position:relative;
+  overflow:hidden;
+  background:color-mix(in srgb,var(--surface-raised) 96%,transparent)!important;
+  border:1px solid var(--line)!important;
+  border-radius:16px!important;
+  box-shadow:
+    10px 10px 0 color-mix(in srgb,var(--accent) 11%,transparent),
+    var(--shadow,0 18px 45px rgba(35,53,41,.08))!important;
+  animation:dl-card-enter .42s cubic-bezier(.16,.8,.25,1) both;
+}
+.dl-account-card:before,
+.dl-account-legal-page:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:4px;
+  background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 25%,transparent));
+}
+.dl-account-card:after{
+  content:"";
+  position:absolute;
+  width:58px;
+  height:58px;
+  right:-22px;
+  top:-18px;
+  background:color-mix(in srgb,var(--accent) 10%,transparent);
+  box-shadow:-16px 16px 0 color-mix(in srgb,var(--accent) 5%,transparent);
+  transform:rotate(12deg);
+  pointer-events:none;
+}
+
+.dl-account-close,
+.dl-legal-sheet-head button{
+  border-radius:8px!important;
+  border:1px solid var(--line)!important;
+  background:var(--surface-raised)!important;
+  box-shadow:4px 4px 0 color-mix(in srgb,var(--ink) 10%,transparent)!important;
+  transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease!important;
+}
+.dl-account-close:hover,
+.dl-legal-sheet-head button:hover{border-color:var(--accent)!important;transform:translate(-1px,-1px);box-shadow:6px 6px 0 color-mix(in srgb,var(--accent) 14%,transparent)!important}
+.dl-account-close:active,
+.dl-legal-sheet-head button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 color-mix(in srgb,var(--ink) 9%,transparent)!important}
+
+.dl-account-tabs{
+  position:relative;
+  gap:4px;
+  padding:5px!important;
+  border:1px solid var(--line);
+  border-radius:10px!important;
+  background:var(--surface-muted)!important;
+  box-shadow:inset 0 2px 0 color-mix(in srgb,var(--ink) 4%,transparent);
+}
+.dl-account-tabs button{
+  position:relative;
+  min-height:44px;
+  border-radius:7px!important;
+  font-weight:800!important;
+  transition:transform .14s ease,background .18s ease,color .18s ease,box-shadow .18s ease!important;
+}
+.dl-account-tabs button.active{
+  background:var(--surface-raised)!important;
+  color:var(--ink)!important;
+  box-shadow:0 4px 0 color-mix(in srgb,var(--ink) 10%,transparent),0 7px 16px rgba(0,0,0,.06)!important;
+}
+.dl-account-tabs button:active{transform:translateY(2px)}
+
+.dl-account-field{color:var(--ink-soft)!important;font-weight:800!important}
+.dl-account-field input{
+  min-height:52px;
+  border-radius:9px!important;
+  border:1px solid var(--line)!important;
+  border-bottom-width:3px!important;
+  background:var(--surface)!important;
+  color:var(--ink)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 50%,transparent);
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease!important;
+}
+.dl-account-field input:hover{border-color:var(--line-strong)!important}
+.dl-account-field input:focus{
+  border-color:var(--accent)!important;
+  box-shadow:0 0 0 3px var(--accent-soft),inset 0 -2px 0 color-mix(in srgb,var(--accent) 24%,transparent)!important;
+  transform:translateY(-1px);
+}
+.dl-account-field input::placeholder{color:color-mix(in srgb,var(--ink-soft) 60%,transparent)}
+
+.dl-account-btn{
+  position:relative;
+  min-height:48px;
+  border-radius:9px!important;
+  border:1px solid transparent!important;
+  overflow:hidden;
+  letter-spacing:.01em;
+  box-shadow:0 5px 0 color-mix(in srgb,var(--ink) 16%,transparent)!important;
+  transition:transform .14s ease,box-shadow .14s ease,filter .14s ease,background .16s ease!important;
+}
+.dl-account-btn:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 0 38%,rgba(255,255,255,.22) 48%,transparent 58%);
+  transform:translateX(-140%);
+}
+.dl-account-btn:hover:before{animation:dl-shine .62s ease}
+.dl-account-btn:hover{transform:translateY(-2px)!important;box-shadow:0 7px 0 color-mix(in srgb,var(--ink) 17%,transparent)!important;filter:brightness(1.03)}
+.dl-account-btn:active{transform:translateY(4px)!important;box-shadow:0 1px 0 color-mix(in srgb,var(--ink) 14%,transparent)!important}
+.dl-account-btn.primary{background:var(--accent)!important;color:#fff!important;border-color:color-mix(in srgb,var(--accent-dark) 55%,var(--accent))!important}
+.dl-account-btn.primary:hover{background:var(--accent-dark)!important}
+.dl-account-btn.secondary{background:var(--surface-muted)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.dl-account-btn.danger{background:color-mix(in srgb,#c84b4b 9%,var(--surface-raised))!important;border-color:color-mix(in srgb,#c84b4b 30%,var(--line))!important}
+
+.dl-account-link{color:var(--accent-dark)!important;text-underline-offset:3px}
+.dl-account-link:hover{text-decoration-thickness:2px!important}
+
+.dl-account-legal-box,
+.dl-account-consent-summary,
+.dl-account-profile-card{
+  border-radius:10px!important;
+  border:1px solid var(--line)!important;
+  background:color-mix(in srgb,var(--surface) 88%,var(--accent-soft) 12%)!important;
+  box-shadow:inset 4px 0 0 color-mix(in srgb,var(--accent) 34%,transparent);
+}
+.dl-account-check input{
+  appearance:none;
+  width:19px!important;
+  height:19px!important;
+  border:2px solid var(--line-strong);
+  border-radius:3px!important;
+  background:var(--surface-raised);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.dl-account-check input:checked{border-color:var(--accent);background:var(--accent)}
+.dl-account-check input:checked:after{
+  content:"";
+  width:8px;
+  height:4px;
+  border-left:3px solid #fff;
+  border-bottom:3px solid #fff;
+  transform:rotate(-45deg) translateY(-1px);
+}
+
+.dl-account-message{border-radius:9px!important;box-shadow:inset 4px 0 0 color-mix(in srgb,var(--accent) 46%,transparent)}
+.dl-account-message.error{box-shadow:inset 4px 0 0 #c84b4b}
+.dl-account-message.warn{box-shadow:inset 4px 0 0 #c9962a}
+
+.dl-account-trust span{font-weight:680}
+.dl-account-dot{border-radius:2px!important;box-shadow:0 0 0 4px rgba(131,221,181,.12)!important}
+
+.dl-legal-sheet{background:color-mix(in srgb,#080d0a 72%,transparent)!important;backdrop-filter:blur(8px)!important}
+.dl-legal-sheet-card{
+  border-radius:16px 16px 8px 8px!important;
+  border:1px solid var(--line)!important;
+  background:var(--surface-raised)!important;
+  color:var(--ink)!important;
+  box-shadow:0 -10px 0 color-mix(in srgb,var(--accent) 12%,transparent),0 -22px 65px rgba(0,0,0,.22)!important;
+}
+.dl-legal-sheet-head{background:var(--surface-raised)!important;border-color:var(--line)!important}
+.dl-legal-content{color:var(--ink-soft)!important}
+.dl-legal-content h3{font-family:var(--font-block,"Pixelify Sans",sans-serif)!important;color:var(--ink)!important;font-weight:600!important;font-size:23px!important}
+
+@keyframes dl-card-enter{
+  from{opacity:0;transform:translateY(14px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes dl-cube-drift{
+  0%{transform:translate3d(0,0,0) rotate(0);opacity:.42}
+  100%{transform:translate3d(8px,-10px,0) rotate(5deg);opacity:.72}
+}
+@keyframes dl-shine{to{transform:translateX(140%)}}
+
+:root[data-theme=dark] .dl-account-card,
+:root[data-theme=dark] .dl-account-legal-page{
+  background:color-mix(in srgb,var(--surface-raised) 94%,transparent)!important;
+  box-shadow:10px 10px 0 color-mix(in srgb,var(--accent) 14%,transparent),0 22px 58px rgba(0,0,0,.48)!important;
+}
+:root[data-theme=dark] .dl-account-field input{box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+
+@media(max-width:820px){
+  .dl-account-brand{min-height:190px!important;padding:26px 22px 24px!important}
+  .dl-account-brand h1{font-size:42px!important;max-width:10.5ch}
+  .dl-account-logo{font-size:20px}
+  .dl-account-brand:before{width:56px!important;height:56px!important;right:13%!important;top:37%!important}
+  .dl-account-brand:after{width:76px!important;height:76px!important;left:auto!important;right:-20px!important;bottom:-12px!important}
+  .dl-account-main{min-height:calc(100dvh - 190px)!important;padding:18px 14px calc(28px + env(safe-area-inset-bottom))!important}
+  .dl-account-card,.dl-account-legal-page{border-radius:13px!important;box-shadow:7px 7px 0 color-mix(in srgb,var(--accent) 11%,transparent),var(--shadow-small)!important}
+  .dl-account-card h2{font-size:36px!important;line-height:1!important}
+  .dl-account-lead{font-size:14px!important;line-height:1.6!important}
+  .dl-account-close{width:46px!important;height:46px!important;border-radius:8px!important}
+}
+
+@media(max-width:460px){
+  .dl-account-brand{min-height:176px!important}
+  .dl-account-brand h1{font-size:37px!important}
+  .dl-account-main{min-height:calc(100dvh - 176px)!important;padding-left:10px!important;padding-right:10px!important}
+  .dl-account-card,.dl-account-legal-page{padding:22px 18px!important}
+  .dl-account-tabs button{min-height:42px}
+  .dl-account-field input{min-height:50px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-account-card,.dl-account-legal-page,.dl-account-brand:before,.dl-account-brand:after{animation:none!important}
+  .dl-account-btn:hover:before{animation:none!important}
+}
