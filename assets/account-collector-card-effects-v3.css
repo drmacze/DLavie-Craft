@@ -1,0 +1,235 @@
+/* Collector Card Effects v3 — premium, role-aware, mobile-safe */
+.dl-collector-card{
+  --card-accent:#5f9a6d;
+  --card-accent-2:#a7d06a;
+  --card-glow:rgba(95,154,109,.34);
+  --mx:50%;
+  --my:38%;
+  --rx:0deg;
+  --ry:0deg;
+  position:relative!important;
+  isolation:isolate!important;
+  perspective:1100px!important;
+  touch-action:pan-y!important;
+  -webkit-tap-highlight-color:transparent!important;
+  filter:drop-shadow(0 18px 30px rgba(10,14,12,.12));
+}
+.dl-collector-card.role-builder{--card-accent:#c88d2f;--card-accent-2:#f0ce63;--card-glow:rgba(210,151,48,.34)}
+.dl-collector-card.role-miner{--card-accent:#55b7c9;--card-accent-2:#9ef2ff;--card-glow:rgba(76,192,218,.36)}
+.dl-collector-card.role-explorer{--card-accent:#4f9c69;--card-accent-2:#b3dc72;--card-glow:rgba(71,164,103,.34)}
+.dl-collector-card.role-newbie{--card-accent:#80aa45;--card-accent-2:#d7ee72;--card-glow:rgba(125,179,70,.34)}
+.dl-collector-card.role-pvp{--card-accent:#cf5351;--card-accent-2:#ff9b6b;--card-glow:rgba(220,75,71,.36)}
+
+.dl-collector-card .dl-collector-card-inner{
+  position:relative!important;
+  transform-style:preserve-3d!important;
+  transform:rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0)!important;
+  transition:transform .36s cubic-bezier(.18,.75,.22,1),filter .35s ease!important;
+  overflow:hidden!important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--card-accent) 22%,transparent),
+    0 16px 38px rgba(14,19,16,.12),
+    inset 0 0 0 1px rgba(255,255,255,.52)!important;
+}
+.dl-collector-card.is-card-hovered .dl-collector-card-inner{
+  transition:transform .08s linear,filter .18s ease!important;
+  filter:saturate(1.06) brightness(1.025)!important;
+}
+
+/* Subtle pixel aura behind the physical card. */
+.dl-collector-card:before{
+  content:"";
+  position:absolute;
+  inset:3% 4%;
+  z-index:-2;
+  border-radius:6%;
+  background:
+    radial-gradient(circle at var(--mx) var(--my),var(--card-glow),transparent 38%),
+    conic-gradient(from 30deg,transparent,var(--card-glow),transparent 36%,var(--card-glow),transparent 72%);
+  filter:blur(24px);
+  opacity:.38;
+  transform:scale(.98);
+  animation:dlCardAuraV3 5.8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes dlCardAuraV3{50%{opacity:.62;transform:scale(1.025)}}
+
+/* Holographic light follows the pointer on desktop and drifts softly on touch. */
+.dl-collector-card .dl-card-holo{
+  position:absolute!important;
+  inset:0!important;
+  z-index:22!important;
+  pointer-events:none!important;
+  opacity:.18!important;
+  mix-blend-mode:screen!important;
+  background:
+    radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.72) 0 5%,rgba(255,255,255,.18) 12%,transparent 29%),
+    repeating-linear-gradient(118deg,transparent 0 17px,rgba(255,255,255,.08) 18px 20px,transparent 21px 39px),
+    linear-gradient(112deg,transparent 27%,color-mix(in srgb,var(--card-accent-2) 65%,#fff) 45%,transparent 62%);
+  transform:translate3d(0,0,1px);
+  animation:dlCardFoilDriftV3 7.5s ease-in-out infinite;
+}
+@keyframes dlCardFoilDriftV3{
+  0%,100%{background-position:0 0,0 0,-70% 0;opacity:.12}
+  50%{background-position:0 0,26px -18px,70% 0;opacity:.28}
+}
+
+/* Pixel sparks use existing markup; movement is transform-only for iPhone performance. */
+.dl-collector-card .dl-card-sparks{position:absolute!important;inset:0!important;z-index:18!important;pointer-events:none!important;overflow:hidden!important}
+.dl-collector-card .dl-card-sparks i{
+  position:absolute!important;
+  width:5px!important;height:5px!important;
+  background:color-mix(in srgb,var(--card-accent-2) 75%,#fff)!important;
+  box-shadow:0 0 8px var(--card-glow),7px 0 0 color-mix(in srgb,var(--card-accent) 72%,#fff)!important;
+  opacity:0;
+  transform:translate3d(0,10px,0) scale(.6) rotate(0);
+  animation:dlCardSparkV3 4.6s steps(5,end) infinite;
+}
+.dl-collector-card .dl-card-sparks i:nth-child(1){left:8%;top:18%;animation-delay:.2s}
+.dl-collector-card .dl-card-sparks i:nth-child(2){left:82%;top:13%;animation-delay:1.4s}
+.dl-collector-card .dl-card-sparks i:nth-child(3){left:73%;top:72%;animation-delay:2.5s}
+.dl-collector-card .dl-card-sparks i:nth-child(4){left:16%;top:68%;animation-delay:3.1s}
+.dl-collector-card .dl-card-sparks i:nth-child(5){left:48%;top:9%;animation-delay:3.8s}
+.dl-collector-card .dl-card-sparks i:nth-child(6){left:91%;top:46%;animation-delay:4.3s}
+@keyframes dlCardSparkV3{
+  0%,68%,100%{opacity:0;transform:translate3d(0,12px,0) scale(.55) rotate(0)}
+  74%{opacity:.9}
+  88%{opacity:.55;transform:translate3d(-5px,-18px,0) scale(1.15) rotate(90deg)}
+}
+
+/* Avatar gets a restrained in-world breathing / portal reflection. */
+.dl-collector-card .dl-card-avatar-wrap{
+  transform:translateZ(12px)!important;
+  filter:drop-shadow(0 10px 12px rgba(9,15,11,.15));
+  animation:dlAvatarFloatV3 5.4s ease-in-out infinite;
+}
+@keyframes dlAvatarFloatV3{50%{transform:translateZ(12px) translateY(-4px)}}
+.dl-collector-card .dl-card-avatar:after{
+  content:"";
+  position:absolute;
+  inset:-12%;
+  border-radius:10%;
+  background:radial-gradient(circle at 50% 48%,var(--card-glow),transparent 54%);
+  opacity:.18;
+  pointer-events:none;
+  animation:dlAvatarPulseV3 4.2s ease-in-out infinite;
+}
+@keyframes dlAvatarPulseV3{50%{opacity:.42;transform:scale(1.04)}}
+
+/* Heart level reads like a powered Minecraft item instead of a static sticker. */
+.dl-collector-card .dl-card-level-heart{
+  position:relative!important;
+  transform:translateZ(16px)!important;
+  animation:dlHeartIdleV3 3.5s ease-in-out infinite!important;
+}
+.dl-collector-card .dl-card-level-heart:after{
+  content:"";
+  position:absolute;
+  inset:16%;
+  background:rgba(255,255,255,.72);
+  clip-path:polygon(50% 0,62% 36%,100% 50%,62% 64%,50% 100%,38% 64%,0 50%,38% 36%);
+  opacity:0;
+  animation:dlHeartSparkV3 4.4s steps(3,end) infinite;
+  pointer-events:none;
+}
+@keyframes dlHeartIdleV3{50%{filter:drop-shadow(0 0 10px rgba(255,74,79,.35));transform:translateZ(16px) scale(1.035)}}
+@keyframes dlHeartSparkV3{72%,83%{opacity:.8;transform:scale(.65) rotate(45deg)}0%,60%,100%{opacity:0;transform:scale(.25)}}
+
+/* Tier progression ------------------------------------------------------- */
+.dl-collector-card.tier-base .dl-card-holo{opacity:.07!important;animation-duration:10s!important}
+
+.dl-collector-card.tier-enchanted .dl-card-holo{
+  opacity:.27!important;
+  background:
+    radial-gradient(circle at var(--mx) var(--my),rgba(245,194,255,.55),transparent 28%),
+    repeating-linear-gradient(122deg,transparent 0 19px,rgba(189,84,255,.14) 20px 22px,transparent 23px 39px),
+    linear-gradient(115deg,transparent 25%,rgba(157,68,221,.2),rgba(235,153,255,.48),rgba(104,60,181,.16),transparent 72%)!important;
+}
+.dl-collector-card.tier-enchanted .dl-card-art:before{
+  content:"✦ ᚱ ᛫ ᚨ ✧ ᛉ"!important;
+  position:absolute!important;
+  z-index:20!important;
+  left:7%!important;right:7%!important;bottom:8%!important;
+  color:#f6c3ff!important;
+  font-size:9px!important;font-weight:900!important;letter-spacing:5px!important;
+  white-space:nowrap!important;
+  text-shadow:0 0 6px #bd67f0,0 0 16px rgba(169,70,224,.65)!important;
+  opacity:.55!important;
+  transform:none!important;
+  animation:dlEnchantRuneV3 4.8s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+.dl-collector-card.tier-enchanted .dl-card-art:after{
+  content:""!important;
+  position:absolute!important;
+  left:8%!important;bottom:4%!important;z-index:19!important;
+  width:54px!important;height:35px!important;
+  border:3px solid #23162e!important;
+  border-radius:4px!important;
+  background:linear-gradient(90deg,#663497 0 45%,#c478df 46% 53%,#53297f 54%)!important;
+  box-shadow:0 0 12px rgba(196,94,238,.7),inset 0 -7px 0 rgba(28,12,42,.28)!important;
+  clip-path:polygon(0 15%,43% 0,50% 15%,57% 0,100% 15%,100% 100%,57% 86%,50% 100%,43% 86%,0 100%)!important;
+  transform:rotate(-7deg)!important;
+  animation:dlBookV3 3.8s ease-in-out infinite!important;
+}
+@keyframes dlEnchantRuneV3{50%{opacity:1;transform:translateY(-8px)}}
+@keyframes dlBookV3{50%{transform:rotate(-3deg) translateY(-5px);filter:brightness(1.15)}}
+
+.dl-collector-card.tier-holo .dl-card-holo,
+.dl-collector-card.tier-mythic .dl-card-holo,
+.dl-collector-card.tier-legendary .dl-card-holo{
+  opacity:.42!important;
+  background:
+    radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.8) 0 3%,transparent 23%),
+    repeating-linear-gradient(125deg,rgba(255,95,177,.16) 0 8px,rgba(90,233,255,.15) 9px 17px,rgba(255,229,91,.13) 18px 26px,rgba(124,255,170,.14) 27px 35px),
+    linear-gradient(110deg,transparent 20%,rgba(95,234,255,.38),rgba(255,108,213,.5),rgba(255,235,114,.42),rgba(107,255,179,.34),transparent 80%)!important;
+  background-size:auto,140% 140%,180% 100%!important;
+  animation:dlHoloSpectrumV3 6.8s ease-in-out infinite!important;
+}
+@keyframes dlHoloSpectrumV3{0%,100%{background-position:center,0 0,-80% 0}50%{background-position:center,58px -34px,80% 0}}
+.dl-collector-card.tier-mythic .dl-card-holo{opacity:.55!important;animation-duration:5.2s!important}
+.dl-collector-card.tier-legendary .dl-card-holo{opacity:.68!important;animation-duration:4.3s!important}
+
+.dl-collector-card.tier-legendary .dl-collector-card-inner{
+  box-shadow:
+    0 0 0 1px rgba(255,227,105,.65),
+    0 0 26px rgba(68,234,199,.16),
+    0 0 48px rgba(210,92,255,.12),
+    0 20px 42px rgba(12,16,14,.16),
+    inset 0 0 0 1px rgba(255,255,255,.7)!important;
+}
+.dl-collector-card.tier-legendary:after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  z-index:25;
+  pointer-events:none;
+  border-radius:inherit;
+  padding:2px;
+  background:conic-gradient(from 0deg,#7cf5de,#b579ff,#ff8fd5,#ffe76d,#7cf5de);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:.62;
+  animation:dlLegendBorderV3 6s linear infinite;
+}
+@keyframes dlLegendBorderV3{to{filter:hue-rotate(360deg)}}
+
+/* Only animate cards that are actually visible. */
+.dl-collector-card:not(.is-card-visible) *,
+.dl-collector-card:not(.is-card-visible):before,
+.dl-collector-card:not(.is-card-visible):after{animation-play-state:paused!important}
+
+@media(max-width:700px){
+  .dl-collector-card{filter:drop-shadow(0 10px 18px rgba(10,14,12,.10))}
+  .dl-collector-card .dl-collector-card-inner{transform:none!important;transition:none!important}
+  .dl-collector-card .dl-card-holo{opacity:clamp(.1,.32,.48)!important}
+  .dl-collector-card:before{filter:blur(18px);opacity:.3}
+  .dl-collector-card .dl-card-avatar-wrap{transform:none!important;animation:dlAvatarFloatMobileV3 5.8s ease-in-out infinite}
+  @keyframes dlAvatarFloatMobileV3{50%{transform:translateY(-3px)}}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-collector-card,.dl-collector-card *,.dl-collector-card:before,.dl-collector-card:after{animation:none!important;transition:none!important}
+  .dl-collector-card .dl-collector-card-inner{transform:none!important}
+}
