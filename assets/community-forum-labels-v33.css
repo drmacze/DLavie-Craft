@@ -1,0 +1,43 @@
+/* DLavie Community forum labels v33 — professional display names without changing stored forum names. */
+
+.community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label],
+.community-page.community-v2 .active-forum-head h2[data-dl-forum-label]{
+  font-size:0!important;
+}
+
+.community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label]::after{
+  content:attr(data-dl-forum-label);
+  display:inline-block;
+  max-width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:inherit;
+  font:inherit;
+  font-size:11px!important;
+  line-height:1.15!important;
+  letter-spacing:0!important;
+  vertical-align:middle;
+}
+
+.community-page.community-v2 .active-forum-head h2[data-dl-forum-label]::after{
+  content:attr(data-dl-forum-label);
+  display:inline-block;
+  color:inherit;
+  font:inherit;
+  font-size:19px!important;
+  line-height:1.05!important;
+  letter-spacing:-.02em!important;
+}
+
+@media(max-width:1050px){
+  .community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label]::after{
+    font-size:10px!important;
+  }
+}
+
+@media(max-width:430px){
+  .community-page.community-v2 .active-forum-head h2[data-dl-forum-label]::after{
+    font-size:18px!important;
+  }
+}
