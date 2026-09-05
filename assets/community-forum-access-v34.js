@@ -3,6 +3,9 @@
 
   const PAGE='.community-page.community-v2';
   const ROUTE=/#\/community(?:$|[/?])/;
+  const SB_URL='https://ydaeukhqwishlrjyfktk.supabase.co';
+  const SB_KEY='sb_publishable_XNXU6SVeM-D477Ymy1ORsw_4hCHOll9';
+  const SESSION_KEY='sb-ydaeukhqwishlrjyfktk-auth-token';
   let forums=[];
   let developer=false;
   let loaded=false;
@@ -12,8 +15,18 @@
   let raf=0;
   let timer=0;
 
-  const core=()=>window.__DLAVIE_COMMUNITY_V4__;
   const clean=(v='')=>String(v).replace(/\s+/g,' ').trim().toLowerCase();
+  function session(){try{const s=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');return s?.access_token?s:null;}catch{return null;}}
+  async function api(path,options={}){
+    const s=session(),write=!!options.write;
+    const headers={apikey:SB_KEY,Authorization:`Bearer ${s?.access_token||SB_KEY}`,'Accept-Profile':'api',Accept:'application/json',...(options.headers||{})};
+    if(write){headers['Content-Type']='application/json';headers['Content-Profile']='api';headers.Prefer=options.prefer||'return=representation';}
+    const request={...options,headers};delete request.write;delete request.prefer;
+    const res=await fetch(`${SB_URL}/rest/v1/${path}`,request);
+    const text=await res.text();let body=null;try{body=text?JSON.parse(text):null;}catch{body=text;}
+    if(!res.ok)throw new Error(body?.message||body?.details||body?.hint||body||`Server ${res.status}`);
+    return body;
+  }
 
   function activeButton(page){
     return page.querySelector([
@@ -46,13 +59,11 @@
   async function load(force=false){
     if(loading)return loading;
     if(loaded&&!force)return;
-    const c=core();
-    if(!c?.api)return;
     loading=(async()=>{
       try{
         const [rows,dev]=await Promise.all([
-          c.api('dlavie_craft_community_forums?select=id,slug,name,description,forum_type,icon,accent_color,sort_order,is_active,is_readonly,is_system&order=sort_order.asc'),
-          c.api('rpc/dlavie_craft_is_developer',{method:'POST',write:true,body:'{}'}).catch(()=>false)
+          api('dlavie_craft_community_forums?select=id,slug,name,description,forum_type,icon,accent_color,sort_order,is_active,is_readonly,is_system&order=sort_order.asc'),
+          api('rpc/dlavie_craft_is_developer',{method:'POST',write:true,body:'{}',prefer:'return=representation'}).catch(()=>false)
         ]);
         forums=Array.isArray(rows)?rows:[];
         developer=dev===true||dev?.value===true||dev?.is_developer===true;
