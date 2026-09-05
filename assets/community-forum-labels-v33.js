@@ -24,21 +24,54 @@
     return String(value || '').trim();
   }
 
+  function hideNativeForumText(button) {
+    const walker = document.createTreeWalker(button, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(node => {
+      const parent = node.parentElement;
+      if (!parent || parent.closest('.dl-v33-forum-raw,.dl-v33-forum-display,svg,.forum-nav-icon,.dl-canon-icon-v9')) return;
+      const text = (node.nodeValue || '').trim();
+      if (!text || /^\d+$/.test(text)) return;
+      if (!/[a-zA-ZÀ-ÿ]/.test(text)) return;
+
+      const span = document.createElement('span');
+      span.className = 'dl-v33-forum-raw';
+      span.setAttribute('aria-hidden', 'true');
+      node.parentNode.insertBefore(span, node);
+      span.appendChild(node);
+    });
+  }
+
+  function decorateButton(button) {
+    if (!(button instanceof HTMLElement)) return;
+
+    const raw = button.dataset.dlForumRaw || button.textContent || '';
+    if (!button.dataset.dlForumRaw) button.dataset.dlForumRaw = raw.trim();
+    const label = professionalLabel(button.dataset.dlForumRaw);
+    if (!label) return;
+
+    button.dataset.dlForumLabel = label;
+    button.setAttribute('aria-label', label);
+    button.title = label;
+
+    hideNativeForumText(button);
+
+    let display = button.querySelector(':scope > .dl-v33-forum-display');
+    if (!display) {
+      display = document.createElement('span');
+      display.className = 'dl-v33-forum-display';
+      display.setAttribute('aria-hidden', 'true');
+      button.appendChild(display);
+    }
+    display.dataset.label = label;
+  }
+
   function decorate(target) {
     if (!target?.isConnected) return;
 
-    target.querySelectorAll('.forum-sidebar nav button strong').forEach(strong => {
-      const raw = strong.dataset.dlForumRaw || strong.textContent || '';
-      if (!strong.dataset.dlForumRaw) strong.dataset.dlForumRaw = raw.trim();
-      const label = professionalLabel(raw);
-      if (!label) return;
-      strong.dataset.dlForumLabel = label;
-      const button = strong.closest('button');
-      if (button) {
-        button.setAttribute('aria-label', label);
-        button.title = label;
-      }
-    });
+    target.querySelectorAll('.forum-sidebar nav button').forEach(decorateButton);
 
     const heading = target.querySelector('.active-forum-head h2');
     if (heading) {
@@ -69,7 +102,7 @@
     observer = new MutationObserver(records => {
       const meaningful = records.some(record => {
         const node = record.target?.nodeType === 1 ? record.target : record.target?.parentElement;
-        return !node?.closest?.('[data-dl-forum-label]');
+        return !node?.closest?.('.dl-v33-forum-raw,.dl-v33-forum-display');
       });
       if (meaningful) schedule(target);
     });
