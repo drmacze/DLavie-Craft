@@ -3,6 +3,7 @@
 
   const PAGE = '.community-page.community-v2';
   const ROUTE = /#\/community(?:$|[/?])/;
+  const INTERNAL_SELECTOR = '[data-dl-community-hydration-pulse],.dl-v10-actions,.dl-community-avatar-slot-v3,.dl-community-role-chip,.dl-community-verified';
   let page = null;
   let pageObserver = null;
   let documentObserver = null;
@@ -15,9 +16,6 @@
     pulseRaf = requestAnimationFrame(() => {
       pulseRaf = 0;
       if (!target?.isConnected) return;
-      // Existing community runtimes listen for childList mutations but some data
-      // identifiers arrive later as attributes. A tiny hidden pulse wakes those
-      // runtimes without rebuilding React-owned markup.
       const marker = document.createElement('i');
       marker.hidden = true;
       marker.setAttribute('data-dl-community-hydration-pulse', '');
@@ -69,6 +67,15 @@
     return false;
   }
 
+  function isInternalChildMutation(record) {
+    const changed = [...record.addedNodes, ...record.removedNodes].filter(node => node.nodeType === 1);
+    if (!changed.length) return false;
+    return changed.every(node => {
+      const element = /** @type {Element} */ (node);
+      return element.matches?.(INTERNAL_SELECTOR) || element.querySelector?.(INTERNAL_SELECTOR);
+    });
+  }
+
   function scheduleStabilization(target, token) {
     const delays = [0, 70, 160, 320, 620, 1050, 1550];
     delays.forEach(delay => setTimeout(() => {
@@ -80,9 +87,6 @@
     clearTimeout(readyTimer);
     readyTimer = setTimeout(() => {
       if (token !== generation || target !== page || !target?.isConnected) return;
-      // Never leave content hidden if a backend request is slow. By this point
-      // legacy controls are still constrained by the v13 CSS and subsequent
-      // attribute changes continue to trigger hydration pulses.
       target.classList.remove('dl-community-v13-hydrating');
       target.classList.add('dl-community-v13-ready');
       target.querySelectorAll('.typed-feed > .community-entry').forEach(cleanLegacy);
@@ -112,8 +116,9 @@
         if (record.type === 'attributes') {
           return record.attributeName === 'data-dl-author-id' || record.attributeName === 'data-dl-post-id';
         }
+        if (isInternalChildMutation(record)) return false;
         const node = record.target?.nodeType === 1 ? record.target : record.target?.parentElement;
-        return !node?.closest?.('[data-dl-community-hydration-pulse],.dl-v10-actions,.dl-community-avatar-slot-v3,.dl-community-role-chip,.dl-community-verified');
+        return !node?.closest?.(INTERNAL_SELECTOR);
       });
       if (!relevant) return;
       pulse(target);
