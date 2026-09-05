@@ -1,0 +1,150 @@
+/* DLavie Community polish v12 — mobile-first cleanup and density improvements */
+
+.community-page.community-v2{--dl-card-radius:16px;--dl-mobile-gap:10px}
+
+/* Forum rail: intentionally scrollable, consistent card widths, no accidental clipping. */
+.community-page .forum-tabs,
+.community-page .forum-sidebar nav{
+  display:flex!important;
+  align-items:stretch!important;
+  gap:9px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x proximity!important;
+  -webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;
+  overscroll-behavior-inline:contain!important;
+  padding:3px 3px 7px!important;
+}
+.community-page .forum-tabs::-webkit-scrollbar,
+.community-page .forum-sidebar nav::-webkit-scrollbar{display:none!important}
+.community-page .forum-tabs>button,
+.community-page .forum-sidebar nav>button{
+  flex:0 0 168px!important;
+  min-width:168px!important;
+  width:168px!important;
+  min-height:58px!important;
+  padding:9px 10px!important;
+  scroll-snap-align:start!important;
+  border-radius:13px!important;
+  overflow:hidden!important;
+  justify-content:flex-start!important;
+  box-sizing:border-box!important;
+}
+.community-page .forum-tabs>button .dl-canon-label-v9,
+.community-page .forum-sidebar nav>button .dl-canon-label-v9{font-size:11px!important;font-weight:780!important;line-height:1.15!important}
+.community-page .forum-tabs>button.active,
+.community-page .forum-sidebar nav>button.active{
+  border-color:color-mix(in srgb,var(--accent,#7654d6) 38%,var(--line,#d8ddd7))!important;
+  background:color-mix(in srgb,var(--accent-soft,#eee8ff) 62%,#fff)!important;
+  box-shadow:inset 0 -3px color-mix(in srgb,var(--accent,#7654d6) 78%,transparent),0 3px 10px rgba(35,29,58,.04)!important;
+}
+
+/* Active room card: keep one room icon and a cleaner information hierarchy. */
+.community-page .active-forum-head{border-radius:var(--dl-card-radius)!important;overflow:hidden!important}
+.community-page .active-forum-head>.dl-canon-icon-v9{width:42px!important;height:42px!important;min-width:42px!important;border-radius:11px!important}
+.community-page .active-forum-head>.dl-canon-icon-v9 svg{width:30px!important;height:30px!important}
+
+/* Toolbar becomes a stable grid instead of uneven buttons. */
+.community-page #dl-community-toolbar{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important;padding:10px!important;border-radius:15px!important}
+.community-page #dl-community-toolbar .community-toolbar-tabs,
+.community-page #dl-community-toolbar>div:last-child{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.community-page #dl-community-toolbar button{min-width:0!important;width:100%!important;min-height:46px!important;justify-content:center!important;border-radius:11px!important;padding:0 9px!important}
+.community-page #dl-community-toolbar button .dl-canon-label-v9{font-size:9px!important;font-weight:800!important}
+
+/* Main composer: compact, deliberate actions. */
+.community-page .quick-chat-composer{border-radius:15px!important;padding:10px!important;gap:8px!important;align-items:stretch!important}
+.community-page .quick-chat-composer textarea{min-height:82px!important;border-radius:11px!important}
+.community-page .quick-chat-composer .dl-sticker-compose,
+.community-page .quick-chat-composer button[type="submit"]{min-height:42px!important;border-radius:10px!important;justify-content:center!important}
+
+/* Message cards: more solid, less floating whitespace. */
+.community-page .community-entry.entry-chat.dl-community-entry-v3,
+.community-page .community-entry.entry-chat{
+  border-radius:16px!important;
+  padding:12px 12px 10px!important;
+  background:color-mix(in srgb,var(--surface-raised,#fff) 95%,transparent)!important;
+  box-shadow:0 1px 0 rgba(33,39,35,.06),0 8px 25px rgba(31,37,33,.025)!important;
+}
+.community-page .entry-chat .chat-entry-main{grid-template-columns:46px minmax(0,1fr)!important;gap:10px!important}
+.community-page .entry-chat .chat-bubble{padding:7px 34px 7px 0!important;border:0!important;background:transparent!important}
+.community-page .entry-chat .chat-bubble .entry-author{gap:5px!important;margin-bottom:6px!important;line-height:1!important}
+.community-page .entry-chat .chat-bubble .entry-author>strong{font-size:12px!important;font-weight:850!important;letter-spacing:-.01em!important}
+.community-page .entry-chat .chat-bubble .entry-author time,
+.community-page .entry-chat .chat-bubble .entry-author small{font-size:8px!important;color:var(--ink-soft,#79817b)!important}
+.community-page .entry-chat .chat-bubble p{font-size:13px!important;line-height:1.48!important}
+
+/* Identity chips should read as metadata, not oversized buttons. */
+.community-page .dl-community-role-chip{display:inline-flex!important;align-items:center!important;margin-left:0!important;max-width:118px!important}
+.community-page .dl-community-role-chip .dl-role-badge{min-height:23px!important;padding:3px 7px 3px 4px!important;border-radius:7px!important;font-size:8px!important;gap:4px!important}
+.community-page .dl-community-role-chip .dl-role-badge i{width:15px!important;height:15px!important;font-size:8px!important}
+.community-page .level-chip{min-height:20px!important;height:20px!important;padding:0 6px!important;border-radius:6px!important;font-size:8px!important;line-height:20px!important}
+.community-page .dl-community-verified{margin-left:0!important;padding:0 4px 0 0!important;font-size:9px!important;gap:4px!important}
+.community-page .dl-community-verified>i{width:15px!important;height:15px!important;flex:0 0 15px!important}
+
+/* Message action row: reaction stays left, reply stays right and never overlaps. */
+.community-page .dl-v10-actions{width:100%!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important;margin:8px 0 0!important;padding-left:56px!important;box-sizing:border-box!important}
+.community-page .dl-v10-reaction-strip{min-width:0!important;display:flex!important;align-items:center!important;gap:6px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;padding:2px 0!important}
+.community-page .dl-v10-reaction-strip::-webkit-scrollbar{display:none!important}
+.community-page .dl-v10-chip{flex:0 0 auto!important;min-width:46px!important;width:auto!important;height:36px!important;padding:0 10px!important;border-radius:10px!important}
+.community-page .dl-v10-add{flex:0 0 38px!important;width:38px!important;height:36px!important;min-width:38px!important;border-radius:10px!important}
+.community-page .dl-v10-reply{flex:0 0 auto!important;min-width:94px!important;width:auto!important;height:36px!important;padding:0 11px!important;border-radius:10px!important;white-space:nowrap!important}
+
+/* Thread is a child card, not a second full-size feed card. */
+.community-page .entry-chat .post-thread{margin:9px 0 0 55px!important;padding:10px 10px 10px 13px!important;border-left-width:3px!important;border-radius:0 12px 12px 0!important;background:color-mix(in srgb,var(--surface,#f6f7f3) 78%,transparent)!important}
+.community-page .post-thread .community-comment.dl-comment-v3{grid-template-columns:34px minmax(0,1fr)!important;padding:8px!important;border-radius:11px!important}
+.community-page .post-thread .dl-community-avatar-slot-v3{width:34px!important;height:34px!important;min-width:34px!important;flex-basis:34px!important;padding:3px!important;border-radius:9px!important}
+.community-page .post-thread .community-comment.dl-comment-v3 p{font-size:11px!important}
+
+/* Reply composer: no cut-off Sticker/Kirim buttons on iPhone. */
+.community-page .entry-chat .reply-composer{grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important;padding-top:9px!important}
+.community-page .entry-chat .reply-composer>.community-avatar,
+.community-page .entry-chat .reply-composer>.dl-community-avatar-slot-v3{display:none!important}
+.community-page .entry-chat .reply-composer textarea{grid-column:1/2!important;grid-row:1/3!important;width:100%!important;min-height:82px!important;max-height:150px!important;border-radius:10px!important}
+.community-page .entry-chat .reply-composer .dl-sticker-compose,
+.community-page .entry-chat .reply-composer button[type="submit"],
+.community-page .entry-chat .reply-composer .button{grid-column:2!important;width:116px!important;min-width:116px!important;max-width:116px!important;min-height:38px!important;margin:0!important;justify-content:center!important;border-radius:9px!important;overflow:hidden!important}
+.community-page .entry-chat .reply-composer .dl-sticker-compose{grid-row:1!important;align-self:end!important}
+.community-page .entry-chat .reply-composer button[type="submit"],
+.community-page .entry-chat .reply-composer .button:not(.dl-sticker-compose){grid-row:2!important;align-self:start!important}
+
+/* Sticker rendering closer to Discord scale and spacing. */
+.community-page .dl-sticker-message{display:inline-grid!important;justify-items:start!important;gap:4px!important;margin:6px 0 2px!important;background:transparent!important;border:0!important;padding:0!important}
+.community-page .dl-sticker-message img{width:auto!important;height:auto!important;max-width:160px!important;max-height:160px!important;object-fit:contain!important;border-radius:0!important;box-shadow:none!important}
+.community-page .post-thread .dl-sticker-message img,.community-page .dl-sticker-message.small img{max-width:104px!important;max-height:104px!important}
+.community-page .dl-sticker-message small{font-size:8px!important;color:var(--ink-soft,#737b75)!important}
+
+/* Role-themed micro accents without flooding the card with color. */
+.community-page .entry-chat.dl-role-builder{border-left:3px solid #c99438!important}.community-page .entry-chat.dl-role-miner{border-left:3px solid #55a7be!important}.community-page .entry-chat.dl-role-explorer{border-left:3px solid #4d9969!important}.community-page .entry-chat.dl-role-newbie{border-left:3px solid #86aa50!important}.community-page .entry-chat.dl-role-pvp{border-left:3px solid #cf5854!important}
+
+@media(max-width:700px){
+  .community-page .community-hub-head{padding:20px 18px!important}
+  .community-page .community-hub-head h1{font-size:clamp(38px,10vw,54px)!important;line-height:1.03!important}
+  .community-page .forum-tabs>button,.community-page .forum-sidebar nav>button{flex-basis:calc(50vw - 34px)!important;min-width:calc(50vw - 34px)!important;width:calc(50vw - 34px)!important;max-width:180px!important;min-height:56px!important;padding:8px!important}
+  .community-page .forum-tabs>button .dl-canon-label-v9,.community-page .forum-sidebar nav>button .dl-canon-label-v9{font-size:10px!important}
+  .community-page .active-forum-head{padding:14px!important}
+  .community-page .entry-chat .chat-entry-main{grid-template-columns:43px minmax(0,1fr)!important;gap:9px!important}
+  .community-page .dl-community-avatar-slot-v3{width:43px!important;height:43px!important;min-width:43px!important;flex-basis:43px!important}
+  .community-page .dl-v10-actions{padding-left:52px!important}
+  .community-page .entry-chat .post-thread{margin-left:51px!important}
+  .community-page .dl-community-verified>strong{font-size:8px!important}
+  .community-page .dl-community-role-chip{max-width:104px!important}
+  .community-page .entry-chat .reply-composer{grid-template-columns:minmax(0,1fr)!important}
+  .community-page .entry-chat .reply-composer textarea{grid-column:1!important;grid-row:1!important;min-height:84px!important}
+  .community-page .entry-chat .reply-composer .dl-sticker-compose,
+  .community-page .entry-chat .reply-composer button[type="submit"],
+  .community-page .entry-chat .reply-composer .button{grid-column:1!important;width:100%!important;min-width:0!important;max-width:none!important;min-height:40px!important}
+  .community-page .entry-chat .reply-composer .dl-sticker-compose{grid-row:2!important}
+  .community-page .entry-chat .reply-composer button[type="submit"],
+  .community-page .entry-chat .reply-composer .button:not(.dl-sticker-compose){grid-row:3!important}
+}
+
+@media(max-width:430px){
+  .community-page .forum-tabs>button,.community-page .forum-sidebar nav>button{flex-basis:142px!important;min-width:142px!important;width:142px!important}
+  .community-page #dl-community-toolbar button{padding:0 6px!important}.community-page #dl-community-toolbar button .dl-canon-label-v9{font-size:8px!important}
+  .community-page .community-entry.entry-chat.dl-community-entry-v3,.community-page .community-entry.entry-chat{padding:10px 9px 9px!important}
+  .community-page .dl-v10-actions{grid-template-columns:minmax(0,1fr) auto!important;padding-left:49px!important}
+  .community-page .entry-chat .post-thread{margin-left:47px!important;padding-left:10px!important}
+}
+
+@media(prefers-reduced-motion:reduce){.community-page *{scroll-behavior:auto!important}}
