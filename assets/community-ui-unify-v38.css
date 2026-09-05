@@ -1,0 +1,325 @@
+/* DLavie Community v38 — exact dark reaction sheet + Showcase identity parity with General. */
+
+:root{
+  --dl38-bg:#0b0912;
+  --dl38-surface:#120f1a;
+  --dl38-surface-2:#17121f;
+  --dl38-line:rgba(255,255,255,.065);
+  --dl38-line-accent:rgba(180,138,255,.22);
+  --dl38-text:rgba(255,255,255,.95);
+  --dl38-soft:rgba(255,255,255,.58);
+  --dl38-faint:rgba(255,255,255,.38);
+  --dl38-accent:#a97cf2;
+}
+
+/* =========================================================
+   Reaction picker — appended to <body>, so do not scope to page.
+   These selectors intentionally outrank community-controls-v10.css.
+   ========================================================= */
+html body.dl-v10-picker-open .dl-v10-picker{
+  color-scheme:dark!important;
+  border:1px solid var(--dl38-line-accent)!important;
+  background:linear-gradient(180deg,#15101d 0%,#0c0911 100%)!important;
+  color:var(--dl38-text)!important;
+  box-shadow:0 26px 72px rgba(0,0,0,.58)!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>header{
+  background:#120e19!important;
+  background-image:none!important;
+  border-color:var(--dl38-line)!important;
+  color:var(--dl38-text)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>header>div{
+  background:transparent!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>header strong{
+  color:var(--dl38-text)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:14px!important;
+  font-weight:800!important;
+  letter-spacing:-.01em!important;
+  text-shadow:none!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>header small{
+  color:var(--dl38-soft)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:10px!important;
+  font-weight:550!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>header button{
+  border:1px solid rgba(255,255,255,.085)!important;
+  background:rgba(255,255,255,.035)!important;
+  background-image:none!important;
+  color:rgba(255,255,255,.9)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  box-shadow:none!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>label{
+  display:block!important;
+  background:#100c17!important;
+  background-image:none!important;
+  border-color:var(--dl38-line)!important;
+  color:var(--dl38-soft)!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker>label>span{display:none!important}
+html body.dl-v10-picker-open .dl-v10-picker input[type="search"]{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  background:#09070d!important;
+  background-image:none!important;
+  border:1px solid rgba(255,255,255,.085)!important;
+  color:var(--dl38-text)!important;
+  -webkit-text-fill-color:var(--dl38-text)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:11px!important;
+  font-weight:650!important;
+  box-shadow:none!important;
+}
+html body.dl-v10-picker-open .dl-v10-picker input[type="search"]::placeholder{
+  color:var(--dl38-faint)!important;
+  -webkit-text-fill-color:var(--dl38-faint)!important;
+  opacity:1!important;
+}
+html body.dl-v10-picker-open .dl-v10-emoji-list{
+  background:#0d0a12!important;
+  background-image:none!important;
+  color:var(--dl38-text)!important;
+}
+html body.dl-v10-picker-open .dl-v10-emoji-list section,
+html body.dl-v10-picker-open .dl-v10-emoji-list section>div{
+  background:transparent!important;
+}
+html body.dl-v10-picker-open .dl-v10-emoji-list section>small{
+  color:rgba(211,192,240,.62)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+}
+html body.dl-v10-picker-open .dl-v10-emoji{
+  background:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  font-family:Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif!important;
+}
+html body.dl-v10-picker-open .dl-v10-emoji:active,
+html body.dl-v10-picker-open .dl-v10-emoji:focus-visible{
+  background:rgba(169,124,242,.10)!important;
+  border-color:rgba(169,124,242,.18)!important;
+}
+
+/* =========================================================
+   Showcase — keep gallery media, but use the SAME identity language
+   as General: compact avatar, username color, icon-only verified,
+   plain level text, no giant role/verified pills.
+   ========================================================= */
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry{
+  --v19-role:var(--v19-explorer,#55c98a);
+  border-color:var(--dl38-line)!important;
+  background:linear-gradient(180deg,rgba(14,11,23,.82),rgba(11,9,18,.90))!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.14)!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:15px!important;
+  bottom:15px!important;
+  width:2px!important;
+  border-radius:0 2px 2px 0!important;
+  background:var(--v19-role,#55c98a)!important;
+  opacity:.52!important;
+  pointer-events:none!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .chat-entry-main,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .entry-main{
+  min-width:0!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-community-avatar-slot-v3,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .community-avatar,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry [class*="avatar-slot"]{
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  flex:0 0 42px!important;
+  padding:4px!important;
+  border-radius:12px!important;
+  border:1px solid color-mix(in srgb,var(--v19-role,#55c98a) 48%,rgba(255,255,255,.08) 52%)!important;
+  box-shadow:0 4px 10px rgba(0,0,0,.16),0 0 0 2px color-mix(in srgb,var(--v19-role,#55c98a) 7%,transparent)!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .entry-author,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-author{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:3px 6px!important;
+  min-height:20px!important;
+  margin:0 0 6px!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .entry-author>:scope,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-author>:scope{
+  font-family:inherit!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .entry-author>:scope>strong,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-author>:scope>strong,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-name{
+  order:0!important;
+  margin:0!important;
+  padding:0!important;
+  color:var(--v19-role,#55c98a)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:13px!important;
+  line-height:1.05!important;
+  font-weight:900!important;
+  letter-spacing:-.018em!important;
+  max-width:min(48vw,220px)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+/* Role is encoded by username color in General, so hide the Showcase role pill too. */
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-community-role-chip,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-role-source{
+  display:none!important;
+}
+/* Verified must be icon-only, never a big 'Verified' label. */
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-community-verified,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-verified{
+  order:1!important;
+  position:relative!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  width:14px!important;
+  height:14px!important;
+  min-width:14px!important;
+  min-height:14px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-community-verified>*{display:none!important}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-community-verified::before{
+  content:"✓"!important;
+  color:#f3c84f!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:11px!important;
+  font-weight:1000!important;
+  line-height:1!important;
+  text-shadow:0 0 7px rgba(243,200,79,.22)!important;
+}
+/* Level is plain compact metadata, not a blue/purple chip. */
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .level-chip,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-level{
+  order:2!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:color-mix(in srgb,var(--v19-role,#55c98a) 82%,#fff 18%)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:900!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry time,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v19-time{
+  order:4!important;
+  margin-left:auto!important;
+  color:var(--dl38-faint)!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+  font-size:8px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+/* Match General action controls exactly. */
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-actions{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:6px!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:8px 0 0!important;
+  padding:0 0 0 51px!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-reaction-strip{
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  min-width:0!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  padding:0!important;
+  scrollbar-width:none!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-reaction-strip::-webkit-scrollbar{display:none!important}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-chip,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-add,
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-reply{
+  height:31px!important;
+  min-height:31px!important;
+  max-height:31px!important;
+  margin:0!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  border-radius:9px!important;
+  background:rgba(16,13,26,.70)!important;
+  color:rgba(255,255,255,.60)!important;
+  box-shadow:none!important;
+  font-family:var(--font-body,system-ui,-apple-system,sans-serif)!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-chip{
+  min-width:43px!important;
+  padding:0 8px!important;
+  gap:5px!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-add{
+  width:31px!important;
+  min-width:31px!important;
+  padding:0!important;
+}
+.community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-reply{
+  min-width:80px!important;
+  padding:0 8px!important;
+  background:transparent!important;
+  font-size:9px!important;
+  font-weight:850!important;
+}
+
+@media(max-width:430px){
+  html body.dl-v10-picker-open .dl-v10-picker{
+    left:10px!important;
+    right:10px!important;
+    bottom:max(10px,env(safe-area-inset-bottom))!important;
+    top:auto!important;
+    width:auto!important;
+    max-height:min(72svh,610px)!important;
+    transform:none!important;
+    border-radius:20px!important;
+  }
+  html body.dl-v10-picker-open .dl-v10-picker>header{padding:18px 12px 10px!important}
+  html body.dl-v10-picker-open .dl-v10-picker>label{padding:9px 11px!important}
+  html body.dl-v10-picker-open .dl-v10-emoji-list{padding:10px 11px max(12px,env(safe-area-inset-bottom))!important}
+  html body.dl-v10-picker-open .dl-v10-emoji-list section>div{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:6px!important}
+  html body.dl-v10-picker-open .dl-v10-emoji{min-height:43px!important;font-size:23px!important}
+
+  .community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-community-avatar-slot-v3,
+  .community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .community-avatar,
+  .community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry [class*="avatar-slot"]{
+    width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;flex-basis:40px!important;
+  }
+  .community-page.community-v2[data-dl-forum-type="showcase"] .typed-feed>.community-entry .dl-v10-actions{padding-left:49px!important}
+}
