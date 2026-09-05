@@ -1,0 +1,231 @@
+/* DLavie Community Professional v13 — hydration-safe, mobile-first */
+
+/* Prevent the raw/legacy first frame from flashing before the enhancement runtimes
+   have mapped post ids, identity and v10 controls. */
+.community-page.community-v2:not(.dl-community-v13-ready) .typed-feed > .community-entry{
+  opacity:0!important;
+  transform:translateY(5px)!important;
+  pointer-events:none!important;
+}
+.community-page.community-v2.dl-community-v13-ready .typed-feed > .community-entry{
+  opacity:1!important;
+  transform:none!important;
+  transition:opacity .2s ease,transform .26s cubic-bezier(.2,.75,.2,1)!important;
+}
+.community-page .dl-v13-legacy{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+/* Hard guard for old mobile reaction surfaces after v10 exists. */
+.community-page .community-entry:has(> .dl-v10-actions) > .entry-actions,
+.community-page .community-entry:has(> .dl-v10-actions) > .reaction-area,
+.community-page .community-entry:has(> .dl-v10-actions) > .reaction-bar,
+.community-page .community-entry:has(> .dl-v10-actions) > .dl-v4-reactions,
+.community-page .community-entry:has(> .dl-v10-actions) > [class*="reaction-host"],
+.community-page .community-entry:has(> .dl-v10-actions) > [class*="emoji-host"]{
+  display:none!important;
+}
+
+/* Feed rhythm */
+.community-page .typed-feed{
+  display:grid!important;
+  gap:14px!important;
+}
+.community-page .community-entry.entry-chat,
+.community-page .community-entry.entry-chat.dl-community-entry-v3{
+  position:relative!important;
+  margin:0!important;
+  padding:16px 16px 13px!important;
+  border-radius:20px!important;
+  border:1px solid color-mix(in srgb,var(--line,#d8ddd7) 72%,var(--accent,#7654d6) 28%)!important;
+  background:color-mix(in srgb,var(--surface-raised,#fff) 96%,transparent)!important;
+  box-shadow:0 12px 28px rgba(17,14,26,.065),inset 0 1px 0 rgba(255,255,255,.055)!important;
+  overflow:visible!important;
+}
+.community-page .community-entry.entry-chat::after{
+  content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:3px;
+  background:color-mix(in srgb,var(--accent,#7654d6) 38%,transparent);opacity:.55;pointer-events:none;
+}
+
+/* Main message geometry */
+.community-page .entry-chat .chat-entry-main{
+  display:grid!important;
+  grid-template-columns:48px minmax(0,1fr)!important;
+  gap:12px!important;
+  align-items:start!important;
+}
+.community-page .dl-community-avatar-slot-v3,
+.community-page .entry-chat .community-avatar,
+.community-page .entry-chat [class*="avatar-slot"]{
+  width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;
+  border-radius:14px!important;
+}
+.community-page .entry-chat .chat-bubble{
+  min-width:0!important;
+  padding:0 34px 0 0!important;
+  background:none!important;border:0!important;box-shadow:none!important;
+}
+
+/* Author line: username first, identity metadata second. */
+.community-page .entry-chat .entry-author{
+  display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:6px!important;
+  min-height:26px!important;margin:0 0 8px!important;
+}
+.community-page .entry-chat .entry-author>strong{
+  order:0!important;font-size:13px!important;line-height:1.15!important;font-weight:900!important;
+  letter-spacing:-.012em!important;color:var(--ink,#161b18)!important;
+}
+.community-page .dl-community-verified{order:1!important;margin:0!important;max-width:112px!important}
+.community-page .dl-community-role-chip{order:2!important;margin:0!important;max-width:116px!important}
+.community-page .entry-chat .entry-author .level-chip{order:3!important;margin:0!important}
+.community-page .entry-chat .entry-author time,
+.community-page .entry-chat .entry-author>small{order:4!important;margin-left:1px!important;font-size:8px!important;opacity:.72!important}
+.community-page .entry-chat .chat-bubble>p,
+.community-page .entry-chat .chat-bubble .message-text{
+  margin:0!important;font-size:14px!important;line-height:1.52!important;font-weight:480!important;
+  color:var(--ink,#171c19)!important;overflow-wrap:anywhere!important;
+}
+
+/* Three-dot action aligns as a subtle utility, not a floating oversized button. */
+.community-page .entry-chat .entry-menu,
+.community-page .entry-chat .message-menu,
+.community-page .entry-chat button[aria-label*="menu" i],
+.community-page .entry-chat button[aria-label*="opsi" i]{
+  position:absolute!important;right:11px!important;top:11px!important;width:34px!important;height:30px!important;
+  min-width:34px!important;padding:0!important;border-radius:10px!important;background:transparent!important;
+  border:1px solid transparent!important;box-shadow:none!important;opacity:.68!important;
+}
+
+/* Professional action rail */
+.community-page .dl-v10-actions{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;
+  gap:10px!important;width:100%!important;margin:13px 0 0!important;padding:11px 0 0 60px!important;
+  border-top:1px solid color-mix(in srgb,var(--line,#d9ddd8) 70%,transparent)!important;
+  box-sizing:border-box!important;
+}
+.community-page .dl-v10-reaction-strip{
+  display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important;
+  overflow-x:auto!important;overflow-y:hidden!important;padding:1px!important;scrollbar-width:none!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+.community-page .dl-v10-reaction-strip::-webkit-scrollbar{display:none!important}
+.community-page .dl-v10-chip,
+.community-page .dl-v10-add,
+.community-page .dl-v10-reply{
+  position:relative!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  flex:0 0 auto!important;height:38px!important;min-height:38px!important;max-height:38px!important;
+  margin:0!important;border-radius:12px!important;box-sizing:border-box!important;
+  border:1px solid color-mix(in srgb,var(--line,#d8ddd7) 76%,var(--accent,#7654d6) 24%)!important;
+  background:color-mix(in srgb,var(--surface,#f7f8f5) 91%,var(--accent-soft,#eee8ff) 9%)!important;
+  color:var(--ink,#171c19)!important;box-shadow:0 2px 7px rgba(22,19,31,.035)!important;
+}
+.community-page .dl-v10-chip{width:auto!important;min-width:50px!important;padding:0 11px!important;gap:7px!important;font-size:15px!important}
+.community-page .dl-v10-chip>b{font-size:10px!important;font-weight:850!important;opacity:.82!important}
+.community-page .dl-v10-chip.mine{
+  border-color:color-mix(in srgb,var(--accent,#7654d6) 70%,var(--line,#ddd) 30%)!important;
+  background:color-mix(in srgb,var(--accent-soft,#eee8ff) 72%,var(--surface,#fff) 28%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent,#7654d6) 18%,transparent)!important;
+}
+.community-page .dl-v10-add{
+  width:40px!important;min-width:40px!important;padding:0!important;font-size:0!important;
+}
+/* Replace the old smiling-face visual without touching the click/runtime. */
+.community-page .dl-v10-add>span,
+.community-page .dl-v10-add>b{font-size:0!important;position:absolute!important}
+.community-page .dl-v10-add::before{
+  content:"";width:17px;height:17px;border-radius:5px 5px 7px 7px;transform:rotate(45deg);
+  background:linear-gradient(145deg,#9b70f1,#6740c8);box-shadow:inset -3px -3px 0 rgba(56,29,111,.28),0 0 0 2px rgba(130,91,218,.13);
+}
+.community-page .dl-v10-add::after{
+  content:"+";position:absolute;right:5px;bottom:4px;width:13px;height:13px;border-radius:4px;
+  display:grid;place-items:center;background:var(--accent,#7654d6);color:#fff;font-size:10px;font-weight:950;line-height:1;
+  box-shadow:0 0 0 2px var(--surface-raised,#fff);
+}
+.community-page .dl-v10-reply{
+  width:auto!important;min-width:102px!important;padding:0 13px!important;gap:8px!important;white-space:nowrap!important;
+  font-size:10px!important;font-weight:820!important;
+}
+.community-page .dl-v10-reply::before{
+  content:"";width:13px;height:10px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;border-radius:0 0 0 4px;opacity:.68;
+}
+
+/* Never let a legacy reaction chip stretch across the whole card on mobile. */
+.community-page .community-entry button[class*="reaction"]:not(.dl-v10-chip):not(.dl-v10-add),
+.community-page .community-entry [class*="reaction-chip"]:not(.dl-v10-chip){
+  width:auto!important;max-width:max-content!important;min-width:38px!important;
+}
+
+/* Thread hierarchy */
+.community-page .entry-chat .post-thread{
+  margin:12px 0 0 59px!important;padding:12px 12px 11px 14px!important;
+  border-left:2px solid color-mix(in srgb,var(--accent,#7654d6) 38%,var(--line,#ddd))!important;
+  border-radius:0 14px 14px 0!important;
+  background:color-mix(in srgb,var(--surface,#f6f7f3) 88%,transparent)!important;
+}
+.community-page .post-thread::before{
+  content:"Thread";display:block;margin:0 0 8px;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+  color:color-mix(in srgb,var(--accent,#7654d6) 72%,var(--ink-soft,#777) 28%);
+}
+.community-page .post-thread .community-comment{
+  border:1px solid color-mix(in srgb,var(--line,#d8ddd7) 82%,transparent)!important;
+  background:color-mix(in srgb,var(--surface-raised,#fff) 94%,transparent)!important;
+  border-radius:12px!important;box-shadow:none!important;
+}
+
+/* Composer */
+.community-page .quick-chat-composer{
+  border-radius:18px!important;padding:12px!important;gap:9px!important;
+  border:1px solid color-mix(in srgb,var(--line,#d8ddd7) 76%,var(--accent,#7654d6) 24%)!important;
+  background:color-mix(in srgb,var(--surface-raised,#fff) 96%,transparent)!important;
+  box-shadow:0 10px 26px rgba(20,17,29,.045)!important;
+}
+.community-page .quick-chat-composer textarea{
+  min-height:88px!important;padding:13px 14px!important;border-radius:13px!important;resize:vertical!important;
+  font-size:13px!important;line-height:1.45!important;
+}
+.community-page .quick-chat-composer .dl-sticker-compose,
+.community-page .quick-chat-composer button[type="submit"]{
+  border-radius:12px!important;min-height:42px!important;font-weight:850!important;
+}
+
+/* Dark appearance keeps hierarchy and readability without purple overload. */
+@media (prefers-color-scheme:dark){
+  .community-page .community-entry.entry-chat,
+  .community-page .community-entry.entry-chat.dl-community-entry-v3{
+    background:color-mix(in srgb,var(--surface-raised,#17131e) 94%,#0a0810 6%)!important;
+    box-shadow:0 12px 30px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  }
+  .community-page .dl-v10-chip,.community-page .dl-v10-add,.community-page .dl-v10-reply{
+    background:color-mix(in srgb,var(--surface,#15111b) 91%,var(--accent,#7654d6) 9%)!important;
+  }
+}
+
+@media(max-width:700px){
+  .community-page .typed-feed{gap:11px!important}
+  .community-page .community-entry.entry-chat,.community-page .community-entry.entry-chat.dl-community-entry-v3{padding:14px 12px 12px!important;border-radius:18px!important}
+  .community-page .entry-chat .chat-entry-main{grid-template-columns:44px minmax(0,1fr)!important;gap:10px!important}
+  .community-page .dl-community-avatar-slot-v3,.community-page .entry-chat .community-avatar,.community-page .entry-chat [class*="avatar-slot"]{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;border-radius:13px!important}
+  .community-page .entry-chat .chat-bubble{padding-right:31px!important}
+  .community-page .entry-chat .entry-author{gap:5px!important;margin-bottom:7px!important}
+  .community-page .entry-chat .entry-author>strong{font-size:12px!important}
+  .community-page .entry-chat .chat-bubble>p,.community-page .entry-chat .chat-bubble .message-text{font-size:13px!important;line-height:1.5!important}
+  .community-page .dl-community-role-chip{max-width:100px!important}
+  .community-page .dl-community-verified{max-width:98px!important}
+  .community-page .dl-v10-actions{padding-left:54px!important;gap:7px!important;margin-top:11px!important;padding-top:10px!important}
+  .community-page .dl-v10-chip,.community-page .dl-v10-add,.community-page .dl-v10-reply{height:36px!important;min-height:36px!important;max-height:36px!important;border-radius:11px!important}
+  .community-page .dl-v10-chip{min-width:47px!important;padding:0 9px!important}
+  .community-page .dl-v10-add{width:38px!important;min-width:38px!important}
+  .community-page .dl-v10-reply{min-width:94px!important;padding:0 10px!important;font-size:9px!important}
+  .community-page .entry-chat .post-thread{margin-left:53px!important;padding:10px 9px 10px 12px!important}
+}
+
+@media(max-width:430px){
+  .community-page .community-entry.entry-chat,.community-page .community-entry.entry-chat.dl-community-entry-v3{padding-left:10px!important;padding-right:10px!important}
+  .community-page .entry-chat .chat-entry-main{grid-template-columns:42px minmax(0,1fr)!important;gap:9px!important}
+  .community-page .dl-community-avatar-slot-v3,.community-page .entry-chat .community-avatar,.community-page .entry-chat [class*="avatar-slot"]{width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important}
+  .community-page .dl-v10-actions{padding-left:51px!important;grid-template-columns:minmax(0,1fr) auto!important}
+  .community-page .dl-v10-reply{min-width:88px!important;padding:0 9px!important}
+  .community-page .entry-chat .post-thread{margin-left:49px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .community-page.community-v2 .typed-feed > .community-entry{transition:none!important;transform:none!important}
+}
