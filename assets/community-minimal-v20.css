@@ -1,0 +1,345 @@
+/* DLavie Community Minimal V20 — compact controls + developer-only verify */
+
+.community-page.community-v2.dl-community-v20{
+  --v20-builder:#d79a45;
+  --v20-miner:#5bb9d5;
+  --v20-explorer:#55c98a;
+  --v20-newbie:#93be5b;
+  --v20-pvp:#e1666a;
+  --v20-role:var(--accent,#7b57d8);
+}
+.community-page .dl-role-builder{--v20-role:var(--v20-builder)}
+.community-page .dl-role-miner{--v20-role:var(--v20-miner)}
+.community-page .dl-role-explorer{--v20-role:var(--v20-explorer)}
+.community-page .dl-role-newbie{--v20-role:var(--v20-newbie)}
+.community-page .dl-role-pvp{--v20-role:var(--v20-pvp)}
+
+/* Identity becomes two calm rows instead of one crowded strip. */
+.community-page .dl-v20-author{
+  display:grid!important;
+  grid-template-columns:auto auto auto minmax(0,1fr)!important;
+  grid-template-areas:
+    "name verify role ."
+    "level edited time time"!important;
+  align-items:center!important;
+  column-gap:5px!important;
+  row-gap:4px!important;
+  min-height:0!important;
+  margin:0 0 7px!important;
+}
+.community-page .dl-v20-name{
+  grid-area:name!important;
+  margin:0!important;
+  max-width:min(48vw,220px)!important;
+  color:var(--v20-role)!important;
+  font-size:13px!important;
+  line-height:1.05!important;
+  font-weight:900!important;
+  letter-spacing:-.015em!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.community-page .dl-v20-level{
+  grid-area:level!important;
+  margin:0!important;
+  padding:0!important;
+  height:auto!important;
+  min-height:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:color-mix(in srgb,var(--v20-role) 80%,#fff 20%)!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:900!important;
+}
+.community-page .dl-v20-time{
+  grid-area:time!important;
+  justify-self:start!important;
+  margin:0!important;
+  color:rgba(255,255,255,.43)!important;
+  font-size:8px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.community-page .dl-v20-edited{
+  grid-area:edited!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:transparent!important;
+  font-size:0!important;
+}
+.community-page .dl-v20-edited::after{
+  content:"edited"!important;
+  color:rgba(255,255,255,.34)!important;
+  font-size:8px!important;
+  font-style:italic!important;
+  line-height:1!important;
+}
+
+/* Verified is developer-only and icon-only. */
+.community-page.dl-community-v20 .dl-community-verified{
+  display:none!important;
+}
+.community-page .dl-v20-developer .dl-community-verified{
+  grid-area:verify!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  width:14px!important;
+  height:14px!important;
+  min-width:14px!important;
+  min-height:14px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:transparent!important;
+  font-size:0!important;
+}
+.community-page .dl-v20-developer .dl-community-verified > *{
+  display:none!important;
+}
+.community-page .dl-v20-developer .dl-community-verified::before{
+  content:"✓"!important;
+  color:#f2c94c!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  text-shadow:0 0 7px rgba(242,201,76,.26)!important;
+}
+
+/* Role becomes a tiny emblem only; username color carries the role identity. */
+.community-page .dl-v20-role-icon{
+  grid-area:role!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:6px!important;
+  background:color-mix(in srgb,var(--v20-role) 11%,transparent)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.community-page .dl-v20-role-icon .dl-role-badge,
+.community-page .dl-v20-role-icon .dl-role-badge.compact{
+  display:grid!important;
+  place-items:center!important;
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.community-page .dl-v20-role-icon .dl-role-badge>b,
+.community-page .dl-v20-role-icon .dl-role-badge>em{
+  display:none!important;
+}
+.community-page .dl-v20-role-icon .dl-role-badge>i{
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  color:var(--v20-role)!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-style:normal!important;
+}
+
+/* Minimal add reaction / plus control, including legacy '+' inside threads. */
+.community-page .dl-v20-plus,
+.community-page .dl-v10-add,
+.community-page .dl-v19-react-add{
+  position:relative!important;
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  min-height:28px!important;
+  max-width:28px!important;
+  max-height:28px!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:9px!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  background:rgba(16,13,26,.58)!important;
+  box-shadow:none!important;
+  color:rgba(255,255,255,.72)!important;
+  font-size:0!important;
+}
+.community-page .dl-v20-plus::before,
+.community-page .dl-v10-add::before,
+.community-page .dl-v19-react-add::before{
+  content:"+"!important;
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  height:100%!important;
+  transform:none!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:rgba(255,255,255,.78)!important;
+  font-size:17px!important;
+  line-height:1!important;
+  font-weight:500!important;
+}
+.community-page .dl-v20-plus::after,
+.community-page .dl-v10-add::after,
+.community-page .dl-v19-react-add::after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Non-destructive composer layout: wrappers stay owned by React. */
+.community-page .dl-v20-composer{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  gap:6px!important;
+  align-items:center!important;
+  padding:8px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  background:rgba(11,9,18,.74)!important;
+  box-shadow:0 6px 16px rgba(0,0,0,.10)!important;
+}
+.community-page .dl-v20-field-cell{
+  grid-column:1/-1!important;
+  grid-row:1!important;
+  min-width:0!important;
+  width:100%!important;
+}
+.community-page .dl-v20-field{
+  width:100%!important;
+  min-height:66px!important;
+  max-height:112px!important;
+  margin:0!important;
+  padding:10px 11px!important;
+  border-radius:10px!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  background:rgba(8,7,14,.48)!important;
+  color:#fff!important;
+  font-size:12px!important;
+  line-height:1.42!important;
+  resize:vertical!important;
+  box-sizing:border-box!important;
+}
+.community-page .dl-v20-sticker-cell{
+  grid-column:2!important;
+  grid-row:2!important;
+  width:34px!important;
+  min-width:34px!important;
+  justify-self:end!important;
+}
+.community-page .dl-v20-send-cell{
+  grid-column:3!important;
+  grid-row:2!important;
+  width:auto!important;
+  justify-self:end!important;
+}
+.community-page .dl-v20-actions-cell{
+  grid-column:2/4!important;
+  grid-row:2!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:6px!important;
+  width:auto!important;
+}
+.community-page .dl-v20-counter-cell{
+  grid-column:1!important;
+  grid-row:2!important;
+  justify-self:start!important;
+  color:rgba(255,255,255,.34)!important;
+  font-size:8px!important;
+}
+
+.community-page .dl-v20-sticker{
+  display:grid!important;
+  place-items:center!important;
+  width:34px!important;
+  height:34px!important;
+  min-width:34px!important;
+  min-height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:10px!important;
+  border:1px solid rgba(126,230,139,.18)!important;
+  background:rgba(126,230,139,.08)!important;
+  box-shadow:none!important;
+  font-size:0!important;
+  overflow:hidden!important;
+}
+.community-page .dl-v20-sticker .dl-canon-label-v9,
+.community-page .dl-v20-sticker .dl-mc-label,
+.community-page .dl-v20-sticker>span:not([class*="icon"]):not([class*="glyph"]){
+  display:none!important;
+}
+.community-page .dl-v20-sticker [class*="icon"],
+.community-page .dl-v20-sticker [class*="glyph"],
+.community-page .dl-v20-sticker svg{
+  width:18px!important;
+  height:18px!important;
+  max-width:18px!important;
+  max-height:18px!important;
+}
+.community-page .dl-v20-send{
+  width:auto!important;
+  min-width:74px!important;
+  max-width:96px!important;
+  height:34px!important;
+  min-height:34px!important;
+  max-height:34px!important;
+  margin:0!important;
+  padding:0 10px!important;
+  border-radius:10px!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  box-shadow:none!important;
+}
+
+/* Thread content gets slightly tighter so sticker/media and reply tools don't dominate. */
+.community-page .dl-v20-comment{
+  padding-top:6px!important;
+  padding-bottom:7px!important;
+}
+.community-page .dl-v20-comment img:not(.community-avatar img):not([class*="avatar"]),
+.community-page .dl-v20-comment video{
+  max-width:144px!important;
+  max-height:144px!important;
+  object-fit:contain!important;
+  border-radius:10px!important;
+}
+
+@media(max-width:430px){
+  .community-page .dl-v20-author{
+    grid-template-columns:auto auto auto minmax(0,1fr)!important;
+    column-gap:4px!important;
+    row-gap:3px!important;
+  }
+  .community-page .dl-v20-name{font-size:12px!important;max-width:43vw!important}
+  .community-page .dl-v20-role-icon{width:17px!important;height:17px!important;min-width:17px!important;min-height:17px!important}
+  .community-page .dl-v20-field{min-height:62px!important}
+  .community-page .dl-v20-composer{padding:7px!important;gap:5px!important}
+  .community-page .dl-v20-sticker{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;max-width:32px!important;max-height:32px!important}
+  .community-page .dl-v20-sticker-cell{width:32px!important;min-width:32px!important}
+  .community-page .dl-v20-send{height:32px!important;min-height:32px!important;max-height:32px!important;min-width:70px!important;padding:0 9px!important}
+}
