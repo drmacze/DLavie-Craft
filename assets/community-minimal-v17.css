@@ -1,0 +1,221 @@
+/* DLavie Community Minimal V17 — cleaner identity, lighter chrome, compact mobile threads */
+
+.community-page.community-v2.dl-community-v17{
+  --v17-builder:#d79a45;
+  --v17-miner:#58b9d7;
+  --v17-explorer:#55c98a;
+  --v17-newbie:#93be5b;
+  --v17-pvp:#e1666a;
+  --v17-accent:var(--accent,#7b57d8);
+  --v17-ink:var(--ink,#171c19);
+  --v17-soft:var(--ink-soft,#7b817d);
+  --v17-line:color-mix(in srgb,var(--line,#d8ddd7) 82%,transparent);
+  --v17-surface:color-mix(in srgb,var(--surface-raised,#fff) 95%,transparent);
+}
+.community-page .dl-v17-role-builder{--v17-role:var(--v17-builder)}
+.community-page .dl-v17-role-miner{--v17-role:var(--v17-miner)}
+.community-page .dl-v17-role-explorer{--v17-role:var(--v17-explorer)}
+.community-page .dl-v17-role-newbie{--v17-role:var(--v17-newbie)}
+.community-page .dl-v17-role-pvp{--v17-role:var(--v17-pvp)}
+.community-page .dl-v17-entry,.community-page .dl-v17-comment{--v17-role:var(--v17-accent)}
+
+/* Quieter cards: keep readability over animated community backgrounds. */
+.community-page .dl-v17-entry.entry-chat{
+  padding:12px 12px 11px!important;
+  border-radius:16px!important;
+  border:1px solid rgba(255,255,255,.045)!important;
+  background:linear-gradient(180deg,rgba(15,12,24,.82),rgba(12,10,20,.88))!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.14)!important;
+  backdrop-filter:blur(7px) saturate(1.03)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(1.03)!important;
+}
+.community-page .dl-v17-entry.entry-chat::before{
+  background:radial-gradient(circle at 0 18%,color-mix(in srgb,var(--v17-role) 10%,transparent),transparent 26%)!important;
+  opacity:.44!important;
+}
+.community-page .dl-v17-entry.entry-chat::after{
+  width:2px!important;left:0!important;top:15px!important;bottom:15px!important;
+  background:var(--v17-role)!important;opacity:.52!important;
+}
+
+.community-page .dl-v17-entry .chat-entry-main{
+  grid-template-columns:42px minmax(0,1fr)!important;
+  gap:9px!important;
+}
+.community-page .dl-v17-entry .dl-community-avatar-slot-v3,
+.community-page .dl-v17-entry .community-avatar,
+.community-page .dl-v17-entry [class*="avatar-slot"]{
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+  border-radius:12px!important;
+  border:1px solid color-mix(in srgb,var(--v17-role) 50%,rgba(255,255,255,.08) 50%)!important;
+  box-shadow:0 4px 10px rgba(0,0,0,.16),0 0 0 2px color-mix(in srgb,var(--v17-role) 7%,transparent)!important;
+}
+.community-page .dl-v17-entry .chat-bubble{padding:0 28px 0 0!important}
+
+/* Role identity is color, not a badge. */
+.community-page .dl-v17-role-source{display:none!important}
+.community-page .dl-v17-author{
+  display:flex!important;align-items:center!important;flex-wrap:wrap!important;
+  gap:4px 6px!important;min-height:20px!important;margin:0 0 5px!important;
+}
+.community-page .dl-v17-name{
+  order:0!important;margin:0!important;max-width:min(48vw,220px)!important;
+  color:var(--v17-role)!important;font-size:13px!important;line-height:1.05!important;font-weight:900!important;
+  letter-spacing:-.018em!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  text-shadow:0 0 11px color-mix(in srgb,var(--v17-role) 11%,transparent)!important;
+}
+
+/* Verified = tiny gold check only. */
+.community-page .dl-v17-verified{
+  order:1!important;position:relative!important;
+  width:18px!important;height:18px!important;min-width:18px!important;max-width:18px!important;min-height:18px!important;
+  padding:0!important;margin:0!important;border-radius:6px!important;display:grid!important;place-items:center!important;
+  background:linear-gradient(145deg,#ffe382,#d2a626)!important;
+  border:1px solid rgba(126,87,8,.22)!important;box-shadow:inset 0 1px rgba(255,255,255,.5)!important;
+  color:#624606!important;font-size:0!important;line-height:1!important;
+}
+.community-page .dl-v17-verified>*{display:none!important}
+.community-page .dl-v17-verified::before{
+  content:"✓"!important;font-size:10px!important;font-weight:1000!important;line-height:1!important;color:#604305!important;
+}
+
+.community-page .dl-v17-level{
+  order:2!important;padding:0!important;margin:0!important;height:auto!important;min-height:0!important;
+  border:0!important;background:none!important;box-shadow:none!important;
+  color:color-mix(in srgb,var(--v17-role) 78%,#fff 22%)!important;font-size:9px!important;line-height:1!important;font-weight:900!important;
+  opacity:.88!important;
+}
+.community-page .dl-v17-edited{
+  order:3!important;padding:0!important;margin:0!important;border:0!important;background:none!important;box-shadow:none!important;
+  color:rgba(255,255,255,.42)!important;font-size:8px!important;line-height:1!important;font-weight:700!important;
+}
+.community-page .dl-v17-time{
+  order:4!important;margin-left:auto!important;color:rgba(255,255,255,.46)!important;
+  font-size:8px!important;line-height:1!important;white-space:nowrap!important;
+}
+.community-page .dl-v17-entry .chat-bubble>p,
+.community-page .dl-v17-entry .chat-bubble .message-text{
+  margin:0!important;color:rgba(255,255,255,.94)!important;font-size:13px!important;line-height:1.48!important;
+}
+
+.community-page .dl-v17-menu{
+  right:7px!important;top:7px!important;width:27px!important;height:25px!important;min-width:27px!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;color:rgba(255,255,255,.55)!important;opacity:.72!important;
+}
+
+/* Compact actions, no full-width reaction bars. */
+.community-page .dl-v17-actions{
+  grid-template-columns:minmax(0,1fr) auto!important;gap:6px!important;
+  margin:8px 0 0!important;padding:0 0 0 51px!important;border-top:0!important;
+}
+.community-page .dl-v17-reactions{gap:5px!important;padding:0!important}
+.community-page .dl-v17-react-chip,
+.community-page .dl-v17-react-add,
+.community-page .dl-v17-reply{
+  height:31px!important;min-height:31px!important;max-height:31px!important;border-radius:9px!important;
+  border:1px solid rgba(255,255,255,.07)!important;background:rgba(17,14,27,.72)!important;box-shadow:none!important;
+}
+.community-page .dl-v17-react-chip{min-width:43px!important;padding:0 8px!important;gap:5px!important;font-size:15px!important}
+.community-page .dl-v17-react-chip>b{font-size:9px!important;font-weight:900!important;color:rgba(255,255,255,.72)!important}
+.community-page .dl-v17-react-chip.mine{
+  border-color:color-mix(in srgb,var(--v17-role) 44%,rgba(255,255,255,.08) 56%)!important;
+  background:color-mix(in srgb,var(--v17-role) 11%,rgba(16,13,25,.82) 89%)!important;
+}
+.community-page .dl-v17-react-add{width:31px!important;min-width:31px!important}
+.community-page .dl-v17-react-add::before{width:13px!important;height:13px!important;border-radius:4px 4px 5px 5px!important}
+.community-page .dl-v17-react-add::after{width:10px!important;height:10px!important;right:2px!important;bottom:2px!important;border-radius:3px!important;font-size:7px!important}
+.community-page .dl-v17-reply{
+  min-width:82px!important;padding:0 8px!important;gap:5px!important;background:transparent!important;
+  color:rgba(255,255,255,.58)!important;font-size:9px!important;font-weight:850!important;
+}
+.community-page .dl-v17-reply::before{width:10px!important;height:7px!important;opacity:.5!important}
+
+/* Thread replies become a clean branch, never a nested card wall. */
+.community-page .dl-v17-thread{
+  margin:8px 0 0 50px!important;padding:7px 0 0 10px!important;
+  border-left:1px solid color-mix(in srgb,var(--v17-role) 36%,rgba(255,255,255,.08) 64%)!important;
+  border-radius:0!important;background:transparent!important;
+}
+.community-page .dl-v17-thread::before{display:none!important;content:none!important}
+.community-page .dl-v17-comment{
+  padding:7px 4px 8px!important;margin:0 0 6px!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.045)!important;
+  border-radius:0!important;background:transparent!important;box-shadow:none!important;
+}
+.community-page .dl-v17-comment:last-of-type{border-bottom:0!important}
+.community-page .dl-v17-comment .dl-community-avatar-slot-v3,
+.community-page .dl-v17-comment .community-avatar{
+  width:31px!important;height:31px!important;min-width:31px!important;min-height:31px!important;border-radius:9px!important;
+}
+.community-page .dl-v17-comment .dl-v17-name{font-size:11px!important;max-width:140px!important}
+.community-page .dl-v17-comment .dl-v17-verified{width:15px!important;height:15px!important;min-width:15px!important;max-width:15px!important;min-height:15px!important;border-radius:5px!important}
+.community-page .dl-v17-comment .dl-v17-verified::before{font-size:8px!important}
+.community-page .dl-v17-comment .dl-v17-level{font-size:8px!important}
+.community-page .dl-v17-comment .dl-v17-time{font-size:7px!important}
+.community-page .dl-v17-comment p{font-size:11px!important;line-height:1.42!important;margin-top:3px!important}
+
+/* Reply composer: one textarea, then tiny Sticker + Send controls. */
+.community-page .dl-v17-reply-composer{
+  display:grid!important;grid-template-columns:minmax(0,1fr) 38px 76px!important;gap:6px!important;align-items:center!important;
+  margin-top:6px!important;padding:7px 0 0!important;border-top:1px dashed rgba(255,255,255,.055)!important;
+}
+.community-page .dl-v17-reply-composer>.community-avatar,
+.community-page .dl-v17-reply-composer>.dl-community-avatar-slot-v3{display:none!important}
+.community-page .dl-v17-reply-field{
+  grid-column:1/-1!important;grid-row:1!important;width:100%!important;min-height:64px!important;max-height:110px!important;
+  padding:10px 11px!important;border-radius:10px!important;background:rgba(9,8,15,.5)!important;border:1px solid rgba(255,255,255,.06)!important;
+  color:#fff!important;font-size:11px!important;line-height:1.42!important;resize:vertical!important;
+}
+.community-page .dl-v17-reply-sticker{
+  grid-column:2!important;grid-row:2!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:34px!important;min-height:34px!important;
+  padding:0!important;border-radius:9px!important;font-size:0!important;overflow:hidden!important;
+}
+.community-page .dl-v17-reply-sticker .dl-canon-label-v9,
+.community-page .dl-v17-reply-sticker .dl-mc-label{display:none!important}
+.community-page .dl-v17-reply-send{
+  grid-column:3!important;grid-row:2!important;width:76px!important;min-width:76px!important;max-width:76px!important;height:34px!important;min-height:34px!important;
+  padding:0 9px!important;border-radius:9px!important;font-size:10px!important;font-weight:900!important;
+}
+
+/* Main composer becomes shallow instead of a large empty panel. */
+.community-page .dl-v17-main-composer{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:7px!important;align-items:center!important;
+  padding:9px!important;border-radius:15px!important;background:rgba(13,10,21,.78)!important;border:1px solid rgba(255,255,255,.06)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.12)!important;
+}
+.community-page .dl-v17-main-composer .dl-v15-compose-field,
+.community-page .dl-v17-main-composer .dl-v15-compose-actions,
+.community-page .dl-v17-main-composer .dl-v15-sticker-cell,
+.community-page .dl-v17-main-composer .dl-v15-send-cell,
+.community-page .dl-v17-main-composer .dl-v15-compose-counter{display:contents!important}
+.community-page .dl-v17-main-field{
+  grid-column:1/-1!important;grid-row:1!important;min-height:70px!important;max-height:120px!important;padding:11px 12px!important;border-radius:11px!important;
+  background:rgba(9,8,15,.48)!important;border:1px solid rgba(255,255,255,.055)!important;color:#fff!important;font-size:12px!important;
+}
+.community-page .dl-v17-main-composer [class*="counter"],
+.community-page .dl-v17-main-composer .dl-v15-compose-counter{
+  grid-column:1!important;grid-row:2!important;justify-self:start!important;align-self:center!important;color:rgba(255,255,255,.42)!important;font-size:8px!important;
+}
+.community-page .dl-v17-main-sticker{
+  grid-column:2!important;grid-row:2!important;width:38px!important;min-width:38px!important;height:34px!important;min-height:34px!important;
+  padding:0!important;border-radius:9px!important;font-size:0!important;
+}
+.community-page .dl-v17-main-sticker .dl-canon-label-v9,
+.community-page .dl-v17-main-sticker .dl-mc-label{display:none!important}
+.community-page .dl-v17-main-send{
+  grid-column:3!important;grid-row:2!important;min-width:76px!important;width:auto!important;height:34px!important;min-height:34px!important;padding:0 10px!important;border-radius:9px!important;font-size:10px!important;font-weight:900!important;
+}
+
+@media(max-width:430px){
+  .community-page .dl-v17-entry.entry-chat{padding:11px 10px 10px!important;border-radius:15px!important}
+  .community-page .dl-v17-entry .chat-entry-main{grid-template-columns:40px minmax(0,1fr)!important;gap:8px!important}
+  .community-page .dl-v17-entry .dl-community-avatar-slot-v3,.community-page .dl-v17-entry .community-avatar,.community-page .dl-v17-entry [class*="avatar-slot"]{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+  .community-page .dl-v17-name{font-size:12px!important;max-width:42vw!important}
+  .community-page .dl-v17-time{margin-left:0!important;width:100%!important;order:5!important;padding-left:0!important;font-size:7px!important}
+  .community-page .dl-v17-actions{padding-left:48px!important}
+  .community-page .dl-v17-thread{margin-left:46px!important;padding-left:9px!important}
+  .community-page .dl-v17-reply-composer{grid-template-columns:minmax(0,1fr) 36px 72px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .community-page .dl-v17-entry,.community-page .dl-v17-react-chip,.community-page .dl-v17-react-add{transition:none!important;animation:none!important}
+}
