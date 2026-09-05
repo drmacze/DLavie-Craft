@@ -1,0 +1,174 @@
+/* DLavie Community State Fix v25 — stable Info drawer + compact Ringkas on iOS/mobile. */
+
+/* Prevent transformed ancestors from turning fixed UI into in-flow content on iOS Safari. */
+body.dl-community-info-body-open #root,
+body.dl-community-info-body-open .community-page,
+body.dl-community-info-body-open .community-workspace,
+body.dl-community-info-body-open .forum-main{
+  transform:none!important;
+  filter:none!important;
+  perspective:none!important;
+  will-change:auto!important;
+}
+
+/* Ringkas is a density mode, not a hide-the-page mode. */
+.community-page.community-v2.dl-community-focus .forum-main,
+.community-page.community-v2.dl-community-focus .typed-feed,
+.community-page.community-v2.dl-community-focus .typed-feed .community-entry,
+.community-page.community-v2.dl-community-focus .feed-chat,
+.community-page.community-v2.dl-community-focus .feed-chat .community-entry{
+  content-visibility:visible!important;
+  contain:none!important;
+  contain-intrinsic-size:auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  transform:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.community-page.community-v2.dl-community-focus .typed-feed > .community-entry,
+.community-page.community-v2.dl-community-focus .dl-v24-entry,
+.community-page.community-v2.dl-community-focus .dl-v22-entry,
+.community-page.community-v2.dl-community-focus .dl-v20-entry{
+  padding-top:9px!important;
+  padding-bottom:9px!important;
+}
+.community-page.community-v2.dl-community-focus .chat-bubble > p{
+  margin-top:2px!important;
+  line-height:1.4!important;
+}
+.community-page.community-v2.dl-community-focus .dl-v22-actions,
+.community-page.community-v2.dl-community-focus .dl-v10-actions{
+  margin-top:5px!important;
+}
+.community-page.community-v2.dl-community-focus .post-thread{
+  margin-top:6px!important;
+}
+
+/* Desktop/tablet Info remains a side rail. */
+@media(min-width:1051px){
+  .community-page.community-v2.dl-community-info-open .community-profile-rail{
+    display:grid!important;
+    position:sticky!important;
+    top:88px!important;
+    max-height:calc(100vh - 108px)!important;
+    overflow:auto!important;
+  }
+}
+
+/* Mobile Info is a true bottom sheet and never participates in document layout. */
+@media(max-width:1050px){
+  .community-page.community-v2 .community-workspace,
+  .community-page.community-v2.dl-community-info-open .community-workspace{
+    display:block!important;
+    grid-template-columns:none!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+
+  .community-page.community-v2 .community-profile-rail{
+    display:none!important;
+    position:fixed!important;
+    z-index:2147483000!important;
+    left:12px!important;
+    right:12px!important;
+    top:auto!important;
+    bottom:calc(12px + env(safe-area-inset-bottom))!important;
+    width:auto!important;
+    max-width:720px!important;
+    max-height:min(76svh,680px)!important;
+    margin:0 auto!important;
+    padding:12px!important;
+    overflow:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    border-radius:18px!important;
+    background:rgba(12,10,18,.985)!important;
+    box-shadow:0 -18px 60px rgba(0,0,0,.34)!important;
+    transform:none!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    isolation:isolate!important;
+  }
+
+  .community-page.community-v2.dl-community-info-open .community-profile-rail{
+    display:grid!important;
+    gap:10px!important;
+  }
+
+  .community-page.community-v2 #dl-community-info-scrim{
+    display:none!important;
+    position:fixed!important;
+    inset:0!important;
+    z-index:2147482990!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:rgba(4,3,7,.62)!important;
+    backdrop-filter:blur(2px)!important;
+    -webkit-backdrop-filter:blur(2px)!important;
+  }
+  .community-page.community-v2.dl-community-info-open #dl-community-info-scrim{
+    display:block!important;
+  }
+
+  .community-page.community-v2 .dl-community-info-head{
+    position:sticky!important;
+    top:-12px!important;
+    z-index:4!important;
+    margin:-12px -12px 8px!important;
+    padding:13px 14px 11px!important;
+    border-bottom:1px solid rgba(255,255,255,.075)!important;
+    background:rgba(12,10,18,.985)!important;
+  }
+  .community-page.community-v2 .dl-community-info-head strong{
+    font-size:12px!important;
+  }
+  .community-page.community-v2 .dl-community-info-head button{
+    min-width:44px!important;
+    min-height:36px!important;
+    padding:0 8px!important;
+    border-radius:9px!important;
+  }
+
+  /* Do not let hidden/off-screen profile content reserve phantom height. */
+  .community-page.community-v2:not(.dl-community-info-open) .community-profile-rail,
+  .community-page.community-v2:not(.dl-community-info-open) #dl-community-info-scrim{
+    display:none!important;
+    height:0!important;
+    min-height:0!important;
+    max-height:0!important;
+    overflow:hidden!important;
+  }
+}
+
+@media(max-width:430px){
+  .community-page.community-v2 .community-profile-rail{
+    left:8px!important;
+    right:8px!important;
+    bottom:calc(8px + env(safe-area-inset-bottom))!important;
+    max-height:72svh!important;
+    border-radius:16px!important;
+  }
+
+  .community-page.community-v2.dl-community-focus .typed-feed > .community-entry,
+  .community-page.community-v2.dl-community-focus .dl-v24-entry,
+  .community-page.community-v2.dl-community-focus .dl-v22-entry,
+  .community-page.community-v2.dl-community-focus .dl-v20-entry{
+    padding-top:8px!important;
+    padding-bottom:8px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .community-page.community-v2 .community-profile-rail,
+  .community-page.community-v2 #dl-community-info-scrim{
+    transition:none!important;
+  }
+}
