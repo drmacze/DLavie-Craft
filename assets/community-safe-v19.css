@@ -1,0 +1,350 @@
+/* DLavie Community Safe V19 — non-destructive, compact, mobile-safe */
+
+.community-page.community-v2.dl-community-v19{
+  --v19-builder:#d79a45;
+  --v19-miner:#5bb9d5;
+  --v19-explorer:#55c98a;
+  --v19-newbie:#93be5b;
+  --v19-pvp:#e1666a;
+  --v19-accent:var(--accent,#7b57d8);
+  --v19-role:var(--v19-accent);
+  --v19-card:rgba(14,11,23,.82);
+  --v19-card-strong:rgba(10,8,17,.90);
+  --v19-line:rgba(255,255,255,.065);
+  --v19-text:rgba(255,255,255,.95);
+  --v19-soft:rgba(255,255,255,.46);
+}
+.community-page .dl-v19-role-builder{--v19-role:var(--v19-builder)}
+.community-page .dl-v19-role-miner{--v19-role:var(--v19-miner)}
+.community-page .dl-v19-role-explorer{--v19-role:var(--v19-explorer)}
+.community-page .dl-v19-role-newbie{--v19-role:var(--v19-newbie)}
+.community-page .dl-v19-role-pvp{--v19-role:var(--v19-pvp)}
+
+/* Important: never hide the feed while forum tabs rerender. */
+.community-page.community-v2 .typed-feed > .community-entry{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  pointer-events:auto!important;
+}
+
+/* Hide legacy reaction surfaces only when v10 controls are present. */
+.community-page .community-entry:has(> .dl-v10-actions) > .entry-actions,
+.community-page .community-entry:has(> .dl-v10-actions) > .reaction-area,
+.community-page .community-entry:has(> .dl-v10-actions) > .reaction-bar,
+.community-page .community-entry:has(> .dl-v10-actions) > .dl-v4-reactions,
+.community-page .community-entry:has(> .dl-v10-actions) > [class*="reaction-host"],
+.community-page .community-entry:has(> .dl-v10-actions) > [class*="emoji-host"]{
+  display:none!important;
+}
+
+.community-page .typed-feed{
+  display:grid!important;
+  gap:11px!important;
+}
+
+.community-page .dl-v19-entry.entry-chat{
+  position:relative!important;
+  isolation:isolate!important;
+  margin:0!important;
+  padding:12px 12px 11px!important;
+  border-radius:16px!important;
+  border:1px solid var(--v19-line)!important;
+  background:linear-gradient(180deg,rgba(14,11,23,.80),rgba(11,9,18,.87))!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.14)!important;
+  backdrop-filter:blur(6px) saturate(1.02)!important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.02)!important;
+  overflow:hidden!important;
+}
+.community-page .dl-v19-entry.entry-chat::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;top:15px!important;bottom:15px!important;width:2px!important;
+  background:var(--v19-role)!important;
+  opacity:.52!important;
+  border-radius:0 2px 2px 0!important;
+  pointer-events:none!important;
+}
+
+.community-page .dl-v19-entry .chat-entry-main{
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr)!important;
+  gap:9px!important;
+  align-items:start!important;
+}
+.community-page .dl-v19-entry .dl-community-avatar-slot-v3,
+.community-page .dl-v19-entry .community-avatar,
+.community-page .dl-v19-entry [class*="avatar-slot"]{
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+  border-radius:12px!important;
+  border:1px solid color-mix(in srgb,var(--v19-role) 48%,rgba(255,255,255,.08) 52%)!important;
+  box-shadow:0 4px 10px rgba(0,0,0,.16),0 0 0 2px color-mix(in srgb,var(--v19-role) 7%,transparent)!important;
+}
+.community-page .dl-v19-entry .chat-bubble{
+  min-width:0!important;
+  padding:0 28px 0 0!important;
+  background:none!important;border:0!important;box-shadow:none!important;
+}
+
+/* Identity line — role lives in username color, never a chip. */
+.community-page .dl-v19-author{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:3px 6px!important;
+  min-height:20px!important;
+  margin:0 0 6px!important;
+}
+.community-page .dl-v19-role-source,
+.community-page .dl-v19-author > .dl-community-role-chip{
+  display:none!important;
+}
+.community-page .dl-v19-name{
+  order:0!important;
+  margin:0!important;
+  color:var(--v19-role)!important;
+  font-size:13px!important;
+  line-height:1.05!important;
+  font-weight:900!important;
+  letter-spacing:-.018em!important;
+  max-width:min(48vw,220px)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+/* Verified becomes icon-only without changing DOM. */
+.community-page .dl-v19-verified{
+  order:1!important;
+  position:relative!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  width:14px!important;height:14px!important;min-width:14px!important;min-height:14px!important;
+  padding:0!important;margin:0!important;
+  border:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;
+  font-size:0!important;color:transparent!important;
+}
+.community-page .dl-v19-verified > *{display:none!important}
+.community-page .dl-v19-verified::before{
+  content:"✓"!important;
+  color:#f3c84f!important;
+  font-size:11px!important;
+  font-weight:1000!important;
+  line-height:1!important;
+  text-shadow:0 0 7px rgba(243,200,79,.22)!important;
+}
+.community-page .dl-v19-level{
+  order:2!important;
+  margin:0!important;padding:0!important;
+  height:auto!important;min-height:0!important;
+  border:0!important;background:none!important;box-shadow:none!important;
+  color:color-mix(in srgb,var(--v19-role) 82%,#fff 18%)!important;
+  font-size:9px!important;line-height:1!important;font-weight:900!important;
+}
+.community-page .dl-v19-edited{
+  order:3!important;
+  margin:0!important;padding:0!important;
+  border:0!important;background:none!important;box-shadow:none!important;
+  font-size:0!important;color:transparent!important;
+}
+.community-page .dl-v19-edited::after{
+  content:"edited"!important;
+  color:rgba(255,255,255,.34)!important;
+  font-size:8px!important;
+  line-height:1!important;
+  font-style:italic!important;
+  font-weight:650!important;
+}
+.community-page .dl-v19-time{
+  order:4!important;
+  margin-left:auto!important;
+  color:var(--v19-soft)!important;
+  font-size:8px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.community-page .dl-v19-entry .chat-bubble>p,
+.community-page .dl-v19-entry .chat-bubble .message-text{
+  margin:0!important;
+  color:var(--v19-text)!important;
+  font-size:13px!important;
+  line-height:1.48!important;
+  letter-spacing:-.003em!important;
+  overflow-wrap:anywhere!important;
+}
+
+.community-page .entry-chat .entry-menu,
+.community-page .entry-chat .message-menu,
+.community-page .entry-chat button[aria-label*="menu" i],
+.community-page .entry-chat button[aria-label*="opsi" i]{
+  position:absolute!important;
+  right:7px!important;top:7px!important;
+  width:27px!important;height:25px!important;min-width:27px!important;
+  padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;
+  color:rgba(255,255,255,.54)!important;opacity:.72!important;
+}
+
+/* Compact reaction / reply row. */
+.community-page .dl-v19-actions,
+.community-page .dl-v10-actions{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:6px!important;
+  width:100%!important;
+  margin:8px 0 0!important;
+  padding:0 0 0 51px!important;
+  border-top:0!important;
+}
+.community-page .dl-v19-reactions,
+.community-page .dl-v10-reaction-strip{
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  min-width:0!important;
+  overflow-x:auto!important;overflow-y:hidden!important;
+  padding:0!important;scrollbar-width:none!important;
+}
+.community-page .dl-v19-reactions::-webkit-scrollbar,
+.community-page .dl-v10-reaction-strip::-webkit-scrollbar{display:none!important}
+.community-page .dl-v19-react-chip,
+.community-page .dl-v19-react-add,
+.community-page .dl-v19-reply,
+.community-page .dl-v10-chip,
+.community-page .dl-v10-add,
+.community-page .dl-v10-reply{
+  flex:0 0 auto!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  height:31px!important;min-height:31px!important;max-height:31px!important;
+  margin:0!important;border-radius:9px!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  background:rgba(16,13,26,.70)!important;
+  box-shadow:none!important;
+}
+.community-page .dl-v19-react-chip,
+.community-page .dl-v10-chip{
+  min-width:43px!important;padding:0 8px!important;gap:5px!important;font-size:15px!important;
+}
+.community-page .dl-v19-react-chip>b,
+.community-page .dl-v10-chip>b{font-size:9px!important;font-weight:900!important;color:rgba(255,255,255,.72)!important}
+.community-page .dl-v19-react-add,
+.community-page .dl-v10-add{width:31px!important;min-width:31px!important;padding:0!important}
+.community-page .dl-v19-reply,
+.community-page .dl-v10-reply{
+  min-width:80px!important;padding:0 8px!important;gap:5px!important;
+  background:transparent!important;color:rgba(255,255,255,.56)!important;
+  font-size:9px!important;font-weight:850!important;
+}
+
+/* Thread hierarchy — simple branch, no giant nested card. */
+.community-page .dl-v19-thread,
+.community-page .entry-chat .post-thread{
+  margin:8px 0 0 49px!important;
+  padding:7px 0 0 10px!important;
+  border-left:1px solid color-mix(in srgb,var(--v19-role) 35%,rgba(255,255,255,.08) 65%)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.community-page .post-thread::before{display:none!important;content:none!important}
+.community-page .dl-v19-comment,
+.community-page .post-thread .community-comment{
+  padding:7px 4px 8px!important;
+  margin:0 0 6px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(255,255,255,.045)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.community-page .post-thread .community-comment:last-of-type{border-bottom:0!important}
+.community-page .post-thread .community-comment .dl-community-avatar-slot-v3,
+.community-page .post-thread .community-comment .community-avatar,
+.community-page .post-thread .community-comment [class*="avatar-slot"]{
+  width:31px!important;height:31px!important;min-width:31px!important;min-height:31px!important;border-radius:9px!important;
+}
+.community-page .post-thread .community-comment .dl-v19-name{font-size:11px!important;max-width:145px!important}
+.community-page .post-thread .community-comment p{font-size:11px!important;line-height:1.42!important;margin-top:3px!important}
+
+/* Main/reply composer: keep React DOM intact, only restyle wrappers. */
+.community-page .quick-chat-composer,
+.community-page .reply-composer,
+.community-page .post-thread form:has(textarea){
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  gap:6px!important;
+  align-items:center!important;
+  padding:9px!important;
+  border-radius:15px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  background:rgba(12,9,20,.76)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.11)!important;
+}
+.community-page .quick-chat-composer > *:has(textarea),
+.community-page .reply-composer > *:has(textarea),
+.community-page .post-thread form:has(textarea) > *:has(textarea){
+  grid-column:1/-1!important;
+  min-width:0!important;
+}
+.community-page .quick-chat-composer textarea,
+.community-page .reply-composer textarea,
+.community-page .post-thread form:has(textarea) textarea{
+  width:100%!important;
+  min-height:68px!important;
+  max-height:116px!important;
+  margin:0!important;
+  padding:10px 11px!important;
+  border-radius:10px!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  background:rgba(8,7,14,.50)!important;
+  color:#fff!important;
+  font-size:12px!important;
+  line-height:1.42!important;
+  resize:vertical!important;
+  box-sizing:border-box!important;
+}
+.community-page .quick-chat-composer > *:has(.dl-sticker-compose):has(button[type="submit"]),
+.community-page .reply-composer > *:has(.dl-sticker-compose):has(button[type="submit"]),
+.community-page .post-thread form:has(textarea) > *:has(.dl-sticker-compose):has(button[type="submit"]){
+  grid-column:2/4!important;
+  display:flex!important;
+  justify-content:flex-end!important;
+  gap:6px!important;
+}
+.community-page .quick-chat-composer .dl-sticker-compose,
+.community-page .reply-composer .dl-sticker-compose,
+.community-page .post-thread form:has(textarea) .dl-sticker-compose{
+  width:36px!important;min-width:36px!important;max-width:36px!important;
+  height:34px!important;min-height:34px!important;
+  padding:0!important;border-radius:9px!important;
+  font-size:0!important;
+}
+.community-page .quick-chat-composer button[type="submit"],
+.community-page .reply-composer button[type="submit"],
+.community-page .post-thread form:has(textarea) button[type="submit"]{
+  width:auto!important;min-width:76px!important;max-width:110px!important;
+  height:34px!important;min-height:34px!important;
+  padding:0 10px!important;border-radius:9px!important;
+  font-size:10px!important;font-weight:900!important;
+}
+
+@media(max-width:430px){
+  .community-page .dl-v19-entry.entry-chat{padding:11px 10px 10px!important;border-radius:15px!important}
+  .community-page .dl-v19-entry .chat-entry-main{grid-template-columns:40px minmax(0,1fr)!important;gap:8px!important}
+  .community-page .dl-v19-entry .dl-community-avatar-slot-v3,
+  .community-page .dl-v19-entry .community-avatar,
+  .community-page .dl-v19-entry [class*="avatar-slot"]{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+  .community-page .dl-v19-name{font-size:12px!important;max-width:44vw!important}
+  .community-page .dl-v19-time{margin-left:0!important;width:100%!important;order:5!important;font-size:7px!important}
+  .community-page .dl-v19-actions,.community-page .dl-v10-actions{padding-left:48px!important}
+  .community-page .dl-v19-thread,.community-page .entry-chat .post-thread{margin-left:46px!important;padding-left:9px!important}
+  .community-page .quick-chat-composer,
+  .community-page .reply-composer,
+  .community-page .post-thread form:has(textarea){padding:8px!important;gap:5px!important}
+  .community-page .quick-chat-composer textarea,
+  .community-page .reply-composer textarea,
+  .community-page .post-thread form:has(textarea) textarea{min-height:62px!important;font-size:11px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .community-page *{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
