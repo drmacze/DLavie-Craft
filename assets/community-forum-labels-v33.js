@@ -6,6 +6,7 @@
   let observer = null;
   let pageRef = null;
   let raf = 0;
+  let clickHost = null;
 
   const clean = value => String(value || '')
     .replace(/\s+/g, ' ')
@@ -68,21 +69,37 @@
     display.dataset.label = label;
   }
 
+  function getActiveButton(target) {
+    return target.querySelector([
+      '.forum-sidebar nav button.active',
+      '.forum-sidebar nav button[aria-selected="true"]',
+      '.forum-sidebar nav button[aria-current="page"]',
+      '.forum-sidebar nav button[aria-pressed="true"]',
+      '.forum-sidebar nav button[data-active="true"]'
+    ].join(','));
+  }
+
+  function syncActiveHeading(target) {
+    const heading = target.querySelector('.active-forum-head h2');
+    if (!heading) return;
+
+    const active = getActiveButton(target);
+    let label = active?.dataset.dlForumLabel || '';
+
+    // Never reuse the old heading data as the source of truth. React may keep
+    // the same h2 node while switching forums, which caused General to stick.
+    if (!label) label = professionalLabel(heading.textContent || '');
+    if (!label) return;
+
+    heading.dataset.dlForumLabel = label;
+    heading.setAttribute('aria-label', label);
+    target.dataset.dlActiveForumLabel = label;
+  }
+
   function decorate(target) {
     if (!target?.isConnected) return;
-
     target.querySelectorAll('.forum-sidebar nav button').forEach(decorateButton);
-
-    const heading = target.querySelector('.active-forum-head h2');
-    if (heading) {
-      const raw = heading.dataset.dlForumRaw || heading.textContent || '';
-      if (!heading.dataset.dlForumRaw) heading.dataset.dlForumRaw = raw.trim();
-      const label = professionalLabel(raw);
-      if (label) {
-        heading.dataset.dlForumLabel = label;
-        heading.setAttribute('aria-label', label);
-      }
-    }
+    syncActiveHeading(target);
   }
 
   function schedule(target = document.querySelector(PAGE)) {
@@ -93,12 +110,31 @@
     });
   }
 
+  function settle(target) {
+    schedule(target);
+    setTimeout(() => schedule(target), 40);
+    setTimeout(() => schedule(target), 120);
+    setTimeout(() => schedule(target), 260);
+  }
+
+  function onNavClick(event) {
+    if (!event.target.closest('.forum-sidebar nav button')) return;
+    const target = event.currentTarget;
+    settle(target);
+  }
+
   function attach(target) {
     if (!target) return;
-    if (pageRef === target) return schedule(target);
+    if (pageRef === target) return settle(target);
+
     observer?.disconnect();
+    if (clickHost) clickHost.removeEventListener('click', onNavClick, true);
+
     pageRef = target;
-    schedule(target);
+    clickHost = target;
+    target.addEventListener('click', onNavClick, true);
+    settle(target);
+
     observer = new MutationObserver(records => {
       const meaningful = records.some(record => {
         const node = record.target?.nodeType === 1 ? record.target : record.target?.parentElement;
@@ -106,16 +142,26 @@
       });
       if (meaningful) schedule(target);
     });
-    observer.observe(target, { childList: true, subtree: true, characterData: true });
+
+    observer.observe(target, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['class', 'aria-selected', 'aria-current', 'aria-pressed', 'data-active']
+    });
   }
 
   function route() {
     if (!ROUTE.test(location.hash)) {
       observer?.disconnect();
       observer = null;
+      if (clickHost) clickHost.removeEventListener('click', onNavClick, true);
+      clickHost = null;
       pageRef = null;
       return;
     }
+
     let tries = 0;
     const wait = () => {
       const target = document.querySelector(PAGE);
