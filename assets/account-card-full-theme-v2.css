@@ -1,0 +1,105 @@
+/* DLavie Collector Card Full Theme v2 — skin changes the entire card, not only artwork */
+.dl-collector-card[class*="dl-skin-"]{
+  --skin-frame:#2d5037;--skin-frame2:#85b66b;--skin-ink:#172017;--skin-muted:#607062;
+  --skin-panel:#24472f;--skin-panel-ink:#eef6df;--skin-panel-muted:#c8dabb;
+  --skin-heart:#d93d3f;--skin-heart2:#f15a50;--skin-emblem:#cde68f;
+  --skin-ring:conic-gradient(from 0deg,#74d989,#e9e07b,#77b7d9,#74d989);
+  --skin-surface:linear-gradient(145deg,#f2e9b9,#f7efc8 48%,#d9e7ac);
+  --skin-overlay:linear-gradient(90deg,rgba(65,104,63,.045) 1px,transparent 1px),linear-gradient(rgba(65,104,63,.045) 1px,transparent 1px);
+  --skin-shadow:rgba(37,72,45,.25);
+  color:var(--skin-ink)!important;
+  filter:drop-shadow(0 16px 28px var(--skin-shadow))!important;
+}
+
+.dl-collector-card[class*="dl-skin-"] .dl-collector-card-inner{
+  border-color:var(--skin-frame)!important;
+  background:var(--skin-surface)!important;
+  color:var(--skin-ink)!important;
+  box-shadow:0 17px 36px var(--skin-shadow),inset 0 0 0 7px color-mix(in srgb,var(--skin-frame2) 22%,transparent),inset 0 -12px 0 rgba(0,0,0,.05)!important;
+}
+.dl-collector-card[class*="dl-skin-"] .dl-collector-card-inner:before{
+  border-color:var(--skin-frame2)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--skin-frame) 50%,transparent)!important;
+}
+.dl-collector-card[class*="dl-skin-"] .dl-collector-card-inner:after{
+  content:""!important;position:absolute!important;inset:0!important;z-index:0!important;pointer-events:none!important;
+  background:var(--skin-overlay)!important;background-size:22px 22px!important;opacity:.62!important;
+  animation:dlFullCardDrift 11s linear infinite!important;
+}
+@keyframes dlFullCardDrift{50%{background-position:11px 11px,-11px 11px}}
+.dl-collector-card[class*="dl-skin-"] .dl-collector-card-inner>*{position:relative;z-index:2}
+.dl-collector-card[class*="dl-skin-"] .dl-card-art{border-color:var(--skin-frame)!important;box-shadow:inset 0 -18px 42px rgba(0,0,0,.10),0 6px 0 color-mix(in srgb,var(--skin-frame) 22%,transparent)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-name-row{color:var(--skin-ink)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-name-row h3{color:var(--skin-ink)!important;text-shadow:0 1px 0 color-mix(in srgb,var(--skin-frame2) 24%,transparent)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-info{border-color:var(--skin-frame)!important;background:var(--skin-panel)!important;color:var(--skin-panel-ink)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--skin-frame2) 26%,transparent)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-facts{border-right-color:color-mix(in srgb,var(--skin-panel-ink) 18%,transparent)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-facts>strong,.dl-collector-card[class*="dl-skin-"] .dl-card-facts p,.dl-collector-card[class*="dl-skin-"] .dl-card-stats p{color:var(--skin-panel-ink)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-facts p span,.dl-collector-card[class*="dl-skin-"] .dl-card-stats p span{color:var(--skin-panel-muted)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-stats p{background:color-mix(in srgb,var(--skin-panel-ink) 8%,transparent)!important;border:1px solid color-mix(in srgb,var(--skin-panel-ink) 8%,transparent)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-stats b{color:color-mix(in srgb,var(--skin-panel-ink) 72%,#ffe67d)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-watermark{color:color-mix(in srgb,var(--skin-ink) 72%,var(--skin-frame2))!important;font-weight:850!important;opacity:.78!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-role-emblem{border-color:var(--skin-frame)!important;background:var(--skin-emblem)!important;color:var(--skin-frame)!important;box-shadow:inset -6px -6px 0 rgba(0,0,0,.12),5px 6px 0 color-mix(in srgb,var(--skin-frame) 24%,transparent)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-level-heart{background:var(--skin-heart)!important;filter:drop-shadow(3px 4px 0 color-mix(in srgb,var(--skin-heart) 58%,#111))!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-level-heart:before{background:var(--skin-heart2)!important}
+.dl-collector-card[class*="dl-skin-"] .dl-card-level-heart span{color:#fff!important;text-shadow:1px 2px 0 color-mix(in srgb,var(--skin-heart) 65%,#111)!important}
+.dl-collector-card[class*="dl-skin-"].tier-legendary:after{background:var(--skin-ring)!important;opacity:.78!important;animation:dlSkinRing 7.5s linear infinite!important}
+@keyframes dlSkinRing{to{transform:rotate(360deg)}}
+
+/* GRASSLANDS — classic overworld card */
+.dl-skin-grasslands{--skin-frame:#294d33;--skin-frame2:#8eb76d;--skin-ink:#20301f;--skin-panel:#294f34;--skin-panel-ink:#eef6d8;--skin-panel-muted:#c9dbac;--skin-heart:#d8433d;--skin-heart2:#f05a4f;--skin-emblem:#d6df7e;--skin-shadow:rgba(36,73,42,.20);--skin-ring:conic-gradient(#6bc46d,#e0d469,#80bee0,#6bc46d);--skin-surface:linear-gradient(180deg,#f7efbd 0 72%,#e7d691 72% 100%);--skin-overlay:linear-gradient(90deg,rgba(79,117,65,.06) 1px,transparent 1px),linear-gradient(rgba(79,117,65,.05) 1px,transparent 1px)}
+
+/* AMETHYST — whole card becomes geode / crystal */
+.dl-skin-amethyst-cavern{--skin-frame:#2a2034;--skin-frame2:#b58be6;--skin-ink:#f4ecff;--skin-panel:#201726;--skin-panel-ink:#f6eaff;--skin-panel-muted:#c9addd;--skin-heart:#7d48b8;--skin-heart2:#b66de9;--skin-emblem:#b78add;--skin-shadow:rgba(118,71,162,.32);--skin-ring:conic-gradient(#6e46a2,#d49fff,#8260e8,#f1c7ff,#6e46a2);--skin-surface:radial-gradient(circle at 18% 15%,rgba(211,159,255,.22),transparent 28%),radial-gradient(circle at 82% 82%,rgba(138,85,194,.24),transparent 30%),linear-gradient(145deg,#3d2f4b,#241d2c 48%,#17131d);--skin-overlay:linear-gradient(135deg,transparent 0 46%,rgba(216,169,255,.07) 47% 50%,transparent 51%),linear-gradient(45deg,rgba(255,255,255,.025) 25%,transparent 25% 75%,rgba(170,112,221,.035) 75%)}
+.dl-skin-amethyst-cavern .dl-card-watermark{color:#b997d3!important}.dl-skin-amethyst-cavern .dl-card-name-row h3{color:#f7efff!important}.dl-skin-amethyst-cavern .dl-card-holo{opacity:.36!important}
+
+/* OCEAN MONUMENT — prismarine shell, deep sea data panel */
+.dl-skin-ocean-monument{--skin-frame:#215d60;--skin-frame2:#7fd2c2;--skin-ink:#123b3d;--skin-panel:#163f49;--skin-panel-ink:#e9ffff;--skin-panel-muted:#a5d7d5;--skin-heart:#2d8f9e;--skin-heart2:#54c9c4;--skin-emblem:#8edcc4;--skin-shadow:rgba(33,112,122,.28);--skin-ring:conic-gradient(#4bc0c7,#83e0c4,#f3e4a6,#4bc0c7);--skin-surface:repeating-linear-gradient(45deg,rgba(49,143,136,.10) 0 10px,rgba(109,199,177,.07) 10px 20px),linear-gradient(145deg,#d7eee0,#a9d7c9 50%,#73bcb8);--skin-overlay:linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(rgba(21,95,101,.055) 1px,transparent 1px)}
+.dl-skin-ocean-monument .dl-card-info{background:linear-gradient(145deg,#164a54,#10353f)!important}.dl-skin-ocean-monument .dl-card-name-row h3{color:#153e40!important}
+
+/* SAKURA — soft paper, cherry trim, petal foil */
+.dl-skin-sakura-grove{--skin-frame:#7b4d60;--skin-frame2:#efa3c2;--skin-ink:#4d2c38;--skin-panel:#70485a;--skin-panel-ink:#fff1f6;--skin-panel-muted:#e8c8d4;--skin-heart:#dc638e;--skin-heart2:#f59bbb;--skin-emblem:#f0b2c8;--skin-shadow:rgba(150,78,111,.23);--skin-ring:conic-gradient(#f4a5c4,#f8dfeb,#9ccba9,#f4a5c4);--skin-surface:radial-gradient(circle at 15% 20%,rgba(239,159,192,.16) 0 2px,transparent 3px),radial-gradient(circle at 80% 72%,rgba(232,128,172,.12) 0 2px,transparent 3px),linear-gradient(145deg,#fff4f7,#f8dfe8 58%,#e7efd8);--skin-overlay:linear-gradient(120deg,rgba(130,75,96,.025) 25%,transparent 25% 50%,rgba(130,75,96,.025) 50% 75%,transparent 75%)}
+.dl-skin-sakura-grove .dl-card-name-row h3{color:#5a3040!important}.dl-skin-sakura-grove .dl-card-watermark{color:#a46a81!important}
+
+/* LUSH CAVE — mossy frame, glow-berry accents */
+.dl-skin-lush-cave{--skin-frame:#203e2b;--skin-frame2:#62aa63;--skin-ink:#e8f3dc;--skin-panel:#183425;--skin-panel-ink:#edf9db;--skin-panel-muted:#a8c69e;--skin-heart:#d79939;--skin-heart2:#f0c866;--skin-emblem:#79c679;--skin-shadow:rgba(31,90,53,.30);--skin-ring:conic-gradient(#4f9f64,#e3c35d,#4ba78b,#4f9f64);--skin-surface:radial-gradient(circle at 85% 16%,rgba(247,203,95,.17) 0 4px,transparent 5px),radial-gradient(circle at 16% 72%,rgba(81,177,131,.16),transparent 28%),linear-gradient(145deg,#315c3a,#244631 55%,#182e22);--skin-overlay:repeating-linear-gradient(90deg,rgba(93,150,86,.05) 0 2px,transparent 2px 18px),repeating-linear-gradient(0deg,rgba(118,175,95,.04) 0 2px,transparent 2px 18px)}
+.dl-skin-lush-cave .dl-card-name-row h3{color:#edf8df!important}.dl-skin-lush-cave .dl-card-watermark{color:#90b98b!important}
+
+/* NETHER — blackstone body, lava seams across entire card */
+.dl-skin-nether-flame{--skin-frame:#2b1110;--skin-frame2:#ff7a22;--skin-ink:#ffe6bd;--skin-panel:#23100f;--skin-panel-ink:#ffe7c0;--skin-panel-muted:#e4a86c;--skin-heart:#a92b1c;--skin-heart2:#ff6a1b;--skin-emblem:#d64b1e;--skin-shadow:rgba(217,72,25,.34);--skin-ring:conic-gradient(#ff531c,#ffb42b,#7f1c15,#ff531c);--skin-surface:radial-gradient(circle at 10% 88%,rgba(255,101,23,.18),transparent 24%),radial-gradient(circle at 90% 14%,rgba(255,65,17,.12),transparent 23%),linear-gradient(145deg,#331512,#1e0e0d 50%,#120908);--skin-overlay:linear-gradient(128deg,transparent 0 42%,rgba(255,92,20,.16) 43% 45%,transparent 46% 70%,rgba(255,151,33,.10) 71% 72%,transparent 73%),linear-gradient(40deg,rgba(92,24,17,.12) 25%,transparent 25% 75%,rgba(92,24,17,.12) 75%)}
+.dl-skin-nether-flame .dl-card-info{background:linear-gradient(145deg,#301210,#170a09)!important}.dl-skin-nether-flame .dl-card-name-row h3{color:#ffd69e!important;text-shadow:0 0 9px rgba(255,96,20,.22)!important}.dl-skin-nether-flame .dl-card-watermark{color:#db7447!important}.dl-skin-nether-flame .dl-collector-card-inner{animation:dlNetherBody 4.8s ease-in-out infinite!important}@keyframes dlNetherBody{50%{box-shadow:0 18px 40px rgba(103,26,14,.35),inset 0 0 0 7px rgba(255,110,24,.10),0 0 23px rgba(255,76,18,.16)!important}}
+
+/* SOUL VALLEY — basalt + cyan soul energy */
+.dl-skin-soul-valley{--skin-frame:#252f31;--skin-frame2:#69e5e8;--skin-ink:#e6fbf8;--skin-panel:#182426;--skin-panel-ink:#e4ffff;--skin-panel-muted:#8ed0cf;--skin-heart:#257d84;--skin-heart2:#55e1e7;--skin-emblem:#64d8d6;--skin-shadow:rgba(55,198,201,.25);--skin-ring:conic-gradient(#5ce8e9,#d8ffff,#457c89,#5ce8e9);--skin-surface:repeating-linear-gradient(90deg,rgba(167,184,172,.035) 0 12px,transparent 12px 26px),linear-gradient(145deg,#31393a,#232b2d 54%,#151b1d);--skin-overlay:radial-gradient(circle at 15% 18%,rgba(92,235,237,.11) 0 3px,transparent 4px),radial-gradient(circle at 78% 64%,rgba(92,235,237,.09) 0 3px,transparent 4px)}
+.dl-skin-soul-valley .dl-card-name-row h3{color:#dbffff!important}.dl-skin-soul-valley .dl-card-watermark{color:#6da8a9!important}
+
+/* ENDER VOID — obsidian / chorus purple */
+.dl-skin-ender-void{--skin-frame:#100b17;--skin-frame2:#b356e6;--skin-ink:#f4e9ff;--skin-panel:#130c1c;--skin-panel-ink:#f8ecff;--skin-panel-muted:#c09bd7;--skin-heart:#7133a8;--skin-heart2:#c45ce8;--skin-emblem:#8c4ab9;--skin-shadow:rgba(137,64,202,.33);--skin-ring:conic-gradient(#8e43cc,#ef80ff,#453070,#8e43cc);--skin-surface:radial-gradient(circle at 50% 15%,rgba(187,83,239,.18),transparent 32%),linear-gradient(145deg,#21122f,#130b1d 58%,#09060d);--skin-overlay:radial-gradient(circle at 18% 25%,rgba(219,111,255,.14) 0 2px,transparent 3px),radial-gradient(circle at 76% 75%,rgba(219,111,255,.11) 0 2px,transparent 3px)}
+.dl-skin-ender-void .dl-card-name-row h3{color:#f1ddff!important}.dl-skin-ender-void .dl-card-watermark{color:#9f6dbd!important}
+
+/* ENDER DRAGON — armored obsidian card */
+.dl-skin-ender-dragon{--skin-frame:#09070c;--skin-frame2:#d05bff;--skin-ink:#fff1ff;--skin-panel:#0f0a14;--skin-panel-ink:#fff1ff;--skin-panel-muted:#c38bd2;--skin-heart:#672f78;--skin-heart2:#e26cff;--skin-emblem:#2e2237;--skin-shadow:rgba(198,81,255,.38);--skin-ring:conic-gradient(#7e35aa,#f26cff,#21182c,#7e35aa);--skin-surface:linear-gradient(135deg,transparent 0 44%,rgba(112,65,137,.09) 45% 50%,transparent 51%),linear-gradient(145deg,#17121d,#0b0810 62%,#050407);--skin-overlay:linear-gradient(30deg,transparent 0 46%,rgba(222,103,255,.07) 47% 49%,transparent 50% 74%,rgba(136,67,163,.055) 75% 77%,transparent 78%)}
+.dl-skin-ender-dragon .dl-card-role-emblem{color:#e9b4ff!important}.dl-skin-ender-dragon .dl-card-name-row h3{color:#fff0ff!important;text-shadow:0 0 11px rgba(218,95,255,.28)!important}.dl-skin-ender-dragon .dl-card-watermark{color:#9c709f!important}
+
+/* ANCIENT CITY — sculk veins throughout the card */
+.dl-skin-ancient-city{--skin-frame:#071b1d;--skin-frame2:#38cfc9;--skin-ink:#dff9f2;--skin-panel:#081c1e;--skin-panel-ink:#e5fffb;--skin-panel-muted:#81c8c1;--skin-heart:#176467;--skin-heart2:#3bd4cd;--skin-emblem:#14565a;--skin-shadow:rgba(33,185,181,.27);--skin-ring:conic-gradient(#2ed2ca,#8ff7e9,#163e45,#2ed2ca);--skin-surface:radial-gradient(circle at 20% 76%,rgba(52,213,203,.14),transparent 24%),radial-gradient(circle at 82% 18%,rgba(31,147,154,.12),transparent 27%),linear-gradient(145deg,#102e30,#0a2022 55%,#061315);--skin-overlay:repeating-radial-gradient(circle at 20% 40%,rgba(49,205,197,.075) 0 2px,transparent 3px 14px),linear-gradient(90deg,rgba(36,112,116,.045) 1px,transparent 1px)}
+.dl-skin-ancient-city .dl-card-name-row h3{color:#dffef9!important}.dl-skin-ancient-city .dl-card-watermark{color:#579e9b!important}
+
+/* ENCHANTED LIBRARY — enchanted book / arcane leather card */
+.dl-skin-enchanted-library{--skin-frame:#382044;--skin-frame2:#d28bec;--skin-ink:#fff0d7;--skin-panel:#2b1734;--skin-panel-ink:#fff2da;--skin-panel-muted:#d7addf;--skin-heart:#8a438f;--skin-heart2:#e681ee;--skin-emblem:#7a3b91;--skin-shadow:rgba(160,76,190,.30);--skin-ring:conic-gradient(#a45ed3,#f0b2ff,#e7b85b,#a45ed3);--skin-surface:linear-gradient(90deg,rgba(232,182,93,.055) 1px,transparent 1px),linear-gradient(145deg,#5a2d67,#3d2148 54%,#27152f);--skin-overlay:radial-gradient(circle at 16% 15%,rgba(239,176,255,.13) 0 2px,transparent 3px),radial-gradient(circle at 80% 74%,rgba(234,188,104,.09) 0 2px,transparent 3px)}
+.dl-skin-enchanted-library .dl-card-name-row h3{color:#fff0d9!important}.dl-skin-enchanted-library .dl-card-watermark{color:#d4a6da!important}
+
+/* MYTHIC — entire card becomes prismatic, not just artwork */
+.dl-skin-mythic-realm{--skin-frame:#17172a;--skin-frame2:#b6a3ff;--skin-ink:#f9fbff;--skin-panel:#171a2d;--skin-panel-ink:#f7fbff;--skin-panel-muted:#b9bee1;--skin-heart:#7750d1;--skin-heart2:#ff79ca;--skin-emblem:#c7bbff;--skin-shadow:rgba(112,91,222,.38);--skin-ring:conic-gradient(from 0deg,#69f2d3,#7bb7ff,#b07bff,#ff84cd,#ffe57a,#69f2d3);--skin-surface:radial-gradient(circle at 20% 10%,rgba(104,239,211,.18),transparent 30%),radial-gradient(circle at 85% 78%,rgba(255,126,205,.16),transparent 28%),linear-gradient(145deg,#29264c,#191b34 52%,#111426);--skin-overlay:linear-gradient(120deg,transparent 18%,rgba(103,240,212,.11) 30%,rgba(174,117,255,.12) 46%,rgba(255,129,207,.11) 62%,rgba(255,230,113,.09) 75%,transparent 88%)}
+.dl-skin-mythic-realm .dl-card-name-row h3{color:#fbfbff!important;text-shadow:0 0 13px rgba(171,135,255,.26)!important}.dl-skin-mythic-realm .dl-card-info{background:linear-gradient(135deg,rgba(25,28,51,.96),rgba(29,24,54,.96))!important}.dl-skin-mythic-realm .dl-card-watermark{color:#b9b0e0!important}.dl-skin-mythic-realm .dl-collector-card-inner:after{background-size:170% 170%!important;animation:dlMythicBody 8s ease-in-out infinite!important}@keyframes dlMythicBody{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Vault cards inherit a visual hint of the full theme */
+#dl-card-vault .dl-vault-skin[data-skin="nether-flame"]{border-color:#7c321f!important;background:linear-gradient(135deg,#25110f,#171011)!important}
+#dl-card-vault .dl-vault-skin[data-skin="soul-valley"]{border-color:#347e81!important;background:linear-gradient(135deg,#20282a,#151b1d)!important}
+#dl-card-vault .dl-vault-skin[data-skin="ender-void"],#dl-card-vault .dl-vault-skin[data-skin="ender-dragon"]{border-color:#633a78!important;background:linear-gradient(135deg,#1c1225,#100b16)!important}
+#dl-card-vault .dl-vault-skin[data-skin="ancient-city"]{border-color:#246d70!important;background:linear-gradient(135deg,#102629,#0c181b)!important}
+#dl-card-vault .dl-vault-skin[data-skin="enchanted-library"]{border-color:#714a7e!important;background:linear-gradient(135deg,#3b2345,#25182c)!important}
+#dl-card-vault .dl-vault-skin[data-skin="mythic-realm"]{border-color:#7d6ed1!important;background:linear-gradient(135deg,#242441,#16172b)!important}
+
+.dl-collector-card:not(.is-card-visible) .dl-collector-card-inner:after{animation-play-state:paused!important}
+@media(max-width:700px){.dl-collector-card[class*="dl-skin-"] .dl-collector-card-inner:after{animation-duration:14s!important;opacity:.48!important}.dl-skin-nether-flame .dl-collector-card-inner{animation-duration:6.5s!important}}
+@media(prefers-reduced-motion:reduce){.dl-collector-card[class*="dl-skin-"] .dl-collector-card-inner:after,.dl-skin-nether-flame .dl-collector-card-inner{animation:none!important}}
