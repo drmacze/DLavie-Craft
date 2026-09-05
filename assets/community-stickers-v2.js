@@ -18,44 +18,37 @@
   function setValue(el,value){const proto=el instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;const setter=Object.getOwnPropertyDescriptor(proto,'value')?.set;if(setter)setter.call(el,value);else el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));}
 
   function activeButton(page){
-    return page.querySelector([
-      '.forum-sidebar nav button.active',
-      '.forum-sidebar nav button[aria-selected="true"]',
-      '.forum-sidebar nav button[aria-current="page"]',
-      '.forum-sidebar nav button[aria-pressed="true"]',
-      '.forum-sidebar nav button[data-active="true"]'
-    ].join(','));
+    return page.querySelector('.forum-sidebar nav button.active,.forum-sidebar nav button[aria-selected="true"],.forum-sidebar nav button[aria-current="page"],.forum-sidebar nav button[aria-pressed="true"],.forum-sidebar nav button[data-active="true"]');
   }
 
   function activeForum(page){
+    const access=window.__DLAVIE_FORUM_ACCESS__?.getActive?.();
+    if(access?.forum_type)return access;
+
     const st=core()?.getState?.();
     const btn=activeButton(page);
     const heading=page.querySelector('.active-forum-head h2');
     const values=[
-      btn?.dataset?.dlForumRaw,
-      btn?.dataset?.dlForumLabel,
+      btn?.textContent,
       btn?.getAttribute('aria-label'),
-      btn?.querySelector('strong')?.textContent,
-      heading?.dataset?.dlForumRaw,
-      heading?.dataset?.dlForumLabel,
-      heading?.getAttribute('aria-label'),
-      heading?.textContent
+      heading?.textContent,
+      heading?.getAttribute('aria-label')
     ].map(clean).filter(Boolean);
 
     if(st?.forums?.length){
-      const exact=st.forums.find(f=>values.some(v=>v===clean(f.name)||v===clean(f.slug)));
+      const exact=st.forums.find(f=>values.some(v=>v===clean(f.name)||v===clean(f.slug)||v.startsWith(`${clean(f.name)} `)));
       if(exact)return exact;
-      if(values.some(v=>/^(obrolan|general|percakapan|global chat)$/.test(v)))return st.forums.find(f=>f.forum_type==='chat')||null;
+      if(values.some(v=>/^(general|obrolan|percakapan|global chat)(\s|$)/.test(v)))return st.forums.find(f=>f.forum_type==='chat')||null;
     }
-
-    if(values.some(v=>/obrolan|general|percakapan|global\s*chat/.test(v)))return{forum_type:'chat'};
+    if(values.some(v=>/^(general|obrolan|percakapan|global chat)(\s|$)/.test(v)))return{forum_type:'chat'};
     return null;
   }
 
   function stickersAllowed(page){return activeForum(page)?.forum_type==='chat';}
 
   async function reload(){
-    if(loading||!core())return;loading=true;
+    if(loading||!core()?.api)return;
+    loading=true;
     try{stickers=await core().api('dlavie_craft_community_stickers?select=id,name,slug,public_url,mime_type,animated,active,sort_order,created_at&active=eq.true&order=sort_order.asc,created_at.asc')||[];}
     finally{loading=false;}
   }
@@ -64,7 +57,7 @@
   function sheet(){
     document.querySelector('.dl-sticker-sheet')?.remove();
     const o=document.createElement('div');o.className='dl-sticker-sheet';
-    o.innerHTML='<section><header><div><strong>Sticker Komunitas</strong><small>Khusus forum General / Obrolan.</small></div><button type="button" data-close data-dl-no-icon="true">×</button></header><div class="dl-sticker-sheet-body"></div></section>';
+    o.innerHTML='<section><header><div><strong>Sticker Komunitas</strong><small>Khusus forum General.</small></div><button type="button" data-close data-dl-no-icon="true">×</button></header><div class="dl-sticker-sheet-body"></div></section>';
     const close=()=>o.remove();o.querySelector('[data-close]').onclick=close;o.onclick=e=>{if(e.target===o)close();};document.body.append(o);return{body:o.querySelector('.dl-sticker-sheet-body'),close};
   }
 
@@ -86,20 +79,34 @@
   function openPicker(textarea){
     const page=document.querySelector(PAGE);
     if(!page||!stickersAllowed(page))return;
-    if(!core()?.session())return (document.getElementById('dl-shell-account-entry')||document.getElementById('dl-account-entry'))?.click();
+    if(!core()?.session?.())return (document.getElementById('dl-shell-account-entry')||document.getElementById('dl-account-entry'))?.click();
     const ui=sheet(),top=document.createElement('div'),grid=document.createElement('div');
     top.className='dl-sticker-picker-top';top.innerHTML='<input type="search" placeholder="Cari sticker…" aria-label="Cari sticker"><span></span>';grid.className='dl-sticker-grid';ui.body.append(top,grid);
     const draw=q=>{grid.replaceChildren();const active=stickers.filter(s=>!q||s.name.toLowerCase().includes(q.toLowerCase()));top.querySelector('span').textContent=`${active.length} sticker`;if(!active.length){grid.innerHTML='<p class="dl-sticker-empty">Belum ada sticker yang cocok.</p>';return;}active.forEach(s=>{const b=button('','dl-sticker-card');b.innerHTML=`<img src="${esc(s.public_url)}" alt="${esc(s.name)}" loading="lazy" decoding="async"><span>${esc(s.name)}</span>${s.animated?'<b>GIF</b>':''}`;b.onclick=()=>{const current=document.querySelector(PAGE);if(!current||!stickersAllowed(current)){ui.close();return;}setValue(textarea,`[[dlavie-sticker:${s.id}]]`);ui.close();if(textarea.closest('.quick-chat-composer'))setTimeout(()=>textarea.closest('form')?.requestSubmit(),40);else textarea.focus();};grid.append(b);});};
     draw('');top.querySelector('input').oninput=e=>draw(e.target.value.trim());
   }
 
-  function composerButtons(page){
-    page.querySelectorAll('.dl-sticker-compose').forEach(n=>n.remove());
-    if(!stickers.length||!stickersAllowed(page))return;
+  function ensureComposerButtons(page){
+    const allowed=stickers.length>0&&stickersAllowed(page);
+    if(!allowed){
+      page.querySelectorAll('.dl-sticker-compose').forEach(n=>n.remove());
+      return;
+    }
+
     page.querySelectorAll('form textarea').forEach(ta=>{
-      const form=ta.closest('form');if(!form||form.querySelector('.dl-sticker-compose')||ta.closest('#dl-community-toolbar')||ta.closest('.feed-feedback'))return;
-      const b=button('Sticker','dl-sticker-compose');b.setAttribute('aria-label','Pilih sticker komunitas');b.onclick=()=>openPicker(ta);
-      const submit=form.querySelector('button[type="submit"],button:not([type])');if(submit?.parentElement)submit.parentElement.insertBefore(b,submit);else form.append(b);
+      const form=ta.closest('form');
+      if(!form||ta.closest('#dl-community-toolbar')||ta.closest('.feed-feedback'))return;
+      const existing=form.querySelector('.dl-sticker-compose');
+      if(existing){
+        existing.disabled=false;
+        existing.hidden=false;
+        return;
+      }
+      const b=button('Sticker','dl-sticker-compose');
+      b.setAttribute('aria-label','Pilih sticker komunitas');
+      b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openPicker(ta);});
+      const submit=form.querySelector('button[type="submit"]')||[...form.querySelectorAll('button')].find(btn=>/^kirim$/i.test((btn.textContent||'').trim()));
+      if(submit?.parentElement)submit.parentElement.insertBefore(b,submit);else form.append(b);
     });
   }
 
@@ -107,19 +114,29 @@
     page.querySelectorAll('.dl-sticker-studio,[data-sticker-studio]').forEach(n=>n.remove());
     renderMessages(page);
     if(!stickersAllowed(page))document.querySelector('.dl-sticker-sheet')?.remove();
-    composerButtons(page);
+    ensureComposerButtons(page);
   }
+
   function schedule(page=document.querySelector(PAGE)){if(raf)return;raf=requestAnimationFrame(()=>{raf=0;if(page?.isConnected)enhance(page);});}
-  function settle(page){schedule(page);setTimeout(()=>schedule(page),50);setTimeout(()=>schedule(page),150);setTimeout(()=>schedule(page),320);}
+  function settle(page){schedule(page);setTimeout(()=>schedule(page),60);setTimeout(()=>schedule(page),180);setTimeout(()=>schedule(page),420);}
   function onClick(e){if(e.target.closest('.forum-sidebar nav button'))settle(e.currentTarget);}
+
   function attach(page){
     if(pageRef===page){settle(page);return;}
     observer?.disconnect();if(clickHost)clickHost.removeEventListener('click',onClick,true);
     pageRef=page;clickHost=page;page.addEventListener('click',onClick,true);
     reload().then(()=>settle(page)).catch(()=>{});
-    observer=new MutationObserver(records=>{const meaningful=records.some(r=>{const t=r.target?.nodeType===1?r.target:r.target?.parentElement;return !t?.closest?.('.dl-sticker-message,.dl-sticker-compose,.dl-sticker-sheet');});if(meaningful)schedule(page);});
-    observer.observe(page,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-selected','aria-current','aria-pressed','data-active']});
+    observer=new MutationObserver(records=>{
+      const meaningful=records.some(r=>{
+        const t=r.target?.nodeType===1?r.target:r.target?.parentElement;
+        if(t?.closest?.('.dl-sticker-message,.dl-sticker-compose,.dl-sticker-sheet'))return false;
+        return [...r.addedNodes,...r.removedNodes].some(n=>!(n.nodeType===1&&n.matches?.('.dl-sticker-compose,.dl-sticker-message,.dl-sticker-sheet')));
+      });
+      if(meaningful)schedule(page);
+    });
+    observer.observe(page,{childList:true,subtree:true});
   }
+
   function route(){
     if(!ROUTE.test(location.hash)){
       observer?.disconnect();observer=null;
@@ -129,6 +146,8 @@
     let n=0;const wait=()=>{const p=document.querySelector(PAGE);if(p)return attach(p);if(n++<30)setTimeout(wait,90+n*8);};wait();
   }
 
-  window.addEventListener('hashchange',route);window.addEventListener('popstate',route);window.addEventListener('pageshow',route);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',route,{once:true});else route();
+  document.addEventListener('dlavie:forum-settings-changed',()=>setTimeout(()=>settle(document.querySelector(PAGE)),80));
+  window.addEventListener('hashchange',route);window.addEventListener('popstate',route);window.addEventListener('pageshow',route);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',route,{once:true});else route();
   window.__DLAVIE_PUBLIC_STICKERS__={reload,getStickers:()=>stickers.slice(),isAllowed:()=>{const p=document.querySelector(PAGE);return !!p&&stickersAllowed(p);}};
 })();
