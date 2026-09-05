@@ -1,138 +1,16 @@
-/* Community v35.2 — concise native forum titles only.
-   React owns the buttons. Plain description text is visually suppressed without DOM mutation. */
-
+/* Community v36 — concise forum titles rendered explicitly by runtime. */
 @media(max-width:1050px){
-  .community-page.community-v2 .forum-sidebar{
-    margin:0 0 10px!important;
-    padding:4px!important;
-    border:0!important;
-    border-radius:11px!important;
-    background:rgba(10,8,16,.72)!important;
-    box-shadow:none!important;
-    backdrop-filter:none!important;
-    -webkit-backdrop-filter:none!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav{
-    display:flex!important;
-    align-items:center!important;
-    gap:3px!important;
-    padding:0!important;
-    overflow-x:auto!important;
-    overflow-y:hidden!important;
-    scroll-snap-type:x proximity!important;
-    -webkit-overflow-scrolling:touch!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button{
-    flex:0 0 auto!important;
-    width:auto!important;
-    min-width:116px!important;
-    max-width:none!important;
-    height:42px!important;
-    min-height:42px!important;
-    margin:0!important;
-    padding:0 9px!important;
-    scroll-snap-align:start!important;
-    border:0!important;
-    border-radius:8px!important;
-    background:transparent!important;
-    color:rgba(255,255,255,.62)!important;
-    box-shadow:none!important;
-    transform:none!important;
-    transition:background .14s ease,color .14s ease!important;
-    pointer-events:auto!important;
-    touch-action:manipulation!important;
-    overflow:hidden!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button.active,
-  .community-page.community-v2 .forum-sidebar nav button[aria-selected="true"],
-  .community-page.community-v2 .forum-sidebar nav button[aria-current="page"]{
-    background:rgba(255,255,255,.065)!important;
-    color:rgba(255,255,255,.96)!important;
-    box-shadow:inset 0 -2px 0 var(--accent,#8b5cf6)!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button:active{background:rgba(255,255,255,.095)!important}
-
-  .community-page.community-v2 .forum-sidebar nav button .forum-nav-icon,
-  .community-page.community-v2 .forum-sidebar nav button .dl-canon-icon-v9{
-    width:26px!important;
-    height:26px!important;
-    min-width:26px!important;
-    flex:0 0 26px!important;
-    border-radius:7px!important;
-    box-shadow:none!important;
-    pointer-events:none!important;
-  }
-
-  /* Some React button variants place the description as a raw text node beside
-     <strong>. Setting the text wrapper to 0px hides that raw text while the
-     explicit title element below restores the intended channel name. */
-  .community-page.community-v2 .forum-sidebar nav button>div,
-  .community-page.community-v2 .forum-sidebar nav button>span:not(.forum-nav-icon):not(.dl-canon-icon-v9){
-    min-width:0!important;
-    overflow:hidden!important;
-    font-size:0!important;
-    line-height:0!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button small,
-  .community-page.community-v2 .forum-sidebar nav button p,
-  .community-page.community-v2 .forum-sidebar nav button .forum-description,
-  .community-page.community-v2 .forum-sidebar nav button [class*="description"]{
-    display:none!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button strong{
-    display:block!important;
-    min-width:0!important;
-    max-width:none!important;
-    overflow:visible!important;
-    white-space:nowrap!important;
-    text-overflow:clip!important;
-    font-family:var(--font-body,inherit)!important;
-    font-size:11px!important;
-    font-weight:760!important;
-    line-height:1.1!important;
-    letter-spacing:0!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button>b{
-    min-width:20px!important;
-    width:auto!important;
-    height:20px!important;
-    min-height:20px!important;
-    padding:0 5px!important;
-    margin-left:auto!important;
-    border:0!important;
-    border-radius:6px!important;
-    background:rgba(255,255,255,.07)!important;
-    color:rgba(255,255,255,.74)!important;
-    box-shadow:none!important;
-    font-size:9px!important;
-    line-height:20px!important;
-    pointer-events:none!important;
-  }
+  .community-page.community-v2 .forum-sidebar{margin:0 0 10px!important;padding:4px!important;border:0!important;border-radius:11px!important;background:rgba(10,8,16,.72)!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .community-page.community-v2 .forum-sidebar nav{display:flex!important;align-items:center!important;gap:3px!important;padding:0!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x proximity!important;-webkit-overflow-scrolling:touch!important}
+  .community-page.community-v2 .forum-sidebar nav button{position:relative!important;flex:0 0 auto!important;width:auto!important;min-width:82px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 9px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;scroll-snap-align:start!important;border:0!important;border-radius:9px!important;background:transparent!important;color:rgba(255,255,255,.64)!important;box-shadow:none!important;transform:none!important;transition:background .14s ease,color .14s ease!important;pointer-events:auto!important;touch-action:manipulation!important;overflow:hidden!important;font-size:0!important;line-height:0!important}
+  .community-page.community-v2 .forum-sidebar nav button.active,.community-page.community-v2 .forum-sidebar nav button[aria-selected="true"],.community-page.community-v2 .forum-sidebar nav button[aria-current="page"]{background:rgba(255,255,255,.07)!important;color:rgba(255,255,255,.98)!important;box-shadow:inset 0 -2px 0 var(--accent,#8b5cf6)!important}
+  .community-page.community-v2 .forum-sidebar nav button>*:not(.forum-nav-icon):not(.dl-canon-icon-v9):not(.dl-forum-title-v36):not(b){display:none!important}
+  .community-page.community-v2 .forum-sidebar nav button .forum-nav-icon,.community-page.community-v2 .forum-sidebar nav button .dl-canon-icon-v9{display:block!important;width:26px!important;height:26px!important;min-width:26px!important;flex:0 0 26px!important;border-radius:7px!important;box-shadow:none!important;pointer-events:none!important}
+  .community-page.community-v2 .forum-sidebar nav button .dl-forum-title-v36{display:block!important;flex:0 0 auto!important;max-width:none!important;overflow:visible!important;white-space:nowrap!important;text-overflow:clip!important;font-family:var(--font-body,inherit)!important;font-size:11px!important;font-weight:760!important;line-height:1!important;letter-spacing:0!important;color:inherit!important;pointer-events:none!important}
+  .community-page.community-v2 .forum-sidebar nav button>b{display:block!important;flex:0 0 auto!important;min-width:20px!important;width:auto!important;height:20px!important;min-height:20px!important;padding:0 5px!important;margin-left:1px!important;border:0!important;border-radius:6px!important;background:rgba(255,255,255,.07)!important;color:rgba(255,255,255,.74)!important;box-shadow:none!important;font-size:9px!important;line-height:20px!important;pointer-events:none!important}
 }
-
-.community-page.community-v2 .dl-sticker-compose{
-  pointer-events:auto!important;
-  touch-action:manipulation!important;
-  position:relative!important;
-  isolation:isolate!important;
-}
-.community-page.community-v2 .dl-sticker-compose .dl-canon-icon-v9,
-.community-page.community-v2 .dl-sticker-compose svg{pointer-events:none!important}
-.community-page.community-v2 .reply-composer .dl-sticker-compose,
-.community-page.community-v2 .quick-chat-composer .dl-sticker-compose{min-width:44px!important;min-height:44px!important}
-
-@media(max-width:430px){
-  .community-page.community-v2 .forum-sidebar{padding:3px!important}
-  .community-page.community-v2 .forum-sidebar nav{gap:2px!important}
-  .community-page.community-v2 .forum-sidebar nav button{
-    min-width:112px!important;
-    height:40px!important;
-    min-height:40px!important;
-    padding-inline:7px!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button strong{
-    max-width:none!important;
-    font-size:10.5px!important;
-  }
-}
+.community-page.community-v2 .dl-sticker-compose{pointer-events:auto!important;touch-action:manipulation!important;position:relative!important;isolation:isolate!important}
+.community-page.community-v2 .dl-sticker-compose .dl-canon-icon-v9,.community-page.community-v2 .dl-sticker-compose svg{pointer-events:none!important}
+.community-page.community-v2 .reply-composer .dl-sticker-compose,.community-page.community-v2 .quick-chat-composer .dl-sticker-compose{min-width:44px!important;min-height:44px!important}
+@media(max-width:430px){.community-page.community-v2 .forum-sidebar{padding:3px!important}.community-page.community-v2 .forum-sidebar nav{gap:2px!important}.community-page.community-v2 .forum-sidebar nav button{min-width:78px!important;height:42px!important;min-height:42px!important;padding-inline:7px!important;gap:6px!important}.community-page.community-v2 .forum-sidebar nav button .dl-forum-title-v36{font-size:10.5px!important}}
 @media(prefers-reduced-motion:reduce){.community-page.community-v2 .forum-sidebar nav button{transition:none!important}}
