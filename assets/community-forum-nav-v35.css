@@ -1,5 +1,5 @@
-/* Community v35 — native forum names + compact Discord-like channel strip.
-   No DOM label wrappers: React remains the sole owner of forum button content. */
+/* Community v35.1 — native forum names + compact Discord-like channel strip.
+   React owns button content; CSS only presents the channel name, never the description. */
 
 @media(max-width:1050px){
   .community-page.community-v2 .forum-sidebar{
@@ -25,7 +25,7 @@
   .community-page.community-v2 .forum-sidebar nav button{
     flex:0 0 auto!important;
     width:auto!important;
-    min-width:108px!important;
+    min-width:104px!important;
     max-width:none!important;
     height:42px!important;
     min-height:42px!important;
@@ -41,6 +41,7 @@
     transition:background .14s ease,color .14s ease!important;
     pointer-events:auto!important;
     touch-action:manipulation!important;
+    overflow:hidden!important;
   }
   .community-page.community-v2 .forum-sidebar nav button.active,
   .community-page.community-v2 .forum-sidebar nav button[aria-selected="true"],
@@ -49,22 +50,31 @@
     color:rgba(255,255,255,.96)!important;
     box-shadow:inset 0 -2px 0 var(--accent,#8b5cf6)!important;
   }
-  .community-page.community-v2 .forum-sidebar nav button:active{
-    background:rgba(255,255,255,.095)!important;
-  }
+  .community-page.community-v2 .forum-sidebar nav button:active{background:rgba(255,255,255,.095)!important}
+
   .community-page.community-v2 .forum-sidebar nav button .forum-nav-icon,
   .community-page.community-v2 .forum-sidebar nav button .dl-canon-icon-v9{
-    width:26px!important;
-    height:26px!important;
-    min-width:26px!important;
-    flex:0 0 26px!important;
-    border-radius:7px!important;
-    box-shadow:none!important;
-    pointer-events:none!important;
+    width:26px!important;height:26px!important;min-width:26px!important;flex:0 0 26px!important;
+    border-radius:7px!important;box-shadow:none!important;pointer-events:none!important;
+  }
+
+  /* The native button also contains forum description text. Keep it in the DOM
+     for app logic/accessibility, but never let it visually join the channel name. */
+  .community-page.community-v2 .forum-sidebar nav button small,
+  .community-page.community-v2 .forum-sidebar nav button p,
+  .community-page.community-v2 .forum-sidebar nav button .forum-description,
+  .community-page.community-v2 .forum-sidebar nav button [class*="description"]{
+    display:none!important;
+  }
+  .community-page.community-v2 .forum-sidebar nav button>div,
+  .community-page.community-v2 .forum-sidebar nav button>span:not(.forum-nav-icon):not(.dl-canon-icon-v9){
+    min-width:0!important;
+    overflow:hidden!important;
   }
   .community-page.community-v2 .forum-sidebar nav button strong{
+    display:block!important;
     min-width:0!important;
-    max-width:92px!important;
+    max-width:88px!important;
     overflow:hidden!important;
     white-space:nowrap!important;
     text-overflow:ellipsis!important;
@@ -75,54 +85,25 @@
     letter-spacing:0!important;
   }
   .community-page.community-v2 .forum-sidebar nav button>b{
-    min-width:20px!important;
-    width:auto!important;
-    height:20px!important;
-    min-height:20px!important;
-    padding:0 5px!important;
-    margin-left:auto!important;
-    border:0!important;
-    border-radius:6px!important;
-    background:rgba(255,255,255,.07)!important;
-    color:rgba(255,255,255,.74)!important;
-    box-shadow:none!important;
-    font-size:9px!important;
-    pointer-events:none!important;
+    min-width:20px!important;width:auto!important;height:20px!important;min-height:20px!important;
+    padding:0 5px!important;margin-left:auto!important;border:0!important;border-radius:6px!important;
+    background:rgba(255,255,255,.07)!important;color:rgba(255,255,255,.74)!important;
+    box-shadow:none!important;font-size:9px!important;pointer-events:none!important;
   }
 }
 
-/* Sticker controls must remain stable between touchstart and click. */
 .community-page.community-v2 .dl-sticker-compose{
-  pointer-events:auto!important;
-  touch-action:manipulation!important;
-  position:relative!important;
-  isolation:isolate!important;
+  pointer-events:auto!important;touch-action:manipulation!important;position:relative!important;isolation:isolate!important;
 }
 .community-page.community-v2 .dl-sticker-compose .dl-canon-icon-v9,
-.community-page.community-v2 .dl-sticker-compose svg{
-  pointer-events:none!important;
-}
+.community-page.community-v2 .dl-sticker-compose svg{pointer-events:none!important}
 .community-page.community-v2 .reply-composer .dl-sticker-compose,
-.community-page.community-v2 .quick-chat-composer .dl-sticker-compose{
-  min-width:44px!important;
-  min-height:44px!important;
-}
+.community-page.community-v2 .quick-chat-composer .dl-sticker-compose{min-width:44px!important;min-height:44px!important}
 
 @media(max-width:430px){
   .community-page.community-v2 .forum-sidebar{padding:3px!important}
   .community-page.community-v2 .forum-sidebar nav{gap:2px!important}
-  .community-page.community-v2 .forum-sidebar nav button{
-    min-width:102px!important;
-    height:40px!important;
-    min-height:40px!important;
-    padding-inline:7px!important;
-  }
-  .community-page.community-v2 .forum-sidebar nav button strong{
-    max-width:84px!important;
-    font-size:10px!important;
-  }
+  .community-page.community-v2 .forum-sidebar nav button{min-width:100px!important;height:40px!important;min-height:40px!important;padding-inline:7px!important}
+  .community-page.community-v2 .forum-sidebar nav button strong{max-width:80px!important;font-size:10px!important}
 }
-
-@media(prefers-reduced-motion:reduce){
-  .community-page.community-v2 .forum-sidebar nav button{transition:none!important}
-}
+@media(prefers-reduced-motion:reduce){.community-page.community-v2 .forum-sidebar nav button{transition:none!important}}
