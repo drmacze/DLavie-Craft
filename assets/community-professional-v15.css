@@ -1,0 +1,380 @@
+/* DLavie Community Professional V15
+   Stronger hierarchy, compact Discord-like actions, Minecraft identity, mobile-first. */
+
+.community-page.community-v2.dl-community-v15{
+  --v15-role:#7654d6;
+  --v15-surface:color-mix(in srgb,var(--surface-raised,#fff) 94%,transparent);
+  --v15-surface-2:color-mix(in srgb,var(--surface,#f6f7f3) 91%,transparent);
+  --v15-line:color-mix(in srgb,var(--line,#d8ddd7) 76%,var(--accent,#7654d6) 24%);
+  --v15-ink:var(--ink,#171c19);
+  --v15-soft:var(--ink-soft,#727a74);
+  --v15-accent:var(--accent,#7654d6);
+  --v15-accent-soft:var(--accent-soft,#eee8ff);
+}
+
+.community-page .dl-v15-entry.dl-role-builder{--v15-role:#d89d45}
+.community-page .dl-v15-entry.dl-role-miner{--v15-role:#5db6d4}
+.community-page .dl-v15-entry.dl-role-explorer{--v15-role:#4db27b}
+.community-page .dl-v15-entry.dl-role-newbie{--v15-role:#90b957}
+.community-page .dl-v15-entry.dl-role-pvp{--v15-role:#e15e62}
+
+/* Feed rhythm */
+.community-page.dl-community-v15 .typed-feed{
+  display:grid!important;
+  gap:13px!important;
+}
+
+/* Message card */
+.community-page .dl-v15-entry.entry-chat{
+  position:relative!important;
+  isolation:isolate!important;
+  margin:0!important;
+  padding:15px 15px 13px!important;
+  border-radius:20px!important;
+  border:1px solid var(--v15-line)!important;
+  background:
+    linear-gradient(145deg,color-mix(in srgb,var(--v15-role) 5%,transparent),transparent 35%),
+    var(--v15-surface)!important;
+  box-shadow:
+    0 12px 30px rgba(13,10,21,.09),
+    inset 0 1px 0 rgba(255,255,255,.045)!important;
+  overflow:hidden!important;
+  backdrop-filter:blur(10px) saturate(1.06)!important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.06)!important;
+}
+.community-page .dl-v15-entry.entry-chat::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,var(--v15-role),transparent) left top/100% 1px no-repeat,
+    radial-gradient(circle at 0 18%,color-mix(in srgb,var(--v15-role) 17%,transparent),transparent 34%)!important;
+  opacity:.62!important;
+}
+.community-page .dl-v15-entry.entry-chat::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;top:18px!important;bottom:18px!important;
+  width:3px!important;border-radius:0 3px 3px 0!important;
+  background:linear-gradient(180deg,var(--v15-role),color-mix(in srgb,var(--v15-role) 24%,transparent))!important;
+  opacity:.76!important;pointer-events:none!important;
+}
+
+/* Geometry */
+.community-page .dl-v15-entry .chat-entry-main{
+  display:grid!important;
+  grid-template-columns:50px minmax(0,1fr)!important;
+  gap:12px!important;
+  align-items:start!important;
+}
+.community-page .dl-v15-entry .chat-bubble{
+  min-width:0!important;
+  padding:0 38px 0 0!important;
+  border:0!important;background:none!important;box-shadow:none!important;
+}
+.community-page .dl-v15-entry .dl-community-avatar-slot-v3,
+.community-page .dl-v15-entry .community-avatar,
+.community-page .dl-v15-entry [class*="avatar-slot"]{
+  width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important;
+  border-radius:15px!important;
+  border:2px solid color-mix(in srgb,var(--v15-role) 62%,var(--v15-line) 38%)!important;
+  background:color-mix(in srgb,var(--v15-surface-2) 90%,var(--v15-role) 10%)!important;
+  box-shadow:0 6px 16px rgba(12,9,20,.12),0 0 0 3px color-mix(in srgb,var(--v15-role) 8%,transparent)!important;
+  overflow:hidden!important;
+}
+
+/* Author hierarchy: name+verified, then role+level+edited+time */
+.community-page .dl-v15-author{
+  display:grid!important;
+  grid-template-columns:max-content max-content max-content minmax(0,1fr)!important;
+  grid-template-areas:
+    "name verified verified verified"
+    "role level edited time"!important;
+  align-items:center!important;
+  column-gap:6px!important;
+  row-gap:6px!important;
+  min-width:0!important;
+  margin:0 0 9px!important;
+}
+.community-page .dl-v15-name{
+  grid-area:name!important;
+  min-width:0!important;
+  margin:0!important;
+  color:var(--v15-ink)!important;
+  font-size:14px!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  letter-spacing:-.018em!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.community-page .dl-v15-verified{grid-area:verified!important;justify-self:start!important}
+.community-page .dl-v15-role{grid-area:role!important;justify-self:start!important}
+.community-page .dl-v15-level{grid-area:level!important;justify-self:start!important}
+.community-page .dl-v15-edited{grid-area:edited!important;justify-self:start!important}
+.community-page .dl-v15-time{grid-area:time!important;justify-self:end!important}
+
+/* Premium verified: compact gold seal, not a large label */
+.community-page .dl-v15-verified{
+  display:inline-flex!important;align-items:center!important;gap:4px!important;
+  width:max-content!important;max-width:112px!important;min-height:23px!important;
+  margin:0!important;padding:2px 7px 2px 3px!important;border-radius:8px!important;
+  color:#8a6411!important;
+  background:linear-gradient(180deg,#fff7cf,#f7e5a0)!important;
+  border:1px solid rgba(184,139,34,.30)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.65),0 2px 6px rgba(78,53,4,.07)!important;
+}
+.community-page .dl-v15-verified>i{
+  width:18px!important;height:18px!important;min-width:18px!important;border-radius:6px!important;
+  display:grid!important;place-items:center!important;
+  background:linear-gradient(145deg,#ffd868,#d8a625)!important;
+  color:#5e4308!important;border:1px solid rgba(126,88,8,.20)!important;
+  transform:none!important;
+}
+.community-page .dl-v15-verified>i b{font-size:10px!important;line-height:1!important}
+.community-page .dl-v15-verified>i em{display:none!important}
+.community-page .dl-v15-verified>strong{font-size:9px!important;line-height:1!important;font-weight:900!important;white-space:nowrap!important}
+
+/* Role becomes metadata, not a second button */
+.community-page .dl-v15-role{display:inline-flex!important;max-width:108px!important;margin:0!important}
+.community-page .dl-v15-role .dl-role-badge{
+  min-height:23px!important;height:23px!important;
+  padding:2px 7px 2px 3px!important;gap:4px!important;border-radius:8px!important;
+  font-size:9px!important;font-weight:850!important;
+  background:color-mix(in srgb,var(--v15-role) 11%,var(--v15-surface-2) 89%)!important;
+  border:1px solid color-mix(in srgb,var(--v15-role) 32%,var(--v15-line) 68%)!important;
+  color:color-mix(in srgb,var(--v15-role) 78%,var(--v15-ink) 22%)!important;
+  box-shadow:none!important;
+}
+.community-page .dl-v15-role .dl-role-badge i{
+  width:17px!important;height:17px!important;min-width:17px!important;border-radius:5px!important;font-size:8px!important;
+}
+.community-page .dl-v15-role .dl-role-badge em{display:none!important}
+
+.community-page .dl-v15-level{
+  display:inline-flex!important;align-items:center!important;height:23px!important;min-height:23px!important;
+  padding:0 7px!important;margin:0!important;border-radius:7px!important;
+  background:rgba(53,188,126,.10)!important;border:1px solid rgba(62,184,129,.14)!important;
+  color:#36a976!important;font-size:9px!important;line-height:21px!important;font-weight:900!important;
+  white-space:nowrap!important;
+}
+.community-page .dl-v15-edited{
+  display:inline-flex!important;align-items:center!important;height:21px!important;padding:0 6px!important;margin:0!important;
+  border-radius:6px!important;background:color-mix(in srgb,var(--v15-surface-2) 88%,var(--v15-accent) 12%)!important;
+  color:var(--v15-soft)!important;font-size:8px!important;font-weight:800!important;white-space:nowrap!important;
+}
+.community-page .dl-v15-time{
+  margin:0!important;color:var(--v15-soft)!important;opacity:.78!important;font-size:9px!important;line-height:1!important;white-space:nowrap!important;
+}
+
+/* Content */
+.community-page .dl-v15-entry .chat-bubble>p,
+.community-page .dl-v15-entry .chat-bubble .message-text{
+  margin:0!important;
+  color:var(--v15-ink)!important;
+  font-size:14px!important;line-height:1.56!important;font-weight:480!important;
+  letter-spacing:-.005em!important;overflow-wrap:anywhere!important;
+}
+
+/* Three-dot utility */
+.community-page .dl-v15-menu{
+  position:absolute!important;right:11px!important;top:11px!important;
+  width:34px!important;height:32px!important;min-width:34px!important;padding:0!important;
+  border-radius:11px!important;border:1px solid transparent!important;
+  background:transparent!important;color:var(--v15-soft)!important;box-shadow:none!important;opacity:.78!important;
+}
+.community-page .dl-v15-menu:active{
+  transform:scale(.94)!important;background:color-mix(in srgb,var(--v15-accent) 10%,transparent)!important;
+}
+
+/* Action dock */
+.community-page .dl-v15-actions{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;gap:9px!important;
+  width:100%!important;margin:14px 0 0!important;padding:11px 0 0 62px!important;
+  box-sizing:border-box!important;
+  border-top:1px solid color-mix(in srgb,var(--v15-line) 72%,transparent)!important;
+}
+.community-page .dl-v15-reactions{
+  display:flex!important;align-items:center!important;gap:7px!important;
+  min-width:0!important;overflow-x:auto!important;overflow-y:hidden!important;
+  padding:1px!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;
+}
+.community-page .dl-v15-reactions::-webkit-scrollbar{display:none!important}
+.community-page .dl-v15-react-chip,
+.community-page .dl-v15-react-add,
+.community-page .dl-v15-reply{
+  flex:0 0 auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  height:37px!important;min-height:37px!important;max-height:37px!important;margin:0!important;
+  border-radius:11px!important;border:1px solid var(--v15-line)!important;
+  background:var(--v15-surface-2)!important;color:var(--v15-ink)!important;
+  box-shadow:0 2px 7px rgba(13,10,21,.035),inset 0 1px rgba(255,255,255,.035)!important;
+}
+.community-page .dl-v15-react-chip{
+  width:auto!important;min-width:50px!important;padding:0 10px!important;gap:7px!important;font-size:17px!important;
+}
+.community-page .dl-v15-react-chip>b{font-size:10px!important;font-weight:900!important;opacity:.78!important}
+.community-page .dl-v15-react-chip.mine{
+  border-color:color-mix(in srgb,var(--v15-accent) 68%,var(--v15-line) 32%)!important;
+  background:color-mix(in srgb,var(--v15-accent-soft) 66%,var(--v15-surface-2) 34%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--v15-accent) 14%,transparent),0 0 12px color-mix(in srgb,var(--v15-accent) 8%,transparent)!important;
+}
+
+/* Minecraft reaction crystal */
+.community-page .dl-v15-react-add{
+  position:relative!important;width:39px!important;min-width:39px!important;padding:0!important;font-size:0!important;overflow:visible!important;
+}
+.community-page .dl-v15-react-add>span,.community-page .dl-v15-react-add>b{font-size:0!important;position:absolute!important}
+.community-page .dl-v15-react-add::before{
+  content:""!important;width:17px!important;height:17px!important;border-radius:5px 5px 7px 7px!important;
+  transform:rotate(45deg)!important;
+  background:linear-gradient(145deg,#b995ff,#7750dd)!important;
+  box-shadow:inset -3px -3px rgba(55,30,112,.26),0 0 0 2px rgba(137,92,229,.10)!important;
+}
+.community-page .dl-v15-react-add::after{
+  content:"+"!important;position:absolute!important;right:4px!important;bottom:3px!important;
+  width:14px!important;height:14px!important;border-radius:5px!important;display:grid!important;place-items:center!important;
+  background:var(--v15-accent)!important;color:#fff!important;font-size:10px!important;font-weight:950!important;line-height:1!important;
+  box-shadow:0 0 0 2px var(--v15-surface)!important;
+}
+.community-page .dl-v15-react-add:active::before{transform:rotate(45deg) scale(.88)!important}
+
+.community-page .dl-v15-reply{
+  width:auto!important;min-width:102px!important;padding:0 12px!important;gap:7px!important;
+  font-size:10px!important;font-weight:850!important;white-space:nowrap!important;
+}
+.community-page .dl-v15-reply::before{
+  content:""!important;width:13px!important;height:10px!important;border-left:2px solid currentColor!important;border-bottom:2px solid currentColor!important;
+  border-radius:0 0 0 4px!important;opacity:.64!important;
+}
+
+/* Thread as nested conversation */
+.community-page .dl-v15-thread{
+  position:relative!important;
+  margin:12px 0 0 61px!important;padding:12px 11px 11px 14px!important;
+  border-left:2px solid color-mix(in srgb,var(--v15-role) 48%,var(--v15-line) 52%)!important;
+  border-radius:0 14px 14px 0!important;
+  background:color-mix(in srgb,var(--v15-surface-2) 91%,transparent)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.025)!important;
+}
+.community-page .dl-v15-thread::before{
+  content:"THREAD"!important;display:block!important;margin:0 0 9px!important;
+  color:color-mix(in srgb,var(--v15-role) 70%,var(--v15-soft) 30%)!important;
+  font-size:8px!important;font-weight:950!important;letter-spacing:.14em!important;line-height:1!important;
+}
+.community-page .dl-v15-thread .community-comment{
+  border-radius:12px!important;border:1px solid color-mix(in srgb,var(--v15-line) 82%,transparent)!important;
+  background:var(--v15-surface)!important;box-shadow:none!important;
+}
+
+/* Composer: textarea first, compact action shelf second */
+.community-page .dl-v15-composer{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  align-items:center!important;gap:9px!important;
+  padding:12px!important;border-radius:20px!important;
+  border:1px solid var(--v15-line)!important;
+  background:var(--v15-surface)!important;
+  box-shadow:0 11px 28px rgba(13,10,21,.07),inset 0 1px rgba(255,255,255,.035)!important;
+}
+.community-page .dl-v15-compose-field{grid-column:1/-1!important;grid-row:1!important;min-width:0!important}
+.community-page .dl-v15-compose-counter{grid-column:1!important;grid-row:2!important;justify-self:start!important;align-self:center!important}
+.community-page .dl-v15-sticker-cell{grid-column:2!important;grid-row:2!important;justify-self:end!important}
+.community-page .dl-v15-send-cell{grid-column:3!important;grid-row:2!important;justify-self:end!important}
+.community-page .dl-v15-compose-actions{grid-column:2/4!important;grid-row:2!important;justify-self:end!important;display:flex!important;gap:8px!important;align-items:center!important}
+.community-page .dl-v15-composer textarea{
+  width:100%!important;min-height:92px!important;max-height:180px!important;box-sizing:border-box!important;
+  padding:13px 14px!important;border-radius:14px!important;resize:vertical!important;
+  border:1px solid color-mix(in srgb,var(--v15-line) 86%,transparent)!important;
+  background:color-mix(in srgb,var(--v15-surface-2) 93%,transparent)!important;
+  color:var(--v15-ink)!important;font-size:13px!important;line-height:1.5!important;
+  box-shadow:inset 0 1px 2px rgba(20,16,30,.025)!important;
+}
+.community-page .dl-v15-composer textarea:focus{
+  outline:none!important;border-color:color-mix(in srgb,var(--v15-accent) 58%,var(--v15-line) 42%)!important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--v15-accent) 9%,transparent)!important;
+}
+.community-page .dl-v15-compose-counter,
+.community-page .dl-v15-compose-counter *{
+  color:var(--v15-soft)!important;font-size:9px!important;font-weight:760!important;
+}
+.community-page .dl-v15-composer .dl-sticker-compose,
+.community-page .dl-v15-composer button[type="submit"]{
+  width:auto!important;min-width:96px!important;min-height:42px!important;height:42px!important;
+  margin:0!important;padding:0 13px!important;border-radius:12px!important;justify-content:center!important;font-weight:880!important;
+}
+.community-page .dl-v15-composer button[type="submit"]{min-width:110px!important}
+
+/* First-load state stays clean while hydration v13 resolves ids and actions. */
+.community-page.community-v2.dl-community-v15.dl-community-v13-hydrating .typed-feed{
+  min-height:180px!important;
+}
+
+/* Dark mode: solid enough to keep the biome background behind the content. */
+@media (prefers-color-scheme:dark){
+  .community-page.community-v2.dl-community-v15{
+    --v15-surface:rgba(14,11,22,.92);
+    --v15-surface-2:rgba(22,17,32,.94);
+    --v15-line:rgba(181,149,244,.20);
+    --v15-ink:#f7f3fb;
+    --v15-soft:#aaa2b7;
+    --v15-accent:#a56af0;
+    --v15-accent-soft:#322347;
+  }
+  .community-page .dl-v15-entry.entry-chat{box-shadow:0 14px 34px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.025)!important}
+  .community-page .dl-v15-level{background:rgba(41,160,107,.13)!important;color:#59cc99!important}
+  .community-page .dl-v15-edited{background:rgba(255,255,255,.035)!important}
+}
+
+@media(max-width:700px){
+  .community-page.dl-community-v15 .typed-feed{gap:11px!important}
+  .community-page .dl-v15-entry.entry-chat{padding:13px 11px 12px!important;border-radius:18px!important}
+  .community-page .dl-v15-entry .chat-entry-main{grid-template-columns:46px minmax(0,1fr)!important;gap:10px!important}
+  .community-page .dl-v15-entry .dl-community-avatar-slot-v3,
+  .community-page .dl-v15-entry .community-avatar,
+  .community-page .dl-v15-entry [class*="avatar-slot"]{width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;border-radius:13px!important}
+  .community-page .dl-v15-entry .chat-bubble{padding-right:33px!important}
+  .community-page .dl-v15-author{column-gap:5px!important;row-gap:5px!important;margin-bottom:8px!important}
+  .community-page .dl-v15-name{font-size:13px!important}
+  .community-page .dl-v15-verified{max-width:101px!important}
+  .community-page .dl-v15-role{max-width:98px!important}
+  .community-page .dl-v15-time{font-size:8px!important}
+  .community-page .dl-v15-entry .chat-bubble>p,.community-page .dl-v15-entry .chat-bubble .message-text{font-size:13px!important;line-height:1.53!important}
+  .community-page .dl-v15-actions{padding-left:56px!important;margin-top:12px!important;padding-top:10px!important;gap:7px!important}
+  .community-page .dl-v15-react-chip,.community-page .dl-v15-react-add,.community-page .dl-v15-reply{height:36px!important;min-height:36px!important;max-height:36px!important}
+  .community-page .dl-v15-react-chip{min-width:47px!important;padding:0 9px!important}
+  .community-page .dl-v15-react-add{width:38px!important;min-width:38px!important}
+  .community-page .dl-v15-reply{min-width:92px!important;padding:0 10px!important;font-size:9px!important}
+  .community-page .dl-v15-thread{margin-left:55px!important;padding:10px 9px 10px 12px!important}
+  .community-page .dl-v15-composer{padding:10px!important;gap:8px!important;border-radius:17px!important}
+  .community-page .dl-v15-composer textarea{min-height:86px!important;border-radius:12px!important}
+  .community-page .dl-v15-composer .dl-sticker-compose{min-width:88px!important}
+  .community-page .dl-v15-composer button[type="submit"]{min-width:104px!important}
+}
+
+@media(max-width:430px){
+  .community-page .dl-v15-entry.entry-chat{padding-left:10px!important;padding-right:10px!important}
+  .community-page .dl-v15-entry .chat-entry-main{grid-template-columns:43px minmax(0,1fr)!important;gap:9px!important}
+  .community-page .dl-v15-entry .dl-community-avatar-slot-v3,
+  .community-page .dl-v15-entry .community-avatar,
+  .community-page .dl-v15-entry [class*="avatar-slot"]{width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important}
+  .community-page .dl-v15-author{
+    grid-template-columns:max-content minmax(0,1fr) max-content!important;
+    grid-template-areas:"name verified verified" "role level edited" "time time time"!important;
+  }
+  .community-page .dl-v15-time{justify-self:start!important;margin-top:-1px!important}
+  .community-page .dl-v15-actions{padding-left:52px!important;grid-template-columns:minmax(0,1fr) auto!important}
+  .community-page .dl-v15-reply{min-width:86px!important;padding:0 8px!important}
+  .community-page .dl-v15-thread{margin-left:50px!important}
+  .community-page .dl-v15-composer{grid-template-columns:minmax(0,1fr) auto auto!important}
+  .community-page .dl-v15-composer .dl-sticker-compose{min-width:82px!important;padding:0 10px!important}
+  .community-page .dl-v15-composer button[type="submit"]{min-width:92px!important;padding:0 11px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .community-page .dl-v15-entry,.community-page .dl-v15-react-add::before{transition:none!important;animation:none!important}
+}
