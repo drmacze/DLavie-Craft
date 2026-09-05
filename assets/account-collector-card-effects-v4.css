@@ -1,0 +1,92 @@
+/* DLavie Collector Card Effects v4 — fixed geometry, richer rarity, iPhone-safe */
+.dl-collector-card{
+  --card-accent:#5f9a6d;--card-accent2:#b4dd74;--card-glow:rgba(95,154,109,.34);
+  --mx:50%;--my:38%;--rx:0deg;--ry:0deg;
+  position:relative!important;isolation:isolate!important;touch-action:pan-y!important;
+  -webkit-tap-highlight-color:transparent!important;
+  filter:drop-shadow(0 16px 28px rgba(10,14,12,.14))!important;
+}
+.dl-collector-card.role-builder{--card-accent:#c98b2e;--card-accent2:#f3d36b;--card-glow:rgba(207,145,46,.34)}
+.dl-collector-card.role-miner{--card-accent:#4ca8bf;--card-accent2:#9feeff;--card-glow:rgba(75,181,208,.36)}
+.dl-collector-card.role-explorer{--card-accent:#4c9866;--card-accent2:#b9df79;--card-glow:rgba(70,157,99,.34)}
+.dl-collector-card.role-newbie{--card-accent:#7da946;--card-accent2:#d8ee78;--card-glow:rgba(126,171,70,.34)}
+.dl-collector-card.role-pvp{--card-accent:#cf5450;--card-accent2:#ff9e6c;--card-glow:rgba(216,80,75,.36)}
+
+/* Critical geometry fix: the base card expects this layer to fill the aspect-ratio shell. */
+.dl-collector-card .dl-collector-card-inner{
+  position:absolute!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;
+  transform-style:preserve-3d!important;
+  transform:rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0)!important;
+  transition:transform .34s cubic-bezier(.18,.75,.22,1),filter .28s ease!important;
+  overflow:hidden!important;
+  box-shadow:0 16px 34px rgba(11,16,13,.13),inset 0 0 0 1px rgba(255,255,255,.55)!important;
+}
+.dl-collector-card.is-card-hovered .dl-collector-card-inner{transition:transform .07s linear!important;filter:saturate(1.06) brightness(1.025)!important}
+
+/* Role aura lives behind the card and never changes layout. */
+.dl-collector-card:before{
+  content:"";position:absolute;inset:4% 5%;z-index:-2;border-radius:8%;pointer-events:none;
+  background:radial-gradient(circle at var(--mx) var(--my),var(--card-glow),transparent 40%),conic-gradient(from 15deg,transparent,var(--card-glow),transparent 33%,var(--card-glow),transparent 70%);
+  filter:blur(22px);opacity:.36;transform:scale(.98);animation:dlV4Aura 6.2s ease-in-out infinite;
+}
+@keyframes dlV4Aura{50%{opacity:.58;transform:scale(1.018)}}
+
+/* Foil layer follows pointer on desktop and drifts on touch. */
+.dl-collector-card .dl-card-holo{
+  position:absolute!important;inset:0!important;z-index:22!important;pointer-events:none!important;
+  mix-blend-mode:screen!important;opacity:.12!important;transform:none!important;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.72) 0 4%,rgba(255,255,255,.17) 11%,transparent 28%),repeating-linear-gradient(118deg,transparent 0 19px,rgba(255,255,255,.065) 20px 22px,transparent 23px 42px),linear-gradient(112deg,transparent 25%,color-mix(in srgb,var(--card-accent2) 62%,#fff) 45%,transparent 64%)!important;
+  background-size:auto,auto,185% 100%!important;animation:dlV4Foil 7.4s ease-in-out infinite!important;
+}
+@keyframes dlV4Foil{0%,100%{background-position:center,0 0,-85% 0;opacity:.10}50%{background-position:center,28px -16px,85% 0;opacity:.25}}
+
+/* Pixel sparks use existing six nodes. */
+.dl-collector-card .dl-card-sparks{position:absolute!important;inset:0!important;z-index:19!important;pointer-events:none!important;overflow:hidden!important}
+.dl-collector-card .dl-card-sparks i{position:absolute!important;width:5px!important;height:5px!important;opacity:0;background:color-mix(in srgb,var(--card-accent2) 78%,#fff)!important;box-shadow:0 0 8px var(--card-glow),7px 0 0 color-mix(in srgb,var(--card-accent) 68%,#fff)!important;animation:dlV4Spark 4.8s steps(5,end) infinite!important}
+.dl-collector-card .dl-card-sparks i:nth-child(1){left:8%;top:17%;animation-delay:.2s!important}.dl-collector-card .dl-card-sparks i:nth-child(2){left:84%;top:14%;animation-delay:1.2s!important}.dl-collector-card .dl-card-sparks i:nth-child(3){left:75%;top:72%;animation-delay:2.3s!important}.dl-collector-card .dl-card-sparks i:nth-child(4){left:15%;top:69%;animation-delay:3.1s!important}.dl-collector-card .dl-card-sparks i:nth-child(5){left:50%;top:9%;animation-delay:3.8s!important}.dl-collector-card .dl-card-sparks i:nth-child(6){left:91%;top:47%;animation-delay:4.3s!important}
+@keyframes dlV4Spark{0%,68%,100%{opacity:0;transform:translate3d(0,12px,0) scale(.55) rotate(0)}74%{opacity:.9}88%{opacity:.5;transform:translate3d(-5px,-18px,0) scale(1.15) rotate(90deg)}}
+
+/* Artwork feels alive but remains subtle. */
+.dl-collector-card .dl-card-avatar-wrap{filter:drop-shadow(0 10px 12px rgba(8,14,10,.16))!important;animation:dlV4Avatar 5.6s ease-in-out infinite!important}
+@keyframes dlV4Avatar{50%{transform:translate(-50%,-49%) rotate(-1deg) scale(1.018)}}
+.dl-collector-card .dl-card-role-emblem{animation:dlV4Emblem 4.2s ease-in-out infinite!important}
+@keyframes dlV4Emblem{50%{filter:brightness(1.08) drop-shadow(0 0 7px var(--card-glow));transform:rotate(4deg) translateY(-2px)}}
+.dl-collector-card .dl-card-level-heart{animation:dlV4Heart 3.3s ease-in-out infinite!important}
+@keyframes dlV4Heart{50%{filter:drop-shadow(0 0 10px rgba(255,72,78,.38)) drop-shadow(3px 4px 0 rgba(70,20,20,.24));transform:scale(1.045)}}
+
+/* Rarity progression. */
+.dl-collector-card.tier-base .dl-card-holo{opacity:.06!important;animation-duration:10s!important}
+.dl-collector-card.tier-enchanted .dl-card-holo{opacity:.30!important;background:radial-gradient(circle at var(--mx) var(--my),rgba(244,184,255,.62),transparent 26%),repeating-linear-gradient(122deg,transparent 0 20px,rgba(187,78,255,.13) 21px 23px,transparent 24px 41px),linear-gradient(113deg,transparent 22%,rgba(139,64,207,.18),rgba(230,147,255,.46),rgba(100,55,180,.16),transparent 75%)!important}
+.dl-collector-card.tier-enchanted .dl-card-art:before{content:"✦ ᚱ ᛫ ᚨ ✧ ᛉ"!important;position:absolute!important;left:7%!important;right:7%!important;bottom:8%!important;z-index:20!important;color:#f4c0ff!important;font-size:9px!important;font-weight:900!important;letter-spacing:5px!important;white-space:nowrap!important;text-shadow:0 0 7px #bd67f0!important;opacity:.48!important;transform:none!important;animation:dlV4Runes 4.8s ease-in-out infinite!important;pointer-events:none!important}
+@keyframes dlV4Runes{50%{opacity:.95;transform:translateY(-7px)}}
+
+.dl-collector-card.tier-holo .dl-card-holo,.dl-collector-card.tier-mythic .dl-card-holo,.dl-collector-card.tier-legendary .dl-card-holo{opacity:.42!important;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.88) 0 3%,transparent 23%),repeating-linear-gradient(126deg,rgba(255,94,178,.14) 0 8px,rgba(87,232,255,.14) 9px 17px,rgba(255,230,92,.12) 18px 26px,rgba(122,255,173,.13) 27px 35px),linear-gradient(110deg,transparent 18%,rgba(88,234,255,.34),rgba(255,105,212,.47),rgba(255,233,107,.38),rgba(104,255,178,.31),transparent 82%)!important;background-size:auto,145% 145%,185% 100%!important;animation:dlV4Spectrum 6.7s ease-in-out infinite!important}
+@keyframes dlV4Spectrum{0%,100%{background-position:center,0 0,-85% 0}50%{background-position:center,60px -34px,85% 0}}
+.dl-collector-card.tier-mythic .dl-card-holo{opacity:.54!important;animation-duration:5.2s!important}
+.dl-collector-card.tier-legendary .dl-card-holo{opacity:.64!important;animation-duration:4.5s!important}
+.dl-collector-card.tier-legendary:after{content:"";position:absolute;inset:-2px;z-index:24;pointer-events:none;border-radius:20px;padding:2px;background:conic-gradient(from 0deg,#74f3d9,#ab78ff,#ff8fd1,#ffe86c,#74f3d9);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.58;animation:dlV4Legend 7s linear infinite!important}
+@keyframes dlV4Legend{to{filter:hue-rotate(360deg)}}
+
+/* Profile presentation polish / dark mode contrast. */
+#dl-account-portal.dl-account-profile-fullscreen-v3 #dl-collector-profile{padding-top:24px!important;margin-top:24px!important}
+#dl-account-portal.dl-account-profile-fullscreen-v3 .dl-profile-card-wrap{width:min(380px,100%)!important;margin:16px auto 20px!important}
+#dl-account-portal.dl-account-profile-fullscreen-v3 .dl-profile-identity-grid{gap:10px!important;margin-top:18px!important}
+#dl-account-portal.dl-account-profile-fullscreen-v3 .dl-profile-identity-grid article{background:var(--dl-account-card,var(--surface-raised,#fff))!important;border-color:var(--dl-account-line,var(--line,#34303f))!important}
+#dl-account-portal.dl-account-profile-fullscreen-v3 .dl-account-profile-card:nth-child(3n){background:var(--dl-account-card,var(--surface-raised,#fff))!important;color:var(--dl-account-ink,var(--ink,#fff))!important}
+#dl-account-portal.dl-account-profile-fullscreen-v3 .dl-account-profile-card:nth-child(3n) span{color:var(--dl-account-muted,var(--ink-soft,#aaa))!important}
+#dl-account-portal.dl-account-profile-fullscreen-v3 .dl-account-profile-card:nth-child(3n) strong{color:var(--dl-account-ink,var(--ink,#fff))!important}
+
+/* Only visible cards animate. */
+.dl-collector-card:not(.is-card-visible) .dl-card-holo,.dl-collector-card:not(.is-card-visible) .dl-card-sparks i,.dl-collector-card:not(.is-card-visible):before,.dl-collector-card:not(.is-card-visible):after,.dl-collector-card:not(.is-card-visible) .dl-card-avatar-wrap,.dl-collector-card:not(.is-card-visible) .dl-card-role-emblem,.dl-collector-card:not(.is-card-visible) .dl-card-level-heart{animation-play-state:paused!important}
+
+@media(max-width:700px){
+  .dl-collector-card{filter:drop-shadow(0 10px 18px rgba(8,13,10,.12))!important}
+  .dl-collector-card .dl-collector-card-inner{transform:none!important;transition:none!important}
+  .dl-collector-card:before{filter:blur(16px);opacity:.28!important;animation-duration:8s!important}
+  .dl-collector-card .dl-card-holo{animation-duration:8.5s!important}
+  .dl-collector-card.tier-legendary .dl-card-holo{opacity:.48!important;animation-duration:6.8s!important}
+  .dl-collector-card .dl-card-sparks i{animation-duration:6s!important}
+  .dl-collector-card .dl-card-avatar-wrap{animation-duration:6.5s!important}
+  #dl-account-portal.dl-account-profile-fullscreen-v3 .dl-profile-card-wrap{width:min(360px,100%)!important}
+}
+@media(prefers-reduced-motion:reduce){.dl-collector-card,.dl-collector-card *,.dl-collector-card:before,.dl-collector-card:after{animation:none!important;transition:none!important}.dl-collector-card .dl-collector-card-inner{transform:none!important}}
