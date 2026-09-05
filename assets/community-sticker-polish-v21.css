@@ -1,0 +1,331 @@
+/* DLavie Community Sticker Polish v21 — compact Discord-like picker, mobile first */
+
+/* ---------- Sticker compose button ---------- */
+.community-page .dl-sticker-compose{
+  position:relative!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  justify-self:start!important;
+  align-self:center!important;
+  width:36px!important;
+  min-width:36px!important;
+  max-width:36px!important;
+  height:34px!important;
+  min-height:34px!important;
+  max-height:34px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  border-radius:10px!important;
+  background:rgba(20,16,31,.82)!important;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:0!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 4px 10px rgba(0,0,0,.12)!important;
+  overflow:hidden!important;
+}
+.community-page .dl-sticker-compose:hover,
+.community-page .dl-sticker-compose:focus-visible{
+  border-color:rgba(143,105,234,.5)!important;
+  background:rgba(47,34,73,.9)!important;
+}
+.community-page .dl-sticker-compose::before{
+  content:""!important;
+  width:18px!important;
+  height:18px!important;
+  border-radius:5px!important;
+  background:
+    linear-gradient(#2d6d43 0 0) 3px 3px/4px 4px no-repeat,
+    linear-gradient(#2d6d43 0 0) 11px 3px/4px 4px no-repeat,
+    linear-gradient(#2d6d43 0 0) 5px 11px/8px 3px no-repeat,
+    #8bd59b!important;
+  border:2px solid #d9f6df!important;
+  box-shadow:inset 0 -2px 0 rgba(38,92,57,.16),0 1px 0 rgba(255,255,255,.18)!important;
+  image-rendering:pixelated!important;
+}
+.community-page .dl-sticker-compose > *{display:none!important}
+
+/* Do not let the cell/wrapper that contains only Sticker stretch across a row. */
+.community-page form > *:has(> .dl-sticker-compose):not(:has(button[type="submit"])),
+.community-page .quick-chat-composer > *:has(> .dl-sticker-compose):not(:has(button[type="submit"])),
+.community-page .reply-composer > *:has(> .dl-sticker-compose):not(:has(button[type="submit"])){ 
+  width:max-content!important;
+  min-width:0!important;
+  max-width:max-content!important;
+  justify-self:start!important;
+  align-self:center!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* If Sticker and submit share one wrapper, keep both compact and right aligned. */
+.community-page form > *:has(> .dl-sticker-compose):has(> button[type="submit"]),
+.community-page .quick-chat-composer > *:has(> .dl-sticker-compose):has(> button[type="submit"]),
+.community-page .reply-composer > *:has(> .dl-sticker-compose):has(> button[type="submit"]){
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:7px!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* ---------- Picker overlay ---------- */
+.dl-sticker-sheet{
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147483550!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:16px!important;
+  background:rgba(4,3,8,.66)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+.dl-sticker-sheet > section{
+  width:min(480px,calc(100vw - 28px))!important;
+  max-height:min(72dvh,620px)!important;
+  display:grid!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.085)!important;
+  border-radius:20px!important;
+  background:linear-gradient(180deg,rgba(21,17,30,.985),rgba(13,11,20,.995))!important;
+  color:#f7f3ff!important;
+  box-shadow:0 26px 80px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+.dl-sticker-sheet > section > header{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  padding:14px 15px 12px!important;
+  border-bottom:1px solid rgba(255,255,255,.065)!important;
+  background:rgba(255,255,255,.012)!important;
+}
+.dl-sticker-sheet > section > header > div{
+  display:grid!important;
+  gap:3px!important;
+  min-width:0!important;
+  flex:1!important;
+}
+.dl-sticker-sheet > section > header strong{
+  font-size:15px!important;
+  line-height:1.1!important;
+  font-weight:900!important;
+  letter-spacing:-.015em!important;
+  color:#faf7ff!important;
+}
+.dl-sticker-sheet > section > header small{
+  font-size:9px!important;
+  line-height:1.35!important;
+  color:rgba(238,231,255,.53)!important;
+}
+.dl-sticker-sheet > section > header button{
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  min-height:32px!important;
+  padding:0!important;
+  border:1px solid rgba(255,255,255,.085)!important;
+  border-radius:10px!important;
+  background:rgba(255,255,255,.025)!important;
+  color:#f5f1ff!important;
+  box-shadow:none!important;
+  font-size:20px!important;
+  line-height:1!important;
+}
+
+.dl-sticker-sheet-body{
+  min-height:0!important;
+  display:grid!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+  overflow:hidden!important;
+  padding:0!important;
+}
+.dl-sticker-picker-top{
+  position:relative!important;
+  z-index:2!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:9px!important;
+  align-items:center!important;
+  padding:10px 12px!important;
+  border-bottom:1px solid rgba(255,255,255,.055)!important;
+  background:rgba(15,12,22,.98)!important;
+}
+.dl-sticker-picker-top input{
+  width:100%!important;
+  height:38px!important;
+  padding:0 12px!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  border-radius:11px!important;
+  background:rgba(7,6,12,.58)!important;
+  color:#f7f4ff!important;
+  outline:none!important;
+  box-shadow:none!important;
+  font:650 11px/1 var(--font-body,inherit)!important;
+}
+.dl-sticker-picker-top input:focus{
+  border-color:rgba(139,100,232,.58)!important;
+  box-shadow:0 0 0 3px rgba(118,84,214,.08)!important;
+}
+.dl-sticker-picker-top input::placeholder{color:rgba(238,231,255,.38)!important}
+.dl-sticker-picker-top span{
+  min-width:44px!important;
+  text-align:right!important;
+  font-size:8px!important;
+  font-weight:850!important;
+  color:rgba(238,231,255,.50)!important;
+  white-space:nowrap!important;
+}
+
+/* Critical fix: rows must NOT stretch to fill the sheet. */
+.dl-sticker-grid{
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:max-content!important;
+  align-content:start!important;
+  align-items:start!important;
+  gap:8px!important;
+  padding:11px 10px 14px!important;
+  scrollbar-width:none!important;
+}
+.dl-sticker-grid::-webkit-scrollbar{display:none!important}
+
+.dl-sticker-card{
+  position:relative!important;
+  min-width:0!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:112px!important;
+  max-height:none!important;
+  display:grid!important;
+  grid-template-rows:82px auto!important;
+  place-items:center!important;
+  align-content:start!important;
+  gap:5px!important;
+  padding:7px 5px 7px!important;
+  border:1px solid transparent!important;
+  border-radius:13px!important;
+  background:transparent!important;
+  color:#f7f4ff!important;
+  box-shadow:none!important;
+  transform:none!important;
+  animation:none!important;
+  overflow:hidden!important;
+}
+.dl-sticker-card:hover,
+.dl-sticker-card:focus-visible,
+.dl-sticker-card:active{
+  background:rgba(126,87,221,.09)!important;
+  border-color:rgba(141,105,230,.22)!important;
+}
+.dl-sticker-card img{
+  display:block!important;
+  width:82px!important;
+  height:82px!important;
+  max-width:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:
+    linear-gradient(45deg,rgba(255,255,255,.025) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.025) 75%),
+    linear-gradient(45deg,rgba(255,255,255,.025) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.025) 75%)!important;
+  background-size:12px 12px!important;
+  background-position:0 0,6px 6px!important;
+  border:0!important;
+  border-radius:9px!important;
+  box-shadow:none!important;
+}
+.dl-sticker-card > span{
+  width:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  font-size:8px!important;
+  line-height:1.25!important;
+  font-weight:720!important;
+  color:rgba(242,236,255,.70)!important;
+}
+.dl-sticker-card > b{
+  position:absolute!important;
+  top:6px!important;
+  right:6px!important;
+  padding:3px 5px!important;
+  border-radius:6px!important;
+  background:#7550d4!important;
+  color:#fff!important;
+  font-size:6px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.05em!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.18)!important;
+}
+.dl-sticker-empty{
+  grid-column:1/-1!important;
+  margin:0!important;
+  padding:34px 14px!important;
+  text-align:center!important;
+  color:rgba(238,231,255,.50)!important;
+  font-size:10px!important;
+}
+
+@media(max-width:600px){
+  .dl-sticker-sheet{
+    place-items:end center!important;
+    padding:0!important;
+    background:rgba(3,2,7,.58)!important;
+  }
+  .dl-sticker-sheet > section{
+    width:100%!important;
+    max-width:none!important;
+    max-height:min(69dvh,590px)!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-bottom:0!important;
+    border-radius:20px 20px 0 0!important;
+    padding-bottom:env(safe-area-inset-bottom)!important;
+    animation:dlStickerSheetIn .22s cubic-bezier(.2,.8,.2,1) both!important;
+  }
+  .dl-sticker-sheet > section > header{padding:13px 15px 11px!important}
+  .dl-sticker-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:6px!important;
+    padding:10px 10px 16px!important;
+  }
+  .dl-sticker-card{
+    min-height:104px!important;
+    grid-template-rows:76px auto!important;
+    border-radius:12px!important;
+  }
+  .dl-sticker-card img{width:76px!important;height:76px!important}
+}
+
+@media(max-width:360px){
+  .dl-sticker-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;padding-left:7px!important;padding-right:7px!important}
+  .dl-sticker-card{grid-template-rows:68px auto!important;min-height:95px!important;padding-left:3px!important;padding-right:3px!important}
+  .dl-sticker-card img{width:68px!important;height:68px!important}
+}
+
+@keyframes dlStickerSheetIn{
+  from{transform:translateY(16px);opacity:.82}
+  to{transform:translateY(0);opacity:1}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-sticker-sheet > section{animation:none!important}
+}
