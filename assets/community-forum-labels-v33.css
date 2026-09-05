@@ -1,25 +1,9 @@
 /* DLavie Community forum labels v33 — professional display names without changing stored forum names. */
 
-.community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label],
+/* Active forum heading: keep original DOM text for logic, replace only its visual label. */
 .community-page.community-v2 .active-forum-head h2[data-dl-forum-label]{
   font-size:0!important;
 }
-
-.community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label]::after{
-  content:attr(data-dl-forum-label);
-  display:inline-block;
-  max-width:100%;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  color:inherit;
-  font:inherit;
-  font-size:11px!important;
-  line-height:1.15!important;
-  letter-spacing:0!important;
-  vertical-align:middle;
-}
-
 .community-page.community-v2 .active-forum-head h2[data-dl-forum-label]::after{
   content:attr(data-dl-forum-label);
   display:inline-block;
@@ -30,8 +14,68 @@
   letter-spacing:-.02em!important;
 }
 
+/* Navigation buttons can render their text in several nested nodes depending on
+   the current UI enhancer. Hide those raw text nodes while preserving them in
+   the DOM, then draw one stable professional label above them. */
+.community-page.community-v2 .forum-sidebar nav button[data-dl-forum-label]{
+  position:relative!important;
+}
+.community-page.community-v2 .forum-sidebar nav button .dl-v33-forum-raw{
+  display:none!important;
+}
+
+/* v33.1 owns the visible nav label at button level, so disable the older
+   strong::after fallback to prevent duplicate labels. */
+.community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label]::after{
+  content:none!important;
+  display:none!important;
+}
+.community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label]{
+  font-size:inherit!important;
+}
+
+.community-page.community-v2 .forum-sidebar nav button > .dl-v33-forum-display{
+  position:absolute!important;
+  left:46px!important;
+  right:34px!important;
+  top:50%!important;
+  z-index:4!important;
+  min-width:0!important;
+  width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  transform:translateY(-50%)!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+  text-align:left!important;
+  color:inherit!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.community-page.community-v2 .forum-sidebar nav button > .dl-v33-forum-display::after{
+  content:attr(data-label);
+  display:block!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+  color:inherit!important;
+  font-family:var(--font-body,inherit)!important;
+  font-size:11px!important;
+  font-weight:780!important;
+  line-height:1.15!important;
+  letter-spacing:0!important;
+}
+
 @media(max-width:1050px){
-  .community-page.community-v2 .forum-sidebar nav button strong[data-dl-forum-label]::after{
+  .community-page.community-v2 .forum-sidebar nav button > .dl-v33-forum-display{
+    left:44px!important;
+    right:31px!important;
+  }
+  .community-page.community-v2 .forum-sidebar nav button > .dl-v33-forum-display::after{
     font-size:10px!important;
   }
 }
