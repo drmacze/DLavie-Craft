@@ -10,31 +10,31 @@
   const HEIST_DOWNLOAD = 'https://raw.githubusercontent.com/drmacze/DLavie-Heist/main/releases/v10.16/DLavie_Heist_Core_V1.0.mcaddon';
 
   const categories = [
-    ['featured','Featured','FT'],['adventure','Adventure','AD'],['survival','Survival','SV'],['roleplay','Roleplay','RP'],
-    ['minigames','Minigames','MG'],['pvp','PvP','PV'],['horror','Horror','HR'],['magic','Magic','MG'],
-    ['technology','Technology','TC'],['vehicles','Vehicles','VH'],['weapons','Weapons & Combat','WC'],['security','Security','SC'],
-    ['economy','Economy','EC'],['furniture','Furniture','FR'],['building','Building','BL'],['animals','Animals & Wildlife','AW'],
-    ['farming','Farming','FM'],['realism','Realism','RL'],['utility','Utility','UT'],['ui','UI & HUD','UI'],
-    ['worldgen','World Generation','WG'],['structures','Structures','ST'],['mobs','Mobs','MB'],['bosses','Bosses','BS'],
-    ['multiplayer','Multiplayer','MP'],['education','Education','ED'],['seasonal','Seasonal','SN'],['audio','Audio','AU'],
-    ['animation','Animation','AN'],['quality','Quality of Life','QL']
+    ['all','All Add-Ons','ALL'],['featured','Featured','★'],['new','New & Updated','NEW'],['adventure','Adventure','ADV'],
+    ['survival','Survival','SUR'],['roleplay','Roleplay','RP'],['minigames','Minigames','MINI'],['pvp','PvP','PVP'],
+    ['horror','Horror','HOR'],['magic','Magic','MAG'],['technology','Technology','TECH'],['vehicles','Vehicles','VEH'],
+    ['combat','Weapons & Combat','COM'],['security','Security','SEC'],['economy','Economy','ECO'],['furniture','Furniture','FUR'],
+    ['building','Building Tools','BLD'],['animals','Animals & Wildlife','WILD'],['farming','Farming','FARM'],['realism','Realism','REAL'],
+    ['utility','Utility','UTIL'],['ui','UI & HUD','HUD'],['worldgen','World Generation','GEN'],['structures','Structures','STR'],
+    ['mobs','Mobs','MOB'],['bosses','Bosses','BOSS'],['multiplayer','Multiplayer','MULTI'],['audio','Audio','AUDIO'],
+    ['animation','Animation','ANIM'],['quality','Quality of Life','QOL']
   ];
 
   const addons = [
     {
-      id:'dlavie-heist', title:'DLavie Heist', version:'v1.0', price:'FREE', status:'Ready',
-      description:'Heist gameplay module untuk Minecraft Bedrock dengan brankas, linggis, breach 60 detik, cinematic camera, progress bar, sistem uang, dan reward perampokan.',
+      id:'dlavie-heist', title:'DLavie Heist', creator:'DLavie Craft', version:'1.0', price:'FREE', status:'New',
+      description:'Gameplay pembobolan untuk Minecraft Bedrock dengan vault safe, crowbar, breach sequence, cinematic camera, progress bar, money objective, dan reward perampokan.',
       compatibility:'Bedrock / PE 26.45',
-      tags:['featured','adventure','roleplay','weapons','security','economy','realism','utility','multiplayer'],
-      repo:HEIST_REPO, download:HEIST_DOWNLOAD,
-      bullets:['Vault Safe + Crowbar','60s Breach Sequence','Cinematic Camera','Money Objective + $3,000 Reward']
+      tags:['featured','new','adventure','roleplay','combat','security','economy','realism','utility','multiplayer'],
+      repo:HEIST_REPO, download:HEIST_DOWNLOAD, art:'heist',
+      bullets:['Vault Safe','Crowbar Breach','Cinematic Camera','Money System']
     }
   ];
 
   let rootObserver = null;
   let themeObserver = null;
   let previousTitle = document.title;
-  let filter = 'featured';
+  let filter = 'all';
   let query = '';
   let sort = 'featured';
 
@@ -48,7 +48,8 @@
     return [n[0],n[1],n[2],Number.isFinite(n[3])?n[3]:1];
   }
   function luminance(rgb){
-    if(!rgb)return .1; const s=rgb.slice(0,3).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});
+    if(!rgb)return .1;
+    const s=rgb.slice(0,3).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});
     return .2126*s[0]+.7152*s[1]+.0722*s[2];
   }
   function resolvedBackground(){
@@ -59,7 +60,7 @@
   function readAccent(){
     const names=['--accent','--accent-color','--brand','--brand-color','--primary','--primary-color','--theme-accent','--dl-accent','--color-accent'];
     const scopes=[document.documentElement,document.body,document.getElementById(ROOT_ID)?.firstElementChild].filter(Boolean);
-    for(const scope of scopes){const style=getComputedStyle(scope);for(const name of names){const v=style.getPropertyValue(name).trim();if(v && !/transparent|inherit|initial/i.test(v))return v;}}
+    for(const scope of scopes){const style=getComputedStyle(scope);for(const name of names){const v=style.getPropertyValue(name).trim();if(v&&!/transparent|inherit|initial/i.test(v))return v;}}
     return '#8f6cf6';
   }
   function syncTheme(){
@@ -71,18 +72,17 @@
   function bannerMarkup(){
     return `
       <div class="dlm-banner-copy">
-        <div class="dlm-banner-kicker"><span>FREE</span> MINECRAFT MARKETPLACE ADD-ON</div>
-        <h2>DLavie Heist</h2>
-        <p>Brankas, linggis, cinematic breach, sistem uang, dan gameplay pembobolan untuk Minecraft Bedrock.</p>
+        <div class="dlm-banner-kicker"><span>FREE</span> MINECRAFT MARKETPLACE ADD-ONS</div>
+        <h2>Temukan add-on gratis untuk Bedrock.</h2>
+        <p>Jelajahi gameplay packs, roleplay, survival, mobs, utilities, UI, world generation, dan kategori add-on lainnya dalam satu marketplace.</p>
         <div class="dlm-banner-actions">
           <a class="dlm-btn primary" href="#/marketplace">Buka Marketplace</a>
-          <a class="dlm-btn ghost" href="${HEIST_REPO}" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="dlm-btn ghost" href="#/marketplace?category=new">Lihat yang terbaru</a>
         </div>
       </div>
       <div class="dlm-banner-art" aria-hidden="true">
-        <span class="dlm-safe"><i></i><b>$</b></span>
-        <span class="dlm-grid g1"></span><span class="dlm-grid g2"></span>
-        <span class="dlm-chip">BEDROCK</span>
+        <div class="dlm-market-stack"><span class="b1"></span><span class="b2"></span><span class="b3"></span><b>+</b></div>
+        <span class="dlm-chip">BEDROCK ADD-ONS</span>
       </div>`;
   }
 
@@ -92,85 +92,112 @@
     const root=document.getElementById(ROOT_ID); if(!root)return;
     const main=root.querySelector('main') || root.querySelector('[class*="home" i]') || root.firstElementChild;
     if(!main)return;
-    const banner=document.createElement('section'); banner.id=BANNER_ID; banner.className='dlm-home-banner'; banner.setAttribute('aria-label','DLavie Heist gratis'); banner.innerHTML=bannerMarkup();
+    const banner=document.createElement('section');
+    banner.id=BANNER_ID; banner.className='dlm-home-banner'; banner.setAttribute('aria-label','Minecraft Marketplace Add-Ons gratis'); banner.innerHTML=bannerMarkup();
     const directSection=main.querySelector(':scope > section');
     if(directSection && directSection.parentElement===main) directSection.insertAdjacentElement('afterend',banner); else main.prepend(banner);
     syncTheme();
   }
 
   function categoryMarkup(){
-    return categories.map(([id,name,abbr])=>`<button type="button" class="dlm-category-card${filter===id?' active':''}" data-dlm-category="${id}"><span>${abbr}</span><strong>${esc(name)}</strong><small>Jelajahi</small></button>`).join('');
+    return categories.map(([id,name,abbr])=>`<button type="button" class="dlm-category-card${filter===id?' active':''}" data-dlm-category="${id}"><span>${esc(abbr)}</span><strong>${esc(name)}</strong></button>`).join('');
+  }
+
+  function coverMarkup(addon){
+    if(addon.art==='heist') return `<div class="dlm-addon-cover-art heist"><div class="dlm-heist-safe"><i></i><b>$</b></div><span>HEIST</span></div>`;
+    return `<div class="dlm-addon-cover-art generic"><div class="dlm-pack-cube"><i></i><b>+</b></div><span>ADD-ON</span></div>`;
   }
 
   function addonCardMarkup(addon){
-    return `<article class="dlm-addon-card" data-id="${addon.id}">
-      <div class="dlm-addon-cover" aria-hidden="true"><div class="dlm-vault"><span></span><b>$</b></div><em>FREE</em><i>HEIST CORE</i></div>
+    return `<article class="dlm-addon-card" data-id="${esc(addon.id)}">
+      <div class="dlm-addon-cover">${coverMarkup(addon)}<em>${esc(addon.price)}</em></div>
       <div class="dlm-addon-body">
-        <div class="dlm-addon-meta"><span class="free">${addon.price}</span><span>${addon.version}</span><span>${addon.compatibility}</span></div>
-        <h3>${esc(addon.title)}</h3><p>${esc(addon.description)}</p>
+        <div class="dlm-addon-meta"><span class="free">${esc(addon.price)}</span><span>${esc(addon.status)}</span><span>${esc(addon.compatibility)}</span></div>
+        <h3>${esc(addon.title)}</h3><small class="dlm-creator">by ${esc(addon.creator)}</small><p>${esc(addon.description)}</p>
         <div class="dlm-feature-row">${addon.bullets.map(v=>`<span>${esc(v)}</span>`).join('')}</div>
-        <div class="dlm-addon-actions"><a class="dlm-btn primary download" href="${addon.download}" download>Download .mcaddon</a><a class="dlm-btn ghost" href="${addon.repo}" target="_blank" rel="noopener noreferrer">Source</a></div>
+        <div class="dlm-addon-actions"><a class="dlm-btn primary download" href="${addon.download}" download>Download .mcaddon</a><a class="dlm-btn ghost" href="${addon.repo}" target="_blank" rel="noopener noreferrer">Details</a></div>
       </div>
     </article>`;
   }
 
   function visibleAddons(){
-    let list=addons.filter(a=>(filter==='featured'||a.tags.includes(filter)) && (!query || `${a.title} ${a.description} ${a.tags.join(' ')}`.toLowerCase().includes(query)));
+    let list=addons.filter(a=>(filter==='all'||a.tags.includes(filter)) && (!query || `${a.title} ${a.creator} ${a.description} ${a.tags.join(' ')}`.toLowerCase().includes(query)));
     if(sort==='az')list=[...list].sort((a,b)=>a.title.localeCompare(b.title));
-    if(sort==='newest')list=[...list].reverse();
+    if(sort==='newest')list=[...list].sort((a,b)=>(b.tags.includes('new')?1:0)-(a.tags.includes('new')?1:0));
     return list;
   }
 
   function renderCatalog(){
-    const grid=document.querySelector(`#${PAGE_ID} .dlm-addon-grid`); const count=document.querySelector(`#${PAGE_ID} [data-dlm-count]`); if(!grid)return;
+    const page=document.getElementById(PAGE_ID); if(!page)return;
+    const grid=page.querySelector('.dlm-addon-grid'); const count=page.querySelector('[data-dlm-count]'); if(!grid)return;
     const list=visibleAddons(); if(count)count.textContent=`${list.length} add-on`;
-    grid.innerHTML=list.length?list.map(addonCardMarkup).join(''):`<div class="dlm-empty"><span>0</span><strong>Belum ada add-on di kategori ini</strong><p>Kategori sudah siap. Konten berikutnya bisa ditambahkan tanpa mengubah layout marketplace.</p><button type="button" data-dlm-category="featured">Kembali ke Featured</button></div>`;
+    grid.innerHTML=list.length?list.map(addonCardMarkup).join(''):`<div class="dlm-empty"><span>+</span><strong>Belum ada add-on di kategori ini</strong><p>Kategori sudah tersedia dan akan terisi saat add-on baru dipublikasikan.</p><button type="button" data-dlm-category="all">Lihat semua add-on</button></div>`;
   }
 
   function pageMarkup(){
     return `<div class="dlm-shell">
-      <header class="dlm-topbar"><button type="button" class="dlm-back" data-dlm-back aria-label="Kembali"><span>←</span></button><a href="#/" class="dlm-brand"><i></i><span>DLavie <b>Marketplace</b></span></a><div class="dlm-top-actions"><a href="${HEIST_REPO}" target="_blank" rel="noopener noreferrer">GitHub</a></div></header>
+      <header class="dlm-topbar"><button type="button" class="dlm-back" data-dlm-back aria-label="Kembali">←</button><a href="#/" class="dlm-brand"><i></i><span>DLavie <b>Add-On Marketplace</b></span></a><div class="dlm-top-actions"><a href="#/">DLavie Craft</a></div></header>
       <main class="dlm-main">
-        <section class="dlm-hero"><div><span class="dlm-eyebrow">DLAVIE CRAFT • BEDROCK</span><h1>Marketplace <em>Add-Ons</em></h1><p>Temukan add-on Minecraft Bedrock dari DLavie Craft. Katalog dibuat seperti marketplace modern dengan kategori lengkap, pencarian, filter, status versi, dan unduhan langsung.</p><div class="dlm-hero-badges"><span>${categories.length} kategori</span><span>Free downloads</span><span>Bedrock / PE</span></div></div><div class="dlm-hero-cube" aria-hidden="true"><i></i><b>+</b></div></section>
+        <section class="dlm-hero">
+          <div><span class="dlm-eyebrow">MINECRAFT BEDROCK</span><h1>Marketplace <em>Add-Ons</em></h1><p>Katalog add-on Minecraft Bedrock gratis dengan pencarian, filter kategori, informasi kompatibilitas, dan unduhan langsung. Dibuat sebagai hub untuk semua add-on DLavie Craft — bukan halaman khusus satu project.</p><div class="dlm-hero-badges"><span>${categories.length} kategori</span><span>Free add-ons</span><span>Bedrock / PE</span></div></div>
+          <div class="dlm-hero-market" aria-hidden="true"><div class="dlm-pack-cube big"><i></i><b>+</b></div><span>MARKETPLACE</span></div>
+        </section>
 
-        <section class="dlm-featured"><div class="dlm-section-head"><div><span>FEATURED FREE ADD-ON</span><h2>DLavie Heist</h2></div><a href="${HEIST_REPO}" target="_blank" rel="noopener noreferrer">Project repository ↗</a></div><div class="dlm-featured-panel"><div class="dlm-featured-art"><div class="dlm-safe-large"><span></span><b>$</b></div><span class="dlm-free-ribbon">FREE</span><small>HEIST CORE • V1.0</small></div><div class="dlm-featured-copy"><p>Gameplay pembobolan untuk Bedrock: vault safe, crowbar, breach 60 detik, 20-step progress, cinematic camera, sistem uang, dan reward default $3,000.</p><div class="dlm-featured-tags"><span>Roleplay</span><span>Security</span><span>Economy</span><span>Realism</span></div><div class="dlm-banner-actions"><a class="dlm-btn primary" href="${HEIST_DOWNLOAD}" download>Download Gratis</a><a class="dlm-btn ghost" href="${HEIST_REPO}" target="_blank" rel="noopener noreferrer">Detail</a></div></div></div></section>
+        <section class="dlm-browser"><div class="dlm-section-head"><div><span>CATEGORIES</span><h2>Jelajahi add-on</h2></div><small>${categories.length} kategori</small></div><div class="dlm-category-grid">${categoryMarkup()}</div></section>
 
-        <section class="dlm-browser"><div class="dlm-section-head"><div><span>BROWSE</span><h2>Jelajahi kategori</h2></div><small>${categories.length} kategori add-on</small></div><div class="dlm-category-grid">${categoryMarkup()}</div></section>
+        <section class="dlm-catalog"><div class="dlm-section-head compact"><div><span>CATALOG</span><h2>Free Add-Ons</h2></div><small>Semua project tersedia gratis</small></div><div class="dlm-catalog-bar"><label class="dlm-search"><span></span><input type="search" placeholder="Cari add-on, kategori, atau creator..." aria-label="Cari add-on"></label><select class="dlm-sort" aria-label="Urutkan add-on"><option value="featured">Featured</option><option value="newest">Terbaru</option><option value="az">A–Z</option></select></div><div class="dlm-catalog-summary"><strong data-dlm-active-category>All Add-Ons</strong><span data-dlm-count>${addons.length} add-on</span></div><div class="dlm-addon-grid"></div></section>
 
-        <section class="dlm-catalog"><div class="dlm-catalog-bar"><label class="dlm-search"><span></span><input type="search" placeholder="Cari add-on..." aria-label="Cari add-on"></label><select class="dlm-sort" aria-label="Urutkan add-on"><option value="featured">Featured</option><option value="newest">Terbaru</option><option value="az">A–Z</option></select></div><div class="dlm-catalog-summary"><strong data-dlm-active-category>Featured</strong><span data-dlm-count>1 add-on</span></div><div class="dlm-addon-grid"></div></section>
+        <section class="dlm-publish-note"><div><span>PUBLISHING</span><h2>Satu marketplace untuk semua add-on.</h2></div><p>Project seperti DLavie Heist tampil sebagai item katalog. Add-on berikutnya bisa ditambahkan ke kategori yang sesuai tanpa mengubah identitas halaman Marketplace.</p></section>
 
-        <footer class="dlm-footer"><strong>DLavie Craft Marketplace</strong><p>Katalog independen untuk Minecraft Bedrock. Tidak berafiliasi dengan Mojang Studios atau Microsoft.</p><a href="#/">Kembali ke DLavie Craft</a></footer>
+        <footer class="dlm-footer"><strong>DLavie Add-On Marketplace</strong><p>Katalog independen untuk Minecraft Bedrock. Tidak berafiliasi dengan Mojang Studios atau Microsoft.</p><a href="#/">Kembali ke DLavie Craft</a></footer>
       </main>
     </div>`;
   }
 
+  function selectCategory(id, page, shouldScroll=true){
+    filter=categories.some(c=>c[0]===id)?id:'all';
+    page.querySelectorAll('[data-dlm-category]').forEach(b=>b.classList.toggle('active',b.dataset.dlmCategory===filter));
+    const name=categories.find(c=>c[0]===filter)?.[1]||'All Add-Ons';
+    const label=page.querySelector('[data-dlm-active-category]'); if(label)label.textContent=name;
+    renderCatalog();
+    if(shouldScroll)page.querySelector('.dlm-catalog')?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
   function bindPage(page){
     page.addEventListener('click',e=>{
-      const back=e.target.closest('[data-dlm-back]'); if(back){ if(history.length>1)history.back();else location.hash='#/';return; }
-      const cat=e.target.closest('[data-dlm-category]'); if(cat){ filter=cat.dataset.dlmCategory||'featured'; page.querySelectorAll('[data-dlm-category]').forEach(b=>b.classList.toggle('active',b.dataset.dlmCategory===filter)); const name=categories.find(c=>c[0]===filter)?.[1]||'Featured'; const label=page.querySelector('[data-dlm-active-category]');if(label)label.textContent=name; renderCatalog(); page.querySelector('.dlm-catalog')?.scrollIntoView({behavior:'smooth',block:'start'}); }
+      const back=e.target.closest('[data-dlm-back]'); if(back){if(history.length>1)history.back();else location.hash='#/';return;}
+      const cat=e.target.closest('[data-dlm-category]'); if(cat)selectCategory(cat.dataset.dlmCategory||'all',page,true);
     });
-    const search=page.querySelector('.dlm-search input'); if(search)search.addEventListener('input',()=>{query=search.value.trim().toLowerCase();renderCatalog();});
-    const select=page.querySelector('.dlm-sort'); if(select)select.addEventListener('change',()=>{sort=select.value;renderCatalog();});
+    page.querySelector('.dlm-search input')?.addEventListener('input',e=>{query=e.currentTarget.value.trim().toLowerCase();renderCatalog();});
+    page.querySelector('.dlm-sort')?.addEventListener('change',e=>{sort=e.currentTarget.value;renderCatalog();});
+  }
+
+  function requestedCategory(){
+    const q=location.hash.split('?')[1]||''; const params=new URLSearchParams(q); return params.get('category')||'all';
   }
 
   function openMarketplace(){
     document.getElementById(BANNER_ID)?.remove();
     let page=document.getElementById(PAGE_ID);
-    if(!page){page=document.createElement('div');page.id=PAGE_ID;page.className='dl-marketplace-page';page.innerHTML=pageMarkup();document.body.appendChild(page);bindPage(page);renderCatalog();}
-    document.body.classList.add('dl-marketplace-open');
-    page.hidden=false; page.scrollTop=0; previousTitle=document.title; document.title='Marketplace Add-Ons — DLavie Craft'; syncTheme();
+    if(!page){page=document.createElement('div');page.id=PAGE_ID;page.className='dl-marketplace-page';page.innerHTML=pageMarkup();document.body.appendChild(page);bindPage(page);}
+    document.body.classList.add('dl-marketplace-open'); page.hidden=false; page.scrollTop=0; previousTitle=document.title; document.title='Minecraft Add-On Marketplace — DLavie Craft';
+    selectCategory(requestedCategory(),page,false); syncTheme();
   }
   function closeMarketplace(){
-    const page=document.getElementById(PAGE_ID); if(page)page.hidden=true; document.body.classList.remove('dl-marketplace-open'); if(document.title.includes('Marketplace Add-Ons'))document.title=previousTitle||'DLavie Craft'; setTimeout(ensureHomeBanner,80);
+    const page=document.getElementById(PAGE_ID); if(page)page.hidden=true;
+    document.body.classList.remove('dl-marketplace-open'); if(document.title.includes('Add-On Marketplace'))document.title=previousTitle||'DLavie Craft'; setTimeout(ensureHomeBanner,80);
   }
-  function route(){ if(isMarketplace())openMarketplace();else closeMarketplace(); }
+  function route(){if(isMarketplace())openMarketplace();else closeMarketplace();}
 
   function watchRoot(){
     const root=document.getElementById(ROOT_ID); if(!root||rootObserver)return;
     rootObserver=new MutationObserver(()=>{if(!isMarketplace())ensureHomeBanner();}); rootObserver.observe(root,{childList:true,subtree:true});
   }
   function watchTheme(){
-    if(themeObserver)return; themeObserver=new MutationObserver(syncTheme); themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme','data-color','data-accent']}); themeObserver.observe(document.body,{attributes:true,attributeFilter:['class','style','data-theme','data-color','data-accent']});
+    if(themeObserver)return;
+    themeObserver=new MutationObserver(syncTheme);
+    themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme','data-color','data-accent']});
+    themeObserver.observe(document.body,{attributes:true,attributeFilter:['class','style','data-theme','data-color','data-accent']});
     matchMedia('(prefers-color-scheme:dark)').addEventListener?.('change',syncTheme);
     document.addEventListener('click',()=>setTimeout(syncTheme,80),true);
   }
@@ -178,5 +205,5 @@
   window.addEventListener('hashchange',route); window.addEventListener('popstate',route); window.addEventListener('pageshow',()=>{route();ensureHomeBanner();syncTheme();});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{watchRoot();watchTheme();route();ensureHomeBanner();},{once:true}); else {watchRoot();watchTheme();route();ensureHomeBanner();}
 
-  window.__DLAVIE_MARKETPLACE__={version:'1.0.0',open:()=>{location.hash='#/marketplace'},syncTheme};
+  window.__DLAVIE_MARKETPLACE__={version:'2.0.0',open:()=>{location.hash='#/marketplace'},syncTheme};
 })();
