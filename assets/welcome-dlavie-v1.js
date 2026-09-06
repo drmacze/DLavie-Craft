@@ -6,24 +6,27 @@
   const SLIDE_MS = 4800;
   const RESUME_MS = 6200;
   const slides = [
-    { image: '/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w1', eyebrow: 'DLAVIE CRAFT', title: 'Mulai dengan yang terbaik.', body: 'Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.' },
-    { image: '/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w1', eyebrow: 'CREATE TOGETHER', title: 'Bangun. Bagikan. Berkembang.', body: 'Jelajahi karya creator atau ubah akunmu menjadi Crafter untuk mulai mempublikasikan project.' },
-    { image: '/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w1', eyebrow: 'FREE COMMUNITY MODS', title: 'Minecraft, dibuat lebih luas.', body: 'Simpan project favorit, download build terbaru, beri rating dan temukan creator baru.' }
+    { image: '/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w2', eyebrow: 'DLAVIE CRAFT', title: 'Mulai dengan yang terbaik.', body: 'Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.' },
+    { image: '/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w2', eyebrow: 'CREATE TOGETHER', title: 'Bangun. Bagikan. Berkembang.', body: 'Jelajahi karya creator atau ubah akunmu menjadi Crafter untuk mulai mempublikasikan project.' },
+    { image: '/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w2', eyebrow: 'FREE COMMUNITY MODS', title: 'Minecraft, dibuat lebih luas.', body: 'Simpan project favorit, download build terbaru, beri rating dan temukan creator baru.' }
   ];
 
   const $ = (q, r = document) => r.querySelector(q);
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const safeGet = key => { try { return localStorage.getItem(key); } catch { return null; } };
+  const safeSet = (key, value) => { try { localStorage.setItem(key, value); } catch {} };
 
   function shouldShow() {
-    const url = new URL(location.href);
-    if (url.searchParams.get(FORCE_PARAM) === '1') return true;
-    if (localStorage.getItem(STORAGE_KEY) === 'done') return false;
+    let forced = false;
+    try { forced = new URL(location.href).searchParams.get(FORCE_PARAM) === '1'; } catch {}
+    if (forced) return true;
+    if (safeGet(STORAGE_KEY) === 'done') return false;
     const hash = location.hash || '#/';
     return hash === '#/' || hash === '#' || hash === '';
   }
 
   function create() {
-    if (!shouldShow() || $('#dl-welcome')) return;
+    if (!document.body || !shouldShow() || $('#dl-welcome')) return;
     const host = document.createElement('div');
     host.id = 'dl-welcome';
     host.setAttribute('role', 'dialog');
@@ -38,7 +41,7 @@
         </div>
         <div class="dlw-viewport">
           <div class="dlw-track">
-            ${slides.map((s, i) => `<section class="dlw-slide" data-slide="${i}"><img src="${s.image}" alt="" draggable="false"><div class="dlw-shade"></div></section>`).join('')}
+            ${slides.map((s, i) => `<section class="dlw-slide" data-slide="${i}"><img src="${s.image}" alt="" draggable="false" decoding="async"><div class="dlw-shade"></div></section>`).join('')}
           </div>
         </div>
         <div class="dlw-copy" aria-live="polite">
@@ -150,11 +153,16 @@
       finished = true;
       clearInterval(autoTimer); clearTimeout(resumeTimer);
       setStartProgress(1);
-      localStorage.setItem(STORAGE_KEY, 'done');
+      safeSet(STORAGE_KEY, 'done');
       host.classList.add('is-leaving');
       document.documentElement.classList.add('dl-welcome-enter-home');
-      const url = new URL(location.href);
-      if (url.searchParams.get(FORCE_PARAM) === '1') { url.searchParams.delete(FORCE_PARAM); history.replaceState(history.state, '', url.pathname + url.search + (location.hash || '#/')); }
+      try {
+        const url = new URL(location.href);
+        if (url.searchParams.get(FORCE_PARAM) === '1') {
+          url.searchParams.delete(FORCE_PARAM);
+          history.replaceState(history.state, '', url.pathname + url.search + (location.hash || '#/'));
+        }
+      } catch {}
       if (!(location.hash === '#/' || location.hash === '#' || location.hash === '')) location.hash = '#/';
       setTimeout(() => {
         host.remove();
@@ -180,7 +188,12 @@
       if (!startDrag || (e?.pointerId != null && e.pointerId !== startDrag.id)) return;
       const transform = getComputedStyle(knob).transform;
       let x = 0;
-      if (transform && transform !== 'none') { try { x = new DOMMatrixReadOnly(transform).m41; } catch {} }
+      if (transform && transform !== 'none') {
+        try {
+          if (typeof DOMMatrixReadOnly !== 'undefined') x = new DOMMatrixReadOnly(transform).m41;
+          else { const m = transform.match(/matrix\([^,]+,[^,]+,[^,]+,[^,]+,\s*([^,]+)/); x = m ? Number(m[1]) || 0 : 0; }
+        } catch {}
+      }
       const max = Math.max(1, start.clientWidth - knob.offsetWidth - 12);
       const p = x / max;
       start.classList.remove('dragging');
@@ -198,7 +211,18 @@
     startAuto();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', create, { once:true });
-  else create();
-  window.addEventListener('pageshow', () => { if (!$('#dl-welcome')) create(); });
+  function boot() {
+    if (document.body) { create(); return; }
+    const poll = setInterval(() => {
+      if (!document.body) return;
+      clearInterval(poll);
+      create();
+    }, 16);
+    setTimeout(() => clearInterval(poll), 3000);
+  }
+
+  /* Important: deferred third-party scripts can delay DOMContentLoaded on iOS/in-app browsers.
+     The welcome layer must paint immediately once <body> exists instead of waiting for that event. */
+  boot();
+  window.addEventListener('pageshow', () => { if (!$('#dl-welcome')) boot(); });
 })();
