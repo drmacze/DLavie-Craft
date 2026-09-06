@@ -21,8 +21,16 @@
   position:relative!important;
   isolation:isolate!important;
 }
+/* IMPORTANT: the base Collector Card uses an absolutely-positioned inner shell
+   inside an aspect-ratio wrapper. Keep that geometry intact. Making this node
+   relative collapses the visual content to its intrinsic height while the outer
+   card remains tall, which creates the large empty area seen on mobile Safari. */
 .dl-collector-card[data-dl-premium-tier] .dl-collector-card-inner{
-  position:relative!important;
+  position:absolute!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:0!important;
   isolation:isolate!important;
 }
 
