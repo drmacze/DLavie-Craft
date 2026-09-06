@@ -6,47 +6,45 @@
   <meta name="description" content="Minecraft mods, add-ons, maps, skins, shaders, texture packs dan komunitas creator resmi DLavie Craft." />
   <meta name="theme-color" content="#050608" />
   <title>DLavie Craft — Minecraft Creator Hub</title>
-  <link rel="preload" as="image" href="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w12" fetchpriority="high">
-  <link rel="stylesheet" crossorigin href="/DLavie-Craft/assets/index-BLlJjh3N.css?v=20260907static1">
+  <link rel="preload" as="image" href="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w14" fetchpriority="high">
+  <link rel="stylesheet" crossorigin href="/DLavie-Craft/assets/index-BLlJjh3N.css?v=20260907static2">
   <style>
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#050608;color:#fff}body{min-height:100vh;min-height:100dvh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}#root{min-height:100vh;background:#050608}
     #dl-welcome-v4{display:none;position:fixed;inset:0;z-index:2147483000;background:#050608;color:#fff;overflow:hidden}html.dlw4-on,html.dlw4-on body{overflow:hidden!important;overscroll-behavior:none!important}html.dlw4-on #dl-welcome-v4{display:block}
     .dlw4-frame{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#08090d;isolation:isolate}
-    .dlw4-viewport{position:absolute;inset:0;z-index:1;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x}.dlw4-viewport::-webkit-scrollbar{display:none}
-    .dlw4-track{display:flex;width:100%;height:100%}.dlw4-slide{position:relative;flex:0 0 100%;width:100%;height:100%;overflow:hidden;background:#08090d;scroll-snap-align:start;scroll-snap-stop:always}.dlw4-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;pointer-events:none;-webkit-user-drag:none;user-select:none;-webkit-user-select:none;backface-visibility:hidden;transform:translateZ(0);transition:opacity .35s ease}.dlw4-slide:not(.active) img{opacity:.94}
-    .dlw4-slide:after{content:"";position:absolute;inset:-12%;pointer-events:none;background:radial-gradient(circle at 30% 20%,rgba(187,116,255,.13),transparent 27%),linear-gradient(112deg,transparent 38%,rgba(255,255,255,.035) 49%,transparent 60%);mix-blend-mode:screen;opacity:.34;transform:translate3d(-2%,0,0);animation:dlwAmbient 7.5s ease-in-out infinite alternate}.dlw4-slide:nth-child(2):after{animation-delay:-2.4s}.dlw4-slide:nth-child(3):after{animation-delay:-4.8s}
-    .dlw4-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(2,3,6,0) 0%,rgba(2,3,6,0) 53%,rgba(2,3,6,.06) 67%,rgba(2,3,6,.46) 82%,rgba(2,3,6,.88) 94%,#050608 100%)}
-    .dlw4-copy{position:absolute;z-index:6;left:34px;right:34px;bottom:123px;text-align:center;text-shadow:0 2px 18px rgba(0,0,0,.62);pointer-events:none}.dlw4-copy h1{margin:0 auto;max-width:286px;font-size:18px;line-height:1.15;letter-spacing:-.022em;font-weight:800;transition:opacity .22s ease,transform .22s ease}.dlw4-copy p{margin:8px auto 0;max-width:292px;font-size:9.5px;line-height:1.48;color:rgba(255,255,255,.68);transition:opacity .22s ease,transform .22s ease}.dlw4-copy.swap h1,.dlw4-copy.swap p{opacity:.2;transform:translateY(5px)}
-    .dlw4-dots{position:absolute;z-index:7;left:50%;bottom:91px;transform:translateX(-50%);display:flex;align-items:center;gap:6px}.dlw4-dots button{width:5px;height:5px;border:0;padding:0;border-radius:99px;background:rgba(255,255,255,.34);transition:width .25s ease,background .25s ease,transform .25s ease}.dlw4-dots button.active{width:18px;background:#fff;transform:scaleY(1.08)}
-    .dlw4-start{--dlw-p:0;position:absolute;z-index:8;left:18px;right:18px;bottom:max(18px,env(safe-area-inset-bottom));height:50px;border:1px solid rgba(255,255,255,.14);border-radius:26px;background:rgba(4,5,8,.62);overflow:hidden;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px rgba(255,255,255,.025),0 12px 34px rgba(0,0,0,.16)}.dlw4-fill{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.09),rgba(133,78,211,.16));transform:scaleX(var(--dlw-p));transform-origin:left;transition:transform .16s ease}.dlw4-knob{position:absolute;z-index:2;left:5px;top:5px;width:40px;height:40px;border:1px solid rgba(255,255,255,.17);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.09);color:#fff;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s cubic-bezier(.2,.8,.2,1),background .2s ease}.dlw4-start.dragging .dlw4-knob{transition:none;background:rgba(255,255,255,.14)}.dlw4-start.dragging .dlw4-fill{transition:none}.dlw4-start strong{position:absolute;inset:0;display:grid;place-items:center;padding-left:16px;font-size:9.5px;font-weight:710;letter-spacing:.005em;pointer-events:none;color:rgba(255,255,255,.86)}.dlw4-range{position:absolute;z-index:4;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;touch-action:none}
-    #dl-welcome-v4.leaving{transform:translate3d(-100%,0,0);opacity:.08;pointer-events:none;transition:transform .52s cubic-bezier(.22,.8,.2,1),opacity .46s ease}html.dlw4-enter-home #root{animation:dlHomeIn .52s cubic-bezier(.22,.8,.2,1) both}@keyframes dlwAmbient{from{transform:translate3d(-2%,0,0);opacity:.24}to{transform:translate3d(2%,-1%,0);opacity:.42}}@keyframes dlHomeIn{from{transform:translate3d(7%,0,0);opacity:.42}to{transform:none;opacity:1}}
+    .dlw4-viewport{position:absolute;inset:0;z-index:1;overflow:hidden;touch-action:none;overscroll-behavior:none;cursor:grab}.dlw4-viewport.dragging{cursor:grabbing}
+    .dlw4-track{display:flex;width:100%;height:100%;will-change:transform;transform:translate3d(0,0,0);transition:transform .46s cubic-bezier(.22,.8,.2,1)}
+    .dlw4-slide{position:relative;flex:0 0 100%;width:100%;height:100%;overflow:hidden;background:#08090d}
+    .dlw4-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;pointer-events:none;-webkit-user-drag:none;user-select:none;-webkit-user-select:none;backface-visibility:hidden;transform:translateZ(0);filter:none;image-rendering:auto}
+    @supports (image-rendering:-webkit-optimize-contrast){.dlw4-slide img{image-rendering:-webkit-optimize-contrast}}
+    .dlw4-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0%,transparent 66%,rgba(2,3,6,.10) 76%,rgba(2,3,6,.52) 90%,rgba(5,6,8,.90) 100%)}
+    .dlw4-copy{position:absolute;z-index:6;left:34px;right:34px;bottom:123px;text-align:center;text-shadow:0 2px 18px rgba(0,0,0,.62);pointer-events:none}.dlw4-copy h1{margin:0 auto;max-width:286px;font-size:18px;line-height:1.15;letter-spacing:-.022em;font-weight:800;transition:opacity .18s ease,transform .18s ease}.dlw4-copy p{margin:8px auto 0;max-width:292px;font-size:9.5px;line-height:1.48;color:rgba(255,255,255,.72);transition:opacity .18s ease,transform .18s ease}.dlw4-copy.swap h1,.dlw4-copy.swap p{opacity:.25;transform:translateY(4px)}
+    .dlw4-dots{position:absolute;z-index:7;left:50%;bottom:91px;transform:translateX(-50%);display:flex;align-items:center;gap:6px}.dlw4-dots button{width:5px;height:5px;border:0;padding:0;border-radius:99px;background:rgba(255,255,255,.34);transition:width .22s ease,background .22s ease;cursor:pointer}.dlw4-dots button.active{width:18px;background:#fff}
+    .dlw4-start{--dlw-p:0;position:absolute;z-index:9;left:18px;right:18px;bottom:max(18px,env(safe-area-inset-bottom));height:50px;border:1px solid rgba(255,255,255,.15);border-radius:26px;background:rgba(4,5,8,.68);overflow:hidden;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1px rgba(255,255,255,.03),0 12px 34px rgba(0,0,0,.18);touch-action:none;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+    .dlw4-fill{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.10),rgba(133,78,211,.18));transform:scaleX(var(--dlw-p));transform-origin:left;transition:transform .18s ease}.dlw4-knob{position:absolute;z-index:2;left:5px;top:5px;width:40px;height:40px;border:1px solid rgba(255,255,255,.20);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.11);color:#fff;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,.30);transition:transform .20s cubic-bezier(.2,.8,.2,1),background .2s ease;pointer-events:none}.dlw4-start.dragging .dlw4-knob,.dlw4-start.dragging .dlw4-fill{transition:none}.dlw4-start.dragging .dlw4-knob{background:rgba(255,255,255,.18)}.dlw4-start strong{position:absolute;inset:0;display:grid;place-items:center;padding-left:16px;font-size:9.5px;font-weight:750;pointer-events:none;color:rgba(255,255,255,.90)}
+    #dl-welcome-v4.leaving{transform:translate3d(-100%,0,0);opacity:.06;pointer-events:none;transition:transform .50s cubic-bezier(.22,.8,.2,1),opacity .44s ease}html.dlw4-enter-home #root{animation:dlHomeIn .50s cubic-bezier(.22,.8,.2,1) both}@keyframes dlHomeIn{from{transform:translate3d(7%,0,0);opacity:.42}to{transform:none;opacity:1}}
     #dl-app-fail{display:none;position:fixed;left:18px;right:18px;bottom:22px;z-index:30;max-width:420px;margin:auto;padding:14px 15px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(12,12,17,.94);color:#fff;box-shadow:0 16px 44px rgba(0,0,0,.34)}#dl-app-fail.show{display:flex;align-items:center;justify-content:space-between;gap:12px}#dl-app-fail span{font-size:11px;line-height:1.4;color:rgba(255,255,255,.74)}#dl-app-fail button{border:0;border-radius:999px;padding:9px 12px;background:#fff;color:#0a0a0d;font-weight:800;white-space:nowrap}
-    @media(min-width:700px){#dl-welcome-v4{display:none;place-items:center;padding:24px;background:radial-gradient(circle at 24% 18%,rgba(109,54,177,.18),transparent 28%),radial-gradient(circle at 78% 76%,rgba(80,130,170,.12),transparent 24%),#050608}html.dlw4-on #dl-welcome-v4{display:grid}.dlw4-frame{width:min(320px,100%);height:min(680px,calc(100dvh - 48px));border-radius:30px;box-shadow:0 36px 100px rgba(0,0,0,.68),0 0 0 1px rgba(255,255,255,.065)}.dlw4-copy{left:26px;right:26px;bottom:116px}.dlw4-copy h1{font-size:17px}.dlw4-copy p{font-size:8.8px}.dlw4-dots{bottom:87px}.dlw4-start{left:15px;right:15px;height:48px}.dlw4-knob{width:38px;height:38px}}
-    @media(prefers-reduced-motion:reduce){.dlw4-viewport,#dl-welcome-v4,#root{scroll-behavior:auto!important;transition-duration:.08s!important;animation-duration:.08s!important}.dlw4-slide:after{animation:none!important}}
+    @media(min-width:700px){#dl-welcome-v4{display:none;place-items:center;padding:24px;background:radial-gradient(circle at 24% 18%,rgba(109,54,177,.18),transparent 28%),#050608}html.dlw4-on #dl-welcome-v4{display:grid}.dlw4-frame{width:min(320px,100%);height:min(680px,calc(100dvh - 48px));border-radius:30px;box-shadow:0 36px 100px rgba(0,0,0,.68),0 0 0 1px rgba(255,255,255,.065)}.dlw4-copy{left:26px;right:26px;bottom:116px}.dlw4-copy h1{font-size:17px}.dlw4-copy p{font-size:8.8px}.dlw4-dots{bottom:87px}.dlw4-start{left:15px;right:15px;height:48px}.dlw4-knob{width:38px;height:38px}}
+    @media(prefers-reduced-motion:reduce){.dlw4-track,#dl-welcome-v4,#root{transition-duration:.08s!important;animation-duration:.08s!important}}
   </style>
   <script>
-    (function(){
-      var show=true;
-      try{var h=location.hash||'',home=h===''||h==='#'||h==='#/';var force=location.search.indexOf('welcome=1')!==-1;var done=false;try{done=localStorage.getItem('dlavie:welcome:v4')==='done'}catch(e){}show=home&&(force||!done)}catch(e){}
-      window.__DLAVIE_WELCOME_ACTIVE__=show;
-      document.documentElement.classList.add(show?'dlw4-on':'dlw4-off');
-    })();
+    (function(){var show=true;try{var h=location.hash||'',home=h===''||h==='#'||h==='#/';var force=location.search.indexOf('welcome=1')!==-1;var done=false;try{done=localStorage.getItem('dlavie:welcome:v4')==='done'}catch(e){}show=home&&(force||!done)}catch(e){}window.__DLAVIE_WELCOME_ACTIVE__=show;document.documentElement.classList.add(show?'dlw4-on':'dlw4-off')})();
   </script>
-  <script type="module" crossorigin src="/DLavie-Craft/assets/index-DQVRunOM.js?v=20260907static1"></script>
+  <script type="module" crossorigin src="/DLavie-Craft/assets/index-DQVRunOM.js?v=20260907static2"></script>
 </head>
 <body>
   <div id="dl-welcome-v4" aria-label="Welcome to DLavie Craft">
     <div class="dlw4-frame">
       <div class="dlw4-viewport" aria-label="Welcome slides">
         <div class="dlw4-track">
-          <section class="dlw4-slide active" data-slide="0"><img src="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w12" alt="" draggable="false" loading="eager" fetchpriority="high"><div class="dlw4-shade"></div></section>
-          <section class="dlw4-slide" data-slide="1"><img src="/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w12" alt="" draggable="false" loading="lazy"><div class="dlw4-shade"></div></section>
-          <section class="dlw4-slide" data-slide="2"><img src="/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w12" alt="" draggable="false" loading="lazy"><div class="dlw4-shade"></div></section>
+          <section class="dlw4-slide active"><img src="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w14" alt="" draggable="false" loading="eager" fetchpriority="high"><div class="dlw4-shade"></div></section>
+          <section class="dlw4-slide"><img src="/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w14" alt="" draggable="false" loading="eager"><div class="dlw4-shade"></div></section>
+          <section class="dlw4-slide"><img src="/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w14" alt="" draggable="false" loading="eager"><div class="dlw4-shade"></div></section>
         </div>
       </div>
       <div class="dlw4-copy" aria-live="polite"><h1>Temukan mod yang selalu kamu cari.</h1><p>Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.</p></div>
       <div class="dlw4-dots" aria-label="Welcome slides"><button class="active" type="button" data-dlw4-dot="0" aria-label="Slide 1"></button><button type="button" data-dlw4-dot="1" aria-label="Slide 2"></button><button type="button" data-dlw4-dot="2" aria-label="Slide 3"></button></div>
-      <div class="dlw4-start" aria-label="Swipe to Start"><div class="dlw4-fill"></div><div class="dlw4-knob" aria-hidden="true">→</div><strong>Swipe to Start</strong><input class="dlw4-range" type="range" min="0" max="100" value="0" step="1" aria-label="Geser untuk masuk ke Home"></div>
+      <div class="dlw4-start" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" aria-label="Geser untuk masuk ke Home"><div class="dlw4-fill"></div><div class="dlw4-knob" aria-hidden="true">→</div><strong>Swipe to Start</strong></div>
     </div>
   </div>
 
@@ -54,48 +52,52 @@
   <div id="dl-app-fail"><span>DLavie belum berhasil dimuat.</span><button type="button" onclick="location.reload()">Muat ulang</button></div>
 
   <script>
-    (function(){
-      'use strict';
-      var host=document.getElementById('dl-welcome-v4');
-      if(!host)return;
-      var KEY='dlavie:welcome:v4',SLIDE_MS=4700,RESUME_MS=6200;
-      var copy=[
-        ['Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.'],
-        ['Bangun dan bagikan duniamu.','Temukan karya komunitas atau aktifkan akun Crafter untuk mempublikasikan projectmu sendiri.'],
-        ['Mainkan lebih banyak, gratis.','Simpan favorit, download build terbaru, beri rating dan temukan creator baru.']
-      ];
-      function forced(){return location.search.indexOf('welcome=1')!==-1}
-      function atHome(){var h=location.hash||'';return h===''||h==='#'||h==='#/'}
-      function stored(){try{return localStorage.getItem(KEY)==='done'}catch(e){return false}}
-      function cleanupOff(){if(host&&host.parentNode)host.parentNode.removeChild(host);window.__DLAVIE_WELCOME_ACTIVE__=false;document.documentElement.classList.remove('dlw4-on','dlw4-enter-home');document.documentElement.classList.add('dlw4-off')}
-      if(!atHome()||(!forced()&&stored())){cleanupOff();return}
-      window.__DLAVIE_WELCOME_ACTIVE__=true;
-      var viewport=host.querySelector('.dlw4-viewport'),slides=[].slice.call(host.querySelectorAll('.dlw4-slide')),dots=[].slice.call(host.querySelectorAll('[data-dlw4-dot]')),copyBox=host.querySelector('.dlw4-copy'),title=copyBox.querySelector('h1'),body=copyBox.querySelector('p'),start=host.querySelector('.dlw4-start'),range=host.querySelector('.dlw4-range'),knob=host.querySelector('.dlw4-knob');
-      var index=0,timer=0,resumeTimer=0,scrollTimer=0,leaving=false,userTouch=false;
-      function width(){return Math.max(1,viewport.clientWidth)}
-      function paint(next){next=Math.max(0,Math.min(slides.length-1,next));index=next;slides.forEach(function(s,i){s.classList.toggle('active',i===index)});dots.forEach(function(d,i){d.classList.toggle('active',i===index)});copyBox.classList.add('swap');setTimeout(function(){title.textContent=copy[index][0];body.textContent=copy[index][1];copyBox.classList.remove('swap')},90)}
-      function go(next,manual){next=(next+slides.length)%slides.length;paint(next);try{viewport.scrollTo({left:width()*next,behavior:'smooth'})}catch(e){viewport.scrollLeft=width()*next}if(manual)pauseAuto();else restartAuto()}
-      function restartAuto(){clearTimeout(timer);timer=setTimeout(function(){go(index+1,false)},SLIDE_MS)}
-      function pauseAuto(){clearTimeout(timer);clearTimeout(resumeTimer);resumeTimer=setTimeout(restartAuto,RESUME_MS)}
-      dots.forEach(function(d,i){d.addEventListener('click',function(){go(i,true)})});
-      viewport.addEventListener('touchstart',function(){userTouch=true;clearTimeout(timer);clearTimeout(resumeTimer)},{passive:true});
-      viewport.addEventListener('scroll',function(){var n=Math.round(viewport.scrollLeft/width());if(n!==index)paint(n);clearTimeout(scrollTimer);scrollTimer=setTimeout(function(){if(userTouch){userTouch=false;pauseAuto()}},110)},{passive:true});
-      viewport.addEventListener('touchend',function(){userTouch=false;pauseAuto()},{passive:true});
-      function setStart(v,animate){v=Math.max(0,Math.min(100,Number(v)||0));var p=v/100,max=Math.max(0,start.clientWidth-knob.offsetWidth-10);start.classList.toggle('dragging',!animate);knob.style.transform='translate3d('+(max*p)+'px,0,0)';start.style.setProperty('--dlw-p',String(p))}
-      function resetStart(){range.value='0';setStart(0,true)}
-      function settleStart(){if(leaving)return;var v=Number(range.value)||0;if(v>=72){finish();return}resetStart();restartAuto()}
-      range.addEventListener('input',function(){clearTimeout(timer);setStart(range.value,false)});range.addEventListener('change',settleStart);range.addEventListener('touchend',settleStart,{passive:true});range.addEventListener('pointerup',settleStart,{passive:true});
-      function removeForce(){if(!forced())return;try{var u=new URL(location.href);u.searchParams.delete('welcome');history.replaceState(history.state,'',u.pathname+(u.search||'')+(location.hash||'#/'))}catch(e){}}
-      function finish(){if(leaving)return;leaving=true;clearTimeout(timer);clearTimeout(resumeTimer);range.value='100';setStart(100,true);try{localStorage.setItem(KEY,'done')}catch(e){}removeForce();host.classList.add('leaving');document.documentElement.classList.add('dlw4-enter-home');setTimeout(function(){cleanupOff();try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}},540)}
-      paint(0);viewport.scrollLeft=0;setStart(0,true);restartAuto();
-      window.addEventListener('resize',function(){viewport.scrollLeft=width()*index;setStart(range.value,true)},{passive:true});
-    })();
+  (function(){
+    'use strict';
+    var host=document.getElementById('dl-welcome-v4');if(!host)return;
+    var KEY='dlavie:welcome:v4',SLIDE_MS=4800,RESUME_MS=6200;
+    function forced(){return location.search.indexOf('welcome=1')!==-1}
+    function home(){var h=location.hash||'';return h===''||h==='#'||h==='#/'}
+    function stored(){try{return localStorage.getItem(KEY)==='done'}catch(e){return false}}
+    function cleanup(){if(host&&host.parentNode)host.parentNode.removeChild(host);window.__DLAVIE_WELCOME_ACTIVE__=false;document.documentElement.classList.remove('dlw4-on','dlw4-enter-home');document.documentElement.classList.add('dlw4-off')}
+    if(!home()||(!forced()&&stored())){cleanup();return}
+    window.__DLAVIE_WELCOME_ACTIVE__=true;
+    var viewport=host.querySelector('.dlw4-viewport'),track=host.querySelector('.dlw4-track'),slides=[].slice.call(host.querySelectorAll('.dlw4-slide')),dots=[].slice.call(host.querySelectorAll('[data-dlw4-dot]')),copyBox=host.querySelector('.dlw4-copy'),title=copyBox.querySelector('h1'),body=copyBox.querySelector('p'),start=host.querySelector('.dlw4-start'),knob=start.querySelector('.dlw4-knob'),fill=start.querySelector('.dlw4-fill');
+    var text=[['Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.'],['Bangun dan bagikan duniamu.','Temukan karya komunitas atau aktifkan akun Crafter untuk mempublikasikan projectmu sendiri.'],['Mainkan lebih banyak, gratis.','Simpan favorit, download build terbaru, beri rating dan temukan creator baru.']];
+    var index=0,timer=0,resume=0,slideDrag=null,startDrag=null,leaving=false;
+    function width(){return Math.max(1,viewport.getBoundingClientRect().width)}
+    function trackTo(px,animate){track.style.transition=animate?'transform .46s cubic-bezier(.22,.8,.2,1)':'none';track.style.transform='translate3d('+px+'px,0,0)'}
+    function paint(i){index=Math.max(0,Math.min(slides.length-1,i));slides.forEach(function(s,n){s.classList.toggle('active',n===index)});dots.forEach(function(d,n){d.classList.toggle('active',n===index);d.setAttribute('aria-current',n===index?'true':'false')});copyBox.classList.add('swap');setTimeout(function(){title.textContent=text[index][0];body.textContent=text[index][1];copyBox.classList.remove('swap')},80)}
+    function restart(){clearTimeout(timer);timer=setTimeout(function(){var n=index+1;if(n>=slides.length)n=0;paint(n);trackTo(-index*width(),true);restart()},SLIDE_MS)}
+    function pause(){clearTimeout(timer);clearTimeout(resume);resume=setTimeout(restart,RESUME_MS)}
+    function snap(i,manual){paint(Math.max(0,Math.min(slides.length-1,i)));trackTo(-index*width(),true);manual?pause():restart()}
+    function pt(e){var t=e.touches&&e.touches[0]||e.changedTouches&&e.changedTouches[0]||e;return{x:t.clientX,y:t.clientY}}
+    function slideBegin(e){if(leaving)return;var p=pt(e);slideDrag={x:p.x,y:p.y,dx:0,t:Date.now(),horizontal:false};clearTimeout(timer);clearTimeout(resume);viewport.classList.add('dragging');track.style.transition='none'}
+    function slideMove(e){if(!slideDrag)return;var p=pt(e),dx=p.x-slideDrag.x,dy=p.y-slideDrag.y;slideDrag.dx=dx;if(!slideDrag.horizontal){if(Math.abs(dx)<6)return;if(Math.abs(dx)<=Math.abs(dy))return;slideDrag.horizontal=true}if(e.cancelable)e.preventDefault();var d=dx;if((index===0&&d>0)||(index===slides.length-1&&d<0))d*=.28;trackTo(-index*width()+d,false)}
+    function slideEnd(){if(!slideDrag)return;var d=slideDrag,dt=Math.max(1,Date.now()-d.t),velocity=Math.abs(d.dx)/dt,target=index;if(d.horizontal&&(Math.abs(d.dx)>42||velocity>.38))target=index+(d.dx<0?1:-1);slideDrag=null;viewport.classList.remove('dragging');snap(target,true)}
+    function maxStart(){return Math.max(1,start.clientWidth-knob.offsetWidth-10)}
+    function setStart(p,animate){p=Math.max(0,Math.min(1,p));start.classList.toggle('dragging',!animate);knob.style.transform='translate3d('+(maxStart()*p)+'px,0,0)';start.style.setProperty('--dlw-p',String(p));fill.style.transform='scaleX('+p+')';start.setAttribute('aria-valuenow',String(Math.round(p*100)))}
+    function startBegin(e){if(leaving)return;e.stopPropagation();if(e.cancelable)e.preventDefault();startDrag={x:pt(e).x,p:0};clearTimeout(timer);clearTimeout(resume)}
+    function startMove(e){if(!startDrag)return;e.stopPropagation();if(e.cancelable)e.preventDefault();startDrag.p=Math.max(0,Math.min(1,(pt(e).x-startDrag.x)/maxStart()));setStart(startDrag.p,false)}
+    function startEnd(e){if(!startDrag)return;e.stopPropagation();var p=startDrag.p;startDrag=null;if(p>=.62)finish();else{setStart(0,true);restart()}}
+    function removeForce(){if(!forced())return;try{var u=new URL(location.href);u.searchParams.delete('welcome');history.replaceState(history.state,'',u.pathname+(u.search||'')+(location.hash||'#/'))}catch(e){}}
+    function finish(){if(leaving)return;leaving=true;clearTimeout(timer);clearTimeout(resume);setStart(1,true);try{localStorage.setItem(KEY,'done')}catch(e){}removeForce();host.classList.add('leaving');document.documentElement.classList.add('dlw4-enter-home');setTimeout(function(){cleanup();try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}},510)}
+    if(window.PointerEvent){
+      viewport.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;slideBegin(e);try{viewport.setPointerCapture(e.pointerId)}catch(x){}},{passive:false});viewport.addEventListener('pointermove',slideMove,{passive:false});viewport.addEventListener('pointerup',slideEnd,{passive:false});viewport.addEventListener('pointercancel',slideEnd,{passive:false});
+      start.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;startBegin(e);try{start.setPointerCapture(e.pointerId)}catch(x){}},{passive:false});start.addEventListener('pointermove',startMove,{passive:false});start.addEventListener('pointerup',startEnd,{passive:false});start.addEventListener('pointercancel',startEnd,{passive:false});
+    }else{
+      viewport.addEventListener('touchstart',slideBegin,{passive:false});viewport.addEventListener('touchmove',slideMove,{passive:false});viewport.addEventListener('touchend',slideEnd,{passive:false});viewport.addEventListener('touchcancel',slideEnd,{passive:false});start.addEventListener('touchstart',startBegin,{passive:false});start.addEventListener('touchmove',startMove,{passive:false});start.addEventListener('touchend',startEnd,{passive:false});start.addEventListener('touchcancel',startEnd,{passive:false});
+    }
+    dots.forEach(function(d,i){d.addEventListener('click',function(e){e.preventDefault();snap(i,true)})});
+    start.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){e.preventDefault();finish()}});
+    trackTo(0,false);paint(0);setStart(0,true);restart();window.addEventListener('resize',function(){trackTo(-index*width(),false);if(!startDrag)setStart(0,true)},{passive:true});
+  })();
   </script>
 
   <script>
     (function(){var r=document.getElementById('root'),f=document.getElementById('dl-app-fail');function check(){if(r&&r.childElementCount){if(f)f.classList.remove('show');return true}return false}if(r&&window.MutationObserver){var m=new MutationObserver(function(){if(check())m.disconnect()});m.observe(r,{childList:true,subtree:true})}setTimeout(function(){if(!check()&&f&&!document.documentElement.classList.contains('dlw4-on'))f.classList.add('show')},9000);window.addEventListener('dlavie:welcome-complete',function(){setTimeout(function(){if(!check()&&f)f.classList.add('show')},2500)})})();
   </script>
   <noscript><div style="position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#050608;color:#fff;padding:24px;text-align:center">DLavie membutuhkan JavaScript untuk berjalan.</div></noscript>
-  <script defer src="/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907static1"></script>
+  <script defer src="/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907g2"></script>
 </body>
 </html>
