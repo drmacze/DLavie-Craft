@@ -6,18 +6,8 @@
     <meta name="description" content="Minecraft mods, add-ons, maps, skins, shaders, texture packs dan komunitas creator resmi DLavie Craft." />
     <meta name="theme-color" content="#f1f3ed" />
     <title>DLavie Craft — Minecraft Creator Hub</title>
-    <link rel="preload" as="image" href="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w4">
-    <script>
-      (function(){
-        try{
-          var h=location.hash||'';
-          var home=h===''||h==='#'||h==='#/';
-          var force=location.search.indexOf('welcome=1')!==-1;
-          var done=window.localStorage&&localStorage.getItem('dlavie:welcome:v3')==='done';
-          document.documentElement.classList.add(home&&(force||!done)?'dlw3-lock':'dlw3-skip');
-        }catch(e){document.documentElement.classList.add('dlw3-lock');}
-      })();
-    </script>
+    <link rel="preload" as="image" href="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w5">
+    <script>document.documentElement.classList.add('dlw3-skip');</script>
     <script src="/DLavie-Craft/assets/console-upload-fix.js?v=20260904"></script>
     <script src="/DLavie-Craft/assets/console-addon-type-fix.js?v=20260904b"></script>
     <script src="/DLavie-Craft/assets/public-console-entry-hide.js?v=20260904c"></script>
@@ -57,8 +47,8 @@
     <script defer src="/DLavie-Craft/assets/marketplace-addon-v1.js?v=20260906aa2"></script>
     <script defer src="/DLavie-Craft/assets/home-structure-v3.js?v=20260906hm3"></script>
 
-    <!-- Static-first welcome controller. Visual markup exists in body before app startup. -->
-    <script defer src="/DLavie-Craft/assets/welcome-dlavie-v3.js?v=20260907w4"></script>
+    <!-- Welcome is fail-open and only becomes visible after the main app has rendered. -->
+    <script defer src="/DLavie-Craft/assets/welcome-dlavie-v3.js?v=20260907w5"></script>
 
     <!-- Game Hub + Crafter platform. Stability runs first to refresh expired sessions before catalog requests. -->
     <script defer src="/DLavie-Craft/assets/gamehub-stability-v2.js?v=20260906gs2"></script>
@@ -66,7 +56,6 @@
     <script defer src="/DLavie-Craft/assets/gamehub-crafter-social-v1.js?v=20260906gh2"></script>
     <script defer src="/DLavie-Craft/assets/gamehub-saved-nav-v2.js?v=20260906sn2"></script>
 
-    <!-- App module is requested before optional motion CDNs so the UI never waits on third-party hosts. -->
     <script type="module" crossorigin src="/DLavie-Craft/assets/index-DQVRunOM.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -119,28 +108,21 @@
     <link rel="stylesheet" href="/DLavie-Craft/assets/community-ui-polish-v37.css?v=20260906u2">
     <link rel="stylesheet" href="/DLavie-Craft/assets/community-ui-unify-v38.css?v=20260906v1">
 
-    <!-- Marketplace is last so light/dark/custom accent rules win consistently. -->
     <link rel="stylesheet" href="/DLavie-Craft/assets/marketplace-addon-v1.css?v=20260906aa2">
-
-    <!-- Home v3: clear compact hierarchy, with animated Minecraft background preserved. -->
     <link rel="stylesheet" href="/DLavie-Craft/assets/home-minimal-v1.css?v=20260906hm3">
-
-    <!-- Game Hub visual layer: reference-inspired, theme-aware, mobile first. -->
     <link rel="stylesheet" href="/DLavie-Craft/assets/gamehub-platform-v1.css?v=20260906gs2">
     <link rel="stylesheet" href="/DLavie-Craft/assets/gamehub-crafter-social-v1.css?v=20260906gh2">
     <link rel="stylesheet" href="/DLavie-Craft/assets/gamehub-mobile-stability-v2.css?v=20260906gs2">
     <link rel="stylesheet" href="/DLavie-Craft/assets/gamehub-saved-nav-v2.css?v=20260906sn2">
-
-    <!-- Welcome v3 static-first visual layer. -->
-    <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-dlavie-v3.css?v=20260907w4">
+    <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-dlavie-v3.css?v=20260907w5">
   </head>
   <body>
     <div id="dl-welcome-v3" aria-label="Welcome to DLavie Craft">
       <div class="dlw3-frame">
         <div class="dlw3-track">
-          <section class="dlw3-slide"><img src="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w4" alt="" draggable="false" loading="eager" fetchpriority="high"><div class="dlw3-shade"></div></section>
-          <section class="dlw3-slide"><img src="/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w4" alt="" draggable="false" loading="eager"><div class="dlw3-shade"></div></section>
-          <section class="dlw3-slide"><img src="/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w4" alt="" draggable="false" loading="eager"><div class="dlw3-shade"></div></section>
+          <section class="dlw3-slide"><img src="/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w5" alt="" draggable="false" loading="eager" fetchpriority="high"><div class="dlw3-shade"></div></section>
+          <section class="dlw3-slide"><img src="/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w5" alt="" draggable="false" loading="eager"><div class="dlw3-shade"></div></section>
+          <section class="dlw3-slide"><img src="/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w5" alt="" draggable="false" loading="eager"><div class="dlw3-shade"></div></section>
         </div>
         <div class="dlw3-progress" aria-hidden="true"><i data-dlw3-progress></i><i data-dlw3-progress></i><i data-dlw3-progress></i></div>
         <div class="dlw3-top"><b class="dlw3-brand">DLAVIE</b><button class="dlw3-skip" type="button" data-dlw3-skip>Lewati</button></div>
