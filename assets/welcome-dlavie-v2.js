@@ -4,9 +4,9 @@
   const KEY = 'dlavie:welcome:v2';
   const SLIDE_MS = 4600;
   const slides = [
-    { image:'/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w2', eyebrow:'DLAVIE', title:'Mulai dengan yang terbaik.', body:'Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.' },
-    { image:'/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w2', eyebrow:'CREATE TOGETHER', title:'Bangun. Bagikan. Berkembang.', body:'Jelajahi karya creator atau aktifkan akun Crafter untuk mempublikasikan projectmu.' },
-    { image:'/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w2', eyebrow:'FREE MINECRAFT MOD', title:'Mainkan lebih banyak.', body:'Simpan favorit, download build terbaru, beri rating dan temukan creator baru.' }
+    { image:'/DLavie-Craft/assets/welcome-start-best.webp?v=20260907w3', eyebrow:'DLAVIE', title:'Mulai dengan yang terbaik.', body:'Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.' },
+    { image:'/DLavie-Craft/assets/welcome-lets-build.webp?v=20260907w3', eyebrow:'CREATE TOGETHER', title:'Bangun. Bagikan. Berkembang.', body:'Jelajahi karya creator atau aktifkan akun Crafter untuk mempublikasikan projectmu.' },
+    { image:'/DLavie-Craft/assets/welcome-free-mod.webp?v=20260907w3', eyebrow:'FREE MINECRAFT MOD', title:'Mainkan lebih banyak.', body:'Simpan favorit, download build terbaru, beri rating dan temukan creator baru.' }
   ];
 
   const safeStorage = {
@@ -19,11 +19,11 @@
   function shouldShow(){ return atHome() && (forced() || safeStorage.get(KEY)!=='done'); }
 
   function mount(){
-    if(!shouldShow() || document.getElementById('dl-welcome-v2')) return;
+    if(!document.body || !shouldShow() || document.getElementById('dl-welcome-v2')) return;
     const host=document.createElement('div');
     host.id='dl-welcome-v2';
     host.innerHTML=`<div class="dlw2-frame">
-      <div class="dlw2-track">${slides.map((s,i)=>`<section class="dlw2-slide" data-i="${i}"><img src="${s.image}" alt="" draggable="false"><div class="dlw2-shade"></div></section>`).join('')}</div>
+      <div class="dlw2-track">${slides.map((s,i)=>`<section class="dlw2-slide" data-i="${i}"><img src="${s.image}" alt="" draggable="false" decoding="async"><div class="dlw2-shade"></div></section>`).join('')}</div>
       <div class="dlw2-progress">${slides.map((_,i)=>`<i data-p="${i}"></i>`).join('')}</div>
       <div class="dlw2-top"><b>DLAVIE</b><button type="button" data-skip>Lewati</button></div>
       <div class="dlw2-copy"><span></span><h1></h1><p></p></div>
@@ -88,13 +88,33 @@
     }
     host.querySelector('[data-skip]').addEventListener('click',finish);
 
-    // Never allow a first-visit overlay to trap the site if rendering is interrupted.
+    // Fail open: welcome must never trap the website if an embedded browser behaves unexpectedly.
     const watchdog=setTimeout(()=>{ if(host.isConnected && !copy.querySelector('h1').textContent) finish(); },2500);
     host.addEventListener('transitionend',()=>clearTimeout(watchdog),{once:true});
     render(false);
   }
 
-  const run=()=>{ try{ mount(); }catch(err){ console.warn('[DLavie Welcome] recovery',err); document.documentElement.classList.remove('dlw2-lock'); document.getElementById('dl-welcome-v2')?.remove(); } };
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run,{once:true}); else run();
-  window.addEventListener('pageshow',run);
+  function run(){
+    try{ mount(); }
+    catch(err){
+      console.warn('[DLavie Welcome] recovery',err);
+      document.documentElement.classList.remove('dlw2-lock');
+      document.getElementById('dl-welcome-v2')?.remove();
+    }
+  }
+
+  function boot(){
+    // This script is defer-loaded, so body normally already exists. Do not wait for DOMContentLoaded:
+    // later defer/CDN scripts can delay that event on iOS and embedded Safari, producing a black screen.
+    if(document.body){ run(); return; }
+    let tries=0;
+    const poll=setInterval(()=>{
+      tries++;
+      if(document.body){ clearInterval(poll); run(); }
+      else if(tries>180) clearInterval(poll);
+    },16);
+  }
+
+  boot();
+  window.addEventListener('pageshow',boot);
 })();
