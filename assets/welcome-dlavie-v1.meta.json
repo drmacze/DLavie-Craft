@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "experience": "first-visit-welcome",
+  "backgrounds": [
+    "welcome-start-best.webp",
+    "welcome-lets-build.webp",
+    "welcome-free-mod.webp"
+  ],
+  "interaction": {
+    "auto_slide_ms": 4800,
+    "manual_swipe": true,
+    "swipe_to_start": true
+  },
+  "source": "user-provided artwork",
+  "updated": "2026-09-07"
+}
