@@ -2,6 +2,7 @@
   'use strict';
   var KEY='dlavie:welcome:v3';
   var SLIDE_MS=4600;
+  var READY_TIMEOUT=9000;
   var slides=[
     {eyebrow:'DLAVIE',title:'Mulai dengan yang terbaik.',body:'Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.'},
     {eyebrow:'CREATE TOGETHER',title:'Bangun. Bagikan. Berkembang.',body:'Jelajahi karya creator atau aktifkan akun Crafter untuk mempublikasikan projectmu.'},
@@ -13,6 +14,10 @@
   function atHome(){var h=location.hash||'';return h===''||h==='#'||h==='#/'}
   function shouldShow(){return atHome()&&(forced()||getStored()!=='done')}
   function list(q,root){return Array.prototype.slice.call((root||document).querySelectorAll(q))}
+  function appReady(){
+    var root=document.getElementById('root');
+    return !!(document.getElementById('dl-gamehub-root') || (root && root.childElementCount>0));
+  }
   function removeForce(){
     if(!forced())return;
     try{
@@ -21,20 +26,40 @@
       history.replaceState(history.state,'',next);
     }catch(e){}
   }
+  function disableWelcome(host){
+    if(host&&host.parentNode)host.parentNode.removeChild(host);
+    document.documentElement.classList.add('dlw3-skip');
+    document.documentElement.classList.remove('dlw3-lock','dlw3-live','dlw3-enter-home');
+  }
   function boot(){
     var host=document.getElementById('dl-welcome-v3');
     if(!host)return;
+    document.documentElement.classList.remove('dlw3-lock','dlw3-live');
     if(!shouldShow()){
-      host.parentNode&&host.parentNode.removeChild(host);
-      document.documentElement.classList.add('dlw3-skip');
-      document.documentElement.classList.remove('dlw3-lock');
+      disableWelcome(host);
       return;
     }
-    document.documentElement.classList.remove('dlw3-skip');
-    document.documentElement.classList.add('dlw3-lock');
-    if(host.getAttribute('data-bound')==='1')return;
-    host.setAttribute('data-bound','1');
-    bind(host);
+    if(host.getAttribute('data-waiting')==='1' || host.getAttribute('data-bound')==='1')return;
+    host.setAttribute('data-waiting','1');
+    var started=Date.now();
+    var timer=setInterval(function(){
+      if(!host.isConnected){clearInterval(timer);return;}
+      if(appReady()){
+        clearInterval(timer);
+        host.removeAttribute('data-waiting');
+        document.documentElement.classList.remove('dlw3-skip');
+        document.documentElement.classList.add('dlw3-live','dlw3-lock');
+        if(host.getAttribute('data-bound')!=='1'){
+          host.setAttribute('data-bound','1');
+          bind(host);
+        }
+        return;
+      }
+      if(Date.now()-started>=READY_TIMEOUT){
+        clearInterval(timer);
+        disableWelcome(host);
+      }
+    },80);
   }
   function bind(host){
     var track=host.querySelector('.dlw3-track');
@@ -45,14 +70,16 @@
     var knob=host.querySelector('.dlw3-knob');
     var fill=host.querySelector('.dlw3-fill');
     var frame=host.querySelector('.dlw3-frame');
+    if(!track||!copy||!start||!knob||!fill||!frame){disableWelcome(host);return;}
     var index=0,timer=0,swipe=null,drag=null,leaving=false;
     function render(animate){
       if(animate===false)track.style.transition='none';
       track.style.transform='translate3d('+(-index*100)+'%,0,0)';
       var s=slides[index];
-      copy.querySelector('span').textContent=s.eyebrow;
-      copy.querySelector('h1').textContent=s.title;
-      copy.querySelector('p').textContent=s.body;
+      var eyebrow=copy.querySelector('span'),title=copy.querySelector('h1'),body=copy.querySelector('p');
+      if(eyebrow)eyebrow.textContent=s.eyebrow;
+      if(title)title.textContent=s.title;
+      if(body)body.textContent=s.body;
       dots.forEach(function(d,i){d.classList.toggle('active',i===index)});
       bars.forEach(function(b,i){b.classList.remove('active','done');if(i<index)b.classList.add('done');if(i===index)b.classList.add('active')});
       if(animate===false)setTimeout(function(){track.style.transition=''},20);
@@ -77,7 +104,11 @@
     function finish(){
       if(leaving)return;
       leaving=true;clearTimeout(timer);setStored();setDrag(1);host.classList.add('leaving');document.documentElement.classList.add('dlw3-enter-home');removeForce();
-      setTimeout(function(){if(host.parentNode)host.parentNode.removeChild(host);document.documentElement.classList.remove('dlw3-lock','dlw3-enter-home');try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}},620);
+      setTimeout(function(){
+        if(host.parentNode)host.parentNode.removeChild(host);
+        document.documentElement.classList.remove('dlw3-lock','dlw3-live','dlw3-enter-home');
+        try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}
+      },620);
     }
     var skip=host.querySelector('[data-dlw3-skip]');
     if(skip)skip.addEventListener('click',finish);
