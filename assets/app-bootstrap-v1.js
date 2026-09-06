@@ -23,6 +23,9 @@
   }
   function series(list){return list.reduce(function(p,x){return p.then(function(){return script(x)})},Promise.resolve(true))}
 
+  // Welcome controls load first so iOS gets the corrected drag interaction immediately.
+  script(A+'welcome-interaction-v5.js?v=20260907w16');
+
   var coreCss=[
     A+'marketplace-addon-v1.css?v=20260906aa2',
     A+'home-minimal-v1.css?v=20260906hm3',
