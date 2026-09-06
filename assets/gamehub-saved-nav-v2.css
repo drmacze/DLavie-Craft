@@ -1,0 +1,73 @@
+/* DLavie Craft Game Hub — Saved Library + centered nav v2 */
+
+#dl-gamehub-root .gh-bottom-nav{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) 76px minmax(0,1fr) minmax(0,1fr)!important;
+}
+#dl-gamehub-root .gh-nav-item{
+  min-width:0!important;
+  padding:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  gap:4px!important;
+  line-height:1!important;
+}
+#dl-gamehub-root .gh-nav-item svg{
+  display:block!important;
+  flex:none!important;
+  margin:0 auto!important;
+  transform:none!important;
+}
+#dl-gamehub-root .gh-nav-item span{
+  display:block!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#dl-gamehub-root .gh-plus{
+  justify-self:center!important;
+  align-self:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+.gh-saved-view{animation:ghSavedEnter .24s ease both}
+@keyframes ghSavedEnter{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.gh-saved-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;max-width:900px;margin:12px auto 16px;padding:0 2px}
+.gh-saved-head>div{min-width:0}
+.gh-saved-head span{display:block;color:var(--gh-muted);font-size:8px;font-weight:850;letter-spacing:.14em}
+.gh-saved-head h1{margin:4px 0 5px;font-size:clamp(24px,4vw,36px);line-height:1;letter-spacing:-.045em}
+.gh-saved-head p{max-width:620px;margin:0;color:var(--gh-muted);font-size:10px;line-height:1.55}
+.gh-saved-head>strong{flex:none;min-width:42px;height:42px;padding:0 10px;display:grid;place-items:center;border:1px solid var(--gh-line);border-radius:14px;background:var(--gh-card);font-size:15px}
+.gh-saved-list{max-width:900px;margin:0 auto;gap:7px!important}
+.gh-saved-card{position:relative;grid-template-columns:72px minmax(0,1fr) 30px!important;min-height:82px!important;padding-right:10px!important}
+.gh-saved-card>img,.gh-saved-card>.gh-no-thumb{width:72px!important;height:72px!important;min-height:72px!important;border-radius:15px!important;object-fit:cover!important}
+.gh-saved-card .gh-library-card-copy{min-width:0}
+.gh-saved-card .gh-library-card-copy strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gh-saved-card .gh-library-card-copy small{display:block;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gh-saved-chevron{display:grid;place-items:center;opacity:.42}
+.gh-saved-empty{max-width:620px;margin:42px auto 0;padding:34px 24px;border:1px solid var(--gh-line);border-radius:24px;background:var(--gh-card);text-align:center}
+.gh-saved-empty>span{width:50px;height:50px;margin:0 auto 12px;display:grid;place-items:center;border-radius:16px;background:var(--surface-muted);color:var(--gh-muted)}
+.gh-saved-empty h2{margin:0;font-size:20px;letter-spacing:-.035em}
+.gh-saved-empty p{max-width:430px;margin:7px auto 0;color:var(--gh-muted);font-size:10px;line-height:1.55}
+.gh-saved-empty button{margin-top:16px;min-height:40px;padding:0 16px;border:1px solid var(--gh-line);border-radius:12px;background:var(--ink);color:var(--bg)!important;font-size:10px;font-weight:800;cursor:pointer}
+
+@media(max-width:640px){
+  #dl-gamehub-root .gh-bottom-nav{width:calc(100% - 22px)!important;padding:0 7px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 68px minmax(0,1fr) minmax(0,1fr)!important}
+  #dl-gamehub-root .gh-nav-item{height:50px!important;gap:3px!important;font-size:6.5px!important}
+  #dl-gamehub-root .gh-nav-item svg{width:18px!important;height:18px!important}
+  #dl-gamehub-root .gh-plus{width:56px!important;height:56px!important;margin-top:-31px!important}
+  .gh-saved-head{margin-top:4px;align-items:center}
+  .gh-saved-head p{font-size:9px}
+  .gh-saved-head>strong{min-width:38px;height:38px;border-radius:12px;font-size:13px}
+  .gh-saved-list{gap:5px!important}
+  .gh-saved-card{grid-template-columns:64px minmax(0,1fr) 26px!important;min-height:74px!important;padding:5px 8px 5px 5px!important}
+  .gh-saved-card>img,.gh-saved-card>.gh-no-thumb{width:64px!important;height:64px!important;min-height:64px!important;border-radius:13px!important}
+  .gh-saved-empty{margin-top:24px;padding:28px 18px}
+}
