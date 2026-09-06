@@ -1,0 +1,102 @@
+/* DLavie Craft Game Hub mobile stability v2
+   Keeps the Game Hub anchored to the top of the page on iOS Safari and
+   prevents old home/layout layers from moving the new UI out of view. */
+
+body.dl-gamehub-active{
+  min-height:100dvh!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  scroll-behavior:auto!important;
+}
+
+body.dl-gamehub-active #root,
+body.dl-gamehub-active .page-shell,
+body.dl-gamehub-active .site-frame{
+  min-height:0!important;
+  height:auto!important;
+  align-items:initial!important;
+  justify-content:initial!important;
+  place-items:initial!important;
+}
+
+body.dl-gamehub-active #dl-gamehub-root{
+  position:relative!important;
+  inset:auto!important;
+  top:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  left:auto!important;
+  display:block!important;
+  width:100%!important;
+  min-height:100dvh!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  translate:none!important;
+  align-self:auto!important;
+}
+
+body.dl-gamehub-active #dl-gamehub-root .gh-shell{
+  position:relative!important;
+  inset:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  translate:none!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+body.dl-gamehub-active #dl-gamehub-root .gh-topbar,
+body.dl-gamehub-active #dl-gamehub-root .gh-search-row,
+body.dl-gamehub-active #dl-gamehub-root .gh-categories,
+body.dl-gamehub-active #dl-gamehub-root .gh-home-grid,
+body.dl-gamehub-active #dl-gamehub-root .gh-section,
+body.dl-gamehub-active #dl-gamehub-root .gh-view-head,
+body.dl-gamehub-active #dl-gamehub-root .gh-editions,
+body.dl-gamehub-active #dl-gamehub-root .gh-library-list,
+body.dl-gamehub-active #dl-gamehub-root .gh-console-tabs,
+body.dl-gamehub-active #dl-gamehub-root .gh-stats-grid,
+body.dl-gamehub-active #dl-gamehub-root .gh-console-library{
+  position:relative!important;
+  top:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  left:auto!important;
+  transform:none!important;
+  translate:none!important;
+}
+
+body.dl-gamehub-active #dl-gamehub-root .gh-topbar{
+  z-index:12!important;
+}
+
+body.dl-gamehub-active #dl-gamehub-root .gh-bottom-nav{
+  position:fixed!important;
+  top:auto!important;
+  z-index:120!important;
+}
+
+body.dl-gamehub-active #dl-gamehub-root .gh-categories{
+  z-index:2!important;
+}
+
+@media(max-width:650px){
+  body.dl-gamehub-active #dl-gamehub-root .gh-shell{
+    width:calc(100% - 22px)!important;
+    padding-top:max(12px,env(safe-area-inset-top))!important;
+    padding-bottom:calc(116px + env(safe-area-inset-bottom))!important;
+  }
+  body.dl-gamehub-active #dl-gamehub-root .gh-topbar{
+    min-height:52px!important;
+    height:52px!important;
+    margin:0 0 12px!important;
+  }
+  body.dl-gamehub-active #dl-gamehub-root .gh-search-row{
+    margin-top:0!important;
+  }
+  body.dl-gamehub-active #dl-gamehub-root .gh-bottom-nav{
+    bottom:max(14px,env(safe-area-inset-bottom))!important;
+  }
+}
