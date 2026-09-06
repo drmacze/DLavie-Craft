@@ -1,0 +1,45 @@
+/* DLavie Account load recovery v7 */
+.dl-account-portal.dl-account-loading-v7 .dl-account-card,
+.dl-account-portal.dl-account-load-error-v7 .dl-account-card{
+  box-shadow:none!important;
+  animation:none!important;
+}
+.dl-account-portal.dl-account-loading-v7 .dl-account-card::before,
+.dl-account-portal.dl-account-loading-v7 .dl-account-card::after,
+.dl-account-portal.dl-account-load-error-v7 .dl-account-card::before,
+.dl-account-portal.dl-account-load-error-v7 .dl-account-card::after{
+  animation:none!important;
+  filter:none!important;
+}
+.dl-account-load-actions-v7{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+.dl-account-load-actions-v7 .dl-account-btn{
+  min-width:132px;
+}
+@media(max-width:820px){
+  .dl-account-portal.dl-account-loading-v7 .dl-account-brand,
+  .dl-account-portal.dl-account-load-error-v7 .dl-account-brand{
+    min-height:150px!important;
+    padding:22px 24px!important;
+  }
+  .dl-account-portal.dl-account-loading-v7 .dl-account-brand h1,
+  .dl-account-portal.dl-account-load-error-v7 .dl-account-brand h1{
+    font-size:28px!important;
+    line-height:1.04!important;
+    margin:8px 0 0!important;
+  }
+  .dl-account-portal.dl-account-loading-v7 .dl-account-main,
+  .dl-account-portal.dl-account-load-error-v7 .dl-account-main{
+    min-height:calc(100dvh - 150px)!important;
+    align-items:flex-start!important;
+    padding:18px 14px max(30px,env(safe-area-inset-bottom))!important;
+  }
+  .dl-account-portal.dl-account-loading-v7 .dl-account-card,
+  .dl-account-portal.dl-account-load-error-v7 .dl-account-card{
+    border-radius:18px!important;
+    padding:22px 20px!important;
+  }
+}
