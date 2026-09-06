@@ -1,10 +1,10 @@
 (function(){
   'use strict';
-  var KEY='dlavie:welcome:v4',SLIDE_MS=4600;
+  var KEY='dlavie:welcome:v4',SLIDE_MS=5200;
   var copy=[
-    ['DLAVIE','Mulai dengan yang terbaik.','Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.'],
-    ['CREATE TOGETHER','Bangun. Bagikan. Berkembang.','Jelajahi karya creator atau aktifkan akun Crafter untuk mempublikasikan projectmu.'],
-    ['FREE MINECRAFT MOD','Mainkan lebih banyak.','Simpan favorit, download build terbaru, beri rating dan temukan creator baru.']
+    ['','Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft dalam satu tempat.'],
+    ['','Bangun sesuatu yang layak dibagikan.','Temukan karya komunitas atau aktifkan akun Crafter untuk mulai mempublikasikan projectmu.'],
+    ['','Mainkan lebih banyak, gratis.','Simpan favorit, download build terbaru, beri rating dan temukan creator baru.']
   ];
   function q(s,r){return (r||document).querySelector(s)}
   function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
@@ -18,7 +18,7 @@
   window.__DLAVIE_WELCOME_ACTIVE__=true;
   document.documentElement.classList.add('dlw4-on');
   document.documentElement.classList.remove('dlw4-off');
-  var track=q('.dlw4-track',host),dots=qa('[data-dlw4-dot]',host),bars=qa('[data-dlw4-progress]',host),copyBox=q('.dlw4-copy',host),start=q('.dlw4-start',host),knob=q('.dlw4-knob',host),fill=q('.dlw4-fill',host),frame=q('.dlw4-frame',host);
+  var track=q('.dlw4-track',host),dots=qa('[data-dlw4-dot]',host),copyBox=q('.dlw4-copy',host),start=q('.dlw4-start',host),knob=q('.dlw4-knob',host),fill=q('.dlw4-fill',host),frame=q('.dlw4-frame',host);
   var index=0,timer=0,touch=null,drag=null,leaving=false;
   function render(animate){
     if(!track)return;
@@ -28,7 +28,6 @@
     var e=q('span',copyBox),h=q('h1',copyBox),p=q('p',copyBox);
     if(e)e.textContent=c[0];if(h)h.textContent=c[1];if(p)p.textContent=c[2];
     dots.forEach(function(d,i){d.classList.toggle('active',i===index)});
-    bars.forEach(function(b,i){b.classList.remove('active','done');if(i<index)b.classList.add('done');if(i===index)b.classList.add('active')});
     if(animate===false)setTimeout(function(){track.style.transition=''},20);
     clearTimeout(timer);timer=setTimeout(function(){go(index+1)},SLIDE_MS);
   }
@@ -57,8 +56,7 @@
       document.documentElement.classList.remove('dlw4-on','dlw4-enter-home');
       document.documentElement.classList.add('dlw4-off');
       try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}
-    },340);
+    },360);
   }
-  var skip=q('[data-dlw4-skip]',host);if(skip)skip.addEventListener('click',finish);
   render(false);
 })();
