@@ -1,9 +1,9 @@
 (function(){
   'use strict';
-  var KEY='dlavie:welcome:v4',SLIDE_MS=5200;
+  var KEY='dlavie:welcome:v4',SLIDE_MS=5400;
   var copy=[
-    ['','Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft dalam satu tempat.'],
-    ['','Bangun sesuatu yang layak dibagikan.','Temukan karya komunitas atau aktifkan akun Crafter untuk mulai mempublikasikan projectmu.'],
+    ['','Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.'],
+    ['','Bangun dan bagikan duniamu.','Temukan karya komunitas atau aktifkan akun Crafter untuk mempublikasikan projectmu sendiri.'],
     ['','Mainkan lebih banyak, gratis.','Simpan favorit, download build terbaru, beri rating dan temukan creator baru.']
   ];
   function q(s,r){return (r||document).querySelector(s)}
@@ -24,21 +24,21 @@
     if(!track)return;
     track.style.transition=animate===false?'none':'';
     track.style.transform='translate3d('+(-index*100)+'%,0,0)';
-    var c=copy[index];
-    var e=q('span',copyBox),h=q('h1',copyBox),p=q('p',copyBox);
+    var c=copy[index],e=q('span',copyBox),h=q('h1',copyBox),p=q('p',copyBox);
     if(e)e.textContent=c[0];if(h)h.textContent=c[1];if(p)p.textContent=c[2];
-    dots.forEach(function(d,i){d.classList.toggle('active',i===index)});
+    dots.forEach(function(d,i){d.classList.toggle('active',i===index);d.setAttribute('aria-current',i===index?'true':'false')});
     if(animate===false)setTimeout(function(){track.style.transition=''},20);
     clearTimeout(timer);timer=setTimeout(function(){go(index+1)},SLIDE_MS);
   }
-  function go(i){index=(i+copy.length)%copy.length;render(true)}
+  function go(i){index=(i+copy.length)%copy.length;render(true);warmNext()}
+  function warmNext(){var next=track&&track.children[(index+1)%copy.length];var img=next&&next.querySelector('img');if(img&&img.loading==='lazy')img.loading='eager'}
   dots.forEach(function(d,i){d.addEventListener('click',function(){go(i)})});
   frame.addEventListener('touchstart',function(e){var t=e.touches&&e.touches[0];if(!t)return;touch={x:t.clientX,y:t.clientY};clearTimeout(timer)},{passive:true});
-  frame.addEventListener('touchend',function(e){var t=e.changedTouches&&e.changedTouches[0];if(!touch||!t){render(true);return}var dx=t.clientX-touch.x,dy=t.clientY-touch.y;touch=null;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>42)go(index+(dx<0?1:-1));else render(true)},{passive:true});
-  function setDrag(p){p=Math.max(0,Math.min(1,p));var max=Math.max(0,start.clientWidth-knob.offsetWidth-12);knob.style.transform='translate3d('+(p*max)+'px,0,0)';fill.style.transform='scaleX('+p+')';start.setAttribute('data-p',String(p))}
-  function begin(x){var r=start.getBoundingClientRect();drag={x:x,w:r.width};start.classList.add('dragging')}
-  function move(x){if(!drag)return;setDrag((x-drag.x)/Math.max(1,drag.w-knob.offsetWidth-12))}
-  function end(){if(!drag)return;var p=parseFloat(start.getAttribute('data-p')||'0');drag=null;start.classList.remove('dragging');if(p>=.68)finish();else setDrag(0)}
+  frame.addEventListener('touchend',function(e){var t=e.changedTouches&&e.changedTouches[0];if(!touch||!t){render(true);return}var dx=t.clientX-touch.x,dy=t.clientY-touch.y;touch=null;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40)go(index+(dx<0?1:-1));else render(true)},{passive:true});
+  function setDrag(p){p=Math.max(0,Math.min(1,p));var max=Math.max(0,start.clientWidth-knob.offsetWidth-10);knob.style.transform='translate3d('+(p*max)+'px,0,0)';fill.style.transform='scaleX('+p+')';start.setAttribute('data-p',String(p))}
+  function begin(x){var r=start.getBoundingClientRect();drag={x:x,w:r.width};start.classList.add('dragging');clearTimeout(timer)}
+  function move(x){if(!drag)return;setDrag((x-drag.x)/Math.max(1,drag.w-knob.offsetWidth-10))}
+  function end(){if(!drag)return;var p=parseFloat(start.getAttribute('data-p')||'0');drag=null;start.classList.remove('dragging');if(p>=.66)finish();else{setDrag(0);render(true)}}
   start.addEventListener('touchstart',function(e){e.stopPropagation();var t=e.touches&&e.touches[0];if(t)begin(t.clientX)},{passive:true});
   start.addEventListener('touchmove',function(e){var t=e.touches&&e.touches[0];if(t){e.preventDefault();move(t.clientX)}},{passive:false});
   start.addEventListener('touchend',function(e){e.stopPropagation();end()},{passive:true});
@@ -56,7 +56,7 @@
       document.documentElement.classList.remove('dlw4-on','dlw4-enter-home');
       document.documentElement.classList.add('dlw4-off');
       try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}
-    },360);
+    },560);
   }
-  render(false);
+  render(false);setTimeout(warmNext,900);
 })();
