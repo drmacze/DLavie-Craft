@@ -3,18 +3,39 @@
   var A='/DLavie-Craft/assets/';
   var shell=document.getElementById('dl-app-boot-shell');
   var root=document.getElementById('root');
-  var started=false,revealed=false;
+  var started=false,revealed=false,enhancementsStarted=false;
+  var HARD_FAIL_MS=6500;
 
-  function css(href){return new Promise(function(resolve){var l=document.createElement('link');l.rel='stylesheet';l.href=href;l.onload=function(){resolve(true)};l.onerror=function(){resolve(false)};document.head.appendChild(l)})}
-  function classic(src){return new Promise(function(resolve){var s=document.createElement('script');s.src=src;s.async=false;s.onload=function(){resolve(true)};s.onerror=function(){resolve(false)};document.body.appendChild(s)})}
-  function moduleScript(src){return new Promise(function(resolve,reject){var s=document.createElement('script');s.type='module';s.src=src;s.onload=function(){resolve(true)};s.onerror=function(){reject(new Error('module '+src))};document.body.appendChild(s)})}
-  function loadCssList(list){return Promise.all(list.map(css))}
-  function series(list){return list.reduce(function(p,src){return p.then(function(){return classic(src)})},Promise.resolve())}
-  function markReady(){if(revealed)return;revealed=true;document.documentElement.classList.add('dl-app-ready');if(shell){shell.classList.add('done');setTimeout(function(){if(shell.parentNode)shell.parentNode.removeChild(shell)},260)}}
+  function timeout(p,ms,fallback){return Promise.race([p,new Promise(function(resolve){setTimeout(function(){resolve(fallback)},ms)})])}
+  function css(href){return timeout(new Promise(function(resolve){var l=document.createElement('link');l.rel='stylesheet';l.href=href;l.onload=function(){resolve(true)};l.onerror=function(){resolve(false)};document.head.appendChild(l)}),2600,false)}
+  function classic(src){return timeout(new Promise(function(resolve){var s=document.createElement('script');s.src=src;s.async=false;s.onload=function(){resolve(true)};s.onerror=function(){resolve(false)};document.body.appendChild(s)}),4200,false)}
+  function moduleScript(src){return timeout(new Promise(function(resolve){var s=document.createElement('script');s.type='module';s.src=src;s.onload=function(){resolve(true)};s.onerror=function(){resolve(false)};document.body.appendChild(s)}),5200,false)}
+  function loadCssList(list){list.forEach(function(x){css(x)})}
+  function series(list){return list.reduce(function(p,src){return p.then(function(){return classic(src)})},Promise.resolve(true))}
   function rootReady(){return !!(document.getElementById('dl-gamehub-root')||(root&&root.childElementCount>0))}
-  function waitForRoot(ms){return new Promise(function(resolve){if(rootReady()){resolve(true);return}var done=false;var mo=new MutationObserver(function(){if(rootReady()){done=true;mo.disconnect();resolve(true)}});if(root)mo.observe(root,{childList:true,subtree:true});setTimeout(function(){if(done)return;mo.disconnect();resolve(rootReady())},ms)})}
-  function fail(msg){document.documentElement.classList.add('dl-app-failed');if(shell){var t=shell.querySelector('[data-boot-text]');if(t)t.textContent=msg||'Gagal memuat DLavie';var b=shell.querySelector('[data-boot-retry]');if(b)b.hidden=false}}
-  if(shell){var retry=shell.querySelector('[data-boot-retry]');if(retry)retry.addEventListener('click',function(){location.reload()})}
+
+  function markReady(){
+    if(revealed)return;
+    revealed=true;
+    document.documentElement.classList.add('dl-app-ready');
+    document.documentElement.classList.remove('dl-app-failed');
+    if(shell){shell.classList.add('done');setTimeout(function(){if(shell&&shell.parentNode)shell.parentNode.removeChild(shell)},220)}
+  }
+  function fail(msg){
+    if(revealed)return;
+    document.documentElement.classList.add('dl-app-failed');
+    if(shell){
+      var spinner=shell.querySelector('.dl-boot-spinner');if(spinner)spinner.style.display='none';
+      var t=shell.querySelector('[data-boot-text]');if(t)t.textContent=msg||'Gagal memuat DLavie.';
+      var b=shell.querySelector('[data-boot-retry]');if(b)b.hidden=false;
+    }
+  }
+  if(shell){var retry=shell.querySelector('[data-boot-retry]');if(retry)retry.addEventListener('click',function(){try{sessionStorage.setItem('dlavie:boot-retry','1')}catch(e){}location.reload()})}
+
+  if(root&&window.MutationObserver){
+    var revealObserver=new MutationObserver(function(){if(rootReady()){revealObserver.disconnect();markReady();afterCore()}});
+    revealObserver.observe(root,{childList:true,subtree:true});
+  }
 
   var coreCss=[
     A+'index-BLlJjh3N.css',
@@ -40,7 +61,6 @@
   var accountJs=[
     'console-upload-fix.js?v=20260904','console-addon-type-fix.js?v=20260904b','public-console-entry-hide.js?v=20260904c','account-auth-runtime-fix.js?v=20260904s','account-verification-flow-v2.js?v=20260905d1','download-auth-gate.js?v=20260904j','account-legal-system.js?v=20260904d','account-load-recovery-v7.js?v=20260906z1','account-mutation-guard.js?v=20260904f','account-shell-integration.js?v=20260904s','account-minecraft-effects-v2.js?v=20260904i','account-collector-profile-v1.js?v=20260905c1','account-collector-card-motion-v3.js?v=20260905p1','account-profile-fullscreen-v3.js?v=20260906w1','account-profile-snap-v5.js?v=20260906x1','account-onboarding-visual-v2.js?v=20260905d1','account-onboarding-scroll-fix-v1.js?v=20260905d2','account-card-skins-v1.js?v=20260905q2','account-profile-card-premium-v6.js?v=20260906y1'
   ].map(function(x){return A+x});
-
   var communityCss=[
     'community-chat-v3.css?v=20260904t','community-discord-v4.css?v=20260905y','community-discord-v4-fixes.css?v=20260905y','community-rules-v1.css?v=20260905z2','community-controls-v10.css?v=20260905h1','community-role-identity-v3.css?v=20260905m1','community-sticker-console-v3.css?v=20260905k1','community-forum-console-v1.css?v=20260906p1','minecraft-icon-canonical-v9.css?v=20260905n1','community-safe-v19.css?v=20260905w1','community-clean-v26.css?v=20260906g1','community-toolbar-v27.css?v=20260906h1','community-stable-v29.css?v=20260906j1','community-thread-polish-v32.css?v=20260906m1','community-forum-access-v34.css?v=20260906p1','community-forum-nav-v35.css?v=20260906s1','community-content-polish-v35.css?v=20260906r1','community-ui-polish-v37.css?v=20260906u2','community-ui-unify-v38.css?v=20260906v1'
   ].map(function(x){return A+x});
@@ -56,28 +76,45 @@
   window.addEventListener('hashchange',enhancementForRoute);
 
   function afterCore(){
+    if(enhancementsStarted)return;enhancementsStarted=true;
     enhancementForRoute();
-    var idle=window.requestIdleCallback||function(fn){return setTimeout(fn,800)};
-    idle(function(){loadAccount()},{timeout:1800});
-    idle(function(){loadCommunity()},{timeout:2600});
-    setTimeout(loadMotion,2600);
+    var idle=window.requestIdleCallback||function(fn){return setTimeout(fn,900)};
+    idle(function(){loadAccount()},{timeout:2200});
+    idle(function(){loadCommunity()},{timeout:3200});
+    setTimeout(loadMotion,3200);
   }
 
   function boot(){
     if(started)return;started=true;
-    var cssP=loadCssList(coreCss);
-    var moduleP=moduleScript(A+'index-DQVRunOM.js');
-    Promise.all([cssP,moduleP]).then(function(){return series(gamehub)}).then(function(){return waitForRoot(3200)}).then(function(ok){
-      if(ok){markReady();afterCore()}
-      else if(rootReady()){markReady();afterCore()}
-      else fail('DLavie membutuhkan waktu lebih lama. Coba lagi.')
-    }).catch(function(){fail('Gagal memuat aplikasi. Coba lagi.')});
+    loadCssList(coreCss);
+
+    // The app bundle and Game Hub are independent. Never make first render wait on six enhancement scripts.
+    var moduleP=moduleScript(A+'index-DQVRunOM.js?v=20260907boot2');
+    setTimeout(function(){series(gamehub)},80);
+
+    moduleP.then(function(ok){
+      if(!ok){
+        return moduleScript(A+'index-DQVRunOM.js?v=20260907boot2r').then(function(retryOk){if(!retryOk)fail('Gagal memuat aplikasi. Ketuk Coba lagi.');return retryOk});
+      }
+      return true;
+    }).then(function(){
+      if(rootReady()){markReady();afterCore();return}
+      setTimeout(function(){if(rootReady()){markReady();afterCore()}},350);
+    });
+
+    // Hard watchdog: refresh can never remain on an endless spinner.
+    setTimeout(function(){
+      if(revealed)return;
+      if(rootReady()){markReady();afterCore()}
+      else fail('Koneksi atau cache browser menghambat pemuatan. Ketuk Coba lagi.')
+    },HARD_FAIL_MS);
   }
 
   function schedule(){
-    if(window.__DLAVIE_WELCOME_ACTIVE__){requestAnimationFrame(function(){setTimeout(boot,180)})}
+    if(window.__DLAVIE_WELCOME_ACTIVE__)setTimeout(boot,120);
     else setTimeout(boot,0);
   }
   window.addEventListener('dlavie:welcome-complete',function(){if(!started)boot()});
+  window.addEventListener('pageshow',function(){if(rootReady())markReady()});
   schedule();
 })();
