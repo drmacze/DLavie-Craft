@@ -1,0 +1,42 @@
+/* DLavie Welcome v1 — first-visit story intro */
+html.dl-welcome-lock,html.dl-welcome-lock body{overflow:hidden!important;overscroll-behavior:none!important}
+#dl-welcome{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:16px;background:radial-gradient(circle at 50% 18%,rgba(119,57,255,.16),transparent 34%),rgba(5,6,9,.94);opacity:0;transition:opacity .45s ease;isolation:isolate;font-family:var(--font-body,system-ui,sans-serif);color:#fff}
+#dl-welcome.is-ready{opacity:1}
+#dl-welcome:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 0 42%,rgba(156,95,255,.05) 48%,transparent 54%);animation:dlwAmbient 9s ease-in-out infinite;z-index:-1}
+.dlw-frame{position:relative;width:min(430px,100%);height:min(860px,calc(100dvh - 32px));overflow:hidden;border-radius:34px;background:#090a0e;box-shadow:0 36px 110px rgba(0,0,0,.62),0 0 0 1px rgba(255,255,255,.08);transform:translateY(10px) scale(.985);opacity:.9;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .55s ease}
+#dl-welcome.is-ready .dlw-frame{transform:none;opacity:1}
+.dlw-viewport{position:absolute;inset:0;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.dlw-track{display:flex;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.dlw-slide{position:relative;flex:0 0 100%;width:100%;height:100%;overflow:hidden;background:#090a0e}
+.dlw-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;transform:scale(1.018);animation:dlwKenBurns 9s ease-in-out infinite alternate}
+.dlw-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,9,.14) 0%,rgba(5,6,9,.02) 38%,rgba(5,6,9,.18) 58%,rgba(5,6,9,.92) 88%,#07080b 100%);pointer-events:none}
+.dlw-progress{position:absolute;z-index:5;left:22px;right:22px;top:max(18px,env(safe-area-inset-top));height:2px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+.dlw-progress i{display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#fff,#c89cff);transform-origin:left;transform:scaleX(0)}
+.dlw-topbar{position:absolute;z-index:6;left:22px;right:22px;top:calc(max(18px,env(safe-area-inset-top)) + 14px);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dlw-brand{font-size:10px;font-weight:900;letter-spacing:.26em;text-shadow:0 2px 18px rgba(0,0,0,.65)}
+.dlw-skip{border:0;background:rgba(7,8,11,.38);color:rgba(255,255,255,.82);font-size:9px;font-weight:800;padding:8px 11px;border-radius:999px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer}
+.dlw-copy{position:absolute;z-index:6;left:28px;right:28px;bottom:132px;text-align:center;text-shadow:0 2px 22px rgba(0,0,0,.72)}
+.dlw-eyebrow{display:block;margin-bottom:7px;font-size:8px;font-weight:900;letter-spacing:.23em;color:rgba(220,198,255,.88)}
+.dlw-copy h1{margin:0;font-size:clamp(22px,6vw,30px);line-height:1.04;letter-spacing:-.045em;font-weight:850}
+.dlw-copy p{max-width:340px;margin:10px auto 0;font-size:10px;line-height:1.55;color:rgba(255,255,255,.72)}
+.dlw-dots{position:absolute;z-index:7;left:50%;bottom:105px;transform:translateX(-50%);display:flex;gap:6px}
+.dlw-dots button{width:6px;height:6px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.28);transition:width .28s ease,background .28s ease;cursor:pointer}
+.dlw-dots button.active{width:24px;background:#fff}
+.dlw-start{--dlw-start-p:0;position:absolute;z-index:8;left:18px;right:18px;bottom:max(20px,env(safe-area-inset-bottom));height:62px;border:1px solid rgba(255,255,255,.17);border-radius:31px;background:rgba(7,8,11,.52);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px rgba(255,255,255,.06),0 15px 40px rgba(0,0,0,.24);overflow:hidden;touch-action:none;cursor:grab;outline:none}
+.dlw-start:focus-visible{box-shadow:0 0 0 3px rgba(174,112,255,.42),0 15px 40px rgba(0,0,0,.24)}
+.dlw-start.dragging{cursor:grabbing}
+.dlw-start-fill{position:absolute;inset:0;background:linear-gradient(90deg,rgba(130,68,255,.42),rgba(203,150,255,.18));transform-origin:left;transform:scaleX(0);pointer-events:none;transition:transform .22s ease}
+.dlw-start.dragging .dlw-start-fill{transition:none}
+.dlw-start-knob{position:absolute;left:6px;top:6px;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#090a0e;box-shadow:0 8px 24px rgba(0,0,0,.34);transition:transform .25s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.dlw-start.dragging .dlw-start-knob{transition:none}
+.dlw-start-knob span{font-size:20px;line-height:1;transform:translateX(1px)}
+.dlw-start-label{position:absolute;inset:0;display:grid;place-items:center;padding-left:24px;font-size:10px;font-weight:800;letter-spacing:.02em;color:rgba(255,255,255,calc(.82 - (var(--dlw-start-p) * .45)));pointer-events:none}
+#dl-welcome.is-leaving{opacity:0;pointer-events:none;transition:opacity .62s ease}
+#dl-welcome.is-leaving .dlw-frame{transform:translate3d(0,-5%,0) scale(.94);filter:blur(4px);opacity:0;transition:transform .72s cubic-bezier(.4,0,.2,1),filter .55s ease,opacity .45s ease}
+html.dl-welcome-enter-home #dl-gamehub-root{animation:dlwEnterHome .72s cubic-bezier(.2,.8,.2,1) both}
+@keyframes dlwEnterHome{from{opacity:.2;transform:translateY(24px) scale(.985);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes dlwKenBurns{from{transform:scale(1.018) translate3d(0,0,0)}to{transform:scale(1.045) translate3d(0,-.6%,0)}}
+@keyframes dlwAmbient{0%,100%{opacity:.55;transform:translateX(-2%)}50%{opacity:1;transform:translateX(2%)}}
+@media (max-width:560px){#dl-welcome{padding:0;background:#07080b}.dlw-frame{width:100%;height:100dvh;max-height:none;border-radius:0;box-shadow:none}.dlw-copy{left:24px;right:24px;bottom:134px}.dlw-start{left:16px;right:16px}}
+@media (min-width:900px){#dl-welcome{background:radial-gradient(circle at 50% 20%,rgba(115,54,255,.18),transparent 27%),linear-gradient(135deg,#050608,#09080e 50%,#050608)}.dlw-frame{height:min(820px,calc(100dvh - 48px))}}
+@media (prefers-reduced-motion:reduce){#dl-welcome:before,.dlw-slide img{animation:none!important}.dlw-track,.dlw-frame,#dl-welcome{transition-duration:.15s!important}}
