@@ -1,7 +1,8 @@
-/* DLavie Welcome v3 — static-first, iOS/webview-safe intro */
-html.dlw3-lock,html.dlw3-lock body{overflow:hidden!important;overscroll-behavior:none!important}
+/* DLavie Welcome v3 — non-blocking, iOS/webview-safe intro */
+html.dlw3-lock.dlw3-live,html.dlw3-lock.dlw3-live body{overflow:hidden!important;overscroll-behavior:none!important}
 html.dlw3-skip #dl-welcome-v3{display:none!important}
-#dl-welcome-v3{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:16px;background:#050608;color:#fff;font-family:var(--font-body,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);isolation:isolate}
+#dl-welcome-v3{position:fixed;inset:0;z-index:2147483000;display:none;place-items:center;padding:16px;background:#050608;color:#fff;font-family:var(--font-body,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);isolation:isolate}
+html.dlw3-live #dl-welcome-v3{display:grid}
 .dlw3-frame{position:relative;width:min(430px,100%);height:min(860px,calc(100dvh - 32px));overflow:hidden;border-radius:34px;background:#07080c;box-shadow:0 34px 100px rgba(0,0,0,.64),0 0 0 1px rgba(255,255,255,.07)}
 .dlw3-track{display:flex;width:100%;height:100%;transform:translate3d(0,0,0);transition:transform .68s cubic-bezier(.2,.8,.2,1);will-change:transform}
 .dlw3-slide{position:relative;flex:0 0 100%;width:100%;height:100%;overflow:hidden;background:#08090d}
@@ -34,6 +35,6 @@ html.dlw3-enter-home #dl-gamehub-root,html.dlw3-enter-home #root{animation:dlw3H
 @keyframes dlw3Bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes dlw3Zoom{from{transform:scale(1.01)}to{transform:scale(1.045)}}
 @keyframes dlw3Home{from{opacity:.15;transform:translateY(22px) scale(.985);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}
-@media(max-width:560px){#dl-welcome-v3{display:block;padding:0}.dlw3-frame{width:100%;height:100dvh;max-height:none;border-radius:0;box-shadow:none}.dlw3-copy{left:24px;right:24px;bottom:134px}}
+@media(max-width:560px){html.dlw3-live #dl-welcome-v3{display:block;padding:0}.dlw3-frame{width:100%;height:100dvh;max-height:none;border-radius:0;box-shadow:none}.dlw3-copy{left:24px;right:24px;bottom:134px}}
 @media(min-width:900px){#dl-welcome-v3{background:radial-gradient(circle at 50% 20%,rgba(119,57,255,.17),transparent 30%),#050608}}
 @media(prefers-reduced-motion:reduce){.dlw3-track,.dlw3-knob,#dl-welcome-v3,.dlw3-frame{transition-duration:.12s!important}.dlw3-slide img,.dlw3-progress i:after{animation:none!important}}
