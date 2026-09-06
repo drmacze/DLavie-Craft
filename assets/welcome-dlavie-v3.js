@@ -2,7 +2,7 @@
   'use strict';
   var KEY='dlavie:welcome:v3';
   var SLIDE_MS=4600;
-  var READY_TIMEOUT=9000;
+  var HOME_WAIT_MS=9000;
   var slides=[
     {eyebrow:'DLAVIE',title:'Mulai dengan yang terbaik.',body:'Temukan mod, add-on, map, skin dan project Minecraft pilihan komunitas.'},
     {eyebrow:'CREATE TOGETHER',title:'Bangun. Bagikan. Berkembang.',body:'Jelajahi karya creator atau aktifkan akun Crafter untuk mempublikasikan projectmu.'},
@@ -14,52 +14,18 @@
   function atHome(){var h=location.hash||'';return h===''||h==='#'||h==='#/'}
   function shouldShow(){return atHome()&&(forced()||getStored()!=='done')}
   function list(q,root){return Array.prototype.slice.call((root||document).querySelectorAll(q))}
-  function appReady(){
-    var root=document.getElementById('root');
-    return !!(document.getElementById('dl-gamehub-root') || (root && root.childElementCount>0));
-  }
-  function removeForce(){
-    if(!forced())return;
-    try{
-      var parts=location.search.replace(/^\?/,'').split('&').filter(function(p){return p&&p.split('=')[0]!=='welcome'});
-      var next=location.pathname+(parts.length?'?'+parts.join('&'):'')+(location.hash||'#/');
-      history.replaceState(history.state,'',next);
-    }catch(e){}
-  }
-  function disableWelcome(host){
-    if(host&&host.parentNode)host.parentNode.removeChild(host);
-    document.documentElement.classList.add('dlw3-skip');
-    document.documentElement.classList.remove('dlw3-lock','dlw3-live','dlw3-enter-home');
-  }
+  function appReady(){var root=document.getElementById('root');return !!(document.getElementById('dl-gamehub-root')||(root&&root.childElementCount>0))}
+  function removeForce(){if(!forced())return;try{var parts=location.search.replace(/^\?/,'').split('&').filter(function(p){return p&&p.split('=')[0]!=='welcome'});var next=location.pathname+(parts.length?'?'+parts.join('&'):'')+(location.hash||'#/');history.replaceState(history.state,'',next)}catch(e){}}
+  function disableWelcome(host){if(host&&host.parentNode)host.parentNode.removeChild(host);document.documentElement.classList.add('dlw3-skip');document.documentElement.classList.remove('dlw3-lock','dlw3-live','dlw3-enter-home')}
   function boot(){
     var host=document.getElementById('dl-welcome-v3');
     if(!host)return;
-    document.documentElement.classList.remove('dlw3-lock','dlw3-live');
-    if(!shouldShow()){
-      disableWelcome(host);
-      return;
-    }
-    if(host.getAttribute('data-waiting')==='1' || host.getAttribute('data-bound')==='1')return;
-    host.setAttribute('data-waiting','1');
-    var started=Date.now();
-    var timer=setInterval(function(){
-      if(!host.isConnected){clearInterval(timer);return;}
-      if(appReady()){
-        clearInterval(timer);
-        host.removeAttribute('data-waiting');
-        document.documentElement.classList.remove('dlw3-skip');
-        document.documentElement.classList.add('dlw3-live','dlw3-lock');
-        if(host.getAttribute('data-bound')!=='1'){
-          host.setAttribute('data-bound','1');
-          bind(host);
-        }
-        return;
-      }
-      if(Date.now()-started>=READY_TIMEOUT){
-        clearInterval(timer);
-        disableWelcome(host);
-      }
-    },80);
+    if(!shouldShow()){disableWelcome(host);return}
+    document.documentElement.classList.remove('dlw3-skip');
+    document.documentElement.classList.add('dlw3-live','dlw3-lock');
+    if(host.getAttribute('data-bound')==='1')return;
+    host.setAttribute('data-bound','1');
+    bind(host);
   }
   function bind(host){
     var track=host.querySelector('.dlw3-track');
@@ -70,7 +36,7 @@
     var knob=host.querySelector('.dlw3-knob');
     var fill=host.querySelector('.dlw3-fill');
     var frame=host.querySelector('.dlw3-frame');
-    if(!track||!copy||!start||!knob||!fill||!frame){disableWelcome(host);return;}
+    if(!track||!copy||!start||!knob||!fill||!frame){disableWelcome(host);return}
     var index=0,timer=0,swipe=null,drag=null,leaving=false;
     function render(animate){
       if(animate===false)track.style.transition='none';
@@ -101,20 +67,27 @@
     window.addEventListener('mousemove',function(e){move(e.clientX)});
     window.addEventListener('mouseup',end);
     start.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();finish()}});
+    function leaveNow(){host.classList.add('leaving');document.documentElement.classList.add('dlw3-enter-home');setTimeout(function(){if(host.parentNode)host.parentNode.removeChild(host);document.documentElement.classList.remove('dlw3-lock','dlw3-live','dlw3-enter-home');try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}},620)}
     function finish(){
       if(leaving)return;
-      leaving=true;clearTimeout(timer);setStored();setDrag(1);host.classList.add('leaving');document.documentElement.classList.add('dlw3-enter-home');removeForce();
-      setTimeout(function(){
-        if(host.parentNode)host.parentNode.removeChild(host);
-        document.documentElement.classList.remove('dlw3-lock','dlw3-live','dlw3-enter-home');
-        try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}
-      },620);
+      leaving=true;clearTimeout(timer);setStored();setDrag(1);removeForce();
+      var label=start.querySelector('strong');
+      if(appReady()){leaveNow();return}
+      if(label)label.textContent='Menyiapkan Home...';
+      start.classList.add('waiting');
+      var started=Date.now();
+      var wait=setInterval(function(){
+        if(!host.isConnected){clearInterval(wait);return}
+        if(appReady()){clearInterval(wait);leaveNow();return}
+        if(Date.now()-started>=HOME_WAIT_MS){clearInterval(wait);leaving=false;start.classList.remove('waiting');setDrag(0);if(label)label.textContent='Swipe to Start'}
+      },100);
     }
     var skip=host.querySelector('[data-dlw3-skip]');
     if(skip)skip.addEventListener('click',finish);
     render(false);
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-  setTimeout(boot,0);
-  window.addEventListener('pageshow',boot);
+  function start(){try{boot()}catch(e){document.documentElement.classList.remove('dlw3-lock','dlw3-live');document.documentElement.classList.add('dlw3-skip')}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+  setTimeout(start,0);
+  window.addEventListener('pageshow',start);
 })();
