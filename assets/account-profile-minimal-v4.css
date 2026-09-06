@@ -1,0 +1,342 @@
+/* DLavie Account Profile v4 — minimal page chrome, Collector Card untouched. */
+
+.dl-account-portal.dl-account-profile-stable-v4{
+  --dl-ap-line:color-mix(in srgb,var(--dl-account-line,#d9ddd7) 82%,transparent);
+  --dl-ap-soft:color-mix(in srgb,var(--dl-account-muted,#6b746d) 90%,transparent);
+  --dl-ap-surface:color-mix(in srgb,var(--dl-account-card,#fff) 96%,var(--dl-account-soft,#f3f1f7) 4%);
+  background:var(--dl-account-card,#fff)!important;
+  overflow:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  scrollbar-gutter:stable;
+}
+
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-shell,
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-main{
+  width:100%!important;
+  min-height:100dvh!important;
+  margin:0!important;
+  background:var(--dl-account-card,#fff)!important;
+}
+
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-brand{display:none!important}
+
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3{
+  width:min(100%,980px)!important;
+  max-width:980px!important;
+  min-height:100dvh!important;
+  margin:0 auto!important;
+  padding:clamp(26px,4vw,44px) clamp(18px,4vw,42px) max(56px,env(safe-area-inset-bottom))!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  isolation:auto!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3::before,
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3::after{display:none!important;content:none!important}
+
+/* Keep the page typography quiet; the Collector Card remains the visual hero. */
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-eyebrow{
+  min-height:0!important;
+  margin:0 0 7px!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:var(--dl-ap-soft)!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.11em!important;
+  text-transform:uppercase!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3 h2{
+  max-width:18ch!important;
+  margin:0!important;
+  padding:0!important;
+  color:var(--dl-account-ink,#172019)!important;
+  font-size:clamp(28px,4vw,42px)!important;
+  line-height:1.03!important;
+  letter-spacing:-.035em!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-lead{
+  max-width:620px!important;
+  margin:9px 0 22px!important;
+  color:var(--dl-ap-soft)!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+}
+
+/* Account facts become simple rows instead of a wall of cards. */
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile{
+  width:100%!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0 24px!important;
+  margin:4px 0 28px!important;
+  border-top:1px solid var(--dl-ap-line)!important;
+  border-bottom:1px solid var(--dl-ap-line)!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card{
+  position:relative!important;
+  min-width:0!important;
+  min-height:72px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:5px!important;
+  margin:0!important;
+  padding:13px 2px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dl-ap-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card::before,
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card::after{display:none!important;content:none!important}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card:nth-last-child(-n+2){border-bottom:0!important}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card span{
+  margin:0!important;
+  color:var(--dl-ap-soft)!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  line-height:1.2!important;
+  letter-spacing:.035em!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card strong{
+  margin:0!important;
+  color:var(--dl-account-ink,#172019)!important;
+  font-size:13px!important;
+  font-weight:780!important;
+  line-height:1.35!important;
+  overflow-wrap:anywhere!important;
+}
+
+/* Collector section chrome: quiet. The .dl-collector-card itself is intentionally untouched. */
+.dl-account-portal.dl-account-profile-stable-v4 #dl-collector-profile,
+.dl-account-portal.dl-account-profile-stable-v4 .dl-collector-profile-section{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:0 0 12px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head>div{min-width:0!important}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head>div>span{
+  display:block!important;
+  margin:0 0 4px!important;
+  color:var(--dl-ap-soft)!important;
+  font-size:8px!important;
+  font-weight:800!important;
+  letter-spacing:.11em!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head h3{
+  margin:0!important;
+  color:var(--dl-account-ink,#172019)!important;
+  font-size:17px!important;
+  line-height:1.15!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head p{
+  margin:4px 0 0!important;
+  color:var(--dl-ap-soft)!important;
+  font-size:10px!important;
+  line-height:1.4!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head>.dl-role-badge{
+  min-height:24px!important;
+  padding:3px 7px!important;
+  border-radius:8px!important;
+  box-shadow:none!important;
+}
+
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-card-wrap{
+  margin:0 auto 18px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Supporting identity details are flat and compact. */
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0!important;
+  margin:0 0 12px!important;
+  border:1px solid var(--dl-ap-line)!important;
+  border-radius:12px!important;
+  overflow:hidden!important;
+  background:transparent!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid>article{
+  min-width:0!important;
+  min-height:62px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:4px!important;
+  margin:0!important;
+  padding:10px 11px!important;
+  border:0!important;
+  border-right:1px solid var(--dl-ap-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid>article:last-child{border-right:0!important}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid span{
+  color:var(--dl-ap-soft)!important;
+  font-size:8px!important;
+  font-weight:700!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid strong{
+  color:var(--dl-account-ink,#172019)!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+/* Avatar / secondary controls: flat and utilitarian. */
+.dl-account-portal.dl-account-profile-stable-v4 .dl-avatar-editor,
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-row{
+  width:100%!important;
+  max-width:none!important;
+  margin:12px 0 0!important;
+  padding:12px 0 0!important;
+  border:0!important;
+  border-top:1px solid var(--dl-ap-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-btn:not(.dl-collector-card *),
+.dl-account-portal.dl-account-profile-stable-v4 .dl-avatar-change{
+  min-height:38px!important;
+  padding:0 12px!important;
+  border:1px solid var(--dl-ap-line)!important;
+  border-radius:10px!important;
+  background:transparent!important;
+  color:var(--dl-account-ink,#172019)!important;
+  box-shadow:none!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  transform:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-btn.primary:not(.dl-collector-card *){
+  border-color:color-mix(in srgb,var(--accent,#7254cf) 34%,var(--dl-ap-line))!important;
+  background:color-mix(in srgb,var(--accent-soft,#eee8ff) 34%,transparent)!important;
+  color:var(--dl-account-ink,#172019)!important;
+}
+
+/* Close button is intentionally plain and predictable on Safari. */
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-close{
+  position:fixed!important;
+  top:calc(env(safe-area-inset-top) + 12px)!important;
+  right:12px!important;
+  z-index:2147483200!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  padding:0!important;
+  border:1px solid var(--dl-ap-line)!important;
+  border-radius:12px!important;
+  background:var(--dl-ap-surface)!important;
+  color:var(--dl-account-ink,#172019)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  touch-action:manipulation!important;
+}
+
+/* Remove presentation effects from page chrome only. Collector Card effects remain intact. */
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3 *:not(.dl-collector-card):not(.dl-collector-card *){
+  text-shadow:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3 *:not(.dl-collector-card):not(.dl-collector-card *)::before,
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3 *:not(.dl-collector-card):not(.dl-collector-card *)::after{
+  animation:none!important;
+}
+.dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3 .dl-role-badge em{display:none!important}
+
+@media(max-width:720px){
+  .dl-account-portal.dl-account-profile-stable-v4{scrollbar-gutter:auto}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3{
+    width:100%!important;
+    max-width:none!important;
+    padding:calc(env(safe-area-inset-top) + 64px) 14px max(40px,env(safe-area-inset-bottom))!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3 h2{
+    max-width:15ch!important;
+    padding-right:42px!important;
+    font-size:clamp(27px,8.5vw,36px)!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-lead{
+    margin:7px 0 17px!important;
+    font-size:12px!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile{
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    margin-bottom:22px!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card{
+    min-height:60px!important;
+    padding:11px 1px!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card:nth-last-child(-n+2){border-bottom:1px solid var(--dl-ap-line)!important}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-card:last-child{border-bottom:0!important}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head{
+    align-items:flex-start!important;
+    margin-bottom:10px!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head p{max-width:34ch!important}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid>article{
+    min-height:56px!important;
+    border-right:1px solid var(--dl-ap-line)!important;
+    border-bottom:1px solid var(--dl-ap-line)!important;
+  }
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid>article:nth-child(2n){border-right:0!important}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-identity-grid>article:nth-last-child(-n+2){border-bottom:0!important}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-close{
+    top:calc(env(safe-area-inset-top) + 10px)!important;
+    right:10px!important;
+  }
+}
+
+@media(max-width:390px){
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-account-profile-page-v3{padding-left:11px!important;padding-right:11px!important}
+  .dl-account-portal.dl-account-profile-stable-v4 .dl-profile-collector-head>.dl-role-badge{display:none!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dl-account-portal.dl-account-profile-stable-v4 *{scroll-behavior:auto!important}
+}
