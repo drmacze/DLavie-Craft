@@ -9,7 +9,7 @@
 
   const state = {
     view: 'home',
-    edition: localStorage.getItem('dlavie:edition') || 'bedrock',
+    edition: (() => { try { return localStorage.getItem('dlavie:edition') === 'java' ? 'java' : 'bedrock'; } catch { return 'bedrock'; } })(),
     category: 'all',
     query: '',
     sort: 'updated',
@@ -28,7 +28,7 @@
   };
 
   const categories = [
-    ['all', 'Semua'], ['addon', 'Add-On'], ['map', 'Map'], ['skin', 'Skin'],
+    ['all', 'Semua'], ['mod', 'Mod'], ['modpack', 'Modpack'], ['resource_pack', 'Resource Pack'], ['data_pack', 'Data Pack'], ['addon', 'Add-On'], ['map', 'Map'], ['skin', 'Skin'],
     ['texture_pack', 'Texture'], ['shader', 'Shader'], ['adventure', 'Adventure'],
     ['survival', 'Survival'], ['roleplay', 'Roleplay'], ['pvp', 'PvP'],
     ['horror', 'Horror'], ['vehicles', 'Vehicles'], ['mobs', 'Mobs']
@@ -168,8 +168,7 @@
     return state.projects.filter(p => {
       if ((p.minecraft_edition || 'bedrock') !== state.edition) return false;
       if (state.category !== 'all') {
-        const hay = `${p.project_type || ''} ${p.category || ''} ${(p.tags || []).join(' ')}`.toLowerCase();
-        if (!hay.includes(state.category.toLowerCase())) return false;
+        if (!(p.project_type === state.category || p.category === state.category || (p.tags || []).some(tag => String(tag).toLowerCase() === state.category))) return false;
       }
       if (q) {
         const hay = `${p.name} ${p.summary || ''} ${p.project_type || ''} ${p.category || ''} ${(p.tags || []).join(' ')}`.toLowerCase();
@@ -179,14 +178,24 @@
     });
   }
 
+  async function allPublicRows(path) {
+    const rows = [];
+    for (;;) {
+      const page = await rest(`${path}&limit=200&offset=${rows.length}`);
+      if (!Array.isArray(page)) throw new Error('Respons katalog tidak valid.');
+      if (!page.length) return rows;
+      rows.push(...page);
+    }
+  }
+
   async function loadPublic(force = false) {
     if (state.loading || (state.loaded && !force)) return;
     state.loading = true;
     state.publicError = '';
     try {
       const [projects, stats] = await Promise.all([
-        rest('dlavie_projects?select=*&status=eq.published&visibility=eq.public&order=featured.desc,download_count.desc,updated_at.desc&limit=80'),
-        rest('dlavie_project_public_stats?select=*')
+        allPublicRows('dlavie_projects?select=*&status=eq.published&visibility=eq.public&order=id.asc'),
+        allPublicRows('dlavie_project_public_stats?select=*&order=project_id.asc')
       ]);
       state.projects = Array.isArray(projects) ? projects : [];
       state.stats = new Map((stats || []).map(s => [s.project_id, s]));
@@ -217,6 +226,22 @@
     return `<div class="gh-shell">${topbar(title, subtitle)}${content}</div>${bottomNav(active)}`;
   }
 
+  function editionHeroHtml() {
+    return `<section class="market-edition-picker" aria-label="Pilih edisi Minecraft">
+      <div class="market-edition-heading"><h2>Minecraft kamu</h2><span>Geser untuk memilih edisi</span></div>
+      <div class="market-edition-track" tabindex="0" aria-label="Kartu edisi Minecraft; gunakan tombol panah">${['bedrock','java'].map(ed => {
+        const name = ed === 'java' ? 'Java' : 'Bedrock';
+        return `<article class="market-edition-slide" data-edition="${ed}" aria-label="Minecraft ${name}">
+          <img src="/DLavie-Craft/assets/minecraft-${ed}-hq.webp" alt="" decoding="async">
+          <div class="market-edition-copy"><span>${ed === 'java' ? 'Windows · macOS · Linux' : 'Mobile · Windows · Konsol'}</span><h2>Minecraft<br>${name} Edition</h2><p>${ed === 'java' ? 'Mod, modpack & resource pack' : 'Add-on, map & texture pack'}</p>
+          <button class="market-play" data-action="launch-edition" data-value="${ed}" aria-label="${ed === 'java' ? 'Cara bermain Minecraft Java' : 'Buka Minecraft Bedrock'}">${ico('play',24)}<span>${ed === 'java' ? 'Cara bermain' : 'Play'}</span></button></div>
+        </article>`;
+      }).join('')}</div>
+      <div class="market-edition-tabs" role="group" aria-label="Edisi aktif">${['bedrock','java'].map(ed => `<button data-action="edition" data-value="${ed}" aria-pressed="${state.edition === ed}">${ed === 'java' ? 'Java' : 'Bedrock'}</button>`).join('')}</div>
+      <p class="market-launch-status" role="status"></p>
+    </section>`;
+  }
+
   function homeHtml() {
     const list = visibleProjects().sort((a, b) => state.sort === 'downloads'
       ? Number(b.download_count || 0) - Number(a.download_count || 0)
@@ -236,10 +261,10 @@
     else if (!list.length) results = `<div class="market-state"><h3>${filtered ? 'Tidak ada proyek yang cocok' : 'Belum ada proyek di edisi ini'}</h3><p>${filtered ? 'Coba kata kunci lain atau hapus filter pencarian.' : 'Proyek publik dari kreator akan tampil di sini.'}</p>${filtered ? '<button data-action="reset-search">Hapus filter</button>' : ''}</div>`;
     else results = `<div class="market-results">${list.map(card).join('')}</div>`;
     return shell(`<main class="market-home">
-      <h1 class="market-sr-only">Jelajahi proyek Minecraft</h1>
+      <h1 class="market-sr-only">Jelajahi proyek Minecraft</h1>${editionHeroHtml()}
       <div class="market-controls"><label class="market-search" for="gh-search">${ico('search')}<input id="gh-search" type="search" value="${esc(state.query)}" aria-label="Cari proyek Minecraft" placeholder="Cari mod, map, shader…" autocomplete="off"></label>
-      <details class="market-filter"><summary aria-label="Filter edisi dan urutan">${ico('sliders')}</summary><div class="market-filter-panel"><span>Edisi Minecraft</span><div class="market-editions" role="group" aria-label="Edisi Minecraft">${['bedrock','java'].map(ed => `<button data-action="edition" data-value="${ed}" aria-pressed="${state.edition === ed}">${ed === 'bedrock' ? 'Bedrock' : 'Java'}</button>`).join('')}</div><label class="market-sort">Urutkan<select id="market-sort"><option value="updated" ${state.sort === 'updated' ? 'selected' : ''}>Baru diperbarui</option><option value="downloads" ${state.sort === 'downloads' ? 'selected' : ''}>Paling diunduh</option></select></label></div></details></div>
-      <div class="market-layout"><aside class="market-sidebar"><div class="market-categories" role="group" aria-label="Kategori proyek">${categories.map(([key,label]) => `<button data-action="category" data-value="${key}" aria-pressed="${state.category === key}">${esc(label)}</button>`).join('')}</div></aside>
+      <details class="market-filter"><summary aria-label="Urutkan proyek">${ico('sliders')}</summary><div class="market-filter-panel"><label class="market-sort">Urutkan<select id="market-sort"><option value="updated" ${state.sort === 'updated' ? 'selected' : ''}>Baru diperbarui</option><option value="downloads" ${state.sort === 'downloads' ? 'selected' : ''}>Paling diunduh</option></select></label></div></details></div>
+      <div class="market-layout"><aside class="market-sidebar"><div class="market-categories" role="group" aria-label="Kategori proyek">${categories.filter(([key]) => state.edition === 'java' ? key !== 'addon' : !['mod','modpack','resource_pack','data_pack'].includes(key)).map(([key,label]) => `<button data-action="category" data-value="${key}" aria-pressed="${state.category === key}">${esc(label)}</button>`).join('')}</div></aside>
       <section class="market-catalog" aria-labelledby="market-results-title"><div class="market-results-head"><div><h2 id="market-results-title">${filtered ? 'Hasil pencarian' : 'Jelajahi proyek'}</h2><span role="status">${state.loading ? 'Memuat…' : `${list.length} proyek · ${state.edition === 'java' ? 'Java' : 'Bedrock'}`}</span></div></div>${results}</section></div>
       <footer class="market-footer"><strong>DLavie Craft</strong><span>Platform komunitas independen. Tidak berafiliasi dengan Mojang atau Microsoft.</span></footer>
     </main>`, {active:'home',title:'Home',subtitle:'DLavie Craft'});
@@ -310,6 +335,28 @@
   }
 
   function bindRoot(root) {
+    const track = $('.market-edition-track', root);
+    if (track) {
+      const slides = $$('.market-edition-slide', track);
+      const leftFor = slide => slide.offsetLeft - slides[0].offsetLeft;
+      track.scrollLeft = leftFor(slides[state.edition === 'java' ? 1 : 0]);
+      let timer;
+      track.addEventListener('scroll', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          if (!track.isConnected) return;
+          const nearest = slides.reduce((a,b) => Math.abs(leftFor(a)-track.scrollLeft) < Math.abs(leftFor(b)-track.scrollLeft) ? a : b);
+          if (nearest.dataset.edition !== state.edition) setEdition(nearest.dataset.edition, false);
+        }, 160);
+      }, {passive:true});
+      track.addEventListener('keydown', e => {
+        if (e.target !== track || !['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+        e.preventDefault();
+        setEdition(['ArrowRight','End'].includes(e.key) ? 'java' : 'bedrock', false);
+        $('.market-edition-track',root)?.focus({preventScroll:true});
+      });
+    }
+
     const search=$('#gh-search',root); if(search) search.addEventListener('input',e=>{state.query=e.target.value;renderView();requestAnimationFrame(()=>{const n=$('#gh-search');if(n){n.focus();if(n.type !== 'search') n.setSelectionRange(n.value.length,n.value.length)}})});
     const sort = $('#market-sort',root);
     if(sort) sort.addEventListener('change', e => {state.sort=e.target.value;renderView();$('#market-sort')?.focus();});
@@ -326,7 +373,7 @@
       else if(a==='plus'){handlePlus();}
       else if(a==='category'){const offset=$('.market-categories',root)?.scrollLeft || 0;state.category=t.dataset.value;renderView();const bar=$('.market-categories',root);if(bar){bar.scrollLeft=offset;bar.querySelector('[aria-pressed="true"]')?.focus({preventScroll:true});}}
       else if(a==='edition'){setEdition(t.dataset.value);}
-      else if(a==='launch-edition'){e.stopPropagation();launchEdition();}
+      else if(a==='launch-edition'){e.stopPropagation();launchEdition(t.dataset.value);}
       else if(a==='project'){location.hash=`#/project/${encodeURIComponent(t.dataset.slug)}`;}
       else if(a==='console-tab'){state.consoleTab=t.dataset.value;renderView();}
       else if(a==='editor'){openProjectEditor();}
@@ -342,27 +389,22 @@
     root=document.createElement('div');root.id=ROOT_ID;shell.appendChild(root);return root;
   }
 
-  function setEdition(ed) {
-    state.edition=ed==='java'?'java':'bedrock';localStorage.setItem('dlavie:edition',state.edition);state.category='all';state.query='';toast(`${state.edition==='java'?'Minecraft Java':'Minecraft Bedrock'} menjadi mode aktif.`,'success');renderView();
+  function setEdition(ed, focus = true) {
+    state.edition=ed==='java'?'java':'bedrock';
+    try { localStorage.setItem('dlavie:edition',state.edition); } catch {}
+    state.category='all';state.query='';renderView();
+    if (focus) $(`.market-edition-tabs [data-value="${state.edition}"]`)?.focus({preventScroll:true});
   }
 
-  function launchEdition() {
-    if(state.edition==='java'){
-      if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){toast('Device mobile tidak mendukung Minecraft Java Edition.','error');return;}
-      toast('Membuka Minecraft Java / Launcher…');
-      location.href='minecraft://';
-      setTimeout(()=>{if(document.visibilityState==='visible') window.open('https://www.minecraft.net/download','_blank','noopener');},1500);
+  function launchEdition(edition = state.edition) {
+    const status = $('.market-launch-status');
+    if (edition === 'java') {
+      if (status) status.innerHTML = 'Buka Minecraft Launcher di komputer, lalu pilih Java Edition. <a href="https://www.minecraft.net/download" target="_blank" rel="noopener">Unduh Launcher</a>';
+      else toast('Buka Minecraft Launcher di komputer, lalu pilih Java Edition.');
       return;
     }
-    const ua=navigator.userAgent;
-    toast('Membuka Minecraft Bedrock…');
-    location.href='minecraft://';
-    setTimeout(()=>{
-      if(document.visibilityState!=='visible') return;
-      if(/iPhone|iPad|iPod/i.test(ua)) location.href='https://apps.apple.com/app/minecraft-play-with-friends/id479516143';
-      else if(/Android/i.test(ua)) location.href='https://play.google.com/store/apps/details?id=com.mojang.minecraftpe';
-      else window.open('https://www.minecraft.net/get-minecraft','_blank','noopener');
-    },1600);
+    if (status) status.innerHTML = 'Izinkan browser membuka Minecraft. Jika belum terbuka, coba melalui Safari atau browser utama. <a href="https://www.minecraft.net/get-minecraft" target="_blank" rel="noopener">Dapatkan Minecraft</a>';
+    location.href = 'minecraft://';
   }
 
   function openDrawer() {

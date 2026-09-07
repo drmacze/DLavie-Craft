@@ -11,13 +11,13 @@
   css(A+'gamehub-user-access-v3.css?v=20260907u3');
   css(A+'gamehub-edition-hero-fix-v4.css?v=20260907u5');
   css(A+'gamehub-ui-fix-v5.css?v=20260907u5');
-  series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u5',A+'gamehub-ui-fix-v5.js?v=20260907ref8']);
+  series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u5',A+'gamehub-ui-fix-v5.js?v=20260907edition9']);
 
   var homeStarted=false,marketStarted=false,socialStarted=false,accountStarted=false,communityStarted=false;
   function loadHome(){
     if(homeStarted)return;homeStarted=true;
-    ['home-minimal-v1.css?v=20260906hm3','gamehub-platform-v1.css?v=20260907hm6','gamehub-mobile-stability-v2.css?v=20260907hm6','gamehub-saved-nav-v2.css?v=20260906sn2','gamehub-home-market-v6.css?v=20260907ref8'].forEach(function(x){css(A+x)});
-    series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u5',A+'gamehub-ui-fix-v5.js?v=20260907ref8',A+'gamehub-stability-v2.js?v=20260907p1',A+'gamehub-platform-v1.js?v=20260907ref8']).then(function(){
+    ['home-minimal-v1.css?v=20260906hm3','gamehub-platform-v1.css?v=20260907hm6','gamehub-mobile-stability-v2.css?v=20260907hm6','gamehub-saved-nav-v2.css?v=20260906sn2','gamehub-home-market-v6.css?v=20260907edition9'].forEach(function(x){css(A+x)});
+    series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u5',A+'gamehub-ui-fix-v5.js?v=20260907edition9',A+'gamehub-stability-v2.js?v=20260907p1',A+'gamehub-platform-v1.js?v=20260907edition9']).then(function(){
       setTimeout(function(){script(A+'gamehub-saved-nav-v2.js?v=20260907p1')},220);
     });
   }
