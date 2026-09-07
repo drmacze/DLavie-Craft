@@ -8,6 +8,8 @@
   <title>DLavie Craft — Minecraft Creator Hub</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#050608;color:#fff}body{min-height:100vh;min-height:100dvh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}#root{min-height:100vh;background:#050608}#dl-app-fail{display:none;position:fixed;z-index:100;left:18px;right:18px;bottom:20px;max-width:420px;margin:auto;padding:13px 14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(12,12,17,.95);color:#fff;box-shadow:0 16px 44px rgba(0,0,0,.34);align-items:center;justify-content:space-between;gap:12px}#dl-app-fail.show{display:flex}#dl-app-fail span{font-size:11px;line-height:1.4;color:rgba(255,255,255,.72)}#dl-app-fail button{border:0;border-radius:999px;padding:9px 12px;background:#fff;color:#08090c;font-weight:800}
+    @keyframes dlWelcomeStarDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-10px,12px,0)}}
+    #dl-welcome-v8 .dlw8-stars{animation:dlWelcomeStarDrift 22s ease-in-out infinite alternate!important;will-change:transform;contain:paint}
   </style>
   <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-first-v8.css?v=20260907w23" />
   <script>
@@ -50,7 +52,7 @@
       'use strict';
       var root=document.getElementById('root'),fail=document.getElementById('dl-app-fail');
       var appStarted=false,enhStarted=false;
-      function loadEnh(){if(enhStarted)return;enhStarted=true;var s=document.createElement('script');s.src='/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907h3';s.defer=true;document.body.appendChild(s)}
+      function loadEnh(){if(enhStarted)return;enhStarted=true;var s=document.createElement('script');s.src='/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907h4';s.defer=true;document.body.appendChild(s)}
       function watchRoot(){
         if(root&&root.childElementCount){loadEnh();return}
         if(root&&window.MutationObserver){var m=new MutationObserver(function(){if(root.childElementCount){m.disconnect();loadEnh()}});m.observe(root,{childList:true,subtree:true})}
