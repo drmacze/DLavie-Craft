@@ -13,6 +13,7 @@
   let rendering = false;
   let savedRequest = 0;
   let rootObserver = null;
+  let observerQueued = false;
 
   const $ = (q, r = document) => r.querySelector(q);
   const esc = (v = '') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
@@ -96,17 +97,22 @@
     const nav = $('.gh-bottom-nav');
     const library = nav?.querySelector('[data-action="library"]');
     if (library) {
+      const nextLabel = isCrafter ? 'Library' : 'Tersimpan';
+      const nextAria = isCrafter ? 'Library' : 'Project tersimpan';
       const label = library.querySelector('span');
-      if (label) label.textContent = isCrafter ? 'Library' : 'Tersimpan';
-      library.setAttribute('aria-label', isCrafter ? 'Library' : 'Project tersimpan');
+      if (label && label.textContent !== nextLabel) label.textContent = nextLabel;
+      if (library.getAttribute('aria-label') !== nextAria) library.setAttribute('aria-label', nextAria);
     }
     const drawer = $('.gh-drawer');
     const drawerLibrary = drawer?.querySelector('[data-go="library"]');
     if (drawerLibrary && !isCrafter) {
-      Array.from(drawerLibrary.childNodes).filter(n => n.nodeType === Node.TEXT_NODE).forEach(n => { n.textContent = ' Tersimpan'; });
+      Array.from(drawerLibrary.childNodes).filter(n => n.nodeType === Node.TEXT_NODE).forEach(n => {
+        if (n.textContent !== ' Tersimpan') n.textContent = ' Tersimpan';
+      });
     }
     const note = drawer?.querySelector('.gh-drawer-note');
-    if (note && !isCrafter) note.innerHTML = 'Menu <b>Tersimpan</b> berisi project yang kamu bookmark. Mode Minecraft tetap bisa diubah melalui tombol filter di Home.';
+    const noteHtml = 'Menu <b>Tersimpan</b> berisi project yang kamu bookmark. Mode Minecraft tetap bisa diubah melalui tombol filter di Home.';
+    if (note && !isCrafter && note.innerHTML !== noteHtml) note.innerHTML = noteHtml;
   }
 
   function mediaUrl(project) {
@@ -194,17 +200,34 @@
     return true;
   }
 
+  function runObservedUpdate(root) {
+    if (observerQueued) return;
+    observerQueued = true;
+    requestAnimationFrame(() => {
+      observerQueued = false;
+      if (!document.documentElement.contains(root)) return;
+      if (!rendering && savedActive && !root.querySelector('.gh-saved-view')) renderSaved();
+      else applyRoleLabels(roleIsCrafter);
+    });
+  }
+
   function watchRoot() {
     const root = document.getElementById(ROOT_ID);
-    if (!root || rootObserver?.target === root) return;
+    if (!root || rootObserver?.target === root) return !!root;
     rootObserver?.disconnect?.();
-    const observer = new MutationObserver(() => {
-      if (!rendering && savedActive && !root.querySelector('.gh-saved-view')) queueMicrotask(renderSaved);
-      else queueMicrotask(() => applyRoleLabels(roleIsCrafter));
-    });
-    observer.observe(root, { childList: true, subtree: true });
+    const observer = new MutationObserver(() => runObservedUpdate(root));
+    observer.observe(root, { childList: true });
     rootObserver = observer;
     rootObserver.target = root;
+    applyRoleLabels(roleIsCrafter);
+    return true;
+  }
+
+  function watchRootSoon() {
+    watchRoot();
+    setTimeout(watchRoot, 100);
+    setTimeout(watchRoot, 360);
+    setTimeout(watchRoot, 900);
   }
 
   document.addEventListener('click', async e => {
@@ -235,24 +258,18 @@
     }
   }, true);
 
-  const documentObserver = new MutationObserver(() => {
-    watchRoot();
-    applyRoleLabels(roleIsCrafter);
-  });
-
-  function refresh() {
-    watchRoot();
-    resolveCrafter(true).catch(() => {});
+  function refresh(force = false) {
+    watchRootSoon();
+    resolveCrafter(force).catch(() => {});
   }
 
-  documentObserver.observe(document.documentElement, { childList: true, subtree: true });
   window.addEventListener('hashchange', () => {
     if (!/^#\/?(?:$|home(?:$|[/?]))/i.test(location.hash || '#/')) { savedActive = false; savedRequest += 1; }
-    setTimeout(refresh, 50);
+    setTimeout(() => refresh(false), 50);
   });
-  window.addEventListener('pageshow', refresh);
-  window.addEventListener('storage', e => { if (e.key === AUTH_KEY) { roleCheckedAt = 0; savedActive = false; setTimeout(refresh, 50); } });
-  document.addEventListener('dlavie:auth-changed', refresh);
-  document.addEventListener('dlavie:account-updated', refresh);
-  setTimeout(refresh, 60);
+  window.addEventListener('pageshow', () => refresh(false));
+  window.addEventListener('storage', e => { if (e.key === AUTH_KEY) { roleCheckedAt = 0; savedActive = false; setTimeout(() => refresh(true), 50); } });
+  document.addEventListener('dlavie:auth-changed', () => refresh(true));
+  document.addEventListener('dlavie:account-updated', () => refresh(true));
+  setTimeout(() => refresh(false), 60);
 })();
