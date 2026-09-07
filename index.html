@@ -9,7 +9,7 @@
   <style>
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#050608;color:#fff}body{min-height:100vh;min-height:100dvh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}#root{min-height:100vh;background:#050608}#dl-app-fail{display:none;position:fixed;z-index:100;left:18px;right:18px;bottom:20px;max-width:420px;margin:auto;padding:13px 14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(12,12,17,.95);color:#fff;box-shadow:0 16px 44px rgba(0,0,0,.34);align-items:center;justify-content:space-between;gap:12px}#dl-app-fail.show{display:flex}#dl-app-fail span{font-size:11px;line-height:1.4;color:rgba(255,255,255,.72)}#dl-app-fail button{border:0;border-radius:999px;padding:9px 12px;background:#fff;color:#08090c;font-weight:800}
   </style>
-  <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-first-v8.css?v=20260907w22" />
+  <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-first-v8.css?v=20260907w23" />
   <script>
     (function(){
       var show=true;
@@ -50,7 +50,7 @@
       'use strict';
       var root=document.getElementById('root'),fail=document.getElementById('dl-app-fail');
       var appStarted=false,enhStarted=false;
-      function loadEnh(){if(enhStarted)return;enhStarted=true;var s=document.createElement('script');s.src='/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907h2';s.defer=true;document.body.appendChild(s)}
+      function loadEnh(){if(enhStarted)return;enhStarted=true;var s=document.createElement('script');s.src='/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907h3';s.defer=true;document.body.appendChild(s)}
       function watchRoot(){
         if(root&&root.childElementCount){loadEnh();return}
         if(root&&window.MutationObserver){var m=new MutationObserver(function(){if(root.childElementCount){m.disconnect();loadEnh()}});m.observe(root,{childList:true,subtree:true})}
@@ -106,8 +106,10 @@
         label.textContent=progress>=THRESHOLD?'Lepas untuk masuk':(progress>.06?'Terus geser…':'Swipe to Start');
         setScene(progress,animate)
       }
+      function prewarm(){try{if(window.__DLAVIE_BOOT_APP__)window.__DLAVIE_BOOT_APP__()}catch(e){}}
       function begin(x){
         if(leaving||dragging)return;
+        prewarm();
         dragging=true;startX=x;dragTravel=Math.max(1,start.clientWidth-knob.offsetWidth-10);pointerId=null;
         frame.classList.add('scrubbing');start.classList.add('dragging');
         render(0,false)
@@ -124,31 +126,49 @@
         if(complete)finish();else reset()
       }
 
-      start.addEventListener('touchstart',function(e){
-        if(leaving||dragging)return;var t=e.touches&&e.touches[0];if(!t)return;if(e.cancelable)e.preventDefault();begin(t.clientX)
-      },{passive:false});
-      document.addEventListener('touchmove',function(e){
-        if(!dragging)return;var t=e.touches&&e.touches[0];if(!t)return;if(e.cancelable)e.preventDefault();move(t.clientX)
-      },{passive:false,capture:true});
-      document.addEventListener('touchend',function(e){if(!dragging)return;if(e.cancelable)e.preventDefault();release()},{passive:false,capture:true});
-      document.addEventListener('touchcancel',function(){if(dragging)reset()},{passive:true,capture:true});
+      function onTouchMove(e){if(!dragging)return;var t=e.touches&&e.touches[0];if(!t)return;if(e.cancelable)e.preventDefault();move(t.clientX)}
+      function onTouchEnd(e){if(!dragging)return;if(e.cancelable)e.preventDefault();release()}
+      function onTouchCancel(){if(dragging)reset()}
 
+      start.addEventListener('touchstart',function(e){if(leaving||dragging)return;var t=e.touches&&e.touches[0];if(!t)return;if(e.cancelable)e.preventDefault();begin(t.clientX)},{passive:false});
+      document.addEventListener('touchmove',onTouchMove,{passive:false,capture:true});
+      document.addEventListener('touchend',onTouchEnd,{passive:false,capture:true});
+      document.addEventListener('touchcancel',onTouchCancel,{passive:true,capture:true});
+
+      function onPointerMove(e){if(!dragging||pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;move(e.clientX)}
+      function onPointerUp(e){if(!dragging||pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;release()}
+      function onPointerCancel(e){if(dragging&&pointerId!==null&&e.pointerId===pointerId)reset()}
       if(window.PointerEvent){
-        start.addEventListener('pointerdown',function(e){
-          if(e.pointerType==='touch'||leaving||dragging||(e.pointerType==='mouse'&&e.button!==0))return;e.preventDefault();begin(e.clientX);pointerId=e.pointerId;try{start.setPointerCapture(e.pointerId)}catch(x){}
-        });
-        document.addEventListener('pointermove',function(e){if(!dragging||pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;move(e.clientX)});
-        document.addEventListener('pointerup',function(e){if(!dragging||pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;release()});
-        document.addEventListener('pointercancel',function(e){if(dragging&&pointerId!==null&&e.pointerId===pointerId)reset()})
+        start.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'||leaving||dragging||(e.pointerType==='mouse'&&e.button!==0))return;e.preventDefault();begin(e.clientX);pointerId=e.pointerId;try{start.setPointerCapture(e.pointerId)}catch(x){} });
+        document.addEventListener('pointermove',onPointerMove);
+        document.addEventListener('pointerup',onPointerUp);
+        document.addEventListener('pointercancel',onPointerCancel)
       }
 
       start.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){e.preventDefault();finish()}});
       function removeForce(){try{var u=new URL(location.href);u.searchParams.delete('welcome');history.replaceState(history.state,'',u.pathname+(u.search||'')+(location.hash||'#/'))}catch(e){}}
-      function exitWelcome(){host.classList.add('leaving');document.documentElement.classList.add('dlw8-enter');setTimeout(function(){if(host.parentNode)host.parentNode.removeChild(host);window.__DLAVIE_WELCOME_ACTIVE__=false;document.documentElement.classList.remove('dlw8-on','dlw8-enter');document.documentElement.classList.add('dlw8-off');try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}},440)}
+      function detachGestureGuards(){
+        document.removeEventListener('touchmove',onTouchMove,true);document.removeEventListener('touchend',onTouchEnd,true);document.removeEventListener('touchcancel',onTouchCancel,true);
+        document.removeEventListener('pointermove',onPointerMove);document.removeEventListener('pointerup',onPointerUp);document.removeEventListener('pointercancel',onPointerCancel)
+      }
+      function unlockHome(){
+        if(!host)return;
+        detachGestureGuards();
+        host.style.pointerEvents='none';host.setAttribute('aria-hidden','true');
+        document.documentElement.classList.remove('dlw8-on','dlw8-enter');document.documentElement.classList.add('dlw8-off');
+        document.body.style.overflow='';document.body.style.touchAction='';document.documentElement.style.overflow='';
+        window.__DLAVIE_WELCOME_ACTIVE__=false;
+        if(host.parentNode)host.parentNode.removeChild(host);
+        try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}
+      }
       function finish(){
-        if(leaving)return;leaving=true;frame.classList.remove('scrubbing');start.classList.remove('dragging');render(1,true);label.textContent='Membuka DLavie…';
-        try{localStorage.setItem(KEY,'done')}catch(e){}removeForce();if(window.__DLAVIE_BOOT_APP__)window.__DLAVIE_BOOT_APP__();
-        var waited=0,iv=setInterval(function(){waited+=70;if((document.getElementById('root')&&document.getElementById('root').childElementCount)||waited>=2100){clearInterval(iv);exitWelcome()}},70)
+        if(leaving)return;leaving=true;dragging=false;frame.classList.remove('scrubbing');start.classList.remove('dragging');render(1,true);label.textContent='Membuka DLavie…';
+        try{localStorage.setItem(KEY,'done')}catch(e){}removeForce();prewarm();
+        var root=document.getElementById('root'),done=false,observer=null;
+        function open(){if(done)return;done=true;if(observer)observer.disconnect();unlockHome()}
+        if(root&&root.childElementCount){open();return}
+        if(root&&window.MutationObserver){observer=new MutationObserver(function(){if(root.childElementCount)open()});observer.observe(root,{childList:true,subtree:true})}
+        setTimeout(open,1800)
       }
       window.addEventListener('resize',function(){setScene(progress,false)},{passive:true});
       setCopy(0);render(0,true)
