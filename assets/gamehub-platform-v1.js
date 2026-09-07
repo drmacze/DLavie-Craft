@@ -12,6 +12,8 @@
     edition: localStorage.getItem('dlavie:edition') || 'bedrock',
     category: 'all',
     query: '',
+    sort: 'updated',
+    publicError: '',
     projects: [],
     stats: new Map(),
     loading: false,
@@ -181,6 +183,7 @@
   async function loadPublic(force = false) {
     if (state.loading || (state.loaded && !force)) return;
     state.loading = true;
+    state.publicError = '';
     try {
       const [projects, stats] = await Promise.all([
         rest('dlavie_projects?select=*&status=eq.published&visibility=eq.public&order=featured.desc,download_count.desc,updated_at.desc&limit=80'),
@@ -189,7 +192,7 @@
       state.projects = Array.isArray(projects) ? projects : [];
       state.stats = new Map((stats || []).map(s => [s.project_id, s]));
       state.loaded = true;
-    } catch (e) { toast(e.message, 'error'); }
+    } catch (e) { state.publicError = e.message; toast(e.message, 'error'); }
     finally { state.loading = false; rerenderCurrent(); }
   }
 
@@ -216,38 +219,31 @@
   }
 
   function homeHtml() {
-    if (!state.loaded && state.loading) return shell('<div class="gh-loading"><div class="gh-spinner"></div></div>');
-    const list = visibleProjects();
-    const featured = list.find(p => p.featured) || list[0] || null;
-    const editionName = state.edition === 'java' ? 'Minecraft Java' : 'Minecraft Bedrock';
-    const editionSub = state.edition === 'java' ? 'PC · Mods & modpacks' : 'Mobile · Console · Windows';
-    const cards = list.slice(0, 12);
-    const popular = [...list].sort((a,b) => Number(b.download_count||0)-Number(a.download_count||0)).slice(0, 6);
-    return shell(`
-      <div class="gh-search-row">
-        <label class="gh-search">${ico('search',18)}<input id="gh-search" value="${esc(state.query)}" placeholder="Cari mod, map, skin, add-on…"></label>
-        <button class="gh-filter-btn" data-action="library" aria-label="Pilih Minecraft">${ico('sliders',19)}</button>
-      </div>
-      <div class="gh-categories">${categories.map(([k,l]) => `<button class="gh-category ${state.category===k?'active':''}" data-action="category" data-value="${k}">${esc(l)}</button>`).join('')}</div>
-      <section class="gh-market-intro" aria-label="Marketplace Minecraft">
-        <div><span>Marketplace komunitas</span><h1>Temukan project Minecraft terbaik.</h1><p>Jelajahi add-on, map, shader, texture pack, skin, dan mod buatan creator dalam satu tempat.</p></div>
-        <button type="button" data-action="library">Jelajahi semua ${ico('chevron',16)}</button>
-      </section>
-      <div class="gh-home-grid">
-        <article class="gh-launch-card" data-action="launch-edition">
-          ${featured ? img(featured, 'gh-launch-media') : `<div class="gh-launch-fallback">${esc(editionName)}</div>`}
-          <div class="gh-launch-content"><small>Library aktif</small><h2>${esc(editionName)}</h2><p>${esc(editionSub)}</p><button class="gh-play" data-action="launch-edition" aria-label="Pilih edisi Minecraft">${ico('chevron',22)}</button></div>
-        </article>
-        <aside class="gh-side-panel">
-          <div class="gh-side-head"><div><span>Sedang trending</span><h2>Populer minggu ini</h2></div><button data-action="library">Lihat semua</button></div>
-          <div class="gh-mini-list">${popular.length ? popular.map(p => {
-            const s=statFor(p.id); return `<button class="gh-mini-project" data-action="project" data-slug="${esc(p.slug)}">${mediaUrl(p)?`<img src="${esc(mediaUrl(p))}" alt="">`:'<div class="gh-mini-thumb">No thumbnail</div>'}<span><strong>${esc(p.name)}</strong><small>★ ${Number(s.rating_average||0).toFixed(1)} · ${fmt(p.download_count)} download</small></span><span class="gh-chevron">${ico('chevron',17)}</span></button>`;
-          }).join('') : '<div class="gh-empty">Belum ada project untuk edition ini.</div>'}</div>
-        </aside>
-      </div>
-      <section class="gh-section"><div class="gh-section-head"><div><span>${esc(editionName)}</span><h2>Project terbaru</h2></div><button data-action="library">Buka katalog</button></div>
-        <div class="gh-project-strip">${cards.length ? cards.map(p => {const s=statFor(p.id); return `<button class="gh-project-card" data-action="project" data-slug="${esc(p.slug)}"><span class="gh-rating-pill">★ ${Number(s.rating_average||0).toFixed(1)}</span>${img(p)}<span class="gh-project-card-copy"><strong>${esc(p.name)}</strong><span>${esc(p.category||p.project_type||'Project')} · ${fmt(p.download_count)} download</span></span></button>`}).join('') : '<div class="gh-empty">Tidak ada hasil yang cocok.</div>'}</div>
-      </section>`, {active:'home'});
+    const list = visibleProjects().sort((a, b) => state.sort === 'downloads'
+      ? Number(b.download_count || 0) - Number(a.download_count || 0)
+      : (Date.parse(b.updated_at) || 0) - (Date.parse(a.updated_at) || 0));
+    const filtered = state.query.trim() || state.category !== 'all';
+    const card = p => {
+      const stats = statFor(p.id);
+      return `<a class="market-project" href="#/project/${encodeURIComponent(p.slug)}">
+        ${img(p)}<div class="market-project-copy"><div class="market-tags"><span>${esc(categories.find(([key]) => key === p.project_type)?.[1] || p.project_type || 'Project')}</span>${p.featured ? '<span class="market-featured">Pilihan</span>' : ''}</div>
+        <h3>${esc(p.name)}</h3><p>${esc(p.summary || 'Lihat detail dan versi yang tersedia.')}</p>
+        <div class="market-meta"><span>${ico('download',15)} ${fmt(p.download_count)} unduhan</span>${Number(stats.rating_count) > 0 ? `<span>${ico('star',15)} ${Number(stats.rating_average).toFixed(1)}</span>` : ''}</div></div>
+      </a>`;
+    };
+    let results;
+    if (state.loading) results = '<div class="market-state" role="status"><div class="gh-spinner"></div><p>Memuat proyek…</p></div>';
+    else if (state.publicError) results = '<div class="market-state" role="alert"><h3>Proyek belum dapat dimuat</h3><p>Silakan coba kembali.</p><button data-action="retry-public">Coba lagi</button></div>';
+    else if (!list.length) results = `<div class="market-state"><h3>${filtered ? 'Tidak ada proyek yang cocok' : 'Belum ada proyek di edisi ini'}</h3><p>${filtered ? 'Coba kata kunci lain atau hapus filter pencarian.' : 'Proyek publik dari kreator akan tampil di sini.'}</p>${filtered ? '<button data-action="reset-search">Hapus filter</button>' : ''}</div>`;
+    else results = `<div class="market-results">${list.map(card).join('')}</div>`;
+    return shell(`<main class="market-home">
+      <section class="market-heading"><div><span class="market-eyebrow">KARYA KOMUNITAS MINECRAFT</span><h1>Temukan dunia berikutnya.</h1><p>Jelajahi add-on, map, shader, dan karya kreator lainnya.</p></div><button class="market-upload" data-action="plus">${ico('plus',18)} Unggah proyek</button></section>
+      <div class="market-controls"><label class="market-search" for="gh-search">${ico('search')}<input id="gh-search" type="search" value="${esc(state.query)}" aria-label="Cari proyek Minecraft" placeholder="Cari proyek Minecraft…" autocomplete="off"></label>
+      <div class="market-editions" role="group" aria-label="Edisi Minecraft">${['bedrock','java'].map(ed => `<button data-action="edition" data-value="${ed}" aria-pressed="${state.edition === ed}">${ed === 'bedrock' ? 'Bedrock' : 'Java'}</button>`).join('')}</div></div>
+      <div class="market-layout"><aside class="market-sidebar"><h2>Kategori</h2><div class="market-categories" role="group" aria-label="Kategori proyek">${categories.map(([key,label]) => `<button data-action="category" data-value="${key}" aria-pressed="${state.category === key}">${esc(label)}</button>`).join('')}</div><div class="market-creator"><h3>Bagikan karyamu</h3><p>Publikasikan proyek dan temukan pemain baru.</p><button data-action="plus">Mulai mengunggah ${ico('chevron',16)}</button></div></aside>
+      <section class="market-catalog" aria-labelledby="market-results-title"><div class="market-results-head"><div><h2 id="market-results-title">${filtered ? 'Hasil pencarian' : 'Jelajahi proyek'}</h2><span role="status">${state.loading ? 'Memuat…' : `${list.length} proyek · ${state.edition === 'java' ? 'Java' : 'Bedrock'}`}</span></div><label class="market-sort">Urutkan<select id="market-sort"><option value="updated" ${state.sort === 'updated' ? 'selected' : ''}>Baru diperbarui</option><option value="downloads" ${state.sort === 'downloads' ? 'selected' : ''}>Paling diunduh</option></select></label></div>${results}</section></div>
+      <footer class="market-footer"><strong>DLavie Craft</strong><span>Platform komunitas independen. Tidak berafiliasi dengan Mojang atau Microsoft.</span></footer>
+    </main>`, {active:'home',title:'DLavie Craft',subtitle:'Komunitas Minecraft'});
   }
 
   function libraryHtml() {
@@ -315,11 +311,15 @@
   }
 
   function bindRoot(root) {
-    const search=$('#gh-search',root); if(search) search.addEventListener('input',e=>{state.query=e.target.value;renderView();requestAnimationFrame(()=>{const n=$('#gh-search');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}})});
+    const search=$('#gh-search',root); if(search) search.addEventListener('input',e=>{state.query=e.target.value;renderView();requestAnimationFrame(()=>{const n=$('#gh-search');if(n){n.focus();if(n.type !== 'search') n.setSelectionRange(n.value.length,n.value.length)}})});
+    const sort = $('#market-sort',root);
+    if(sort) sort.addEventListener('change', e => {state.sort=e.target.value;renderView();$('#market-sort')?.focus();});
     root.onclick = async e => {
       const t=e.target.closest('[data-action]'); if(!t) return;
       const a=t.dataset.action;
-      if(a==='home'){state.view='home';renderView();}
+      if(a==='retry-public'){loadPublic(true);renderView();}
+      else if(a==='reset-search'){state.query='';state.category='all';renderView();}
+      else if(a==='home'){state.view='home';renderView();}
       else if(a==='library'){state.view='library';renderView();}
       else if(a==='inbox'){state.view='inbox';state.inbox=null;renderView();loadInbox();}
       else if(a==='profile'){openAccount();}
