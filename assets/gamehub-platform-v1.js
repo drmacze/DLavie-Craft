@@ -229,19 +229,23 @@
         <button class="gh-filter-btn" data-action="library" aria-label="Pilih Minecraft">${ico('sliders',19)}</button>
       </div>
       <div class="gh-categories">${categories.map(([k,l]) => `<button class="gh-category ${state.category===k?'active':''}" data-action="category" data-value="${k}">${esc(l)}</button>`).join('')}</div>
+      <section class="gh-market-intro" aria-label="Marketplace Minecraft">
+        <div><span>Marketplace komunitas</span><h1>Temukan project Minecraft terbaik.</h1><p>Jelajahi add-on, map, shader, texture pack, skin, dan mod buatan creator dalam satu tempat.</p></div>
+        <button type="button" data-action="library">Jelajahi semua ${ico('chevron',16)}</button>
+      </section>
       <div class="gh-home-grid">
         <article class="gh-launch-card" data-action="launch-edition">
           ${featured ? img(featured, 'gh-launch-media') : `<div class="gh-launch-fallback">${esc(editionName)}</div>`}
-          <div class="gh-launch-content"><small>Active library</small><h1>${esc(editionName)}</h1><p>${esc(editionSub)}</p><button class="gh-play" data-action="launch-edition" aria-label="Buka Minecraft">${ico('play',24)}</button></div>
+          <div class="gh-launch-content"><small>Library aktif</small><h2>${esc(editionName)}</h2><p>${esc(editionSub)}</p><button class="gh-play" data-action="launch-edition" aria-label="Pilih edisi Minecraft">${ico('chevron',22)}</button></div>
         </article>
         <aside class="gh-side-panel">
-          <div class="gh-side-head"><div><span>Trending</span><h2>Popular sekarang</h2></div><button data-action="library">Lihat semua</button></div>
+          <div class="gh-side-head"><div><span>Sedang trending</span><h2>Populer minggu ini</h2></div><button data-action="library">Lihat semua</button></div>
           <div class="gh-mini-list">${popular.length ? popular.map(p => {
             const s=statFor(p.id); return `<button class="gh-mini-project" data-action="project" data-slug="${esc(p.slug)}">${mediaUrl(p)?`<img src="${esc(mediaUrl(p))}" alt="">`:'<div class="gh-mini-thumb">No thumbnail</div>'}<span><strong>${esc(p.name)}</strong><small>★ ${Number(s.rating_average||0).toFixed(1)} · ${fmt(p.download_count)} download</small></span><span class="gh-chevron">${ico('chevron',17)}</span></button>`;
           }).join('') : '<div class="gh-empty">Belum ada project untuk edition ini.</div>'}</div>
         </aside>
       </div>
-      <section class="gh-section"><div class="gh-section-head"><div><span>${esc(editionName)}</span><h2>Untuk kamu</h2></div><button data-action="library">Library</button></div>
+      <section class="gh-section"><div class="gh-section-head"><div><span>${esc(editionName)}</span><h2>Project terbaru</h2></div><button data-action="library">Buka katalog</button></div>
         <div class="gh-project-strip">${cards.length ? cards.map(p => {const s=statFor(p.id); return `<button class="gh-project-card" data-action="project" data-slug="${esc(p.slug)}"><span class="gh-rating-pill">★ ${Number(s.rating_average||0).toFixed(1)}</span>${img(p)}<span class="gh-project-card-copy"><strong>${esc(p.name)}</strong><span>${esc(p.category||p.project_type||'Project')} · ${fmt(p.download_count)} download</span></span></button>`}).join('') : '<div class="gh-empty">Tidak ada hasil yang cocok.</div>'}</div>
       </section>`, {active:'home'});
   }
