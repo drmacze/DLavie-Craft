@@ -7,6 +7,7 @@
   const nativeFetch = window.fetch.bind(window);
   let refreshPromise = null;
   let routeKey = '';
+  let scrollRaf = 0;
 
   function readStored() {
     try {
@@ -177,22 +178,26 @@
     if (!root) return;
     if (!force && key === routeKey && window.scrollY < 180) return;
     routeKey = key;
-    requestAnimationFrame(() => {
+    if (scrollRaf) cancelAnimationFrame(scrollRaf);
+    scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = 0;
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     });
   }
 
+  function resetSoon(force) {
+    resetGameHubScroll(force);
+    setTimeout(() => resetGameHubScroll(force), 90);
+    setTimeout(() => resetGameHubScroll(false), 280);
+  }
+
   try { history.scrollRestoration = 'manual'; } catch {}
-  window.addEventListener('hashchange', () => setTimeout(() => resetGameHubScroll(true), 0));
-  window.addEventListener('pageshow', () => setTimeout(() => resetGameHubScroll(false), 20));
+  window.addEventListener('hashchange', () => resetSoon(true));
+  window.addEventListener('pageshow', () => resetSoon(false));
   document.addEventListener('click', e => {
     if (!e.target.closest('#dl-gamehub-root [data-action="home"],#dl-gamehub-root [data-action="library"],#dl-gamehub-root [data-action="inbox"]')) return;
-    setTimeout(() => resetGameHubScroll(true), 0);
+    setTimeout(() => resetSoon(true), 0);
   }, true);
-
-  new MutationObserver(() => {
-    if (document.body.classList.contains('dl-gamehub-active') && document.getElementById('dl-gamehub-root')) resetGameHubScroll(false);
-  }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
 })();
