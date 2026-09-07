@@ -9,7 +9,7 @@
   <style>
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#050608;color:#fff}body{min-height:100vh;min-height:100dvh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}#root{min-height:100vh;background:#050608}#dl-app-fail{display:none;position:fixed;z-index:100;left:18px;right:18px;bottom:20px;max-width:420px;margin:auto;padding:13px 14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(12,12,17,.95);color:#fff;box-shadow:0 16px 44px rgba(0,0,0,.34);align-items:center;justify-content:space-between;gap:12px}#dl-app-fail.show{display:flex}#dl-app-fail span{font-size:11px;line-height:1.4;color:rgba(255,255,255,.72)}#dl-app-fail button{border:0;border-radius:999px;padding:9px 12px;background:#fff;color:#08090c;font-weight:800}
   </style>
-  <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-first-v8.css?v=20260907w21" />
+  <link rel="stylesheet" href="/DLavie-Craft/assets/welcome-first-v8.css?v=20260907w22" />
   <script>
     (function(){
       var show=true;
@@ -29,13 +29,13 @@
     <div class="dlw8-frame">
       <div class="dlw8-viewport" aria-label="Welcome slides">
         <div class="dlw8-track">
-          <section class="dlw8-slide active" data-slide="0"><div class="dlw8-stars"></div><div class="dlw8-nebula"></div><div class="dlw8-shade"></div></section>
-          <section class="dlw8-slide" data-slide="1"><div class="dlw8-stars"></div><div class="dlw8-nebula"></div><div class="dlw8-shade"></div></section>
-          <section class="dlw8-slide" data-slide="2"><div class="dlw8-stars"></div><div class="dlw8-nebula"></div><div class="dlw8-shade"></div></section>
+          <section class="dlw8-slide active" data-slide="0"><div class="dlw8-stars"></div><div class="dlw8-word">DLAVIE</div><div class="dlw8-shade"></div></section>
+          <section class="dlw8-slide" data-slide="1"><div class="dlw8-stars"></div><div class="dlw8-word">MINECRAFT</div><div class="dlw8-shade"></div></section>
+          <section class="dlw8-slide" data-slide="2"><div class="dlw8-stars"></div><div class="dlw8-word">ADDON</div><div class="dlw8-shade"></div></section>
         </div>
       </div>
       <div class="dlw8-copy" aria-live="polite"><h1>Temukan mod yang selalu kamu cari.</h1><p>Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.</p></div>
-      <div class="dlw8-dots"><button type="button" class="active" data-dot="0" aria-label="Slide 1"></button><button type="button" data-dot="1" aria-label="Slide 2"></button><button type="button" data-dot="2" aria-label="Slide 3"></button></div>
+      <div class="dlw8-dots" aria-hidden="true"><button type="button" class="active" data-dot="0" tabindex="-1"></button><button type="button" data-dot="1" tabindex="-1"></button><button type="button" data-dot="2" tabindex="-1"></button></div>
       <div class="dlw8-start" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Geser ke kanan untuk masuk ke Home">
         <div class="dlw8-fill"></div><div class="dlw8-knob">→</div><strong>Swipe to Start</strong>
       </div>
@@ -71,48 +71,87 @@
       'use strict';
       var host=document.getElementById('dl-welcome-v8');if(!host)return;
       if(!window.__DLAVIE_WELCOME_ACTIVE__){host.remove();return}
-      var KEY='dlavie:welcome:v8',THRESHOLD=.62,SLIDE_MS=5200,RESUME_MS=6500;
-      var viewport=host.querySelector('.dlw8-viewport'),slides=[].slice.call(host.querySelectorAll('.dlw8-slide')),dots=[].slice.call(host.querySelectorAll('[data-dot]')),copyBox=host.querySelector('.dlw8-copy'),title=copyBox.querySelector('h1'),body=copyBox.querySelector('p'),start=host.querySelector('.dlw8-start'),knob=start.querySelector('.dlw8-knob'),label=start.querySelector('strong');
-      var text=[['Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.'],['Bangun dan bagikan duniamu.','Temukan karya komunitas atau aktifkan akun Crafter untuk mempublikasikan projectmu sendiri.'],['Mainkan lebih banyak, gratis.','Simpan favorit, download build terbaru, beri rating dan temukan creator baru.']];
-      var index=0,timer=0,resume=0,leaving=false,progress=0,touchId=null,pointerId=null,dragRect=null;
+
+      var KEY='dlavie:welcome:v8',THRESHOLD=.93;
+      var frame=host.querySelector('.dlw8-frame'),viewport=host.querySelector('.dlw8-viewport'),track=host.querySelector('.dlw8-track'),slides=[].slice.call(host.querySelectorAll('.dlw8-slide')),dots=[].slice.call(host.querySelectorAll('[data-dot]')),copyBox=host.querySelector('.dlw8-copy'),title=copyBox.querySelector('h1'),body=copyBox.querySelector('p'),start=host.querySelector('.dlw8-start'),knob=start.querySelector('.dlw8-knob'),label=start.querySelector('strong');
+      var copy=[
+        ['Temukan mod yang selalu kamu cari.','Jelajahi mod, add-on, map, skin, shader dan project Minecraft pilihan dalam satu tempat.'],
+        ['Minecraft, dibuat lebih luas.','Cari pengalaman baru, simpan favorit dan temukan karya komunitas yang cocok untuk permainanmu.'],
+        ['Addon yang siap dimainkan.','Temukan build terbaru, creator baru dan project yang bisa langsung kamu bawa ke Minecraft.']
+      ];
+      var progress=0,visualIndex=0,leaving=false,dragging=false,startX=0,dragTravel=1,pointerId=null,copyToken=0;
+
       function clamp(v){return Math.max(0,Math.min(1,v))}
-      function w(){return Math.max(1,viewport.clientWidth)}
-      function paint(i){i=Math.max(0,Math.min(slides.length-1,i));index=i;slides.forEach(function(s,n){s.classList.toggle('active',n===i)});dots.forEach(function(d,n){d.classList.toggle('active',n===i)});title.textContent=text[i][0];body.textContent=text[i][1]}
-      function go(i,manual){i=(i+slides.length)%slides.length;paint(i);try{viewport.scrollTo({left:i*w(),behavior:'smooth'})}catch(e){viewport.scrollLeft=i*w()}manual?pause():restart()}
-      function restart(){clearTimeout(timer);timer=setTimeout(function(){go(index+1,false)},SLIDE_MS)}
-      function pause(){clearTimeout(timer);clearTimeout(resume);resume=setTimeout(restart,RESUME_MS)}
-      viewport.addEventListener('scroll',function(){var n=Math.round(viewport.scrollLeft/w());if(n!==index)paint(n)},{passive:true});
-      viewport.addEventListener('touchstart',pause,{passive:true});
-      dots.forEach(function(d,i){d.addEventListener('click',function(){go(i,true)})});
+      function width(){return Math.max(1,viewport.clientWidth||window.innerWidth||1)}
+      function indexFor(p){return Math.max(0,Math.min(slides.length-1,Math.round(clamp(p)*(slides.length-1))))}
+      function setCopy(i){
+        if(i===visualIndex&&title.textContent===copy[i][0])return;
+        visualIndex=i;slides.forEach(function(s,n){s.classList.toggle('active',n===i)});dots.forEach(function(d,n){d.classList.toggle('active',n===i)});
+        var token=++copyToken;copyBox.classList.add('changing');
+        setTimeout(function(){if(token!==copyToken)return;title.textContent=copy[i][0];body.textContent=copy[i][1];copyBox.classList.remove('changing')},75)
+      }
+      function setScene(p,animate){
+        progress=clamp(p);
+        var px=-(slides.length-1)*width()*progress;
+        track.style.transition=animate?'transform .46s cubic-bezier(.22,.8,.2,1)':'none';
+        track.style.transform='translate3d('+px+'px,0,0)';
+        setCopy(indexFor(progress))
+      }
       function render(p,animate){
         progress=clamp(p);start.style.setProperty('--p',String(progress));start.setAttribute('aria-valuenow',String(Math.round(progress*100)));
-        var travel=Math.max(0,start.clientWidth-knob.offsetWidth-10);knob.style.transition=animate?'transform .22s cubic-bezier(.22,.8,.2,1),background .18s ease':'none';knob.style.transform='translate3d('+(travel*progress)+'px,0,0)';
-        start.classList.toggle('ready',progress>=THRESHOLD);label.textContent=progress>=THRESHOLD?'Lepas untuk masuk':(progress>.08?'Terus geser…':'Swipe to Start')
+        var travel=Math.max(1,start.clientWidth-knob.offsetWidth-10);
+        knob.style.transition=animate?'transform .28s cubic-bezier(.22,.8,.2,1),background .18s ease,color .18s ease':'none';
+        knob.style.transform='translate3d('+(travel*progress)+'px,0,0)';
+        start.classList.toggle('ready',progress>=THRESHOLD);
+        label.textContent=progress>=THRESHOLD?'Lepas untuk masuk':(progress>.06?'Terus geser…':'Swipe to Start');
+        setScene(progress,animate)
       }
-      function begin(x){if(leaving)return;clearTimeout(timer);clearTimeout(resume);dragRect=start.getBoundingClientRect();start.classList.add('dragging');render(0,false);move(x)}
-      function move(x){if(!dragRect)return;var p=(x-dragRect.left-27)/Math.max(1,dragRect.width-54);render(p,false)}
-      function reset(){touchId=null;pointerId=null;dragRect=null;start.classList.remove('dragging','ready');render(0,true);restart()}
-      function release(){if(!dragRect)return;var ok=progress>=THRESHOLD;touchId=null;pointerId=null;dragRect=null;start.classList.remove('dragging');if(ok)finish();else reset()}
-      function findTouch(list,id){if(!list)return null;for(var i=0;i<list.length;i++)if(list[i].identifier===id)return list[i];return null}
-      start.addEventListener('touchstart',function(e){if(leaving||touchId!==null)return;var t=e.changedTouches&&e.changedTouches[0];if(!t)return;if(e.cancelable)e.preventDefault();touchId=t.identifier;begin(t.clientX)},{passive:false});
-      document.addEventListener('touchmove',function(e){if(touchId===null)return;var t=findTouch(e.touches,touchId);if(!t)return;if(e.cancelable)e.preventDefault();move(t.clientX)},{passive:false,capture:true});
-      document.addEventListener('touchend',function(e){if(touchId===null)return;var t=findTouch(e.changedTouches,touchId);if(!t)return;if(e.cancelable)e.preventDefault();release()},{passive:false,capture:true});
-      document.addEventListener('touchcancel',function(e){if(touchId===null)return;reset()},{passive:true,capture:true});
+      function begin(x){
+        if(leaving||dragging)return;
+        dragging=true;startX=x;dragTravel=Math.max(1,start.clientWidth-knob.offsetWidth-10);pointerId=null;
+        frame.classList.add('scrubbing');start.classList.add('dragging');
+        render(0,false)
+      }
+      function move(x){if(!dragging)return;render((x-startX)/dragTravel,false)}
+      function reset(){
+        dragging=false;pointerId=null;frame.classList.remove('scrubbing');start.classList.remove('dragging','ready');
+        render(0,true)
+      }
+      function release(){
+        if(!dragging)return;
+        var complete=progress>=THRESHOLD;
+        dragging=false;pointerId=null;frame.classList.remove('scrubbing');start.classList.remove('dragging');
+        if(complete)finish();else reset()
+      }
+
+      start.addEventListener('touchstart',function(e){
+        if(leaving||dragging)return;var t=e.touches&&e.touches[0];if(!t)return;if(e.cancelable)e.preventDefault();begin(t.clientX)
+      },{passive:false});
+      document.addEventListener('touchmove',function(e){
+        if(!dragging)return;var t=e.touches&&e.touches[0];if(!t)return;if(e.cancelable)e.preventDefault();move(t.clientX)
+      },{passive:false,capture:true});
+      document.addEventListener('touchend',function(e){if(!dragging)return;if(e.cancelable)e.preventDefault();release()},{passive:false,capture:true});
+      document.addEventListener('touchcancel',function(){if(dragging)reset()},{passive:true,capture:true});
+
       if(window.PointerEvent){
-        start.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'||(e.pointerType==='mouse'&&e.button!==0)||leaving||pointerId!==null)return;e.preventDefault();pointerId=e.pointerId;begin(e.clientX)});
-        document.addEventListener('pointermove',function(e){if(pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;move(e.clientX)});
-        document.addEventListener('pointerup',function(e){if(pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;release()});
-        document.addEventListener('pointercancel',function(e){if(pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;reset()})
+        start.addEventListener('pointerdown',function(e){
+          if(e.pointerType==='touch'||leaving||dragging||(e.pointerType==='mouse'&&e.button!==0))return;e.preventDefault();begin(e.clientX);pointerId=e.pointerId;try{start.setPointerCapture(e.pointerId)}catch(x){}
+        });
+        document.addEventListener('pointermove',function(e){if(!dragging||pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;move(e.clientX)});
+        document.addEventListener('pointerup',function(e){if(!dragging||pointerId===null||e.pointerId!==pointerId||e.pointerType==='touch')return;release()});
+        document.addEventListener('pointercancel',function(e){if(dragging&&pointerId!==null&&e.pointerId===pointerId)reset()})
       }
+
       start.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='ArrowRight'){e.preventDefault();finish()}});
       function removeForce(){try{var u=new URL(location.href);u.searchParams.delete('welcome');history.replaceState(history.state,'',u.pathname+(u.search||'')+(location.hash||'#/'))}catch(e){}}
       function exitWelcome(){host.classList.add('leaving');document.documentElement.classList.add('dlw8-enter');setTimeout(function(){if(host.parentNode)host.parentNode.removeChild(host);window.__DLAVIE_WELCOME_ACTIVE__=false;document.documentElement.classList.remove('dlw8-on','dlw8-enter');document.documentElement.classList.add('dlw8-off');try{window.dispatchEvent(new CustomEvent('dlavie:welcome-complete'))}catch(e){}},440)}
       function finish(){
-        if(leaving)return;leaving=true;clearTimeout(timer);clearTimeout(resume);start.classList.remove('dragging');render(1,true);label.textContent='Membuka DLavie…';
+        if(leaving)return;leaving=true;frame.classList.remove('scrubbing');start.classList.remove('dragging');render(1,true);label.textContent='Membuka DLavie…';
         try{localStorage.setItem(KEY,'done')}catch(e){}removeForce();if(window.__DLAVIE_BOOT_APP__)window.__DLAVIE_BOOT_APP__();
         var waited=0,iv=setInterval(function(){waited+=70;if((document.getElementById('root')&&document.getElementById('root').childElementCount)||waited>=2100){clearInterval(iv);exitWelcome()}},70)
       }
-      paint(0);render(0,true);restart()
+      window.addEventListener('resize',function(){setScene(progress,false)},{passive:true});
+      setCopy(0);render(0,true)
     })();
   </script>
   <noscript><div style="position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#050608;color:#fff;padding:24px;text-align:center">DLavie membutuhkan JavaScript untuk berjalan.</div></noscript>
