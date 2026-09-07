@@ -1,66 +1,64 @@
-/* Homepage catalog. Scoped to preserve account, library, and project screens. */
-body.dl-gamehub-active #dl-gamehub-root:has(.market-home){--gh-card:var(--surface-raised);--gh-card-strong:var(--surface-raised);--gh-line:var(--line);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-#dl-gamehub-root:has(.market-home) .gh-shell{width:min(1200px,calc(100% - 64px));padding-top:20px}
-#dl-gamehub-root:has(.market-home) .gh-shell:before{background:var(--bg);opacity:.97}
-#dl-gamehub-root:has(.market-home) .gh-topbar{height:60px;margin-bottom:32px;border-bottom:1px solid var(--line);padding-bottom:16px;grid-template-columns:44px 1fr 44px}
-#dl-gamehub-root:has(.market-home) .gh-brand{text-align:left}
-#dl-gamehub-root:has(.market-home) .gh-brand strong{font-size:20px;letter-spacing:-.03em}
-#dl-gamehub-root:has(.market-home) .gh-brand span{font-size:12px;letter-spacing:.04em}
-#dl-gamehub-root:has(.market-home) .gh-icon-btn{width:44px;height:44px;border-radius:10px;box-shadow:none}
+/* Reference-inspired home: real project covers, horizontal discovery, one upload control. */
+#dl-gamehub-root:has(.market-home){font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--home-panel:color-mix(in srgb,var(--surface-raised) 92%,transparent)}
+body.dl-gamehub-active #dl-gamehub-root:has(.market-home) .gh-shell{width:min(1180px,calc(100% - 48px))!important;padding:26px 0 calc(136px + env(safe-area-inset-bottom))!important}
+#dl-gamehub-root:has(.market-home) .gh-shell:before{background:linear-gradient(155deg,color-mix(in srgb,var(--bg) 92%,transparent),var(--bg) 80%)}
+#dl-gamehub-root:has(.market-home) .gh-topbar{height:56px;grid-template-columns:44px 1fr 44px;margin-bottom:24px}
+#dl-gamehub-root:has(.market-home) .gh-brand{text-align:center}
+#dl-gamehub-root:has(.market-home) .gh-brand strong{font-size:23px;letter-spacing:-.03em;font-weight:700}
+#dl-gamehub-root:has(.market-home) .gh-brand span{font-size:12px;letter-spacing:.06em}
+#dl-gamehub-root:has(.market-home) .gh-icon-btn{width:44px;height:44px;border-radius:15px;background:var(--home-panel);box-shadow:none}
 #dl-gamehub-root:has(.market-home) .gh-bell:after{display:none}
-.market-home{font-size:16px;line-height:1.55}
-.market-home button,.market-home select{cursor:pointer}
-.market-home :is(button,input,select,a):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.market-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:28px}
-.market-eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ink-soft)}
-.market-heading h1{font:750 clamp(28px,3.6vw,42px)/1.16 system-ui,sans-serif;letter-spacing:-.045em;margin:8px 0 12px}
-.market-heading p{margin:0;color:var(--ink-soft)}
-#dl-gamehub-root .market-upload{display:flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;padding:12px 18px;border-radius:9px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);font-size:14px;font-weight:650;min-height:46px}
-.market-controls{display:grid;grid-template-columns:1fr auto;gap:16px;margin-bottom:32px}
-.market-search{display:flex;align-items:center;gap:12px;min-width:0;min-height:52px;padding:0 16px;background:var(--surface-raised);border:1px solid var(--line);border-radius:10px}
-.market-search:focus-within{border-color:var(--accent)}
+.market-home{font-size:16px;line-height:1.5}
+.market-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.market-home :is(button,a,input,summary,select):focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.market-home button,.market-home summary,.market-home select{cursor:pointer}
+.market-controls{display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:12px;max-width:760px;margin:0 auto 24px}
+.market-search{display:flex;align-items:center;gap:12px;background:var(--home-panel);border:1px solid var(--line);border-radius:13px;min-height:48px;padding:0 15px;min-width:0}
 .market-search svg{flex-shrink:0;color:var(--ink-soft)}
-#dl-gamehub-root .market-search input{min-width:0;width:100%;font-size:16px;border:0;outline:none;background:transparent;color:var(--ink);padding:12px 0}
-.market-editions{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:10px;background:var(--surface-raised)}
-#dl-gamehub-root .market-editions button{min-width:96px;padding:8px 16px;font-size:14px;border:0;border-radius:6px;background:transparent;color:var(--ink-soft)}
-#dl-gamehub-root .market-editions button[aria-pressed=true]{background:var(--ink);color:var(--bg);font-weight:650}
-.market-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:36px;align-items:start}
-.market-sidebar h2{font-size:14px;margin:0 0 12px;font-weight:700}
-.market-categories{display:grid;gap:4px}
-#dl-gamehub-root .market-categories button{font-size:14px;text-align:left;border:1px solid transparent;border-radius:7px;background:transparent;padding:10px 12px;min-height:42px;color:var(--ink-soft)}
-#dl-gamehub-root .market-categories button[aria-pressed=true]{color:var(--ink);background:var(--surface-raised);border-color:var(--line);font-weight:700;box-shadow:inset 3px 0 var(--accent)}
-#dl-gamehub-root .market-categories button:hover{color:var(--ink);background:var(--surface-raised)}
-.market-creator{border-top:1px solid var(--line);margin-top:24px;padding-top:20px}
-.market-creator h3{font-size:14px;margin:0 0 8px}
-.market-creator p{font-size:14px;color:var(--ink-soft);margin:0 0 12px}
-#dl-gamehub-root .market-creator button{display:flex;align-items:center;gap:5px;border:0;background:transparent;padding:8px 0;font-size:14px;font-weight:650}
-.market-catalog{min-width:0}
-.market-results-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px}
-.market-results-head h2{font-size:21px;letter-spacing:-.03em;margin:0 0 3px}
-.market-results-head span{font-size:13px;color:var(--ink-soft)}
-.market-sort{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink-soft)}
-#dl-gamehub-root .market-sort select{min-height:44px;max-width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);background:var(--surface-raised);font-size:14px}
-.market-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.market-project{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--surface-raised);color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}
-.market-project:hover{border-color:var(--accent);transform:translateY(-2px)}
-.market-project>img,.market-project>.gh-no-thumb{width:100%;aspect-ratio:16/9;height:auto;object-fit:cover;border-radius:0;background:var(--surface);font-size:14px;display:grid;place-items:center}
-.market-project-copy{padding:18px;display:flex;flex:1;flex-direction:column;min-width:0}
-.market-tags{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--ink-soft)}
-.market-featured{color:var(--ink);font-weight:650}
-.market-project h3{font-size:19px;letter-spacing:-.025em;line-height:1.4;overflow-wrap:anywhere;margin:8px 0}
-.market-project p{font-size:14px;color:var(--ink-soft);line-height:1.6;margin:0 0 20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.market-meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:auto;font-size:13px;color:var(--ink-soft)}
-.market-meta span{display:flex;align-items:center;gap:6px}
-.market-state{min-height:260px;padding:48px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed var(--line);border-radius:12px;background:var(--surface-raised)}
-.market-state h3{font-size:20px;margin:0 0 8px}.market-state p{color:var(--ink-soft);margin:0 0 16px}
-#dl-gamehub-root .market-state button{min-height:44px;padding:10px 18px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:14px}
-.market-footer{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);margin-top:48px;padding-top:20px;font-size:12px;color:var(--ink-soft)}
-.market-footer strong{font-size:14px;white-space:nowrap;color:var(--ink)}
-#dl-gamehub-root:has(.market-home) .gh-bottom-nav{border-radius:14px;box-shadow:0 6px 30px #0002}
-#dl-gamehub-root:has(.market-home) .gh-nav-item{min-height:44px}
+.market-search:focus-within{border-color:var(--accent)}
+#dl-gamehub-root .market-search input{font-size:16px;width:100%;min-width:0;border:0;padding:12px 0;background:transparent;color:var(--ink);outline:none}
+.market-filter{position:relative;z-index:5}
+.market-filter summary{display:grid;place-items:center;list-style:none;width:48px;height:48px;border:1px solid var(--line);border-radius:13px;background:var(--home-panel)}
+.market-filter summary::-webkit-details-marker{display:none}
+.market-filter[open] summary{border-color:var(--accent)}
+.market-filter-panel{position:absolute;right:0;top:58px;width:min(280px,calc(100vw - 48px));padding:20px;background:var(--surface-raised);border:1px solid var(--line);border-radius:16px;box-shadow:0 16px 48px #0004;font-size:14px}
+.market-editions{display:flex;gap:6px;margin:10px 0 20px}
+#dl-gamehub-root .market-editions button{flex:1;min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--surface);color:var(--ink-soft)}
+#dl-gamehub-root .market-editions button[aria-pressed=true]{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.market-sort{display:grid;gap:8px}
+#dl-gamehub-root .market-sort select{width:100%;font-size:14px;padding:10px;min-height:44px;border-radius:8px;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.market-layout{display:block}
+.market-categories{display:flex;justify-content:flex-start;overflow-x:auto;gap:26px;scrollbar-width:thin;padding:0 2px 16px;margin-bottom:18px}
+#dl-gamehub-root .market-categories button{flex-shrink:0;position:relative;min-height:44px;padding:4px 0 16px;border:0;font-size:14px;background:transparent;color:var(--ink-soft);white-space:nowrap}
+#dl-gamehub-root .market-categories button[aria-pressed=true]{color:var(--ink);font-weight:650}
+.market-categories button[aria-pressed=true]:after{content:"";width:5px;height:5px;position:absolute;bottom:3px;left:calc(50% - 2.5px);border-radius:50%;background:currentColor}
+.market-results-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 18px}
+.market-results-head>div{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.market-results-head h2{font-size:16px;margin:0;font-weight:600}
+.market-results-head span{font-size:12px;color:var(--ink-soft)}
+.market-results{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(250px,29vw,330px);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:12px;padding:12px 12px 26px;margin-inline:-12px;scrollbar-width:thin}
+.market-project{position:relative;display:block;min-width:0;height:460px;overflow:hidden;border-radius:30px;border:1px solid var(--line);background:var(--surface-raised);text-decoration:none;color:white;scroll-snap-align:center;isolation:isolate;transition:transform .2s}
+.market-project:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,#0006 55%,#000e 100%);pointer-events:none}
+.market-project>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .3s}
+.market-project:hover>img{transform:scale(1.025)}
+.market-project>.gh-no-thumb{position:absolute;inset:0;display:grid;place-items:center;background:var(--surface-raised);color:var(--ink-soft);font-size:14px;z-index:-2}
+.market-project-copy{position:absolute;bottom:0;left:0;right:0;padding:24px;overflow-wrap:anywhere}
+.market-tags{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:#fffd}
+.market-tags span{background:#0005;padding:3px 8px;border-radius:6px}
+.market-featured{font-weight:650}
+.market-project h3{font-size:24px;line-height:1.2;letter-spacing:-.03em;margin:12px 50px 8px 0;color:#fff}
+.market-project p{font-size:14px;line-height:1.5;color:#fffd;margin:0 0 16px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.market-open{float:right;display:grid;place-items:center;width:42px;height:42px;margin-top:-42px;border:1px solid #fff6;border-radius:13px;background:#ffffff1a;backdrop-filter:blur(8px)}
+.market-meta{display:flex;gap:14px;flex-wrap:wrap;color:#fffd;font-size:12px}
+.market-meta span{display:flex;gap:5px;align-items:center}
+.market-state{min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;border:1px solid var(--line);background:var(--home-panel);border-radius:28px}
+.market-state h3{font-size:20px;margin:0 0 10px}.market-state p{font-size:16px;color:var(--ink-soft);margin:0 0 16px}
+#dl-gamehub-root .market-state button{min-height:44px;border:1px solid var(--line);border-radius:10px;padding:10px 18px;background:var(--surface);font-size:14px}
+.market-footer{display:flex;justify-content:space-between;gap:20px;margin-top:20px;font-size:12px;color:var(--ink-soft)}
+.market-footer strong{font-size:14px;white-space:nowrap}
+body.dl-gamehub-active #dl-gamehub-root:has(.market-home) .gh-bottom-nav{height:78px!important;width:min(520px,calc(100% - 28px))!important;bottom:calc(12px + env(safe-area-inset-bottom))!important;border-radius:24px!important;background:color-mix(in srgb,var(--surface-raised) 96%,transparent)!important;border:1px solid var(--line)!important;box-shadow:0 12px 40px #0003!important;grid-template-columns:1fr 1fr 76px 1fr 1fr!important}
+#dl-gamehub-root:has(.market-home) .gh-nav-item{min-height:52px;gap:5px}
 #dl-gamehub-root:has(.market-home) .gh-nav-item span{font-size:12px!important}
-@media(min-width:1400px){.market-results{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:850px){.market-layout{grid-template-columns:1fr;gap:24px}.market-sidebar h2,.market-creator{display:none}.market-categories{display:flex;overflow-x:auto;padding-bottom:8px;gap:6px}.market-categories button{flex-shrink:0;white-space:nowrap}.market-controls{margin-bottom:16px}.market-heading{align-items:flex-start}.market-upload{margin-top:8px}}
-@media(max-width:600px){#dl-gamehub-root:has(.market-home) .gh-shell{width:calc(100% - 32px)!important;padding-top:max(12px,env(safe-area-inset-top))!important}#dl-gamehub-root:has(.market-home) .gh-topbar{margin-bottom:24px}.market-heading{display:block;margin-bottom:20px}.market-heading h1{font-size:30px}.market-heading p{font-size:16px}#dl-gamehub-root .market-upload{margin-top:16px}.market-controls{grid-template-columns:1fr;gap:12px}.market-editions button{flex:1}.market-results-head{align-items:flex-start;gap:12px}.market-sort{display:grid;gap:4px;font-size:12px}.market-results-head h2{font-size:20px}.market-results{grid-template-columns:1fr}.market-project{display:grid;grid-template-columns:96px minmax(0,1fr);padding:14px;gap:14px}.market-project>img,.market-project>.gh-no-thumb{height:96px;aspect-ratio:1;border-radius:8px;font-size:12px;text-align:center}.market-project-copy{padding:0}.market-project h3{font-size:17px;margin:5px 0}.market-project p{margin-bottom:12px}.market-meta{gap:10px}.market-footer{display:block}.market-footer span{display:block;margin-top:8px}}
-@media(max-width:360px){.market-project{grid-template-columns:72px minmax(0,1fr);padding:12px;gap:10px}.market-project>img,.market-project>.gh-no-thumb{height:72px}.market-results-head{flex-wrap:wrap}}
-@media(prefers-reduced-motion:reduce){.market-project{transition:none}.market-project:hover{transform:none}}
+body.dl-gamehub-active #dl-gamehub-root:has(.market-home) .gh-plus{width:64px!important;height:64px!important;margin-top:-38px!important;background:var(--ink)!important;color:var(--bg)!important;border-radius:50%!important;box-shadow:0 0 0 7px var(--bg),0 10px 26px #0004!important}
+@media(max-width:600px){body.dl-gamehub-active #dl-gamehub-root:has(.market-home) .gh-shell{width:calc(100% - 36px)!important;padding-top:max(16px,env(safe-area-inset-top))!important}.market-controls{margin-bottom:16px}.market-categories{gap:24px;margin-bottom:10px}.market-results-head h2{font-size:14px}.market-results-head span{font-size:12px}.market-results{grid-auto-columns:82%;gap:18px;margin-inline:-18px;padding-inline:calc(9% + 15px);scroll-padding-inline:calc(9% + 15px)}.market-project{height:clamp(330px,53svh,510px);border-radius:28px}.market-project-copy{padding:20px}.market-project h3{font-size:23px}.market-footer{display:block;margin-top:10px}.market-footer span{display:block;margin-top:6px}}
+@media(prefers-reduced-motion:reduce){.market-project,.market-project>img{transition:none}}

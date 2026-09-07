@@ -38,7 +38,7 @@
     'use strict';
     var root=document.getElementById('root'),fail=document.getElementById('dl-app-fail');
     var appStarted=false,enhStarted=false;
-    function loadEnh(){if(enhStarted)return;enhStarted=true;var s=document.createElement('script');s.src='/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907hm7';s.defer=true;document.body.appendChild(s)}
+    function loadEnh(){if(enhStarted)return;enhStarted=true;var s=document.createElement('script');s.src='/DLavie-Craft/assets/app-bootstrap-v1.js?v=20260907ref8';s.defer=true;document.body.appendChild(s)}
     function watchRoot(){if(root&&root.childElementCount){loadEnh();return}if(root&&window.MutationObserver){var m=new MutationObserver(function(){if(root.childElementCount){m.disconnect();loadEnh()}});m.observe(root,{childList:true,subtree:true})}setTimeout(function(){if(!root.childElementCount&&fail&&!window.__DLAVIE_WELCOME_ACTIVE__)fail.classList.add('show')},9000)}
     window.__DLAVIE_BOOT_APP__=function(){if(appStarted)return;appStarted=true;var l=document.createElement('link');l.rel='stylesheet';l.href='/DLavie-Craft/assets/index-BLlJjh3N.css';document.head.appendChild(l);var s=document.createElement('script');s.type='module';s.src='/DLavie-Craft/assets/index-DQVRunOM.js';s.onload=watchRoot;s.onerror=function(){if(fail&&!window.__DLAVIE_WELCOME_ACTIVE__)fail.classList.add('show')};document.head.appendChild(s);watchRoot()};
     if(!window.__DLAVIE_WELCOME_ACTIVE__)window.__DLAVIE_BOOT_APP__();

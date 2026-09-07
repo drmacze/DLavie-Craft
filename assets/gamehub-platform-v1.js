@@ -132,11 +132,10 @@
   }
 
   function openAccount() {
-    toast('Masuk atau daftar untuk melanjutkan.');
-    const btn = $('#dl-account-entry') || $('#dl-shell-account-entry') || $('#dl-shell-account-entry-mobile');
-    if (btn) { setTimeout(() => btn.click(), 80); return; }
-    const url = new URL(location.href); url.searchParams.set('dlavie', 'login');
-    history.pushState({ dlaviePortal: 'login' }, '', url.pathname + url.search + url.hash);
+    const mode = getSession() ? 'account' : 'login';
+    const url = new URL(location.href);
+    url.searchParams.set('dlavie', mode);
+    history.pushState({ dlaviePortal: mode }, '', url.pathname + url.search + url.hash);
     window.dispatchEvent(new PopStateEvent('popstate', { state: history.state }));
   }
 
@@ -227,7 +226,7 @@
       const stats = statFor(p.id);
       return `<a class="market-project" href="#/project/${encodeURIComponent(p.slug)}">
         ${img(p)}<div class="market-project-copy"><div class="market-tags"><span>${esc(categories.find(([key]) => key === p.project_type)?.[1] || p.project_type || 'Project')}</span>${p.featured ? '<span class="market-featured">Pilihan</span>' : ''}</div>
-        <h3>${esc(p.name)}</h3><p>${esc(p.summary || 'Lihat detail dan versi yang tersedia.')}</p>
+        <h3>${esc(p.name)}</h3><span class="market-open" aria-hidden="true">${ico('chevron',22)}</span><p>${esc(p.summary || 'Lihat detail dan versi yang tersedia.')}</p>
         <div class="market-meta"><span>${ico('download',15)} ${fmt(p.download_count)} unduhan</span>${Number(stats.rating_count) > 0 ? `<span>${ico('star',15)} ${Number(stats.rating_average).toFixed(1)}</span>` : ''}</div></div>
       </a>`;
     };
@@ -237,13 +236,13 @@
     else if (!list.length) results = `<div class="market-state"><h3>${filtered ? 'Tidak ada proyek yang cocok' : 'Belum ada proyek di edisi ini'}</h3><p>${filtered ? 'Coba kata kunci lain atau hapus filter pencarian.' : 'Proyek publik dari kreator akan tampil di sini.'}</p>${filtered ? '<button data-action="reset-search">Hapus filter</button>' : ''}</div>`;
     else results = `<div class="market-results">${list.map(card).join('')}</div>`;
     return shell(`<main class="market-home">
-      <section class="market-heading"><div><span class="market-eyebrow">KARYA KOMUNITAS MINECRAFT</span><h1>Temukan dunia berikutnya.</h1><p>Jelajahi add-on, map, shader, dan karya kreator lainnya.</p></div><button class="market-upload" data-action="plus">${ico('plus',18)} Unggah proyek</button></section>
-      <div class="market-controls"><label class="market-search" for="gh-search">${ico('search')}<input id="gh-search" type="search" value="${esc(state.query)}" aria-label="Cari proyek Minecraft" placeholder="Cari proyek Minecraft…" autocomplete="off"></label>
-      <div class="market-editions" role="group" aria-label="Edisi Minecraft">${['bedrock','java'].map(ed => `<button data-action="edition" data-value="${ed}" aria-pressed="${state.edition === ed}">${ed === 'bedrock' ? 'Bedrock' : 'Java'}</button>`).join('')}</div></div>
-      <div class="market-layout"><aside class="market-sidebar"><h2>Kategori</h2><div class="market-categories" role="group" aria-label="Kategori proyek">${categories.map(([key,label]) => `<button data-action="category" data-value="${key}" aria-pressed="${state.category === key}">${esc(label)}</button>`).join('')}</div><div class="market-creator"><h3>Bagikan karyamu</h3><p>Publikasikan proyek dan temukan pemain baru.</p><button data-action="plus">Mulai mengunggah ${ico('chevron',16)}</button></div></aside>
-      <section class="market-catalog" aria-labelledby="market-results-title"><div class="market-results-head"><div><h2 id="market-results-title">${filtered ? 'Hasil pencarian' : 'Jelajahi proyek'}</h2><span role="status">${state.loading ? 'Memuat…' : `${list.length} proyek · ${state.edition === 'java' ? 'Java' : 'Bedrock'}`}</span></div><label class="market-sort">Urutkan<select id="market-sort"><option value="updated" ${state.sort === 'updated' ? 'selected' : ''}>Baru diperbarui</option><option value="downloads" ${state.sort === 'downloads' ? 'selected' : ''}>Paling diunduh</option></select></label></div>${results}</section></div>
+      <h1 class="market-sr-only">Jelajahi proyek Minecraft</h1>
+      <div class="market-controls"><label class="market-search" for="gh-search">${ico('search')}<input id="gh-search" type="search" value="${esc(state.query)}" aria-label="Cari proyek Minecraft" placeholder="Cari mod, map, shader…" autocomplete="off"></label>
+      <details class="market-filter"><summary aria-label="Filter edisi dan urutan">${ico('sliders')}</summary><div class="market-filter-panel"><span>Edisi Minecraft</span><div class="market-editions" role="group" aria-label="Edisi Minecraft">${['bedrock','java'].map(ed => `<button data-action="edition" data-value="${ed}" aria-pressed="${state.edition === ed}">${ed === 'bedrock' ? 'Bedrock' : 'Java'}</button>`).join('')}</div><label class="market-sort">Urutkan<select id="market-sort"><option value="updated" ${state.sort === 'updated' ? 'selected' : ''}>Baru diperbarui</option><option value="downloads" ${state.sort === 'downloads' ? 'selected' : ''}>Paling diunduh</option></select></label></div></details></div>
+      <div class="market-layout"><aside class="market-sidebar"><div class="market-categories" role="group" aria-label="Kategori proyek">${categories.map(([key,label]) => `<button data-action="category" data-value="${key}" aria-pressed="${state.category === key}">${esc(label)}</button>`).join('')}</div></aside>
+      <section class="market-catalog" aria-labelledby="market-results-title"><div class="market-results-head"><div><h2 id="market-results-title">${filtered ? 'Hasil pencarian' : 'Jelajahi proyek'}</h2><span role="status">${state.loading ? 'Memuat…' : `${list.length} proyek · ${state.edition === 'java' ? 'Java' : 'Bedrock'}`}</span></div></div>${results}</section></div>
       <footer class="market-footer"><strong>DLavie Craft</strong><span>Platform komunitas independen. Tidak berafiliasi dengan Mojang atau Microsoft.</span></footer>
-    </main>`, {active:'home',title:'DLavie Craft',subtitle:'Komunitas Minecraft'});
+    </main>`, {active:'home',title:'Home',subtitle:'DLavie Craft'});
   }
 
   function libraryHtml() {
@@ -325,7 +324,7 @@
       else if(a==='profile'){openAccount();}
       else if(a==='drawer'){openDrawer();}
       else if(a==='plus'){handlePlus();}
-      else if(a==='category'){state.category=t.dataset.value;renderView();}
+      else if(a==='category'){const offset=$('.market-categories',root)?.scrollLeft || 0;state.category=t.dataset.value;renderView();const bar=$('.market-categories',root);if(bar){bar.scrollLeft=offset;bar.querySelector('[aria-pressed="true"]')?.focus({preventScroll:true});}}
       else if(a==='edition'){setEdition(t.dataset.value);}
       else if(a==='launch-edition'){e.stopPropagation();launchEdition();}
       else if(a==='project'){location.hash=`#/project/${encodeURIComponent(t.dataset.slug)}`;}

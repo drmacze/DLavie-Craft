@@ -102,13 +102,6 @@
       window.dispatchEvent(new PopStateEvent('popstate', { state: history.state }));
     } catch {}
 
-    const trigger = () => {
-      const btn = document.querySelector('#dl-account-entry, #dl-shell-account-entry, #dl-shell-account-entry-mobile');
-      if (btn) btn.click();
-    };
-    requestAnimationFrame(trigger);
-    setTimeout(trigger, 120);
-    setTimeout(trigger, 420);
     return true;
   }
 
