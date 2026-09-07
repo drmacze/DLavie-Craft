@@ -9,14 +9,15 @@
 
   css(A+'performance-stability-v1.css?v=20260907p1');
   css(A+'gamehub-user-access-v3.css?v=20260907u3');
-  css(A+'gamehub-edition-hero-fix-v4.css?v=20260907u4');
-  script(A+'gamehub-user-access-v3.js?v=20260907u3').then(function(){script(A+'gamehub-edition-hero-fix-v4.js?v=20260907u4')});
+  css(A+'gamehub-edition-hero-fix-v4.css?v=20260907u5');
+  css(A+'gamehub-ui-fix-v5.css?v=20260907u5');
+  series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u5',A+'gamehub-ui-fix-v5.js?v=20260907u5']);
 
   var homeStarted=false,marketStarted=false,socialStarted=false,accountStarted=false,communityStarted=false;
   function loadHome(){
     if(homeStarted)return;homeStarted=true;
     ['home-minimal-v1.css?v=20260906hm3','gamehub-platform-v1.css?v=20260906gs2','gamehub-mobile-stability-v2.css?v=20260906gs2','gamehub-saved-nav-v2.css?v=20260906sn2'].forEach(function(x){css(A+x)});
-    series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u4',A+'gamehub-stability-v2.js?v=20260907p1',A+'gamehub-platform-v1.js?v=20260906gs2']).then(function(){
+    series([A+'gamehub-user-access-v3.js?v=20260907u3',A+'gamehub-edition-hero-fix-v4.js?v=20260907u5',A+'gamehub-ui-fix-v5.js?v=20260907u5',A+'gamehub-stability-v2.js?v=20260907p1',A+'gamehub-platform-v1.js?v=20260906gs2']).then(function(){
       setTimeout(function(){script(A+'gamehub-saved-nav-v2.js?v=20260907p1')},220);
     });
   }
@@ -34,14 +35,16 @@
   }
 
   function route(){
-    var h=(location.hash||'#/').toLowerCase();
+    var h=(location.hash||'#/').toLowerCase(),q='';
+    try{q=((new URLSearchParams(location.search)).get('dlavie')||'').toLowerCase()}catch(e){}
     if(h===''||h==='#'||h==='#/'||/home/.test(h))setTimeout(loadHome,100);
     if(/marketplace/.test(h))loadMarketplace();
     if(/project|crafter|creator/.test(h))loadSocial();
-    if(/account|profile|login|register/.test(h)){loadAccount();loadSocial()}
+    if(/account|profile|login|register/.test(h)||/account|profile|login|register/.test(q)){loadAccount();loadSocial()}
     if(/community/.test(h))setTimeout(loadCommunity,40);
   }
   window.addEventListener('hashchange',route);
-  document.addEventListener('dlavie:auth-changed',function(){if(/community/i.test(location.hash||''))setTimeout(loadCommunity,40)});
+  window.addEventListener('popstate',route);
+  document.addEventListener('dlavie:auth-changed',function(){route();if(/community/i.test(location.hash||''))setTimeout(loadCommunity,40)});
   route();
 })();
