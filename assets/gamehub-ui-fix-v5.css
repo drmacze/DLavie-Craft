@@ -1,0 +1,87 @@
+/* DLavie Craft Game Hub UI polish v5 */
+#dl-gamehub-root .gh-launch-card > .gh-launch-media.gh-edition-hq{
+  width:100%!important;
+  height:100%!important;
+  inset:0!important;
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:0!important;
+  filter:none!important;
+  image-rendering:auto!important;
+  transform:none!important;
+}
+#dl-gamehub-root .gh-edition-badge{display:none!important}
+
+#dl-gamehub-root .gh-user-avatar{
+  overflow:hidden!important;
+  background:#8b8b8b!important;
+}
+#dl-gamehub-root .gh-user-avatar img,
+#dl-gamehub-root .gh-nav-profile-avatar{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  padding:0!important;
+  margin:0!important;
+  filter:none!important;
+  image-rendering:auto!important;
+}
+#dl-gamehub-root .gh-bottom-nav [data-action="profile"] .gh-nav-profile-avatar{
+  width:21px!important;
+  height:21px!important;
+  min-width:21px!important;
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  background:#8b8b8b!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.22)!important;
+}
+
+#dl-gamehub-root .gh-project-card{
+  overflow:hidden!important;
+  padding:0!important;
+}
+#dl-gamehub-root .gh-project-card > img.gh-project-thumb-fixed{
+  display:block!important;
+  width:100%!important;
+  height:150px!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#0b0d12!important;
+  transform:none!important;
+  image-rendering:auto!important;
+}
+#dl-gamehub-root .gh-project-card[data-slug*="water"] > img.gh-project-thumb-fixed{
+  object-position:center!important;
+}
+#dl-gamehub-root .gh-mini-project > img.gh-project-thumb-fixed{
+  width:58px!important;
+  height:58px!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border-radius:13px!important;
+}
+#dl-gamehub-root .gh-library-card > img.gh-project-thumb-fixed,
+#dl-gamehub-root .gh-saved-card > img.gh-project-thumb-fixed{
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  background:#0b0d12!important;
+}
+
+@media(max-width:650px){
+  #dl-gamehub-root .gh-launch-card{min-height:380px!important}
+  #dl-gamehub-root .gh-launch-card > .gh-launch-media.gh-edition-hq{object-position:center!important}
+  #dl-gamehub-root .gh-project-card > img.gh-project-thumb-fixed{height:132px!important}
+  #dl-gamehub-root .gh-project-card{min-height:208px!important}
+  #dl-gamehub-root .gh-project-card-copy{padding:11px 12px 12px!important}
+}
