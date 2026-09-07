@@ -5,11 +5,15 @@
   function script(src){if(loaded[src])return Promise.resolve(true);loaded[src]=1;return new Promise(function(resolve){var s=document.createElement('script');s.src=src;s.defer=true;s.onload=function(){resolve(true)};s.onerror=function(){resolve(false)};document.body.appendChild(s)})}
   function series(list){return list.reduce(function(p,x){return p.then(function(){return script(x)})},Promise.resolve(true))}
 
+  css(A+'performance-stability-v1.css?v=20260907p1');
+
   var homeStarted=false,marketStarted=false,socialStarted=false,accountStarted=false,communityStarted=false;
   function loadHome(){
     if(homeStarted)return;homeStarted=true;
     ['home-minimal-v1.css?v=20260906hm3','gamehub-platform-v1.css?v=20260906gs2','gamehub-mobile-stability-v2.css?v=20260906gs2','gamehub-saved-nav-v2.css?v=20260906sn2'].forEach(function(x){css(A+x)});
-    series([A+'gamehub-stability-v2.js?v=20260906gs2',A+'gamehub-platform-v1.js?v=20260906gs2',A+'gamehub-saved-nav-v2.js?v=20260906sn2',A+'home-structure-v3.js?v=20260906hm3']);
+    series([A+'gamehub-stability-v2.js?v=20260907p1',A+'gamehub-platform-v1.js?v=20260906gs2']).then(function(){
+      setTimeout(function(){script(A+'gamehub-saved-nav-v2.js?v=20260907p1')},220);
+    });
   }
   function loadMarketplace(){if(marketStarted)return;marketStarted=true;css(A+'marketplace-addon-v1.css?v=20260906aa2');script(A+'marketplace-addon-v1.js?v=20260906aa2')}
   function loadSocial(){if(socialStarted)return;socialStarted=true;css(A+'gamehub-crafter-social-v1.css?v=20260906gh2');script(A+'gamehub-crafter-social-v1.js?v=20260906gh2')}
@@ -26,7 +30,7 @@
 
   function route(){
     var h=(location.hash||'#/').toLowerCase();
-    if(h===''||h==='#'||h==='#/'||/home/.test(h))setTimeout(loadHome,180);
+    if(h===''||h==='#'||h==='#/'||/home/.test(h))setTimeout(loadHome,100);
     if(/marketplace/.test(h))loadMarketplace();
     if(/project|crafter|creator/.test(h))loadSocial();
     if(/account|profile|login|register/.test(h)){loadAccount();loadSocial()}
