@@ -1,0 +1,26 @@
+/* Correct Home hero: Minecraft edition art is the hero background; project thumbnails stay in project cards. */
+#dl-gamehub-root .gh-launch-card.gh-edition-hero .gh-edition-badge{display:none!important}
+#dl-gamehub-root .gh-launch-card.gh-edition-hero .gh-edition-hero-media{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+  transform:none!important;
+  filter:none!important;
+}
+#dl-gamehub-root .gh-launch-card.gh-edition-hero:before{
+  background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.08) 44%,rgba(0,0,0,.78) 100%)!important;
+}
+#dl-gamehub-root .gh-launch-card.gh-edition-hero .gh-launch-content{
+  text-shadow:0 2px 16px rgba(0,0,0,.72);
+}
+#dl-gamehub-root .gh-launch-card.gh-edition-hero .gh-user-avatar{
+  text-shadow:none;
+}
+@media(max-width:650px){
+  #dl-gamehub-root .gh-launch-card.gh-edition-hero{min-height:380px!important}
+  #dl-gamehub-root .gh-launch-card.gh-edition-hero .gh-edition-hero-media{object-position:center center!important}
+}
