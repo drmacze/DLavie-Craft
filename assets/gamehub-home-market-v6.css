@@ -1,0 +1,98 @@
+/* DLavie Craft homepage marketplace — minimal, responsive, and content-first. */
+body.dl-gamehub-active #dl-gamehub-root{
+  --gh-card:color-mix(in srgb,var(--surface-raised) 88%,transparent);
+  --gh-card-strong:color-mix(in srgb,var(--surface-raised) 96%,transparent);
+  --gh-line:color-mix(in srgb,var(--line) 86%,transparent);
+  --gh-shadow:0 18px 48px color-mix(in srgb,#000 18%,transparent);
+}
+body.dl-gamehub-active .gh-shell{width:min(1120px,calc(100% - 40px));padding-top:16px}
+body.dl-gamehub-active .gh-topbar{height:46px;margin-bottom:12px}
+body.dl-gamehub-active .gh-icon-btn{width:38px;height:38px;border-radius:11px;box-shadow:none}
+body.dl-gamehub-active .gh-brand strong{font-size:16px;letter-spacing:-.025em}
+body.dl-gamehub-active .gh-brand span{font-size:7px;letter-spacing:.16em}
+
+body.dl-gamehub-active .gh-search-row{max-width:none;margin:0 0 10px;grid-template-columns:minmax(0,1fr) 42px}
+body.dl-gamehub-active .gh-search,
+body.dl-gamehub-active .gh-filter-btn{height:42px;border-radius:11px;box-shadow:none;background:var(--gh-card-strong)}
+body.dl-gamehub-active .gh-search:focus-within{border-color:color-mix(in srgb,var(--gh-accent) 62%,var(--gh-line));box-shadow:0 0 0 3px color-mix(in srgb,var(--gh-accent) 12%,transparent)}
+body.dl-gamehub-active .gh-search input{font-size:11px}
+body.dl-gamehub-active .gh-categories{max-width:none;margin:0;padding:2px 1px 13px;gap:7px}
+body.dl-gamehub-active .gh-category{min-height:31px;padding:0 11px;border:1px solid var(--gh-line);border-radius:9px;background:var(--gh-card);font-size:9px}
+body.dl-gamehub-active .gh-category.active{border-color:transparent;background:var(--ink);color:var(--bg)}
+body.dl-gamehub-active .gh-category.active:after{display:none}
+
+.gh-market-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:1px 0 12px;padding:21px 22px;border:1px solid var(--gh-line);border-radius:18px;background:var(--gh-card-strong);box-shadow:0 10px 34px color-mix(in srgb,#000 9%,transparent)}
+.gh-market-intro>div{min-width:0}
+.gh-market-intro span{display:block;margin-bottom:5px;color:var(--gh-accent);font-size:8px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+.gh-market-intro h1{max-width:660px;margin:0;font-size:clamp(25px,4vw,42px);line-height:1;letter-spacing:-.052em}
+.gh-market-intro p{max-width:650px;margin:8px 0 0;color:var(--gh-muted);font-size:10px;line-height:1.55}
+.gh-market-intro button{flex:0 0 auto;min-height:40px;display:flex;align-items:center;gap:7px;padding:0 14px;border:0;border-radius:10px;background:var(--ink);color:var(--bg)!important;font-size:9px;font-weight:820;cursor:pointer}
+
+body.dl-gamehub-active .gh-home-grid{grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr);gap:12px}
+body.dl-gamehub-active .gh-launch-card{min-height:310px;border-radius:18px;box-shadow:none}
+body.dl-gamehub-active .gh-launch-card:before{background:linear-gradient(180deg,rgba(0,0,0,.03) 20%,rgba(0,0,0,.72) 100%)}
+body.dl-gamehub-active .gh-launch-content{left:18px;right:18px;bottom:17px}
+body.dl-gamehub-active .gh-launch-content small{font-size:7px}
+body.dl-gamehub-active .gh-launch-content h2{margin:4px 0 3px;font-size:clamp(25px,4vw,38px);line-height:1;letter-spacing:-.045em}
+body.dl-gamehub-active .gh-launch-content p{margin:0;font-size:9px}
+body.dl-gamehub-active .gh-play{position:absolute;right:0;bottom:0;width:42px;height:42px;box-shadow:none}
+body.dl-gamehub-active .gh-side-panel{min-height:310px;border-radius:18px;box-shadow:none}
+body.dl-gamehub-active .gh-side-head{padding:15px 15px 8px}
+body.dl-gamehub-active .gh-side-head span{font-size:7px}
+body.dl-gamehub-active .gh-side-head h2{font-size:16px}
+body.dl-gamehub-active .gh-side-head button{font-size:8px}
+body.dl-gamehub-active .gh-mini-list{padding:0 7px 7px;gap:2px}
+body.dl-gamehub-active .gh-mini-project{grid-template-columns:46px minmax(0,1fr) 24px;gap:9px;padding:7px;border-radius:11px}
+body.dl-gamehub-active .gh-mini-project img,
+body.dl-gamehub-active .gh-mini-thumb{width:46px;height:46px;border-radius:9px;padding:0}
+body.dl-gamehub-active .gh-mini-project strong{font-size:10px}
+body.dl-gamehub-active .gh-mini-project small{font-size:7px}
+
+body.dl-gamehub-active .gh-section{margin-top:18px}
+body.dl-gamehub-active .gh-section-head{margin-bottom:8px}
+body.dl-gamehub-active .gh-section-head span{font-size:7px}
+body.dl-gamehub-active .gh-section-head h2{font-size:18px}
+body.dl-gamehub-active .gh-section-head button{font-size:8px}
+body.dl-gamehub-active .gh-project-strip{grid-auto-columns:minmax(176px,218px);gap:9px;padding-bottom:7px}
+body.dl-gamehub-active .gh-project-card{min-height:200px;border-radius:15px;box-shadow:none;transition:transform .2s ease,border-color .2s ease}
+body.dl-gamehub-active .gh-project-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--gh-accent) 42%,var(--gh-line))}
+body.dl-gamehub-active .gh-project-card img,
+body.dl-gamehub-active .gh-project-card .gh-no-thumb{height:128px;padding:0}
+body.dl-gamehub-active .gh-project-card-copy{padding:10px 11px}
+body.dl-gamehub-active .gh-project-card-copy strong{font-size:11px}
+body.dl-gamehub-active .gh-project-card .gh-rating-pill{top:8px;right:8px;padding:4px 6px;font-size:7px}
+
+body.dl-gamehub-active .gh-bottom-nav{height:62px;border-radius:19px;box-shadow:0 16px 42px rgba(0,0,0,.26)}
+body.dl-gamehub-active .gh-plus{width:54px;height:54px;margin-top:-29px;box-shadow:0 10px 26px rgba(0,0,0,.3),0 0 0 5px color-mix(in srgb,var(--surface-raised) 90%,transparent)}
+
+@media(max-width:900px){
+  body.dl-gamehub-active .gh-home-grid{grid-template-columns:1fr}
+  body.dl-gamehub-active .gh-side-panel{min-height:0}
+}
+@media(max-width:650px){
+  body.dl-gamehub-active .gh-shell{width:calc(100% - 20px)!important;padding-top:max(8px,env(safe-area-inset-top))!important}
+  body.dl-gamehub-active .gh-topbar{margin-bottom:8px!important}
+  body.dl-gamehub-active .gh-categories{margin-inline:-10px;padding-inline:10px;gap:6px}
+  body.dl-gamehub-active .gh-category{min-height:30px;padding-inline:10px}
+  .gh-market-intro{display:block;margin-bottom:9px;padding:16px;border-radius:15px}
+  .gh-market-intro h1{font-size:27px}
+  .gh-market-intro p{margin-top:7px;font-size:9px}
+  .gh-market-intro button{width:100%;justify-content:center;margin-top:13px;min-height:39px}
+  body.dl-gamehub-active .gh-home-grid{gap:9px}
+  body.dl-gamehub-active .gh-launch-card{min-height:225px;border-radius:15px}
+  body.dl-gamehub-active .gh-launch-content{left:15px;right:15px;bottom:14px}
+  body.dl-gamehub-active .gh-launch-content h2{font-size:27px}
+  body.dl-gamehub-active .gh-side-panel{border-radius:15px}
+  body.dl-gamehub-active .gh-mini-list{grid-template-columns:1fr!important}
+  body.dl-gamehub-active .gh-mini-project:nth-child(n+4){display:none}
+  body.dl-gamehub-active .gh-project-strip{grid-auto-columns:168px}
+  body.dl-gamehub-active .gh-project-card{min-height:190px}
+  body.dl-gamehub-active .gh-project-card img,
+  body.dl-gamehub-active .gh-project-card .gh-no-thumb{height:120px}
+}
+@media(max-width:380px){
+  .gh-market-intro h1{font-size:24px}
+  .gh-market-intro p{display:none}
+  body.dl-gamehub-active .gh-launch-card{min-height:205px}
+}
+@media(prefers-reduced-motion:reduce){body.dl-gamehub-active .gh-project-card{transition:none}}
